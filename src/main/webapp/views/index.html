@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!--
+  ~ Copyright 2015 Sergej Meister
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<html ng-app="intelliJob">
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <title>IntelliJob</title>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="home">IntelliJob</a>
+        </div>
+        <div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="home">Home</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container custom-alert">
+    <div class="alert alert-error" ng-show="error !== undefined">
+        {{error}}
+    </div>
+    <div class="alert alert-success" ng-show="success !== undefined">
+        {{success}}
+    </div>
+</div>
+
+<div id="content" class="container-fluid" ng-view>
+    <!-- content -->
+</div>
+
+<!-- Libs -->
+<script src="/intellijob/js/jquery/jquery.js"></script>
+<script src="/intellijob/js/bootstrap/bootstrap.js"></script>
+<script src="/intellijob/js/angular/angular.js"></script>
+<script src="/intellijob/js/angular/angular-route.js"></script>
+<script src="/intellijob/js/angular/angular-resource.js"></script>
+<script src="/intellijob/js/angular/angular-cookies.js"></script>
+<script src="/intellijob/js/angular/ui-bootstrap-tpls-0.12.1.min.js"></script>
+
+<!-- App & Models -->
+<script src="/intellijob/js/app/app.js"></script>
+
+
+<!-- Services -->
+<script src="/intellijob/js/app/services/mailServices.js"></script>
+
+<!-- Controller -->
+<script src="/intellijob/js/app/controllers/mailControllers.js"></script>
+
+<!-- Directives -->
+<!--<script src="/js/app/directives/imagedirectives.js"></script>-->
+
+
+</body>
+</html>
