@@ -3,9 +3,7 @@ package com.intellijob.webservices;
 import junit.framework.Assert;
 import org.junit.Test;
 
-/**
- * Created by Sergej Meister on 5/5/15.
- */
+
 public class MailServicesTest extends BaseWebServiceTester {
 
     @Test
@@ -15,7 +13,9 @@ public class MailServicesTest extends BaseWebServiceTester {
             return;
         }
 
-        Assert.assertTrue(Boolean.TRUE);
-
+        Assert.assertEquals(requestMailData.getConnectionType(), mailDefaultConnectionType);
+        Assert.assertEquals(requestMailData.getMailAccount(), mailDefaultAccount);
+        Assert.assertEquals(requestMailData.getUsername(), mailDefaultUsername);
+        Assert.assertEquals(requestMailData.getPassword(), mailDefaultPassword);
     }
 }

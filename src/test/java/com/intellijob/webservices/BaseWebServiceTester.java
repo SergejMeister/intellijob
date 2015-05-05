@@ -57,7 +57,7 @@ public abstract class BaseWebServiceTester {
     private static Properties readProperty(String fileName) {
         Properties properties = new Properties();
         try {
-            InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
+            InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("com/intellijob/webservices/" + fileName);
             properties.load(inputStream);
         } catch (IOException e) {
             System.out.println(e.getLocalizedMessage());
