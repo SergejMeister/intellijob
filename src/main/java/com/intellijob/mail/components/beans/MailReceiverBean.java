@@ -26,12 +26,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import javax.mail.AuthenticationFailedException;
-import javax.mail.Folder;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Store;
+import javax.mail.*;
 
 @Component
 public class MailReceiverBean implements MailReceiver {
@@ -80,6 +75,58 @@ public class MailReceiverBean implements MailReceiver {
             LOG.error(e.getLocalizedMessage(),e);
             throw new BaseMailException(MailError.BAD_REQUEST);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getMessageCount() throws BaseMailException {
+        try {
+            store.connect(mailHost, username, password);
+            Folder[] folders = store.getDefaultFolder().list();
+            int totalCount = 0;
+            for (Folder folder : folders) {
+                if (isMessageFolder(folder.getType())) {
+                    System.out.println(folder.getFullName() + ": " + folder.getMessageCount());
+                    folder.open(Folder.READ_ONLY);
+                    int result = folder.getMessageCount();
+                    totalCount = totalCount + result;
+                    //
+                    // Close folder
+                    //
+                    folder.close(false);
+                }
+
+            }
+            store.close();
+            return totalCount;
+        } catch (AuthenticationFailedException afe) {
+            throw new PermissionDeniedException(afe);
+        } catch (MessagingException e) {
+            LOG.error(e.getLocalizedMessage(), e);
+            throw new BaseMailException(MailError.BAD_REQUEST);
+        }
+    }
+
+    /**
+     * Can contain messages.
+     * <p>
+     * Type 1 - can contain messages.
+     * Type 2 - can contain folders.
+     * Type 3 - can contain both.
+     *
+     * @param folderType folder type (1,2,3)
+     * @return true, if 1 or 3.
+     */
+    private Boolean isMessageFolder(int folderType) {
+        //if ((folderType & Folder.HOLDS_FOLDERS) == 2) {
+        if (folderType == Folder.HOLDS_FOLDERS) {
+            //can only contain other folders!
+            return Boolean.FALSE;
+        }
+        //1 or 3: can contain messages.
+        return Boolean.TRUE;
     }
 
     /**

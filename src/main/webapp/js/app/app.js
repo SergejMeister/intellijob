@@ -45,15 +45,17 @@ intelliJob.config([
         });
 
         /* Intercept http errors */
-        var interceptor = function ($rootScope, $cookieStore, $q, $location) {
+        var interceptor = function ($rootScope, $cookieStore, $q) {
             function success(response) {
+                delete $rootScope.success;
                 delete $rootScope.error;
                 return response;
             }
 
             function error(response) {
                 delete $rootScope.success;
-                var status = response.status;;
+                delete $rootScope.error;
+                var status = response.status;
 
                 if(status == 401) {
                     $rootScope.error = status + ": " + response.data.message ;

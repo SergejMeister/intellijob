@@ -27,13 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 /**
@@ -53,7 +47,7 @@ public class MailServices extends BaseServices {
     @ResponseBody
     public ResponseMailSearchData searchMail(@RequestBody RequestMailData requestMailData) throws Exception {
         MailReceiver mailReceiver = mailController.getReceiver(requestMailData);
-        int messageCount =  mailReceiver.getMessageCount("INBOX");
+        int messageCount = mailReceiver.getMessageCount();
         System.out.println("Total Messages:- " + messageCount);
 
         return new ResponseMailSearchData(messageCount + " mails founded.");
@@ -62,7 +56,7 @@ public class MailServices extends BaseServices {
     @ExceptionHandler(PermissionDeniedException.class)
     @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
     public @ResponseBody ResponseError handleException(PermissionDeniedException pde) {
-        LOG.error(pde.getMailError().getMessage(), pde);
+        LOG.warn(pde.getMailError().getMessage(), pde);
         return handleException(HttpStatus.UNAUTHORIZED,pde);
     }
 

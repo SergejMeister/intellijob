@@ -37,10 +37,20 @@ public interface MailReceiver {
     int getMessageCount(String folderName) throws BaseMailException ;
 
     /**
+     * Returns mails size in all message folders.
+     *
+     * @return mails size.
+     * @throws BaseMailException authentication exception, or other mail config exception.
+     */
+    int getMessageCount() throws BaseMailException;
+
+    /**
      * Returns messages from mail box.
      *
      * @param folderName folder name.
      * @return mails mails.
      */
     Message[] getMessages(String folderName) throws BaseMailException ;
+
+
 }
