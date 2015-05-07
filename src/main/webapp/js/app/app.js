@@ -15,12 +15,12 @@
  */
 
 var intelliJob = angular.module('intelliJob',
-    [
-        'ngRoute',
-        'ngCookies',
-        'intelliJobControllers',
-        'ui.bootstrap'
-    ]);
+        [
+            'ngRoute',
+            'ngCookies',
+            'intelliJobControllers',
+            'ui.bootstrap'
+        ]);
 var intelliJobControllers = angular.module('intelliJobControllers', []);
 
 /**
@@ -31,7 +31,7 @@ intelliJob.config([
     '$locationProvider',
     '$httpProvider',
 
-    function ($routeProvider, $locationProvider,$httpProvider) {
+    function ($routeProvider, $locationProvider, $httpProvider) {
         // Enable HTML5 strategy (without # in urls)
         $locationProvider.html5Mode(true);
 
@@ -57,8 +57,8 @@ intelliJob.config([
                 delete $rootScope.error;
                 var status = response.status;
 
-                if(status == 401) {
-                    $rootScope.error = status + ": " + response.data.message ;
+                if (status == 401) {
+                    $rootScope.error = status + ": " + response.data.message;
                 }
 
                 return $q.reject(response);

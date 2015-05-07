@@ -20,24 +20,27 @@ import com.intellijob.mail.enums.MailError;
 
 import java.io.Serializable;
 
+/**
+ * Base mail exception class.
+ */
 public class BaseMailException extends Exception implements Serializable {
 
     protected MailError mailError;
 
 
-    public BaseMailException(BaseMailException bme){
+    public BaseMailException(BaseMailException bme) {
         super(bme.getMailError().getMessage());
-        this.mailError =  bme.getMailError();
+        this.mailError = bme.getMailError();
     }
 
-    public BaseMailException(MailError mailError){
+    public BaseMailException(MailError mailError) {
         super(mailError.getMessage());
-        this.mailError=mailError;
+        this.mailError = mailError;
     }
 
-    public BaseMailException(MailError mailError, Throwable cause){
+    public BaseMailException(MailError mailError, Throwable cause) {
         super(mailError.getMessage(), cause);
-        this.mailError=mailError;
+        this.mailError = mailError;
     }
 
     public MailError getMailError() {

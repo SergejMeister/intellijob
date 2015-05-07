@@ -26,24 +26,35 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import javax.mail.*;
+import javax.mail.AuthenticationFailedException;
+import javax.mail.Folder;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Store;
 
+/**
+ * Represents mail receiver to get message from mail box.
+ * <p>
+ * Connect to mail box, execute request, close connection.
+ * To connect to the mail box, you have to init this component with connection data.
+ */
 @Component
 public class MailReceiverBean implements MailReceiver {
 
     private final static Logger LOG = LoggerFactory.getLogger(MailReceiverBean.class);
 
-    private Session session ;
+    private Session session;
     private Store store;
     private String mailHost;
     private String username;
     private String password;
 
-
-    public MailReceiverBean()
-    {
-    }
-
+    /**
+     * Init mail connection data.
+     *
+     * @param receiverConnectionData connection data.
+     */
     public void init(ReceiverConnectionData receiverConnectionData) {
         this.session = receiverConnectionData.getSession();
         this.store = receiverConnectionData.getStore();
@@ -69,10 +80,10 @@ public class MailReceiverBean implements MailReceiver {
             folder.close(false);
             store.close();
             return result;
-        } catch(AuthenticationFailedException afe){
+        } catch (AuthenticationFailedException afe) {
             throw new PermissionDeniedException(afe);
         } catch (MessagingException e) {
-            LOG.error(e.getLocalizedMessage(),e);
+            LOG.error(e.getLocalizedMessage(), e);
             throw new BaseMailException(MailError.BAD_REQUEST);
         }
     }
@@ -117,6 +128,7 @@ public class MailReceiverBean implements MailReceiver {
      * Type 3 - can contain both.
      *
      * @param folderType folder type (1,2,3)
+     *
      * @return true, if 1 or 3.
      */
     private Boolean isMessageFolder(int folderType) {
@@ -133,8 +145,7 @@ public class MailReceiverBean implements MailReceiver {
      * {@inheritDoc}
      */
     @Override
-    public Message[] getMessages(String folderName)
-    {
+    public Message[] getMessages(String folderName) {
         throw new NotImplementedException();
     }
 }

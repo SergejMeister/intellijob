@@ -21,7 +21,9 @@ import com.intellijob.mail.components.MailSender;
 import com.intellijob.mail.dto.RequestMailData;
 import com.intellijob.mail.exception.BaseMailException;
 
-
+/**
+ * Interface mail controller.
+ */
 public interface MailController {
 
     /**
@@ -31,7 +33,7 @@ public interface MailController {
      *
      * @return receiver.
      */
-    public MailReceiver getReceiver(RequestMailData requestMailData) throws BaseMailException ;
+    MailReceiver getReceiver(RequestMailData requestMailData) throws BaseMailException;
 
     /**
      * Returns mail sender.
@@ -40,5 +42,5 @@ public interface MailController {
      *
      * @return sender.
      */
-    public MailSender getSender(RequestMailData requestMailData) throws BaseMailException ;
+    MailSender getSender(RequestMailData requestMailData) throws BaseMailException;
 }

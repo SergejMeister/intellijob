@@ -42,12 +42,12 @@ public enum MailConnectionType {
     SMTP;
 
 
-
-    public static MailConnectionType getMailConnectionType(String mailConnectionTypeAsString) throws NotSupportedConnectionType {
-        if(StringUtils.hasLength(mailConnectionTypeAsString)) {
-            try{
+    public static MailConnectionType getMailConnectionType(String mailConnectionTypeAsString)
+            throws NotSupportedConnectionType {
+        if (StringUtils.hasLength(mailConnectionTypeAsString)) {
+            try {
                 MailConnectionType.valueOf(mailConnectionTypeAsString.toUpperCase());
-            }catch(IllegalArgumentException iae) {
+            } catch (IllegalArgumentException iae) {
                 throw new NotSupportedConnectionType();
             }
         }

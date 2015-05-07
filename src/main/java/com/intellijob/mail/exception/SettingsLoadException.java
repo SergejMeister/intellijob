@@ -19,7 +19,7 @@ package com.intellijob.mail.exception;
 import com.intellijob.mail.enums.MailError;
 
 /**
- * Created by Sergej Meister on 5/2/15.
+ * Settings exception with <code>MailError.BAD_SETTINGS</code>
  */
 public class SettingsLoadException extends BaseMailException {
 

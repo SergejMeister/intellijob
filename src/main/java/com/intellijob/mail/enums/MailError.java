@@ -20,30 +20,30 @@ import java.io.Serializable;
 
 public enum MailError implements Serializable {
 
-    BAD_REQUEST (100400, "Bad Request"),
+    BAD_REQUEST(100400, "Bad Request"),
     BAD_AUTHENTICATION(100200, "Access is denied. Incorrect username/password!"),
-    NOT_SUPPORTED_CONNECTION_TYPE(100000, "This connection type is not supported!") ,
-    NOT_SUPPORTED_MAIL_ACCOUNT(100000, "This mail account is not supported!") ,
-    BAD_SETTINGS (100010, "Mail settings could not be loaded successful!") ;
+    NOT_SUPPORTED_CONNECTION_TYPE(100000, "This connection type is not supported!"),
+    NOT_SUPPORTED_MAIL_ACCOUNT(100000, "This mail account is not supported!"),
+    BAD_SETTINGS(100010, "Mail settings could not be loaded successful!");
 
     private int code;
     private String message;
 
     private MailError(Integer code, String message) {
-        this.code=code;
-        this.message=message;
+        this.code = code;
+        this.message = message;
     }
 
     public int getCode() {
         return code;
     }
 
-    public String getMessage() {
-        return message;
-    }
-
     public void setCode(int code) {
         this.code = code;
+    }
+
+    public String getMessage() {
+        return message;
     }
 
     public void setMessage(String message) {

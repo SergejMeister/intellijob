@@ -19,7 +19,7 @@ package com.intellijob.mail.exception;
 import com.intellijob.mail.enums.MailError;
 
 /**
- * Created by Sergej Meister on 5/2/15.
+ * Exception not supported mail account with <code>MailError.NOT_SUPPORTED_MAIL_ACCOUNT</code>
  */
 public class NotSupportedMailAccount extends BaseMailException {
 

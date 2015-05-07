@@ -52,12 +52,12 @@
 
         self.onUrlChange = function (listener) {
             self.pollFns.push(
-                function () {
-                    if (self.$$lastUrl != self.$$url) {
-                        self.$$lastUrl = self.$$url;
-                        listener(self.$$url);
+                    function () {
+                        if (self.$$lastUrl != self.$$url) {
+                            self.$$lastUrl = self.$$url;
+                            listener(self.$$url);
+                        }
                     }
-                }
             );
 
             return listener;
@@ -166,7 +166,7 @@
                     delete this.cookieHash[name];
                 } else {
                     if (angular.isString(value) &&       //strings only
-                        value.length <= 4096) {          //strict cookie storage limits
+                            value.length <= 4096) {          //strict cookie storage limits
                         this.cookieHash[name] = value;
                     }
                 }
@@ -463,17 +463,17 @@
         this.$get = ['$rootScope', '$q',
             function ($rootScope, $q) {
                 var repeatFns = [],
-                    nextRepeatId = 0,
-                    now = 0;
+                        nextRepeatId = 0,
+                        now = 0;
 
                 var $interval = function (fn, delay, count, invokeApply) {
                     var deferred = $q.defer(),
-                        promise = deferred.promise,
-                        iteration = 0,
-                        skipApply = (angular.isDefined(invokeApply) && !invokeApply);
+                            promise = deferred.promise,
+                            iteration = 0,
+                            skipApply = (angular.isDefined(invokeApply) && !invokeApply);
 
                     count = (angular.isDefined(count)) ? count : 0,
-                        promise.then(null, null, fn);
+                            promise.then(null, null, fn);
 
                     promise.$$intervalId = nextRepeatId;
 
@@ -577,17 +577,17 @@
         var match;
         if (match = string.match(R_ISO8061_STR)) {
             var date = new Date(0),
-                tzHour = 0,
-                tzMin = 0;
+                    tzHour = 0,
+                    tzMin = 0;
             if (match[9]) {
                 tzHour = int(match[9] + match[10]);
                 tzMin = int(match[9] + match[11]);
             }
             date.setUTCFullYear(int(match[1]), int(match[2]) - 1, int(match[3]));
             date.setUTCHours(int(match[4] || 0) - tzHour,
-                int(match[5] || 0) - tzMin,
-                int(match[6] || 0),
-                int(match[7] || 0));
+                    int(match[5] || 0) - tzMin,
+                    int(match[6] || 0),
+                    int(match[7] || 0));
             return date;
         }
         return string;
@@ -745,12 +745,12 @@
         if (self.toISOString) {
             self.toISOString = function () {
                 return padNumber(self.origDate.getUTCFullYear(), 4) + '-' +
-                    padNumber(self.origDate.getUTCMonth() + 1, 2) + '-' +
-                    padNumber(self.origDate.getUTCDate(), 2) + 'T' +
-                    padNumber(self.origDate.getUTCHours(), 2) + ':' +
-                    padNumber(self.origDate.getUTCMinutes(), 2) + ':' +
-                    padNumber(self.origDate.getUTCSeconds(), 2) + '.' +
-                    padNumber(self.origDate.getUTCMilliseconds(), 3) + 'Z';
+                        padNumber(self.origDate.getUTCMonth() + 1, 2) + '-' +
+                        padNumber(self.origDate.getUTCDate(), 2) + 'T' +
+                        padNumber(self.origDate.getUTCHours(), 2) + ':' +
+                        padNumber(self.origDate.getUTCMinutes(), 2) + ':' +
+                        padNumber(self.origDate.getUTCSeconds(), 2) + '.' +
+                        padNumber(self.origDate.getUTCMilliseconds(), 3) + 'Z';
             };
         }
 
@@ -777,48 +777,48 @@
 
     angular.mock.animate = angular.module('ngAnimateMock', ['ng'])
 
-        .config(['$provide', function ($provide) {
+            .config(['$provide', function ($provide) {
 
-            var reflowQueue = [];
-            $provide.value('$$animateReflow', function (fn) {
-                var index = reflowQueue.length;
-                reflowQueue.push(fn);
-                return function cancel() {
-                    reflowQueue.splice(index, 1);
-                };
-            });
+                var reflowQueue = [];
+                $provide.value('$$animateReflow', function (fn) {
+                    var index = reflowQueue.length;
+                    reflowQueue.push(fn);
+                    return function cancel() {
+                        reflowQueue.splice(index, 1);
+                    };
+                });
 
-            $provide.decorator('$animate', function ($delegate, $$asyncCallback) {
-                var animate = {
-                    queue: [],
-                    enabled: $delegate.enabled,
-                    triggerCallbacks: function () {
-                        $$asyncCallback.flush();
-                    },
-                    triggerReflow: function () {
-                        angular.forEach(reflowQueue, function (fn) {
-                            fn();
-                        });
-                        reflowQueue = [];
-                    }
-                };
-
-                angular.forEach(
-                    ['enter', 'leave', 'move', 'addClass', 'removeClass', 'setClass'], function (method) {
-                        animate[method] = function () {
-                            animate.queue.push({
-                                event: method,
-                                element: arguments[0],
-                                args: arguments
+                $provide.decorator('$animate', function ($delegate, $$asyncCallback) {
+                    var animate = {
+                        queue: [],
+                        enabled: $delegate.enabled,
+                        triggerCallbacks: function () {
+                            $$asyncCallback.flush();
+                        },
+                        triggerReflow: function () {
+                            angular.forEach(reflowQueue, function (fn) {
+                                fn();
                             });
-                            $delegate[method].apply($delegate, arguments);
-                        };
-                    });
+                            reflowQueue = [];
+                        }
+                    };
 
-                return animate;
-            });
+                    angular.forEach(
+                            ['enter', 'leave', 'move', 'addClass', 'removeClass', 'setClass'], function (method) {
+                                animate[method] = function () {
+                                    animate.queue.push({
+                                        event: method,
+                                        element: arguments[0],
+                                        args: arguments
+                                    });
+                                    $delegate[method].apply($delegate, arguments);
+                                };
+                            });
 
-        }]);
+                    return animate;
+                });
+
+            }]);
 
 
     /**
@@ -1106,31 +1106,31 @@
      */
     function createHttpBackendMock($rootScope, $delegate, $browser) {
         var definitions = [],
-            expectations = [],
-            responses = [],
-            responsesPush = angular.bind(responses, responses.push),
-            copy = angular.copy;
+                expectations = [],
+                responses = [],
+                responsesPush = angular.bind(responses, responses.push),
+                copy = angular.copy;
 
         function createResponse(status, data, headers, statusText) {
             if (angular.isFunction(status)) return status;
 
             return function () {
                 return angular.isNumber(status)
-                    ? [status, data, headers, statusText]
-                    : [200, status, data];
+                        ? [status, data, headers, statusText]
+                        : [200, status, data];
             };
         }
 
         // TODO(vojta): change params to: method, url, data, headers, callback
         function $httpBackend(method, url, data, callback, headers, timeout, withCredentials) {
             var xhr = new MockXhr(),
-                expectation = expectations[0],
-                wasExpected = false;
+                    expectation = expectations[0],
+                    wasExpected = false;
 
             function prettyPrint(data) {
                 return (angular.isString(data) || angular.isFunction(data) || data instanceof RegExp)
-                    ? data
-                    : angular.toJson(data);
+                        ? data
+                        : angular.toJson(data);
             }
 
             function wrapResponse(wrapped) {
@@ -1142,7 +1142,7 @@
                     var response = wrapped.response(method, url, data, headers);
                     xhr.$$respHeaders = response[2];
                     callback(copy(response[0]), copy(response[1]), xhr.getAllResponseHeaders(),
-                        copy(response[3] || ''));
+                            copy(response[3] || ''));
                 }
 
                 function handleTimeout() {
@@ -1188,9 +1188,9 @@
                 }
             }
             throw wasExpected ?
-                new Error('No response defined !') :
-                new Error('Unexpected request: ' + method + ' ' + url + '\n' +
-                (expectation ? 'Expected ' + expectation : 'No more request expected'));
+                    new Error('No response defined !') :
+                    new Error('Unexpected request: ' + method + ' ' + url + '\n' +
+                    (expectation ? 'Expected ' + expectation : 'No more request expected'));
         }
 
         /**
@@ -1217,11 +1217,11 @@
          */
         $httpBackend.when = function (method, url, data, headers) {
             var definition = new MockHttpExpectation(method, url, data, headers),
-                chain = {
-                    respond: function (status, data, headers, statusText) {
-                        definition.response = createResponse(status, data, headers, statusText);
-                    }
-                };
+                    chain = {
+                        respond: function (status, data, headers, statusText) {
+                            definition.response = createResponse(status, data, headers, statusText);
+                        }
+                    };
 
             if ($browser) {
                 chain.passThrough = function () {
@@ -1944,12 +1944,12 @@
      */
     angular.mock.e2e = {};
     angular.mock.e2e.$httpBackendDecorator =
-        ['$rootScope', '$delegate', '$browser', createHttpBackendMock];
+            ['$rootScope', '$delegate', '$browser', createHttpBackendMock];
 
 
     angular.mock.clearDataCache = function () {
         var key,
-            cache = angular.element.cache;
+                cache = angular.element.cache;
 
         for (key in cache) {
             if (Object.prototype.hasOwnProperty.call(cache, key)) {
@@ -1965,9 +1965,9 @@
     if (window.jasmine || window.mocha) {
 
         var currentSpec = null,
-            isSpecRunning = function () {
-                return !!currentSpec;
-            };
+                isSpecRunning = function () {
+                    return !!currentSpec;
+                };
 
 
         beforeEach(function () {

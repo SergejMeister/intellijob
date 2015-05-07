@@ -27,12 +27,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 
 /**
  * Mail Web-Services.
- *
+ * <p>
  * Created by Sergej Meister on 4/26/15.
  */
 @RestController
@@ -43,6 +49,14 @@ public class MailServices extends BaseServices {
     @Autowired
     private MailController mailController;
 
+    /**
+     * Request search mails in mail box.
+     *
+     * @param requestMailData
+     *
+     * @return data transfer object <code>ResponseMailSearchData.java</code>
+     * @throws Exception handle exceptions.
+     */
     @RequestMapping(value = "/mail/search", method = RequestMethod.POST)
     @ResponseBody
     public ResponseMailSearchData searchMail(@RequestBody RequestMailData requestMailData) throws Exception {
@@ -53,17 +67,24 @@ public class MailServices extends BaseServices {
         return new ResponseMailSearchData(messageCount + " mails founded.");
     }
 
+    /**
+     * Covert permission denied exceptions to http status unauthorized.
+     *
+     * @param pde permission denied exception.
+     *
+     * @return data transfer object <code>ResponseError.class</code> with status 401.
+     */
     @ExceptionHandler(PermissionDeniedException.class)
     @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
     public @ResponseBody ResponseError handleException(PermissionDeniedException pde) {
         LOG.warn(pde.getMailError().getMessage(), pde);
-        return handleException(HttpStatus.UNAUTHORIZED,pde);
+        return handleException(HttpStatus.UNAUTHORIZED, pde);
     }
 
     @ExceptionHandler(BaseMailException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public @ResponseBody ResponseError handleException(BaseMailException bme) {
         LOG.error(bme.getMailError().getMessage(), bme);
-        return handleException(HttpStatus.BAD_REQUEST,bme);
+        return handleException(HttpStatus.BAD_REQUEST, bme);
     }
 }

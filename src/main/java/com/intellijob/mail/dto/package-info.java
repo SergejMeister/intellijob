@@ -15,7 +15,7 @@
  */
 
 /**
- * @author Sergej Meister
+ *
  */
 package com.intellijob.mail.dto;
 

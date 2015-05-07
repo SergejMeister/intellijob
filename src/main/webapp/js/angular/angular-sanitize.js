@@ -159,16 +159,16 @@
 
 // Regular Expressions for parsing tags and attributes
     var START_TAG_REGEXP =
-            /^<\s*([\w:-]+)((?:\s+[\w:-]+(?:\s*=\s*(?:(?:"[^"]*")|(?:'[^']*')|[^>\s]+))?)*)\s*(\/?)\s*>/,
-        END_TAG_REGEXP = /^<\s*\/\s*([\w:-]+)[^>]*>/,
-        ATTR_REGEXP = /([\w:-]+)(?:\s*=\s*(?:(?:"((?:[^"])*)")|(?:'((?:[^'])*)')|([^>\s]+)))?/g,
-        BEGIN_TAG_REGEXP = /^</,
-        BEGING_END_TAGE_REGEXP = /^<\s*\//,
-        COMMENT_REGEXP = /<!--(.*?)-->/g,
-        DOCTYPE_REGEXP = /<!DOCTYPE([^>]*?)>/i,
-        CDATA_REGEXP = /<!\[CDATA\[(.*?)]]>/g,
+                    /^<\s*([\w:-]+)((?:\s+[\w:-]+(?:\s*=\s*(?:(?:"[^"]*")|(?:'[^']*')|[^>\s]+))?)*)\s*(\/?)\s*>/,
+            END_TAG_REGEXP = /^<\s*\/\s*([\w:-]+)[^>]*>/,
+            ATTR_REGEXP = /([\w:-]+)(?:\s*=\s*(?:(?:"((?:[^"])*)")|(?:'((?:[^'])*)')|([^>\s]+)))?/g,
+            BEGIN_TAG_REGEXP = /^</,
+            BEGING_END_TAGE_REGEXP = /^<\s*\//,
+            COMMENT_REGEXP = /<!--(.*?)-->/g,
+            DOCTYPE_REGEXP = /<!DOCTYPE([^>]*?)>/i,
+            CDATA_REGEXP = /<!\[CDATA\[(.*?)]]>/g,
     // Match everything outside of normal chars and " (quote character)
-        NON_ALPHANUMERIC_REGEXP = /([^\#-~| |!])/g;
+            NON_ALPHANUMERIC_REGEXP = /([^\#-~| |!])/g;
 
 
 // Good source of info about elements and attributes
@@ -182,10 +182,10 @@
 // Elements that you can, intentionally, leave open (and which close themselves)
 // http://dev.w3.org/html5/spec/Overview.html#optional-tags
     var optionalEndTagBlockElements = makeMap("colgroup,dd,dt,li,p,tbody,td,tfoot,th,thead,tr"),
-        optionalEndTagInlineElements = makeMap("rp,rt"),
-        optionalEndTagElements = angular.extend({},
-            optionalEndTagInlineElements,
-            optionalEndTagBlockElements);
+            optionalEndTagInlineElements = makeMap("rp,rt"),
+            optionalEndTagElements = angular.extend({},
+                    optionalEndTagInlineElements,
+                    optionalEndTagBlockElements);
 
 // Safe Block Elements - HTML5
     var blockElements = angular.extend({}, optionalEndTagBlockElements, makeMap("address,article," +
@@ -202,19 +202,19 @@
     var specialElements = makeMap("script,style");
 
     var validElements = angular.extend({},
-        voidElements,
-        blockElements,
-        inlineElements,
-        optionalEndTagElements);
+            voidElements,
+            blockElements,
+            inlineElements,
+            optionalEndTagElements);
 
 //Attributes that have href and hence need to be sanitized
     var uriAttrs = makeMap("background,cite,href,longdesc,src,usemap");
     var validAttrs = angular.extend({}, uriAttrs, makeMap(
-        'abbr,align,alt,axis,bgcolor,border,cellpadding,cellspacing,class,clear,' +
-        'color,cols,colspan,compact,coords,dir,face,headers,height,hreflang,hspace,' +
-        'ismap,lang,language,nohref,nowrap,rel,rev,rows,rowspan,rules,' +
-        'scope,scrolling,shape,size,span,start,summary,target,title,type,' +
-        'valign,value,vspace,width'));
+            'abbr,align,alt,axis,bgcolor,border,cellpadding,cellspacing,class,clear,' +
+            'color,cols,colspan,compact,coords,dir,face,headers,height,hreflang,hspace,' +
+            'ismap,lang,language,nohref,nowrap,rel,rev,rows,rowspan,rules,' +
+            'scope,scrolling,shape,size,span,start,summary,target,title,type,' +
+            'valign,value,vspace,width'));
 
     function makeMap(str) {
         var obj = {}, items = str.split(','), i;
@@ -297,13 +297,13 @@
 
             } else {
                 html = html.replace(new RegExp("(.*)<\\s*\\/\\s*" + stack.last() + "[^>]*>", 'i'),
-                    function (all, text) {
-                        text = text.replace(COMMENT_REGEXP, "$1").replace(CDATA_REGEXP, "$1");
+                        function (all, text) {
+                            text = text.replace(COMMENT_REGEXP, "$1").replace(CDATA_REGEXP, "$1");
 
-                        if (handler.chars) handler.chars(decodeEntities(text));
+                            if (handler.chars) handler.chars(decodeEntities(text));
 
-                        return "";
-                    });
+                            return "";
+                        });
 
                 parseEndTag("", stack.last());
             }
@@ -338,14 +338,14 @@
             var attrs = {};
 
             rest.replace(ATTR_REGEXP,
-                function (match, name, doubleQuotedValue, singleQuotedValue, unquotedValue) {
-                    var value = doubleQuotedValue
-                        || singleQuotedValue
-                        || unquotedValue
-                        || '';
+                    function (match, name, doubleQuotedValue, singleQuotedValue, unquotedValue) {
+                        var value = doubleQuotedValue
+                                || singleQuotedValue
+                                || unquotedValue
+                                || '';
 
-                    attrs[name] = decodeEntities(value);
-                });
+                        attrs[name] = decodeEntities(value);
+                    });
             if (handler.start) handler.start(tagName, attrs, unary);
         }
 
@@ -395,7 +395,7 @@
             // reflows. However, IE<9 don't support textContent so the innerText
             // fallback is necessary.
             content = 'textContent' in hiddenPre ?
-                hiddenPre.textContent : hiddenPre.innerText;
+                    hiddenPre.textContent : hiddenPre.innerText;
         }
         return spaceBefore + content + spaceAfter;
     }
@@ -409,12 +409,12 @@
      */
     function encodeEntities(value) {
         return value.
-            replace(/&/g, '&amp;').
-            replace(NON_ALPHANUMERIC_REGEXP, function (value) {
-                return '&#' + value.charCodeAt(0) + ';';
-            }).
-            replace(/</g, '&lt;').
-            replace(/>/g, '&gt;');
+                replace(/&/g, '&amp;').
+                replace(NON_ALPHANUMERIC_REGEXP, function (value) {
+                    return '&#' + value.charCodeAt(0) + ';';
+                }).
+                replace(/</g, '&lt;').
+                replace(/>/g, '&gt;');
     }
 
     /**
@@ -443,7 +443,7 @@
                         var lkey = angular.lowercase(key);
                         var isImage = (tag === 'img' && lkey === 'src') || (lkey === 'background');
                         if (validAttrs[lkey] === true &&
-                            (uriAttrs[lkey] !== true || uriValidator(value, isImage))) {
+                                (uriAttrs[lkey] !== true || uriValidator(value, isImage))) {
                             out(' ');
                             out(key);
                             out('="');
@@ -580,8 +580,8 @@
      */
     angular.module('ngSanitize').filter('linky', ['$sanitize', function ($sanitize) {
         var LINKY_URL_REGEXP =
-                /((ftp|https?):\/\/|(mailto:)?[A-Za-z0-9._%+-]+@)\S*[^\s.;,(){}<>]/,
-            MAILTO_REGEXP = /^mailto:/;
+                        /((ftp|https?):\/\/|(mailto:)?[A-Za-z0-9._%+-]+@)\S*[^\s.;,(){}<>]/,
+                MAILTO_REGEXP = /^mailto:/;
 
         return function (text, target) {
             if (!text) return text;

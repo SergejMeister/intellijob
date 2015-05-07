@@ -16,8 +16,6 @@
 
 package com.intellijob.mail.dto;
 
-import com.intellijob.mail.enums.MailConnectionType;
-
 import java.io.Serializable;
 
 /**
@@ -44,12 +42,12 @@ public class RequestMailData implements Serializable {
         return username;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void setPassword(String password) {

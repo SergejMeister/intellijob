@@ -15,8 +15,8 @@
  */
 
 /**
-* Index Controller.
-*/
+ * Index Controller.
+ */
 intelliJobControllers.controller(
         'MailCtrl',
         [
@@ -28,17 +28,17 @@ intelliJobControllers.controller(
             '$routeParams',
             '$route',
             'MailServices',
-            function ($scope,$rootScope,$location,$http,$cookieStore,$routeParams,$route,MailServices) {
+            function ($scope, $rootScope, $location, $http, $cookieStore, $routeParams, $route, MailServices) {
 
                 $scope.mailAccounts = [
-                    {name:'gmail'},
-                    {name:'rambler'}
+                    {name: 'gmail'},
+                    {name: 'rambler'}
                 ];
                 $scope.selectedMailAccount = $scope.mailAccounts[0];
 
 
-                $scope.mailUsername="";
-                $scope.mailPassword="";
+                $scope.mailUsername = "";
+                $scope.mailPassword = "";
                 /**
                  * remove image from shopping cart
                  */
@@ -51,8 +51,8 @@ intelliJobControllers.controller(
                         $rootScope.success = responseMailData.message;
                     }).error(function (data) {
                         //$scope.log(data.errors);
-                        if($scope.selectedMailAccount.name == "gmail") {
-                            $rootScope.error =  $rootScope.error + "When you sure that your access data are correct, than read more about google secure apps (https://support.google.com/accounts/answer/6010255?hl=de) !";
+                        if ($scope.selectedMailAccount.name == "gmail") {
+                            $rootScope.error = $rootScope.error + "When you sure that your access data are correct, than read more about google secure apps (https://support.google.com/accounts/answer/6010255?hl=de) !";
                         }
 
                     })

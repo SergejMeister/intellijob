@@ -13,9 +13,9 @@ public class MailServicesTest extends BaseWebServiceTester {
             return;
         }
 
-        Assert.assertEquals(requestMailData.getConnectionType(), mailDefaultConnectionType);
-        Assert.assertEquals(requestMailData.getMailAccount(), mailDefaultAccount);
-        Assert.assertEquals(requestMailData.getUsername(), mailDefaultUsername);
-        Assert.assertEquals(requestMailData.getPassword(), mailDefaultPassword);
+        Assert.assertEquals("imap", requestMailData.getConnectionType());
+        Assert.assertEquals("gmail", requestMailData.getMailAccount());
+        Assert.assertEquals("DefaultUsername", requestMailData.getUsername());
+        Assert.assertEquals("DefaultPassword", requestMailData.getPassword());
     }
 }

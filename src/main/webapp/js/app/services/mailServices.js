@@ -25,7 +25,7 @@ angular.module('intelliJob')
                  * @param requestMailData
                  * @returns {HttpPromise}
                  */
-                mailServices.searchMail = function(requestMailData) {
+                mailServices.searchMail = function (requestMailData) {
                     return $http.post(urlBase + '/search', requestMailData);
                 };
 

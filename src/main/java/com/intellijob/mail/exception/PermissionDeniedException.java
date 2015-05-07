@@ -19,11 +19,11 @@ package com.intellijob.mail.exception;
 import com.intellijob.mail.enums.MailError;
 
 /**
- * Created by Sergej Meister on 5/1/15.
+ * Permission denied exception with <code>MailError.BAD_AUTHENTICATION</code>
  */
-public class PermissionDeniedException extends BaseMailException  {
+public class PermissionDeniedException extends BaseMailException {
 
     public PermissionDeniedException(Throwable cause) {
-        super(MailError.BAD_AUTHENTICATION,cause);
+        super(MailError.BAD_AUTHENTICATION, cause);
     }
 }

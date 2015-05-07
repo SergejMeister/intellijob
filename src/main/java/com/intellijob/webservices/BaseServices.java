@@ -19,18 +19,13 @@ package com.intellijob.webservices;
 import com.intellijob.mail.dto.ResponseError;
 import com.intellijob.mail.exception.BaseMailException;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.context.request.WebRequest;
 
 /**
- * Created by Sergej Meister on 5/3/15.
+ * Base service class.
  */
 public abstract class BaseServices {
 
     protected ResponseError handleException(HttpStatus status, BaseMailException bme) {
-        return new ResponseError(status.value(), bme.getMailError().getCode(), bme.getMailError().getMessage());
-    }
-
-    protected ResponseError handleException(HttpStatus status, BaseMailException bme, WebRequest request) {
         return new ResponseError(status.value(), bme.getMailError().getCode(), bme.getMailError().getMessage());
     }
 }

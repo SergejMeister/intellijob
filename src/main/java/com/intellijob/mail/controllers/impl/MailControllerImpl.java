@@ -42,14 +42,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * Logic for mail controller.
+ * <p>
+ * Init components MailReceiver and MailSender.
+ */
 @Controller
 public class MailControllerImpl implements MailController {
 
     private final static Logger LOG = LoggerFactory.getLogger(MailControllerImpl.class);
 
-    private final static String MAIL_IMAPS_HOST_KEY="mail.imaps.host";
-    private final static String MAIL_POP3_USER_KEY="mail.pop3.user";
-    private final static String IMAPS_KEY="imaps";
+    private final static String MAIL_IMAPS_HOST_KEY = "mail.imaps.host";
+    private final static String MAIL_POP3_USER_KEY = "mail.pop3.user";
+    private final static String IMAPS_KEY = "imaps";
 
     @Autowired
     private MailReceiverBean mailReceiverBean;
@@ -60,12 +65,16 @@ public class MailControllerImpl implements MailController {
     @Override
     public MailReceiver getReceiver(RequestMailData requestMailData) throws BaseMailException {
 
-        MailConnectionType mailConnectionType = MailConnectionType.getMailConnectionType(requestMailData.getConnectionType());
+        MailConnectionType mailConnectionType =
+                MailConnectionType.getMailConnectionType(requestMailData.getConnectionType());
         requestMailData.setConnectionType(mailConnectionType.toString().toLowerCase());
-        switch(mailConnectionType) {
-            case POP3: return createPopReceiver(requestMailData);
-            case IMAP: return createImapReceiver(requestMailData);
-            default: throw new NotSupportedConnectionType();
+        switch (mailConnectionType) {
+            case POP3:
+                return createPopReceiver(requestMailData);
+            case IMAP:
+                return createImapReceiver(requestMailData);
+            default:
+                throw new NotSupportedConnectionType();
         }
     }
 
@@ -73,7 +82,8 @@ public class MailControllerImpl implements MailController {
         //
         // Setup properties for the mail session.
         //
-        Properties popProperties = getMailProperties(requestMailData.getMailAccount(),requestMailData.getConnectionType());
+        Properties popProperties =
+                getMailProperties(requestMailData.getMailAccount(), requestMailData.getConnectionType());
         popProperties.put(MAIL_POP3_USER_KEY, requestMailData.getUsername());
         Session session = Session.getDefaultInstance(popProperties, null);
 
@@ -82,12 +92,13 @@ public class MailControllerImpl implements MailController {
     }
 
 
-    private Properties getMailProperties(String mailAccountAsString,String connectionTypeAsString) throws BaseMailException {
-        String filePropertyName ;
+    private Properties getMailProperties(String mailAccountAsString, String connectionTypeAsString)
+            throws BaseMailException {
+        String filePropertyName;
         try {
             MailAccount mailAccount = MailAccount.valueOf(mailAccountAsString.toUpperCase());
             filePropertyName = mailAccount.getPropertyName(connectionTypeAsString);
-        } catch(IllegalArgumentException iae) {
+        } catch (IllegalArgumentException iae) {
             LOG.warn("Mail account (" + mailAccountAsString + ") is not supported!", iae);
             throw new NotSupportedMailAccount();
         }
@@ -98,7 +109,8 @@ public class MailControllerImpl implements MailController {
             InputStream inputStream = getClass().getResourceAsStream(filePropertyName);
             properties.load(inputStream);
         } catch (IOException e) {
-            LOG.error("Property (" + getClass().getResource(filePropertyName).getPath() + ") could not be loaded successful!", e);
+            LOG.error("Property (" + getClass().getResource(filePropertyName).getPath() +
+                    ") could not be loaded successful!", e);
             throw new SettingsLoadException();
         }
 
@@ -109,7 +121,8 @@ public class MailControllerImpl implements MailController {
         //
         // Setup properties for the mail session.
         //
-        Properties imapProperties = getMailProperties(requestMailData.getMailAccount(),requestMailData.getConnectionType());
+        Properties imapProperties =
+                getMailProperties(requestMailData.getMailAccount(), requestMailData.getConnectionType());
 
         Session session = Session.getDefaultInstance(imapProperties, null);
         try {
@@ -122,7 +135,7 @@ public class MailControllerImpl implements MailController {
             receiverConnectionData.setPassword(requestMailData.getPassword());
 
             mailReceiverBean.init(receiverConnectionData);
-            return mailReceiverBean ;
+            return mailReceiverBean;
         } catch (MessagingException me) {
             throw new BaseMailException(MailError.BAD_SETTINGS, me);
         }

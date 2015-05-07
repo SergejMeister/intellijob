@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * View controller.
- *
+ * <p>
  * Created by Sergej Meister on 4/26/15.
  */
 @Controller

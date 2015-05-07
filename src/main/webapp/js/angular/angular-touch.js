@@ -56,9 +56,9 @@
         function getCoordinates(event) {
             var touches = event.touches && event.touches.length ? event.touches : [event];
             var e = (event.changedTouches && event.changedTouches[0]) ||
-                (event.originalEvent && event.originalEvent.changedTouches &&
-                event.originalEvent.changedTouches[0]) ||
-                touches[0].originalEvent || touches[0];
+                    (event.originalEvent && event.originalEvent.changedTouches &&
+                    event.originalEvent.changedTouches[0]) ||
+                    touches[0].originalEvent || touches[0];
 
             return {
                 x: e.clientX,
@@ -294,7 +294,7 @@
                     return; // offscreen
                 }
                 if (lastLabelClickCoordinates &&
-                    lastLabelClickCoordinates[0] === x && lastLabelClickCoordinates[1] === y) {
+                        lastLabelClickCoordinates[0] === x && lastLabelClickCoordinates[1] === y) {
                     return; // input click triggered by label click
                 }
                 // reset label click coordinates on first subsequent click
@@ -358,11 +358,11 @@
             // Actual linking function.
             return function (scope, element, attr) {
                 var clickHandler = $parse(attr.ngClick),
-                    tapping = false,
-                    tapElement,  // Used to blur the element after a tap.
-                    startTime,   // Used to check if the tap was held too long.
-                    touchStartX,
-                    touchStartY;
+                        tapping = false,
+                        tapElement,  // Used to blur the element after a tap.
+                        startTime,   // Used to check if the tap was held too long.
+                        touchStartX,
+                        touchStartY;
 
                 function resetState() {
                     tapping = false;
@@ -399,7 +399,7 @@
                     var diff = Date.now() - startTime;
 
                     var touches = (event.changedTouches && event.changedTouches.length) ? event.changedTouches :
-                        ((event.touches && event.touches.length) ? event.touches : [event]);
+                            ((event.touches && event.touches.length) ? event.touches : [event]);
                     var e = touches[0].originalEvent || touches[0];
                     var x = e.clientX;
                     var y = e.clientY;
@@ -541,10 +541,10 @@
                     var deltaY = Math.abs(coords.y - startCoords.y);
                     var deltaX = (coords.x - startCoords.x) * direction;
                     return valid && // Short circuit for already-invalidated swipes.
-                        deltaY < MAX_VERTICAL_DISTANCE &&
-                        deltaX > 0 &&
-                        deltaX > MIN_HORIZONTAL_DISTANCE &&
-                        deltaY / deltaX < MAX_VERTICAL_RATIO;
+                            deltaY < MAX_VERTICAL_DISTANCE &&
+                            deltaX > 0 &&
+                            deltaX > MIN_HORIZONTAL_DISTANCE &&
+                            deltaY / deltaX < MAX_VERTICAL_RATIO;
                 }
 
                 $swipe.bind(element, {

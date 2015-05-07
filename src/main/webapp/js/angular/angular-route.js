@@ -23,7 +23,7 @@
      */
     /* global -ngRouteModule */
     var ngRouteModule = angular.module('ngRoute', ['ng']).
-        provider('$route', $RouteProvider);
+            provider('$route', $RouteProvider);
 
     /**
      * @ngdoc provider
@@ -84,7 +84,7 @@
          *      published to scope under the `controllerAs` name.
          *    - `template` – `{string=|function()=}` – html template as a string or a function that
          *      returns an html template as a string which should be used by {@link
-            *      ngRoute.directive:ngView ngView} or {@link ng.directive:ngInclude ngInclude} directives.
+                *      ngRoute.directive:ngView ngView} or {@link ng.directive:ngInclude ngInclude} directives.
          *      This property takes precedence over `templateUrl`.
          *
          *      If `template` is a function, it will be called with the following parameters:
@@ -149,20 +149,20 @@
          */
         this.when = function (path, route) {
             routes[path] = angular.extend(
-                {reloadOnSearch: true},
-                route,
-                path && pathRegExp(path, route)
+                    {reloadOnSearch: true},
+                    route,
+                    path && pathRegExp(path, route)
             );
 
             // create redirection for trailing slashes
             if (path) {
                 var redirectPath = (path[path.length - 1] == '/')
-                    ? path.substr(0, path.length - 1)
-                    : path + '/';
+                        ? path.substr(0, path.length - 1)
+                        : path + '/';
 
                 routes[redirectPath] = angular.extend(
-                    {redirectTo: path},
-                    pathRegExp(redirectPath, route)
+                        {redirectTo: path},
+                        pathRegExp(redirectPath, route)
                 );
             }
 
@@ -182,29 +182,29 @@
          */
         function pathRegExp(path, opts) {
             var insensitive = opts.caseInsensitiveMatch,
-                ret = {
-                    originalPath: path,
-                    regexp: path
-                },
-                keys = ret.keys = [];
+                    ret = {
+                        originalPath: path,
+                        regexp: path
+                    },
+                    keys = ret.keys = [];
 
             path = path
-                .replace(/([().])/g, '\\$1')
-                .replace(/(\/)?:(\w+)([\?\*])?/g, function (_, slash, key, option) {
-                    var optional = option === '?' ? option : null;
-                    var star = option === '*' ? option : null;
-                    keys.push({name: key, optional: !!optional});
-                    slash = slash || '';
-                    return ''
-                        + (optional ? '' : slash)
-                        + '(?:'
-                        + (optional ? slash : '')
-                        + (star && '(.+?)' || '([^/]+)')
-                        + (optional || '')
-                        + ')'
-                        + (optional || '');
-                })
-                .replace(/([\/$\*])/g, '\\$1');
+                    .replace(/([().])/g, '\\$1')
+                    .replace(/(\/)?:(\w+)([\?\*])?/g, function (_, slash, key, option) {
+                        var optional = option === '?' ? option : null;
+                        var star = option === '*' ? option : null;
+                        keys.push({name: key, optional: !!optional});
+                        slash = slash || '';
+                        return ''
+                                + (optional ? '' : slash)
+                                + '(?:'
+                                + (optional ? slash : '')
+                                + (star && '(.+?)' || '([^/]+)')
+                                + (optional || '')
+                                + ')'
+                                + (optional || '');
+                    })
+                    .replace(/([\/$\*])/g, '\\$1');
 
             ret.regexp = new RegExp('^' + path + '$', insensitive ? 'i' : '');
             return ret;
@@ -426,25 +426,25 @@
                  */
 
                 var forceReload = false,
-                    $route = {
-                        routes: routes,
+                        $route = {
+                            routes: routes,
 
-                        /**
-                         * @ngdoc method
-                         * @name $route#reload
-                         *
-                         * @description
-                         * Causes `$route` service to reload the current route even if
-                         * {@link ng.$location $location} hasn't changed.
-                         *
-                         * As a result of that, {@link ngRoute.directive:ngView ngView}
-                         * creates new scope, reinstantiates the controller.
-                         */
-                        reload: function () {
-                            forceReload = true;
-                            $rootScope.$evalAsync(updateRoute);
-                        }
-                    };
+                            /**
+                             * @ngdoc method
+                             * @name $route#reload
+                             *
+                             * @description
+                             * Causes `$route` service to reload the current route even if
+                             * {@link ng.$location $location} hasn't changed.
+                             *
+                             * As a result of that, {@link ngRoute.directive:ngView ngView}
+                             * creates new scope, reinstantiates the controller.
+                             */
+                            reload: function () {
+                                forceReload = true;
+                                $rootScope.$evalAsync(updateRoute);
+                            }
+                        };
 
                 $rootScope.$on('$locationChangeSuccess', updateRoute);
 
@@ -465,7 +465,7 @@
                  */
                 function switchRouteMatcher(on, route) {
                     var keys = route.keys,
-                        params = {};
+                            params = {};
 
                     if (!route.regexp) return null;
 
@@ -476,8 +476,8 @@
                         var key = keys[i - 1];
 
                         var val = 'string' == typeof m[i]
-                            ? decodeURIComponent(m[i])
-                            : m[i];
+                                ? decodeURIComponent(m[i])
+                                : m[i];
 
                         if (key && val) {
                             params[key.name] = val;
@@ -488,11 +488,11 @@
 
                 function updateRoute() {
                     var next = parseRoute(),
-                        last = $route.current;
+                            last = $route.current;
 
                     if (next && last && next.$$route === last.$$route
-                        && angular.equals(next.pathParams, last.pathParams)
-                        && !next.reloadOnSearch && !forceReload) {
+                            && angular.equals(next.pathParams, last.pathParams)
+                            && !next.reloadOnSearch && !forceReload) {
                         last.params = next.params;
                         angular.copy(last.params, $routeParams);
                         $rootScope.$broadcast('$routeUpdate', last);
@@ -504,62 +504,62 @@
                             if (next.redirectTo) {
                                 if (angular.isString(next.redirectTo)) {
                                     $location.path(interpolate(next.redirectTo, next.params)).search(next.params)
-                                        .replace();
+                                            .replace();
                                 } else {
                                     $location.url(next.redirectTo(next.pathParams, $location.path(), $location.search()))
-                                        .replace();
+                                            .replace();
                                 }
                             }
                         }
 
                         $q.when(next).
-                            then(function () {
-                                if (next) {
-                                    var locals = angular.extend({}, next.resolve),
-                                        template, templateUrl;
-
-                                    angular.forEach(locals, function (value, key) {
-                                        locals[key] = angular.isString(value) ?
-                                            $injector.get(value) : $injector.invoke(value);
-                                    });
-
-                                    if (angular.isDefined(template = next.template)) {
-                                        if (angular.isFunction(template)) {
-                                            template = template(next.params);
-                                        }
-                                    } else if (angular.isDefined(templateUrl = next.templateUrl)) {
-                                        if (angular.isFunction(templateUrl)) {
-                                            templateUrl = templateUrl(next.params);
-                                        }
-                                        templateUrl = $sce.getTrustedResourceUrl(templateUrl);
-                                        if (angular.isDefined(templateUrl)) {
-                                            next.loadedTemplateUrl = templateUrl;
-                                            template = $http.get(templateUrl, {cache: $templateCache}).
-                                                then(function (response) {
-                                                    return response.data;
-                                                });
-                                        }
-                                    }
-                                    if (angular.isDefined(template)) {
-                                        locals['$template'] = template;
-                                    }
-                                    return $q.all(locals);
-                                }
-                            }).
-                            // after route change
-                            then(function (locals) {
-                                if (next == $route.current) {
+                                then(function () {
                                     if (next) {
-                                        next.locals = locals;
-                                        angular.copy(next.params, $routeParams);
+                                        var locals = angular.extend({}, next.resolve),
+                                                template, templateUrl;
+
+                                        angular.forEach(locals, function (value, key) {
+                                            locals[key] = angular.isString(value) ?
+                                                    $injector.get(value) : $injector.invoke(value);
+                                        });
+
+                                        if (angular.isDefined(template = next.template)) {
+                                            if (angular.isFunction(template)) {
+                                                template = template(next.params);
+                                            }
+                                        } else if (angular.isDefined(templateUrl = next.templateUrl)) {
+                                            if (angular.isFunction(templateUrl)) {
+                                                templateUrl = templateUrl(next.params);
+                                            }
+                                            templateUrl = $sce.getTrustedResourceUrl(templateUrl);
+                                            if (angular.isDefined(templateUrl)) {
+                                                next.loadedTemplateUrl = templateUrl;
+                                                template = $http.get(templateUrl, {cache: $templateCache}).
+                                                        then(function (response) {
+                                                            return response.data;
+                                                        });
+                                            }
+                                        }
+                                        if (angular.isDefined(template)) {
+                                            locals['$template'] = template;
+                                        }
+                                        return $q.all(locals);
                                     }
-                                    $rootScope.$broadcast('$routeChangeSuccess', next, last);
-                                }
-                            }, function (error) {
-                                if (next == $route.current) {
-                                    $rootScope.$broadcast('$routeChangeError', next, last, error);
-                                }
-                            });
+                                }).
+                            // after route change
+                                then(function (locals) {
+                                    if (next == $route.current) {
+                                        if (next) {
+                                            next.locals = locals;
+                                            angular.copy(next.params, $routeParams);
+                                        }
+                                        $rootScope.$broadcast('$routeChangeSuccess', next, last);
+                                    }
+                                }, function (error) {
+                                    if (next == $route.current) {
+                                        $rootScope.$broadcast('$routeChangeError', next, last, error);
+                                    }
+                                });
                     }
                 }
 
@@ -835,10 +835,10 @@
             transclude: 'element',
             link: function (scope, $element, attr, ctrl, $transclude) {
                 var currentScope,
-                    currentElement,
-                    previousElement,
-                    autoScrollExp = attr.autoscroll,
-                    onloadExp = attr.onload || '';
+                        currentElement,
+                        previousElement,
+                        autoScrollExp = attr.autoscroll,
+                        onloadExp = attr.onload || '';
 
                 scope.$on('$routeChangeSuccess', update);
                 update();
@@ -863,7 +863,7 @@
 
                 function update() {
                     var locals = $route.current && $route.current.locals,
-                        template = locals && locals.$template;
+                            template = locals && locals.$template;
 
                     if (angular.isDefined(template)) {
                         var newScope = scope.$new();
@@ -878,7 +878,7 @@
                         var clone = $transclude(newScope, function (clone) {
                             $animate.enter(clone, null, currentElement || $element, function onNgViewEnter() {
                                 if (angular.isDefined(autoScrollExp)
-                                    && (!autoScrollExp || scope.$eval(autoScrollExp))) {
+                                        && (!autoScrollExp || scope.$eval(autoScrollExp))) {
                                     $anchorScroll();
                                 }
                             });
@@ -909,7 +909,7 @@
             priority: -400,
             link: function (scope, $element) {
                 var current = $route.current,
-                    locals = current.locals;
+                        locals = current.locals;
 
                 $element.html(locals.$template);
 

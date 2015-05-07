@@ -14,5 +14,8 @@
  * limitations under the License.
  */
 
+/**
+ *
+ */
 package com.intellijob.mail.exception;
 

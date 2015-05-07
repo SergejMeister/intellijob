@@ -22,7 +22,7 @@ import java.io.Serializable;
 
 public class ReceiverConnectionData implements Serializable {
 
-    private Session session ;
+    private Session session;
     private Store store;
     private String mailHost;
     private String username;

@@ -32,11 +32,11 @@ public class ResponseMailSearchData implements Serializable {
     }
 
     public ResponseMailSearchData(String message) {
-        this.message=message;
+        this.message = message;
     }
 
     public ResponseMailSearchData(MailError error) {
-        this.error=error;
+        this.error = error;
     }
 
     public String getMessage() {

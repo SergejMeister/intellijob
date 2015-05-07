@@ -1,11 +1,13 @@
 package com.intellijob.webservices;
 
 
-import com.intellijob.ApplicationController;
+import com.intellijob.TestApplicationController;
 import com.intellijob.mail.dto.RequestMailData;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.SpringApplicationContextLoader;
+import org.springframework.context.annotation.ImportResource;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
@@ -14,9 +16,13 @@ import java.io.InputStream;
 import java.util.Properties;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = ApplicationController.class)
 //@ContextConfiguration(classes = MockServletContext.class)
+@ContextConfiguration(classes = {TestApplicationController.class}, loader = SpringApplicationContextLoader.class)
 @WebAppConfiguration
+
+@ImportResource({
+        "classpath*:developerMailAccount.properties"
+})
 public abstract class BaseWebServiceTester {
 
     /**
@@ -46,7 +52,9 @@ public abstract class BaseWebServiceTester {
         mailDefaultConnectionType = mailProperties.getProperty(PROP_KEY_CONNECTION_TYPE);
         mailDefaultUsername = mailProperties.getProperty(PROP_KEY_MAIL_USERNAME);
         mailDefaultPassword = mailProperties.getProperty(PROP_KEY_MAIL_PASSWORD);
-        requestMailData = createRequestMailData(mailDefaultAccount, mailDefaultUsername, mailDefaultPassword, mailDefaultConnectionType);
+        requestMailData = createRequestMailData(mailDefaultAccount, mailDefaultUsername, mailDefaultPassword,
+                mailDefaultConnectionType);
+
 
         if (RUNNING_LIVE) {
             //TODO execute tests live!
@@ -56,16 +64,20 @@ public abstract class BaseWebServiceTester {
 
     private static Properties readProperty(String fileName) {
         Properties properties = new Properties();
+        System.out.println(BaseWebServiceTester.class.getResource(".").getPath());
+        System.out.println(Thread.currentThread().getContextClassLoader().getResource(".").getPath());
         try {
-            InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("com/intellijob/webservices/" + fileName);
+            InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
             properties.load(inputStream);
         } catch (IOException e) {
             System.out.println(e.getLocalizedMessage());
         }
+
         return properties;
     }
 
-    private static RequestMailData createRequestMailData(String mailAccount, String username, String password, String connectionType) {
+    private static RequestMailData createRequestMailData(String mailAccount, String username, String password,
+                                                         String connectionType) {
         RequestMailData requestMailData = new RequestMailData(username, password);
         requestMailData.setMailAccount(mailAccount);
         requestMailData.setConnectionType(connectionType);

@@ -110,9 +110,9 @@
         var b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u = "sizzle" + -new Date, v = a.document, w = 0, x = 0, y = gb(), z = gb(), A = gb(), B = function (a, b) {
             return a === b && (l = !0), 0
         }, C = "undefined", D = 1 << 31, E = {}.hasOwnProperty, F = [], G = F.pop, H = F.push, I = F.push, J = F.slice, K = F.indexOf || function (a) {
-                for (var b = 0, c = this.length; c > b; b++)if (this[b] === a)return b;
-                return -1
-            }, L = "checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped", M = "[\\x20\\t\\r\\n\\f]", N = "(?:\\\\.|[\\w-]|[^\\x00-\\xa0])+", O = N.replace("w", "w#"), P = "\\[" + M + "*(" + N + ")(?:" + M + "*([*^$|!~]?=)" + M + "*(?:'((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\"|(" + O + "))|)" + M + "*\\]", Q = ":(" + N + ")(?:\\((('((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\")|((?:\\\\.|[^\\\\()[\\]]|" + P + ")*)|.*)\\)|)", R = new RegExp("^" + M + "+|((?:^|[^\\\\])(?:\\\\.)*)" + M + "+$", "g"), S = new RegExp("^" + M + "*," + M + "*"), T = new RegExp("^" + M + "*([>+~]|" + M + ")" + M + "*"), U = new RegExp("=" + M + "*([^\\]'\"]*?)" + M + "*\\]", "g"), V = new RegExp(Q), W = new RegExp("^" + O + "$"), X = {
+                    for (var b = 0, c = this.length; c > b; b++)if (this[b] === a)return b;
+                    return -1
+                }, L = "checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped", M = "[\\x20\\t\\r\\n\\f]", N = "(?:\\\\.|[\\w-]|[^\\x00-\\xa0])+", O = N.replace("w", "w#"), P = "\\[" + M + "*(" + N + ")(?:" + M + "*([*^$|!~]?=)" + M + "*(?:'((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\"|(" + O + "))|)" + M + "*\\]", Q = ":(" + N + ")(?:\\((('((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\")|((?:\\\\.|[^\\\\()[\\]]|" + P + ")*)|.*)\\)|)", R = new RegExp("^" + M + "+|((?:^|[^\\\\])(?:\\\\.)*)" + M + "+$", "g"), S = new RegExp("^" + M + "*," + M + "*"), T = new RegExp("^" + M + "*([>+~]|" + M + ")" + M + "*"), U = new RegExp("=" + M + "*([^\\]'\"]*?)" + M + "*\\]", "g"), V = new RegExp(Q), W = new RegExp("^" + O + "$"), X = {
             ID: new RegExp("^#(" + N + ")"),
             CLASS: new RegExp("^\\.(" + N + ")"),
             TAG: new RegExp("^(" + N.replace("w", "w*") + ")"),
@@ -247,8 +247,8 @@
             }), c.getElementsByTagName = ib(function (a) {
                 return a.appendChild(e.createComment("")), !a.getElementsByTagName("*").length
             }), c.getElementsByClassName = $.test(e.getElementsByClassName) && ib(function (a) {
-                return a.innerHTML = "<div class='a'></div><div class='a i'></div>", a.firstChild.className = "i", 2 === a.getElementsByClassName("i").length
-            }), c.getById = ib(function (a) {
+                        return a.innerHTML = "<div class='a'></div><div class='a i'></div>", a.firstChild.className = "i", 2 === a.getElementsByClassName("i").length
+                    }), c.getById = ib(function (a) {
                 return o.appendChild(a).id = u, !e.getElementsByName || !e.getElementsByName(u).length
             }), c.getById ? (d.find.ID = function (a, b) {
                 if (typeof b.getElementById !== C && p) {
@@ -276,8 +276,8 @@
                 }
                 return f
             }, d.find.CLASS = c.getElementsByClassName && function (a, b) {
-                return typeof b.getElementsByClassName !== C && p ? b.getElementsByClassName(a) : void 0
-            }, r = [], q = [], (c.qsa = $.test(e.querySelectorAll)) && (ib(function (a) {
+                        return typeof b.getElementsByClassName !== C && p ? b.getElementsByClassName(a) : void 0
+                    }, r = [], q = [], (c.qsa = $.test(e.querySelectorAll)) && (ib(function (a) {
                 a.innerHTML = "<select msallowclip=''><option selected=''></option></select>", a.querySelectorAll("[msallowclip^='']").length && q.push("[*^$]=" + M + "*(?:''|\"\")"), a.querySelectorAll("[selected]").length || q.push("\\[" + M + "*(?:value|" + L + ")"), a.querySelectorAll(":checked").length || q.push(":checked")
             }), ib(function (a) {
                 var b = e.createElement("input");
@@ -372,8 +372,8 @@
                 }, CLASS: function (a) {
                     var b = y[a + " "];
                     return b || (b = new RegExp("(^|" + M + ")" + a + "(" + M + "|$)")) && y(a, function (a) {
-                            return b.test("string" == typeof a.className && a.className || typeof a.getAttribute !== C && a.getAttribute("class") || "")
-                        })
+                                return b.test("string" == typeof a.className && a.className || typeof a.getAttribute !== C && a.getAttribute("class") || "")
+                            })
                 }, ATTR: function (a, b, c) {
                     return function (d) {
                         var e = fb.attr(d, a);
@@ -901,8 +901,8 @@
             e = !0;
             for (h in c)n.access(a, b, h, c[h], !0, f, g)
         } else if (void 0 !== d && (e = !0, n.isFunction(d) || (g = !0), j && (g ? (b.call(a, d), b = null) : (j = b, b = function (a, b, c) {
-                return j.call(n(a), c)
-            })), b))for (; i > h; h++)b(a[h], c, g ? d : d.call(a[h], h, b(a[h], c)));
+                    return j.call(n(a), c)
+                })), b))for (; i > h; h++)b(a[h], c, g ? d : d.call(a[h], h, b(a[h], c)));
         return e ? a : j ? b.call(a) : i ? b(a[0], c) : f
     };
     n.acceptData = function (a) {
@@ -1019,10 +1019,10 @@
         }, _queueHooks: function (a, b) {
             var c = b + "queueHooks";
             return L.get(a, c) || L.access(a, c, {
-                    empty: n.Callbacks("once memory").add(function () {
-                        L.remove(a, [b + "queue", c])
+                        empty: n.Callbacks("once memory").add(function () {
+                            L.remove(a, [b + "queue", c])
+                        })
                     })
-                })
         }
     }), n.fn.extend({
         queue: function (a, b) {

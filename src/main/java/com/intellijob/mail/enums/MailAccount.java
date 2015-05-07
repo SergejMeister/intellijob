@@ -17,7 +17,9 @@
 package com.intellijob.mail.enums;
 
 /**
- * Created by Sergej Meister on 5/2/15.
+ * Supported mail accounts.
+ *
+ * @version 1.0
  */
 public enum MailAccount {
 
@@ -27,7 +29,7 @@ public enum MailAccount {
 
     /**
      * Represents the config property file.
-     *
+     * <p>
      * Example: gmail_imap.properties; rambler_imap.properties.
      */
     private final String propertyName;

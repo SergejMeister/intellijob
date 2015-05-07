@@ -18,19 +18,23 @@
 <form name="mailSearchForm" class="form" ng-controller="MailCtrl" ng-submit="search(mailUsername, mailPassword)">
 
     <h1>Hello to IntelliJob!</h1>
+
     <h3>This service:</h3>
     <ul>
         <li>Scans your mail box to find out mails from jobs portal (monster.de, stepstone.de)!</li>
-        <li>Parses mail context to determine jobs metadata (contact person, mail, address, requirements, skills etc.)!</li>
+        <li>Parses mail context to determine jobs metadata (contact person, mail, address, requirements, skills etc.)!
+        </li>
         <li>Uses jobs metadata to find out the best matching job offer!</li>
     </ul>
 
     <div id="searchMail">
         <fieldset>
             <h2>Mail access data</h2>
+
             <div class="form-group">
                 <label for="mail-account">Select mail account by:</label>
-                <select class="form-control" id="mail-account" ng-model="selectedMailAccount" ng-options="mailAccount.name for mailAccount in mailAccounts" >
+                <select class="form-control" id="mail-account" ng-model="selectedMailAccount"
+                        ng-options="mailAccount.name for mailAccount in mailAccounts">
                 </select>
             </div>
             <div class="form-group">
@@ -44,6 +48,7 @@
         </fieldset>
         <fieldset>
             <h2>Your job requirements</h2>
+
             <div class="form-group">
                 <input type="text" class="form-control" id="job_name">
             </div>

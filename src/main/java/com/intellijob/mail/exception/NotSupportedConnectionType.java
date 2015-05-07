@@ -18,6 +18,13 @@ package com.intellijob.mail.exception;
 
 import com.intellijob.mail.enums.MailError;
 
+/**
+ * Exception not supported mail connection type with <code>MailError.NOT_SUPPORTED_CONNECTION_TYPE</code>.
+ * <p>
+ * Supported connection types are imap and pop3.
+ *
+ * @version 1.0
+ */
 public class NotSupportedConnectionType extends BaseMailException {
 
     public NotSupportedConnectionType() {

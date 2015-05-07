@@ -44,27 +44,13 @@ public class ApplicationController extends WebMvcConfigurerAdapter {
      *
      * @param args application start parameters.
      *
-     * @throws Exception
+     * @throws Exception any exceptions.
      */
     public static void main(final String[] args) throws Exception {
         context = SpringApplication.run(ApplicationController.class, args);
-        LOG.info("\n<========================================================================= \n" +
-                    "                     IntelliJob started successful ! \n" +
-                    "=========================================================================>\n");
-    }
-
-    @Override
-    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-        configurer.enable();
-    }
-
-    @Bean
-    public InternalResourceViewResolver viewResolver() {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("views/");
-        resolver.setSuffix(".html");
-
-        return resolver;
+        LOG.info("\n<========================================================================= \n"
+                + "                     IntelliJob started successful ! \n"
+                + "=========================================================================>\n");
     }
 
     /**
@@ -74,5 +60,24 @@ public class ApplicationController extends WebMvcConfigurerAdapter {
      */
     public static ConfigurableApplicationContext getContext() {
         return context;
+    }
+
+    @Override
+    public void configureDefaultServletHandling(final DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
+    }
+
+    /**
+     * Internal resource resolver.
+     *
+     * @return resource view resolver.
+     */
+    @Bean
+    public InternalResourceViewResolver viewResolver() {
+        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        resolver.setPrefix("views/");
+        resolver.setSuffix(".html");
+
+        return resolver;
     }
 }
