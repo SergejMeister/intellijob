@@ -133,8 +133,6 @@ public class MailReceiverBean implements MailReceiver {
             store.connect(mailHost, username, password);
             Folder folder = store.getFolder(folderName);
             folder.open(Folder.READ_ONLY);
-            Message[] messages = folder.getMessages();
-            //for (int i = 0 ; i<= messages.length ; i++ ) {
             for (Message message : folder.getMessages()) {
                 result.add(new Mail(message));
             }
