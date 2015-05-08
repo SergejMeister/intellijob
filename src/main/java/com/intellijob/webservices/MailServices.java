@@ -40,8 +40,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Mail Web-Services.
- * <p>
- * Created by Sergej Meister on 4/26/15.
  */
 @RestController
 public class MailServices extends BaseServices {
