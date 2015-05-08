@@ -16,10 +16,8 @@ import java.io.InputStream;
 import java.util.Properties;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(classes = MockServletContext.class)
 @ContextConfiguration(classes = {TestApplicationController.class}, loader = SpringApplicationContextLoader.class)
 @WebAppConfiguration
-
 @ImportResource({
         "classpath*:developerMailAccount.properties"
 })
@@ -54,18 +52,13 @@ public abstract class BaseWebServiceTester {
         mailDefaultPassword = mailProperties.getProperty(PROP_KEY_MAIL_PASSWORD);
         requestMailData = createRequestMailData(mailDefaultAccount, mailDefaultUsername, mailDefaultPassword,
                 mailDefaultConnectionType);
-
-
-        if (RUNNING_LIVE) {
-            //TODO execute tests live!
-        }
     }
 
 
     private static Properties readProperty(String fileName) {
         Properties properties = new Properties();
-        System.out.println(BaseWebServiceTester.class.getResource(".").getPath());
-        System.out.println(Thread.currentThread().getContextClassLoader().getResource(".").getPath());
+//        System.out.println(BaseWebServiceTester.class.getResource(".").getPath());
+//        System.out.println(Thread.currentThread().getContextClassLoader().getResource(".").getPath());
         try {
             InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
             properties.load(inputStream);

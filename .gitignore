@@ -2,3 +2,4 @@
 .idea
 intellijob.iml
 target
+src/test/resources/developerMailAccount.properties
