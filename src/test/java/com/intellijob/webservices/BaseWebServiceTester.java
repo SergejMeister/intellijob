@@ -26,7 +26,7 @@ public abstract class BaseWebServiceTester {
     /**
      * Constants.
      */
-    protected final static Boolean RUNNING_LIVE = Boolean.TRUE;
+    protected final static Boolean RUNNING_LIVE = Boolean.FALSE;
     protected static final String FILENAME_DEVELOPER_MAIL_ACCOUNT = "developerMailAccount.properties";
     protected static final String FILENAME_TEST_MAIL_ACCOUNT = "testMailAccount.properties";
     protected final static String PROP_KEY_CONNECTION_TYPE = "connectiontype";
