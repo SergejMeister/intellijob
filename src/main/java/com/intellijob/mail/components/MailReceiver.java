@@ -17,8 +17,9 @@
 package com.intellijob.mail.components;
 
 import com.intellijob.mail.exception.BaseMailException;
+import com.intellijob.mail.models.Mail;
 
-import javax.mail.Message;
+import java.util.Set;
 
 /**
  * Represents controller to read messages from mail box.
@@ -50,9 +51,16 @@ public interface MailReceiver {
      *
      * @param folderName folder name.
      *
-     * @return mails mails.
+     * @return list of mails.
      */
-    Message[] getMessages(String folderName) throws BaseMailException;
+    Set<Mail> getMessages(String folderName) throws BaseMailException;
+
+    /**
+     * Returns all messages from mail box.
+     *
+     * @return list of mails.
+     */
+    Set<Mail> getAllMessages() throws BaseMailException;
 
 
 }

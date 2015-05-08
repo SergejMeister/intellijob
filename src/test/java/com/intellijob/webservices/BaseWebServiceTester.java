@@ -23,9 +23,6 @@ import java.util.Properties;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {TestApplicationController.class}, loader = SpringApplicationContextLoader.class)
 @WebAppConfiguration
-//@ImportResource({
-//        "classpath*:developerMailAccount.properties"
-//})
 public abstract class BaseWebServiceTester {
 
     /**

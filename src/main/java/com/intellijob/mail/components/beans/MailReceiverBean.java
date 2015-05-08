@@ -21,10 +21,10 @@ import com.intellijob.mail.dto.ReceiverConnectionData;
 import com.intellijob.mail.enums.MailError;
 import com.intellijob.mail.exception.BaseMailException;
 import com.intellijob.mail.exception.PermissionDeniedException;
+import com.intellijob.mail.models.Mail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.mail.AuthenticationFailedException;
 import javax.mail.Folder;
@@ -32,6 +32,9 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Store;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Represents mail receiver to get message from mail box.
@@ -99,9 +102,9 @@ public class MailReceiverBean implements MailReceiver {
             int totalCount = 0;
             for (Folder folder : folders) {
                 if (isMessageFolder(folder.getType())) {
-                    System.out.println(folder.getFullName() + ": " + folder.getMessageCount());
                     folder.open(Folder.READ_ONLY);
                     int result = folder.getMessageCount();
+                    System.out.println(folder.getFullName() + ": " + result);
                     totalCount = totalCount + result;
                     //
                     // Close folder
@@ -115,6 +118,66 @@ public class MailReceiverBean implements MailReceiver {
         } catch (AuthenticationFailedException afe) {
             throw new PermissionDeniedException(afe);
         } catch (MessagingException e) {
+            LOG.error(e.getLocalizedMessage(), e);
+            throw new BaseMailException(MailError.BAD_REQUEST);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Set<Mail> getMessages(String folderName) throws BaseMailException {
+        Set<Mail> result = new HashSet<>();
+        try {
+            store.connect(mailHost, username, password);
+            Folder folder = store.getFolder(folderName);
+            folder.open(Folder.READ_ONLY);
+            Message[] messages = folder.getMessages();
+            //for (int i = 0 ; i<= messages.length ; i++ ) {
+            for (Message message : folder.getMessages()) {
+                result.add(new Mail(message));
+            }
+            //
+            // Close folder and close store.
+            //
+            folder.close(false);
+            store.close();
+            return result;
+        } catch (AuthenticationFailedException afe) {
+            throw new PermissionDeniedException(afe);
+        } catch (MessagingException | IOException e) {
+            LOG.error(e.getLocalizedMessage(), e);
+            throw new BaseMailException(MailError.BAD_REQUEST);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Set<Mail> getAllMessages() throws BaseMailException {
+        Set<Mail> result = new HashSet<>();
+        try {
+            store.connect(mailHost, username, password);
+            Folder[] folders = store.getDefaultFolder().list();
+            for (Folder folder : folders) {
+                if (isMessageFolder(folder.getType())) {
+                    folder.open(Folder.READ_ONLY);
+                    for (Message message : folder.getMessages()) {
+                        result.add(new Mail(message));
+                    }
+                    //
+                    // Close folder
+                    //
+                    folder.close(false);
+                }
+            }
+            store.close();
+            return result;
+        } catch (AuthenticationFailedException afe) {
+            throw new PermissionDeniedException(afe);
+        } catch (MessagingException | IOException e) {
             LOG.error(e.getLocalizedMessage(), e);
             throw new BaseMailException(MailError.BAD_REQUEST);
         }
@@ -139,13 +202,5 @@ public class MailReceiverBean implements MailReceiver {
         }
         //1 or 3: can contain messages.
         return Boolean.TRUE;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Message[] getMessages(String folderName) {
-        throw new NotImplementedException();
     }
 }

@@ -24,6 +24,7 @@ import com.intellijob.mail.dto.ResponseMailSearchData;
 import com.intellijob.mail.exception.BaseMailException;
 import com.intellijob.mail.exception.NotSupportedMailAccount;
 import com.intellijob.mail.exception.PermissionDeniedException;
+import com.intellijob.mail.models.Mail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Set;
 
 
 /**
@@ -67,8 +70,13 @@ public class MailServices extends BaseServices {
 
         validate(requestMailData);
         MailReceiver mailReceiver = mailController.getReceiver(requestMailData);
-        int messageCount = mailReceiver.getMessageCount();
+        Set<Mail> inboxMails = mailReceiver.getMessages("inbox");
+        int messageCount = inboxMails.size();
         System.out.println("Total Messages:- " + messageCount);
+        for (Mail mail : inboxMails) {
+            System.out.println("From: " + mail.getFrom());
+        }
+
 
         return new ResponseMailSearchData(messageCount + " mails founded.");
     }
