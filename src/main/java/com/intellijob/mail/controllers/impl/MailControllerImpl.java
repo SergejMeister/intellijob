@@ -64,7 +64,6 @@ public class MailControllerImpl implements MailController {
      */
     @Override
     public MailReceiver getReceiver(RequestMailData requestMailData) throws BaseMailException {
-
         MailConnectionType mailConnectionType =
                 MailConnectionType.getMailConnectionType(requestMailData.getConnectionType());
         requestMailData.setConnectionType(mailConnectionType.toString().toLowerCase());

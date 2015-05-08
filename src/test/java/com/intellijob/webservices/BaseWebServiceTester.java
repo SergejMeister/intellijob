@@ -3,13 +3,18 @@ package com.intellijob.webservices;
 
 import com.intellijob.TestApplicationController;
 import com.intellijob.mail.dto.RequestMailData;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationContextLoader;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,9 +23,9 @@ import java.util.Properties;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {TestApplicationController.class}, loader = SpringApplicationContextLoader.class)
 @WebAppConfiguration
-@ImportResource({
-        "classpath*:developerMailAccount.properties"
-})
+//@ImportResource({
+//        "classpath*:developerMailAccount.properties"
+//})
 public abstract class BaseWebServiceTester {
 
     /**
@@ -33,8 +38,6 @@ public abstract class BaseWebServiceTester {
     protected final static String PROP_KEY_MAIL_ACCOUNT = "mailaccount";
     protected final static String PROP_KEY_MAIL_USERNAME = "mailusername";
     protected final static String PROP_KEY_MAIL_PASSWORD = "mailpassword";
-
-
     /**
      * Static variables.
      */
@@ -43,6 +46,12 @@ public abstract class BaseWebServiceTester {
     protected static String mailDefaultUsername;
     protected static String mailDefaultPassword;
     protected static RequestMailData requestMailData;
+    protected MockMvc mockMvc;
+    protected ObjectMapper mapper = new ObjectMapper();
+
+
+    @Autowired
+    private WebApplicationContext wac;
 
     @BeforeClass
     public static void beforeClass() {
@@ -59,7 +68,6 @@ public abstract class BaseWebServiceTester {
         requestMailData = createRequestMailData(mailDefaultAccount, mailDefaultUsername, mailDefaultPassword,
                 mailDefaultConnectionType);
     }
-
 
     private static Properties readProperty(String fileName) {
         Properties properties = new Properties();
@@ -81,5 +89,10 @@ public abstract class BaseWebServiceTester {
         requestMailData.setMailAccount(mailAccount);
         requestMailData.setConnectionType(connectionType);
         return requestMailData;
+    }
+
+    @Before
+    public void setUp() {
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
     }
 }

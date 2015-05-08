@@ -22,11 +22,13 @@ import com.intellijob.mail.dto.RequestMailData;
 import com.intellijob.mail.dto.ResponseError;
 import com.intellijob.mail.dto.ResponseMailSearchData;
 import com.intellijob.mail.exception.BaseMailException;
+import com.intellijob.mail.exception.NotSupportedMailAccount;
 import com.intellijob.mail.exception.PermissionDeniedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,6 +46,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MailServices extends BaseServices {
 
+    public static final String URL_MAIL_SEARCH = "/mail/search";
+
     private final static Logger LOG = LoggerFactory.getLogger(MailServices.class);
 
     @Autowired
@@ -51,20 +55,30 @@ public class MailServices extends BaseServices {
 
     /**
      * Request search mails in mail box.
+     * <p>
+     * When connection type is null, than default connection type imap.
      *
-     * @param requestMailData
+     * @param requestMailData required attributes username, password, mail account.
      *
      * @return data transfer object <code>ResponseMailSearchData.java</code>
      * @throws Exception handle exceptions.
      */
-    @RequestMapping(value = "/mail/search", method = RequestMethod.POST)
-    @ResponseBody
-    public ResponseMailSearchData searchMail(@RequestBody RequestMailData requestMailData) throws Exception {
+    @RequestMapping(value = URL_MAIL_SEARCH, method = RequestMethod.POST)
+    public @ResponseBody ResponseMailSearchData searchMail(@RequestBody RequestMailData requestMailData)
+            throws Exception {
+
+        validate(requestMailData);
         MailReceiver mailReceiver = mailController.getReceiver(requestMailData);
         int messageCount = mailReceiver.getMessageCount();
         System.out.println("Total Messages:- " + messageCount);
 
         return new ResponseMailSearchData(messageCount + " mails founded.");
+    }
+
+    private void validate(RequestMailData requestMailData) throws BaseMailException {
+        if (!StringUtils.hasLength(requestMailData.getMailAccount())) {
+            throw new NotSupportedMailAccount();
+        }
     }
 
     /**
