@@ -27,7 +27,8 @@ public abstract class BaseWebServiceTester {
      * Constants.
      */
     protected final static Boolean RUNNING_LIVE = Boolean.TRUE;
-    protected static final String PROP_FILENAME_REQUEST_MAIL = "developerMailAccount.properties";
+    protected static final String FILENAME_DEVELOPER_MAIL_ACCOUNT = "developerMailAccount.properties";
+    protected static final String FILENAME_TEST_MAIL_ACCOUNT = "testMailAccount.properties";
     protected final static String PROP_KEY_CONNECTION_TYPE = "connectiontype";
     protected final static String PROP_KEY_MAIL_ACCOUNT = "mailaccount";
     protected final static String PROP_KEY_MAIL_USERNAME = "mailusername";
@@ -45,7 +46,12 @@ public abstract class BaseWebServiceTester {
 
     @BeforeClass
     public static void beforeClass() {
-        Properties mailProperties = readProperty(PROP_FILENAME_REQUEST_MAIL);
+        Properties mailProperties;
+        if (RUNNING_LIVE) {
+            mailProperties = readProperty(FILENAME_DEVELOPER_MAIL_ACCOUNT);
+        } else {
+            mailProperties = readProperty(FILENAME_TEST_MAIL_ACCOUNT);
+        }
         mailDefaultAccount = mailProperties.getProperty(PROP_KEY_MAIL_ACCOUNT);
         mailDefaultConnectionType = mailProperties.getProperty(PROP_KEY_CONNECTION_TYPE);
         mailDefaultUsername = mailProperties.getProperty(PROP_KEY_MAIL_USERNAME);
