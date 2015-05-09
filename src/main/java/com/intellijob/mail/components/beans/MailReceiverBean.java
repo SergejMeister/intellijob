@@ -32,8 +32,14 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Store;
+import javax.mail.search.AndTerm;
+import javax.mail.search.FromStringTerm;
+import javax.mail.search.OrTerm;
+import javax.mail.search.SearchTerm;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -179,6 +185,66 @@ public class MailReceiverBean implements MailReceiver {
             LOG.error(e.getLocalizedMessage(), e);
             throw new BaseMailException(MailError.BAD_REQUEST);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Set<Mail> searchByFromTerm(String from) throws BaseMailException {
+        List<String> froms = new ArrayList<>();
+        froms.add(from);
+        return searchByFromTerm(froms, Boolean.FALSE);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Set<Mail> searchByFromTerm(List<String> froms, Boolean or) throws BaseMailException {
+        SearchTerm searchTerm = createSearchTermForFroms(froms, or);
+        Set<Mail> result = new HashSet<>();
+        try {
+            store.connect(mailHost, username, password);
+            Folder[] folders = store.getDefaultFolder().list();
+            for (Folder folder : folders) {
+                if (isMessageFolder(folder.getType())) {
+                    folder.open(Folder.READ_ONLY);
+                    for (Message message : folder.search(searchTerm)) {
+                        result.add(new Mail(message));
+                    }
+                    //
+                    // Close folder
+                    //
+                    folder.close(false);
+                }
+            }
+            store.close();
+            return result;
+        } catch (AuthenticationFailedException afe) {
+            throw new PermissionDeniedException(afe);
+        } catch (MessagingException | IOException e) {
+            LOG.error(e.getLocalizedMessage(), e);
+            throw new BaseMailException(MailError.BAD_REQUEST);
+        }
+    }
+
+    private SearchTerm createSearchTermForFroms(List<String> froms, Boolean or) {
+        SearchTerm term = null;
+        for (String from : froms) {
+            FromStringTerm fromTerm = new FromStringTerm(from);
+            if (term != null) {
+                if (or) {
+                    term = new OrTerm(term, fromTerm);
+                } else {
+                    term = new AndTerm(term, fromTerm);
+                }
+            } else {
+                term = fromTerm;
+            }
+        }
+
+        return term;
     }
 
     /**

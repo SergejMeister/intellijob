@@ -19,6 +19,7 @@ package com.intellijob.mail.components;
 import com.intellijob.mail.exception.BaseMailException;
 import com.intellijob.mail.models.Mail;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -61,6 +62,28 @@ public interface MailReceiver {
      * @return list of mails.
      */
     Set<Mail> getAllMessages() throws BaseMailException;
+
+
+    /**
+     * Search mails in all folders for messages matching the from criteria.
+     *
+     * @param from mail address in from.
+     *
+     * @return founded mails.
+     * @throws BaseMailException exceptions <code>AuthenticationFailedException</code> or <code>MessagingException</code>
+     */
+    Set<Mail> searchByFromTerm(String from) throws BaseMailException;
+
+    /**
+     * Search mails in all folders for messages matching the from criteria.
+     *
+     * @param froms list of mail addresses in from.
+     * @param or    If true, than <code>OrTerm</code> otherwise <code>AndTerm</code>
+     *
+     * @return founded mails.
+     * @throws BaseMailException exceptions <code>AuthenticationFailedException</code> or <code>MessagingException</code>
+     */
+    Set<Mail> searchByFromTerm(List<String> froms, Boolean or) throws BaseMailException;
 
 
 }
