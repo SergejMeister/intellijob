@@ -19,6 +19,8 @@ package com.intellijob.mail.components;
 import com.intellijob.mail.exception.BaseMailException;
 import com.intellijob.mail.models.Mail;
 
+import javax.mail.search.SearchTerm;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -85,5 +87,39 @@ public interface MailReceiver {
      */
     Set<Mail> searchByFromTerm(List<String> froms, Boolean or) throws BaseMailException;
 
+    /**
+     * Search mails in all folders for messages matching the from criteria and greater than <code>date</code>.
+     *
+     * @param from mail address in from.
+     * @param date since date.
+     *
+     * @return founded mails.
+     * @throws BaseMailException exceptions <code>AuthenticationFailedException</code> or <code>MessagingException</code>
+     */
+    Set<Mail> searchByFromTermAndDate(String from, Date date) throws BaseMailException;
 
+    /**
+     * Search mails in all folders for messages matching the from criteria and greater than <code>date</code>.
+     * <p>
+     * Example for term.
+     * termFrom1 or termFrom2 and greater than date.
+     *
+     * @param froms list of mail addresses in from.
+     * @param or    If true, than <code>OrTerm</code> otherwise <code>AndTerm</code>
+     * @param date  since date.
+     *
+     * @return founded mails.
+     * @throws BaseMailException exceptions <code>AuthenticationFailedException</code> or <code>MessagingException</code>
+     */
+    Set<Mail> searchByFromTermAndDate(List<String> froms, Boolean or, Date date) throws BaseMailException;
+
+    /**
+     * Search mails in all folders for messages matching the given search criteria.
+     *
+     * @param searchTerm search criteria.
+     *
+     * @return founded mails.
+     * @throws BaseMailException exceptions <code>AuthenticationFailedException</code> or <code>MessagingException</code>
+     */
+    Set<Mail> search(SearchTerm searchTerm) throws BaseMailException;
 }

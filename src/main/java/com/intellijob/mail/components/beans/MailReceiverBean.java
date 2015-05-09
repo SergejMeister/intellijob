@@ -33,11 +33,14 @@ import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.search.AndTerm;
+import javax.mail.search.ComparisonTerm;
 import javax.mail.search.FromStringTerm;
 import javax.mail.search.OrTerm;
+import javax.mail.search.ReceivedDateTerm;
 import javax.mail.search.SearchTerm;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -83,9 +86,7 @@ public class MailReceiverBean implements MailReceiver {
             folder.open(Folder.READ_ONLY);
             int result = folder.getMessageCount();
 
-            //
             // Close folder and close store.
-            //
             folder.close(false);
             store.close();
             return result;
@@ -112,12 +113,10 @@ public class MailReceiverBean implements MailReceiver {
                     int result = folder.getMessageCount();
                     System.out.println(folder.getFullName() + ": " + result);
                     totalCount = totalCount + result;
-                    //
+
                     // Close folder
-                    //
                     folder.close(false);
                 }
-
             }
             store.close();
             return totalCount;
@@ -142,9 +141,8 @@ public class MailReceiverBean implements MailReceiver {
             for (Message message : folder.getMessages()) {
                 result.add(new Mail(message));
             }
-            //
+
             // Close folder and close store.
-            //
             folder.close(false);
             store.close();
             return result;
@@ -171,9 +169,8 @@ public class MailReceiverBean implements MailReceiver {
                     for (Message message : folder.getMessages()) {
                         result.add(new Mail(message));
                     }
-                    //
+
                     // Close folder
-                    //
                     folder.close(false);
                 }
             }
@@ -203,6 +200,33 @@ public class MailReceiverBean implements MailReceiver {
     @Override
     public Set<Mail> searchByFromTerm(List<String> froms, Boolean or) throws BaseMailException {
         SearchTerm searchTerm = createSearchTermForFroms(froms, or);
+        return search(searchTerm);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Set<Mail> searchByFromTermAndDate(String from, Date date) throws BaseMailException {
+        List<String> froms = new ArrayList<>();
+        froms.add(from);
+        return searchByFromTermAndDate(froms, Boolean.FALSE, date);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Set<Mail> searchByFromTermAndDate(List<String> froms, Boolean or, Date date) throws BaseMailException {
+        SearchTerm searchTerm = createSearchTermForFromsAndDate(froms, or, date);
+        return search(searchTerm);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Set<Mail> search(SearchTerm searchTerm) throws BaseMailException {
         Set<Mail> result = new HashSet<>();
         try {
             store.connect(mailHost, username, password);
@@ -213,9 +237,8 @@ public class MailReceiverBean implements MailReceiver {
                     for (Message message : folder.search(searchTerm)) {
                         result.add(new Mail(message));
                     }
-                    //
+
                     // Close folder
-                    //
                     folder.close(false);
                 }
             }
@@ -227,6 +250,14 @@ public class MailReceiverBean implements MailReceiver {
             LOG.error(e.getLocalizedMessage(), e);
             throw new BaseMailException(MailError.BAD_REQUEST);
         }
+    }
+
+    private SearchTerm createSearchTermForFromsAndDate(List<String> froms, Boolean or, Date date) {
+        SearchTerm term = createSearchTermForFroms(froms, or);
+        ReceivedDateTerm dateTerm = new ReceivedDateTerm(ComparisonTerm.GE, date);
+        term = new AndTerm(term, dateTerm);
+
+        return term;
     }
 
     private SearchTerm createSearchTermForFroms(List<String> froms, Boolean or) {

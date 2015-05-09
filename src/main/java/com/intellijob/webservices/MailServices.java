@@ -39,6 +39,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -73,7 +74,7 @@ public class MailServices extends BaseServices {
         validate(requestMailData);
         MailReceiver mailReceiver = mailController.getReceiver(requestMailData);
         List<String> froms = Arrays.asList("info@jobagent.stepstone.de", "jagent@route.monster.com");
-        Set<Mail> inboxMails = mailReceiver.searchByFromTerm(froms, Boolean.TRUE);
+        Set<Mail> inboxMails = mailReceiver.searchByFromTermAndDate(froms, Boolean.TRUE, new Date());
         int messageCount = inboxMails.size();
         LOG.info("Total Messages:- " + messageCount);
         for (Mail mail : inboxMails) {
