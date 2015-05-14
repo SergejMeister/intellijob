@@ -36,11 +36,12 @@ intelliJobControllers.controller(
                 ];
                 $scope.selectedMailAccount = $scope.mailAccounts[0];
 
-
+                $scope.isSubmitSuccess = false;
                 $scope.mailUsername = "";
                 $scope.mailPassword = "";
+
                 /**
-                 * remove image from shopping cart
+                 * search mails in mail box.
                  */
                 $scope.search = function (mailUsername, mailPassword) {
                     var requestMailData = {};
@@ -48,14 +49,14 @@ intelliJobControllers.controller(
                     requestMailData.password = mailPassword;
                     requestMailData.mailAccount = $scope.selectedMailAccount.name;
                     MailServices.searchMail(requestMailData).success(function (responseMailData) {
+                        $scope.isSubmitSuccess = true;
                         $rootScope.success = responseMailData.message;
+
                     }).error(function (data) {
-                        //$scope.log(data.errors);
                         if ($scope.selectedMailAccount.name == "gmail") {
                             $rootScope.error = $rootScope.error + "When you sure that your access data are correct, than read more about google secure apps (https://support.google.com/accounts/answer/6010255?hl=de) !";
                         }
 
                     })
                 };
-
             }]);

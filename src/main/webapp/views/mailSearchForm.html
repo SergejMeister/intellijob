@@ -54,7 +54,10 @@
             </div>
         </fieldset>
         <div class="actions">
-            <button class="btn btn-info pull" type="submit">Search</button>
+            <button class="btn btn-info pull" type="submit" ng-show="!isSubmitSuccess">Search</button>
+        </div>
+        <div class="actions">
+            <a class="btn btn-info pull" ng-show="isSubmitSuccess" href="intellijob/mails">Show mails</a>
         </div>
     </div>
 </form>

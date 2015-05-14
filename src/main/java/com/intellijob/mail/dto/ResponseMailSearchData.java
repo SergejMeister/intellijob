@@ -20,8 +20,9 @@ import com.intellijob.mail.enums.MailError;
 
 import java.io.Serializable;
 
+
 /**
- * Created by Sergej Meister on 4/30/15.
+ * Data transfer object.
  */
 public class ResponseMailSearchData implements Serializable {
 

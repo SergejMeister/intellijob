@@ -38,8 +38,11 @@ intelliJob.config([
         $routeProvider.when('/intellijob/home', {
             templateUrl: '/intellijob/views/mailSearchForm.html',
             controller: 'MailCtrl'
+        }).when('/intellijob/mails', {
+            templateUrl: '/intellijob/views/mailTable.html',
+            controller: 'MailTableCtrl'
         }).otherwise({
-            redirectTo: '/intellijob/',
+            redirectTo: '/intellijob',
             templateUrl: '/intellijob/views/mailSearchForm.html',
             controller: 'MailCtrl'
         });

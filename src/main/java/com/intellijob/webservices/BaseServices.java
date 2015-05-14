@@ -16,7 +16,7 @@
 
 package com.intellijob.webservices;
 
-import com.intellijob.mail.dto.ResponseError;
+import com.intellijob.dto.ResponseError;
 import com.intellijob.mail.exception.BaseMailException;
 import org.springframework.http.HttpStatus;
 

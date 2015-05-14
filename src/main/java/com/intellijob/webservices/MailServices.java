@@ -16,10 +16,11 @@
 
 package com.intellijob.webservices;
 
+import com.intellijob.dto.ResponseError;
+import com.intellijob.dto.ResponseMailListData;
 import com.intellijob.mail.components.MailReceiver;
 import com.intellijob.mail.controllers.MailController;
 import com.intellijob.mail.dto.RequestMailData;
-import com.intellijob.mail.dto.ResponseError;
 import com.intellijob.mail.dto.ResponseMailSearchData;
 import com.intellijob.mail.exception.BaseMailException;
 import com.intellijob.mail.exception.NotSupportedMailAccount;
@@ -49,7 +50,7 @@ import java.util.Set;
 @RestController
 public class MailServices extends BaseServices {
 
-    public static final String ENDPOINT = "/mail";
+    public static final String ENDPOINT = "/mails";
 
     public static final String URL_MAIL_SEARCH = ENDPOINT + "/search";
 
@@ -72,7 +73,6 @@ public class MailServices extends BaseServices {
     @RequestMapping(value = URL_MAIL_SEARCH, method = RequestMethod.POST)
     public @ResponseBody ResponseMailSearchData searchMail(@RequestBody RequestMailData requestMailData)
             throws Exception {
-
         validate(requestMailData);
         MailReceiver mailReceiver = mailController.getReceiver(requestMailData);
         List<String> froms = Arrays.asList("info@jobagent.stepstone.de", "jagent@route.monster.com");
@@ -80,6 +80,17 @@ public class MailServices extends BaseServices {
         Set<Mail> inboxMails = mailReceiver.searchByFromTerm(froms, Boolean.TRUE);
 
         return new ResponseMailSearchData(inboxMails.size() + " mails founded.");
+    }
+
+    /**
+     * Request Get mails.
+     *
+     * @return data transfer object <code>ResponseMailSearchData.java</code>
+     * @throws Exception handle exceptions.
+     */
+    @RequestMapping(value = ENDPOINT, method = RequestMethod.GET)
+    public @ResponseBody ResponseMailListData getMail() throws Exception {
+        return new ResponseMailListData();
     }
 
     @SuppressWarnings("unused")

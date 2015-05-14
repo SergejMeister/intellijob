@@ -17,16 +17,27 @@ angular.module('intelliJob')
         .factory('MailServices', ['$http', '$rootScope',
             function ($http) {
 
-                var urlBase = "mail";
+                var urlBase = "intellijob/mails";
                 var mailServices = {};
 
                 /**
-                 * Returns result.
-                 * @param requestMailData
+                 * Search mails in mail box.
+                 *
+                 * @param requestMailData.
+                 *
                  * @returns {HttpPromise}
                  */
                 mailServices.searchMail = function (requestMailData) {
                     return $http.post(urlBase + '/search', requestMailData);
+                };
+
+                /**
+                 * Get mails.
+                 *
+                 * @returns {HttpPromise}
+                 */
+                mailServices.getMails = function () {
+                    return $http.get(urlBase);
                 };
 
 
