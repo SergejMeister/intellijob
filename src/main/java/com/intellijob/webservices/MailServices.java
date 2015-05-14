@@ -49,7 +49,9 @@ import java.util.Set;
 @RestController
 public class MailServices extends BaseServices {
 
-    public static final String URL_MAIL_SEARCH = "/mail/search";
+    public static final String ENDPOINT = "/mail";
+
+    public static final String URL_MAIL_SEARCH = ENDPOINT + "/search";
 
     private final static Logger LOG = LoggerFactory.getLogger(MailServices.class);
 
