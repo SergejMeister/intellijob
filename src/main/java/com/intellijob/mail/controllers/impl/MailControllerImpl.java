@@ -103,10 +103,10 @@ public class MailControllerImpl implements MailController {
         }
 
         Properties properties = new Properties();
-        try {
+        try (InputStream inputStream = getClass().getResourceAsStream(filePropertyName)) {
             //LOG.info("Path: " + Thread.currentThread().getContextClassLoader().getResource(filePropertyName).getPath());
-            InputStream inputStream = getClass().getResourceAsStream(filePropertyName);
             properties.load(inputStream);
+            inputStream.close();
         } catch (IOException e) {
             LOG.error("Property (" + getClass().getResource(filePropertyName).getPath() +
                     ") could not be loaded successful!", e);

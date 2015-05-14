@@ -17,8 +17,10 @@
 package com.intellijob.mail.models;
 
 import javax.mail.Address;
+import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
 import java.io.IOException;
 import java.util.Date;
 
@@ -27,24 +29,52 @@ import java.util.Date;
  */
 public class Mail {
 
+    public static final String TEXT_PLAIN = "text/plain";
+    public static final String TEXT_HTML = "text/html";
+
     private Address from;
     private String subject;
     private Date sentDate;
     private Date receivedDate;
     private String contentType;
-    private Object content;
+    private String content;
 
 
     public Mail(Message message) throws MessagingException, IOException {
-        Address[] adresses = message.getFrom();
-        if (adresses.length > 0) {
-            this.from = adresses[0];
+        Address[] addresses = message.getFrom();
+        if (addresses.length > 0) {
+            this.from = addresses[0];
         }
         this.subject = message.getSubject();
         this.sentDate = message.getSentDate();
         this.receivedDate = message.getReceivedDate();
-        this.contentType = message.getContentType();
-        this.content = message.getContent();
+        initContent(message);
+    }
+
+    private void initContent(Message message) throws MessagingException, IOException {
+        Object o = message.getContent();
+        if (o instanceof String) {
+            this.contentType = message.getContentType();
+            this.content = message.getContent().toString();
+            return;
+        } else if (o instanceof Multipart) {
+            Multipart multiPart = (Multipart) o;
+            int multiPartCount = multiPart.getCount();
+            for (int i = 0; i < multiPartCount; i++) {
+                BodyPart bodyPart = multiPart.getBodyPart(i);
+                if (isTextContent(bodyPart.getContentType())) {
+                    this.contentType = bodyPart.getContentType();
+                    this.content = bodyPart.getContent().toString();
+                    return;
+                }
+            }
+        }
+    }
+
+    private Boolean isTextContent(String messageContentType) {
+        String lowerContentType = messageContentType.toLowerCase();
+        //return lowerContentType.contains(TEXT_HTML) ;
+        return lowerContentType.contains(TEXT_PLAIN) || lowerContentType.contains(TEXT_HTML);
     }
 
     public Address getFrom() {
@@ -87,11 +117,11 @@ public class Mail {
         this.contentType = contentType;
     }
 
-    public Object getContent() {
+    public String getContent() {
         return content;
     }
 
-    public void setContent(Object content) {
+    public void setContent(String content) {
         this.content = content;
     }
 }

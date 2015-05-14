@@ -39,7 +39,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -74,15 +73,22 @@ public class MailServices extends BaseServices {
         validate(requestMailData);
         MailReceiver mailReceiver = mailController.getReceiver(requestMailData);
         List<String> froms = Arrays.asList("info@jobagent.stepstone.de", "jagent@route.monster.com");
-        Set<Mail> inboxMails = mailReceiver.searchByFromTermAndDate(froms, Boolean.TRUE, new Date());
-        int messageCount = inboxMails.size();
-        LOG.info("Total Messages:- " + messageCount);
-        for (Mail mail : inboxMails) {
+        //Set<Mail> inboxMails = mailReceiver.searchByFromTermAndDate(froms, Boolean.TRUE, new Date(2015,5,12));
+        Set<Mail> inboxMails = mailReceiver.searchByFromTerm(froms, Boolean.TRUE);
+        logInfoMails(inboxMails);
+
+        return new ResponseMailSearchData(inboxMails.size() + " mails founded.");
+    }
+
+    private void logInfoMails(Set<Mail> mails) {
+        LOG.info("Total Messages:- " + mails.size());
+        for (Mail mail : mails) {
+            LOG.info("------------------------------------------------------------------------------------------");
             LOG.info("From: " + mail.getFrom());
+            LOG.info("ContentType: " + mail.getContentType());
+            LOG.info("Content: " + mail.getContent());
+            LOG.info("------------------------------------------------------------------------------------------");
         }
-
-
-        return new ResponseMailSearchData(messageCount + " mails founded.");
     }
 
     private void validate(RequestMailData requestMailData) throws BaseMailException {

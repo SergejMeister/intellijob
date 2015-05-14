@@ -70,9 +70,9 @@ public abstract class BaseWebServiceTester {
         Properties properties = new Properties();
 //        System.out.println(BaseWebServiceTester.class.getResource(".").getPath());
 //        System.out.println(Thread.currentThread().getContextClassLoader().getResource(".").getPath());
-        try {
-            InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
+        try (InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName)) {
             properties.load(inputStream);
+            inputStream.close();
         } catch (IOException e) {
             System.out.println(e.getLocalizedMessage());
         }
