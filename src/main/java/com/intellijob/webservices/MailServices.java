@@ -57,6 +57,7 @@ public class MailServices extends BaseServices {
 
     @Autowired
     private MailController mailController;
+    private Set<Mail> mails;
 
     /**
      * Request search mails in mail box.
@@ -77,12 +78,13 @@ public class MailServices extends BaseServices {
         List<String> froms = Arrays.asList("info@jobagent.stepstone.de", "jagent@route.monster.com");
         //Set<Mail> inboxMails = mailReceiver.searchByFromTermAndDate(froms, Boolean.TRUE, new Date(2015,5,12));
         Set<Mail> inboxMails = mailReceiver.searchByFromTerm(froms, Boolean.TRUE);
-        logInfoMails(inboxMails);
 
         return new ResponseMailSearchData(inboxMails.size() + " mails founded.");
     }
 
+    @SuppressWarnings("unused")
     private void logInfoMails(Set<Mail> mails) {
+        this.mails = mails;
         LOG.info("Total Messages:- " + mails.size());
         for (Mail mail : mails) {
             LOG.info("------------------------------------------------------------------------------------------");
