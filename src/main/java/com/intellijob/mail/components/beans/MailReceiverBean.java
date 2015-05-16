@@ -21,7 +21,7 @@ import com.intellijob.mail.dto.ReceiverConnectionData;
 import com.intellijob.mail.enums.MailError;
 import com.intellijob.mail.exception.BaseMailException;
 import com.intellijob.mail.exception.PermissionDeniedException;
-import com.intellijob.mail.models.Mail;
+import com.intellijob.mail.models.MailModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -132,14 +132,14 @@ public class MailReceiverBean implements MailReceiver {
      * {@inheritDoc}
      */
     @Override
-    public Set<Mail> getMessages(String folderName) throws BaseMailException {
-        Set<Mail> result = new HashSet<>();
+    public Set<MailModel> getMessages(String folderName) throws BaseMailException {
+        Set<MailModel> result = new HashSet<>();
         try {
             store.connect(mailHost, username, password);
             Folder folder = store.getFolder(folderName);
             folder.open(Folder.READ_ONLY);
             for (Message message : folder.getMessages()) {
-                result.add(new Mail(message));
+                result.add(new MailModel(message));
             }
 
             // Close folder and close store.
@@ -158,8 +158,8 @@ public class MailReceiverBean implements MailReceiver {
      * {@inheritDoc}
      */
     @Override
-    public Set<Mail> getAllMessages() throws BaseMailException {
-        Set<Mail> result = new HashSet<>();
+    public Set<MailModel> getAllMessages() throws BaseMailException {
+        Set<MailModel> result = new HashSet<>();
         try {
             store.connect(mailHost, username, password);
             Folder[] folders = store.getDefaultFolder().list();
@@ -167,7 +167,7 @@ public class MailReceiverBean implements MailReceiver {
                 if (isMessageFolder(folder.getType())) {
                     folder.open(Folder.READ_ONLY);
                     for (Message message : folder.getMessages()) {
-                        result.add(new Mail(message));
+                        result.add(new MailModel(message));
                     }
 
                     // Close folder
@@ -188,7 +188,7 @@ public class MailReceiverBean implements MailReceiver {
      * {@inheritDoc}
      */
     @Override
-    public Set<Mail> searchByFromTerm(String from) throws BaseMailException {
+    public Set<MailModel> searchByFromTerm(String from) throws BaseMailException {
         List<String> froms = new ArrayList<>();
         froms.add(from);
         return searchByFromTerm(froms, Boolean.FALSE);
@@ -198,7 +198,7 @@ public class MailReceiverBean implements MailReceiver {
      * {@inheritDoc}
      */
     @Override
-    public Set<Mail> searchByFromTerm(List<String> froms, Boolean or) throws BaseMailException {
+    public Set<MailModel> searchByFromTerm(List<String> froms, Boolean or) throws BaseMailException {
         SearchTerm searchTerm = createSearchTermForFroms(froms, or);
         return search(searchTerm);
     }
@@ -207,7 +207,7 @@ public class MailReceiverBean implements MailReceiver {
      * {@inheritDoc}
      */
     @Override
-    public Set<Mail> searchByFromTermAndDate(String from, Date date) throws BaseMailException {
+    public Set<MailModel> searchByFromTermAndDate(String from, Date date) throws BaseMailException {
         List<String> froms = new ArrayList<>();
         froms.add(from);
         return searchByFromTermAndDate(froms, Boolean.FALSE, date);
@@ -217,7 +217,7 @@ public class MailReceiverBean implements MailReceiver {
      * {@inheritDoc}
      */
     @Override
-    public Set<Mail> searchByFromTermAndDate(List<String> froms, Boolean or, Date date) throws BaseMailException {
+    public Set<MailModel> searchByFromTermAndDate(List<String> froms, Boolean or, Date date) throws BaseMailException {
         SearchTerm searchTerm = createSearchTermForFromsAndDate(froms, or, date);
         return search(searchTerm);
     }
@@ -226,8 +226,8 @@ public class MailReceiverBean implements MailReceiver {
      * {@inheritDoc}
      */
     @Override
-    public Set<Mail> search(SearchTerm searchTerm) throws BaseMailException {
-        Set<Mail> result = new HashSet<>();
+    public Set<MailModel> search(SearchTerm searchTerm) throws BaseMailException {
+        Set<MailModel> result = new HashSet<>();
         try {
             store.connect(mailHost, username, password);
             Folder[] folders = store.getDefaultFolder().list();
@@ -235,7 +235,7 @@ public class MailReceiverBean implements MailReceiver {
                 if (isMessageFolder(folder.getType())) {
                     folder.open(Folder.READ_ONLY);
                     for (Message message : folder.search(searchTerm)) {
-                        result.add(new Mail(message));
+                        result.add(new MailModel(message));
                     }
 
                     // Close folder

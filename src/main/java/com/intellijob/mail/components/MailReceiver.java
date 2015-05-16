@@ -17,7 +17,7 @@
 package com.intellijob.mail.components;
 
 import com.intellijob.mail.exception.BaseMailException;
-import com.intellijob.mail.models.Mail;
+import com.intellijob.mail.models.MailModel;
 
 import javax.mail.search.SearchTerm;
 import java.util.Date;
@@ -56,14 +56,14 @@ public interface MailReceiver {
      *
      * @return list of mails.
      */
-    Set<Mail> getMessages(String folderName) throws BaseMailException;
+    Set<MailModel> getMessages(String folderName) throws BaseMailException;
 
     /**
      * Returns all messages from mail box.
      *
      * @return list of mails.
      */
-    Set<Mail> getAllMessages() throws BaseMailException;
+    Set<MailModel> getAllMessages() throws BaseMailException;
 
 
     /**
@@ -74,7 +74,7 @@ public interface MailReceiver {
      * @return founded mails.
      * @throws BaseMailException exceptions <code>AuthenticationFailedException</code> or <code>MessagingException</code>
      */
-    Set<Mail> searchByFromTerm(String from) throws BaseMailException;
+    Set<MailModel> searchByFromTerm(String from) throws BaseMailException;
 
     /**
      * Search mails in all folders for messages matching the from criteria.
@@ -85,7 +85,7 @@ public interface MailReceiver {
      * @return founded mails.
      * @throws BaseMailException exceptions <code>AuthenticationFailedException</code> or <code>MessagingException</code>
      */
-    Set<Mail> searchByFromTerm(List<String> froms, Boolean or) throws BaseMailException;
+    Set<MailModel> searchByFromTerm(List<String> froms, Boolean or) throws BaseMailException;
 
     /**
      * Search mails in all folders for messages matching the from criteria and greater than <code>date</code>.
@@ -96,7 +96,7 @@ public interface MailReceiver {
      * @return founded mails.
      * @throws BaseMailException exceptions <code>AuthenticationFailedException</code> or <code>MessagingException</code>
      */
-    Set<Mail> searchByFromTermAndDate(String from, Date date) throws BaseMailException;
+    Set<MailModel> searchByFromTermAndDate(String from, Date date) throws BaseMailException;
 
     /**
      * Search mails in all folders for messages matching the from criteria and greater than <code>date</code>.
@@ -111,7 +111,7 @@ public interface MailReceiver {
      * @return founded mails.
      * @throws BaseMailException exceptions <code>AuthenticationFailedException</code> or <code>MessagingException</code>
      */
-    Set<Mail> searchByFromTermAndDate(List<String> froms, Boolean or, Date date) throws BaseMailException;
+    Set<MailModel> searchByFromTermAndDate(List<String> froms, Boolean or, Date date) throws BaseMailException;
 
     /**
      * Search mails in all folders for messages matching the given search criteria.
@@ -121,5 +121,5 @@ public interface MailReceiver {
      * @return founded mails.
      * @throws BaseMailException exceptions <code>AuthenticationFailedException</code> or <code>MessagingException</code>
      */
-    Set<Mail> search(SearchTerm searchTerm) throws BaseMailException;
+    Set<MailModel> search(SearchTerm searchTerm) throws BaseMailException;
 }

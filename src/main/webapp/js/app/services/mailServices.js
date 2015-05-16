@@ -17,7 +17,8 @@ angular.module('intelliJob')
         .factory('MailServices', ['$http', '$rootScope',
             function ($http) {
 
-                var urlBase = "intellijob/mails";
+                //var urlBase = "intellijob/mails";
+                var urlBase = "/intellijob/mails";
                 var mailServices = {};
 
                 /**

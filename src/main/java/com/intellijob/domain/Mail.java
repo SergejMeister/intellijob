@@ -14,16 +14,21 @@
  * limitations under the License.
  */
 
-package com.intellijob.dto;
+package com.intellijob.domain;
 
-import com.intellijob.mail.models.MailModel;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
 /**
- * Response mail data to transfer model object <code>Mail</code>.
+ * Domain object mail.
  */
-public class ResponseMailData extends ResponseData {
+@Document(collection = "mails")
+public class Mail {
+
+    @Id
+    private String id;
 
     private String sentAddress;
     private String subject;
@@ -32,15 +37,12 @@ public class ResponseMailData extends ResponseData {
     private String contentType;
     private String content;
 
+    public String getId() {
+        return id;
+    }
 
-    public ResponseMailData(MailModel mailModel) {
-        this.sentAddress = mailModel.getFrom().toString();
-        this.subject = mailModel.getSubject();
-        //DateFormat dateFormatter = DateFormat.getDateInstance(DateFormat.SHORT, Locale.GERMANY);
-        this.sentDate = mailModel.getSentDate();
-        this.receivedDate = mailModel.getReceivedDate();
-        this.contentType = mailModel.getContentType();
-        this.content = mailModel.getContent();
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getSentAddress() {
@@ -59,22 +61,6 @@ public class ResponseMailData extends ResponseData {
         this.subject = subject;
     }
 
-    public Date getSentDate() {
-        return sentDate;
-    }
-
-    public void setSentDate(Date sentDate) {
-        this.sentDate = sentDate;
-    }
-
-    public Date getReceivedDate() {
-        return receivedDate;
-    }
-
-    public void setReceivedDate(Date receivedDate) {
-        this.receivedDate = receivedDate;
-    }
-
     public String getContentType() {
         return contentType;
     }
@@ -89,5 +75,21 @@ public class ResponseMailData extends ResponseData {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Date getSentDate() {
+        return sentDate;
+    }
+
+    public void setSentDate(Date sentDate) {
+        this.sentDate = sentDate;
+    }
+
+    public Date getReceivedDate() {
+        return receivedDate;
+    }
+
+    public void setReceivedDate(Date receivedDate) {
+        this.receivedDate = receivedDate;
     }
 }

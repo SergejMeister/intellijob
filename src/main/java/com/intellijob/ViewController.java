@@ -30,8 +30,7 @@ public class ViewController {
 
     @RequestMapping(value = {
             "/home",
-            "/",
-            "/mails"}, method = RequestMethod.GET)
+            "/"}, method = RequestMethod.GET)
     public String index() {
         return "/index";
     }

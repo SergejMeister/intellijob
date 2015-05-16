@@ -27,7 +27,7 @@ import java.util.Date;
 /**
  * This is simple mail model.
  */
-public class Mail {
+public class MailModel {
 
     public static final String TEXT_PLAIN = "text/plain";
     public static final String TEXT_HTML = "text/html";
@@ -40,7 +40,7 @@ public class Mail {
     private String content;
 
 
-    public Mail(Message message) throws MessagingException, IOException {
+    public MailModel(Message message) throws MessagingException, IOException {
         Address[] addresses = message.getFrom();
         if (addresses.length > 0) {
             this.from = addresses[0];

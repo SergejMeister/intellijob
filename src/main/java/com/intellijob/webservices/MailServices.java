@@ -16,6 +16,7 @@
 
 package com.intellijob.webservices;
 
+import com.intellijob.domain.Mail;
 import com.intellijob.dto.ResponseError;
 import com.intellijob.dto.ResponseMailListData;
 import com.intellijob.mail.components.MailReceiver;
@@ -25,7 +26,8 @@ import com.intellijob.mail.dto.ResponseMailSearchData;
 import com.intellijob.mail.exception.BaseMailException;
 import com.intellijob.mail.exception.NotSupportedMailAccount;
 import com.intellijob.mail.exception.PermissionDeniedException;
-import com.intellijob.mail.models.Mail;
+import com.intellijob.mail.models.MailModel;
+import com.intellijob.repository.MailRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +60,11 @@ public class MailServices extends BaseServices {
 
     @Autowired
     private MailController mailController;
-    private Set<Mail> mails;
+
+    @Autowired
+    private MailRepository mailRepository;
+
+
 
     /**
      * Request search mails in mail box.
@@ -77,7 +83,7 @@ public class MailServices extends BaseServices {
         MailReceiver mailReceiver = mailController.getReceiver(requestMailData);
         List<String> froms = Arrays.asList("info@jobagent.stepstone.de", "jagent@route.monster.com");
         //Set<Mail> inboxMails = mailReceiver.searchByFromTermAndDate(froms, Boolean.TRUE, new Date(2015,5,12));
-        Set<Mail> inboxMails = mailReceiver.searchByFromTerm(froms, Boolean.TRUE);
+        Set<MailModel> inboxMails = mailReceiver.searchByFromTerm(froms, Boolean.TRUE);
 
         return new ResponseMailSearchData(inboxMails.size() + " mails founded.");
     }
@@ -90,18 +96,27 @@ public class MailServices extends BaseServices {
      */
     @RequestMapping(value = ENDPOINT, method = RequestMethod.GET)
     public @ResponseBody ResponseMailListData getMail() throws Exception {
+        //List<Mail> mails = mailRepository.findAll();
+        Mail testMail = new Mail();
+        testMail.setSentAddress("testSentAddress");
+        testMail.setContentType("Text/HTML");
+        testMail.setSubject("Betreff");
+        testMail.setContent("Das ist ein mail!");
+
+        mailRepository.save(testMail);
+
+
         return new ResponseMailListData();
     }
 
     @SuppressWarnings("unused")
-    private void logInfoMails(Set<Mail> mails) {
-        this.mails = mails;
+    private void logInfoMails(Set<MailModel> mails) {
         LOG.info("Total Messages:- " + mails.size());
-        for (Mail mail : mails) {
+        for (MailModel mailModel : mails) {
             LOG.info("------------------------------------------------------------------------------------------");
-            LOG.info("From: " + mail.getFrom());
-            LOG.info("ContentType: " + mail.getContentType());
-            LOG.info("Content: " + mail.getContent());
+            LOG.info("From: " + mailModel.getFrom());
+            LOG.info("ContentType: " + mailModel.getContentType());
+            LOG.info("Content: " + mailModel.getContent());
             LOG.info("------------------------------------------------------------------------------------------");
         }
     }
