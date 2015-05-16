@@ -20,7 +20,7 @@ import com.intellijob.domain.Mail;
 import com.intellijob.dto.ResponseError;
 import com.intellijob.dto.ResponseMailListData;
 import com.intellijob.mail.components.MailReceiver;
-import com.intellijob.mail.controllers.MailController;
+import com.intellijob.mail.controllers.MailFacade;
 import com.intellijob.mail.dto.RequestMailData;
 import com.intellijob.mail.dto.ResponseMailSearchData;
 import com.intellijob.mail.exception.BaseMailException;
@@ -59,7 +59,7 @@ public class MailServices extends BaseServices {
     private final static Logger LOG = LoggerFactory.getLogger(MailServices.class);
 
     @Autowired
-    private MailController mailController;
+    private MailFacade mailFacade;
 
     @Autowired
     private MailRepository mailRepository;
@@ -80,7 +80,7 @@ public class MailServices extends BaseServices {
     public @ResponseBody ResponseMailSearchData searchMail(@RequestBody RequestMailData requestMailData)
             throws Exception {
         validate(requestMailData);
-        MailReceiver mailReceiver = mailController.getReceiver(requestMailData);
+        MailReceiver mailReceiver = mailFacade.getReceiver(requestMailData);
         List<String> froms = Arrays.asList("info@jobagent.stepstone.de", "jagent@route.monster.com");
         //Set<Mail> inboxMails = mailReceiver.searchByFromTermAndDate(froms, Boolean.TRUE, new Date(2015,5,12));
         Set<MailModel> inboxMails = mailReceiver.searchByFromTerm(froms, Boolean.TRUE);
