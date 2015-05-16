@@ -41,9 +41,7 @@ import javax.mail.search.SearchTerm;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Represents mail receiver to get message from mail box.
@@ -132,8 +130,8 @@ public class MailReceiverBean implements MailReceiver {
      * {@inheritDoc}
      */
     @Override
-    public Set<MailModel> getMessages(String folderName) throws BaseMailException {
-        Set<MailModel> result = new HashSet<>();
+    public List<MailModel> getMessages(String folderName) throws BaseMailException {
+        List<MailModel> result = new ArrayList<>();
         try {
             store.connect(mailHost, username, password);
             Folder folder = store.getFolder(folderName);
@@ -158,8 +156,8 @@ public class MailReceiverBean implements MailReceiver {
      * {@inheritDoc}
      */
     @Override
-    public Set<MailModel> getAllMessages() throws BaseMailException {
-        Set<MailModel> result = new HashSet<>();
+    public List<MailModel> getAllMessages() throws BaseMailException {
+        List<MailModel> result = new ArrayList<>();
         try {
             store.connect(mailHost, username, password);
             Folder[] folders = store.getDefaultFolder().list();
@@ -188,7 +186,7 @@ public class MailReceiverBean implements MailReceiver {
      * {@inheritDoc}
      */
     @Override
-    public Set<MailModel> searchByFromTerm(String from) throws BaseMailException {
+    public List<MailModel> searchByFromTerm(String from) throws BaseMailException {
         List<String> froms = new ArrayList<>();
         froms.add(from);
         return searchByFromTerm(froms, Boolean.FALSE);
@@ -198,7 +196,7 @@ public class MailReceiverBean implements MailReceiver {
      * {@inheritDoc}
      */
     @Override
-    public Set<MailModel> searchByFromTerm(List<String> froms, Boolean or) throws BaseMailException {
+    public List<MailModel> searchByFromTerm(List<String> froms, Boolean or) throws BaseMailException {
         SearchTerm searchTerm = createSearchTermForFroms(froms, or);
         return search(searchTerm);
     }
@@ -207,7 +205,7 @@ public class MailReceiverBean implements MailReceiver {
      * {@inheritDoc}
      */
     @Override
-    public Set<MailModel> searchByFromTermAndDate(String from, Date date) throws BaseMailException {
+    public List<MailModel> searchByFromTermAndDate(String from, Date date) throws BaseMailException {
         List<String> froms = new ArrayList<>();
         froms.add(from);
         return searchByFromTermAndDate(froms, Boolean.FALSE, date);
@@ -217,7 +215,7 @@ public class MailReceiverBean implements MailReceiver {
      * {@inheritDoc}
      */
     @Override
-    public Set<MailModel> searchByFromTermAndDate(List<String> froms, Boolean or, Date date) throws BaseMailException {
+    public List<MailModel> searchByFromTermAndDate(List<String> froms, Boolean or, Date date) throws BaseMailException {
         SearchTerm searchTerm = createSearchTermForFromsAndDate(froms, or, date);
         return search(searchTerm);
     }
@@ -226,8 +224,8 @@ public class MailReceiverBean implements MailReceiver {
      * {@inheritDoc}
      */
     @Override
-    public Set<MailModel> search(SearchTerm searchTerm) throws BaseMailException {
-        Set<MailModel> result = new HashSet<>();
+    public List<MailModel> search(SearchTerm searchTerm) throws BaseMailException {
+        List<MailModel> result = new ArrayList<>();
         try {
             store.connect(mailHost, username, password);
             Folder[] folders = store.getDefaultFolder().list();

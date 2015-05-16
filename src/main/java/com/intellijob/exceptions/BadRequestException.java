@@ -14,31 +14,21 @@
  * limitations under the License.
  */
 
-package com.intellijob.repository;
+package com.intellijob.exceptions;
 
-import com.intellijob.domain.Mail;
-import org.springframework.data.mongodb.repository.MongoRepository;
-
-import java.util.List;
+import com.intellijob.enums.Error;
 
 /**
- * Repository interface for domain object mail.
+ * Default application exception.
+ * <p>
+ * Error Code - 5000000 <code>Error.BAD_REQUEST</code>
  */
-public interface MailRepository extends MongoRepository<Mail, String> {
+public class BadRequestException extends BaseException {
 
     /**
-     * Returns all mails.
-     *
-     * @return list of mails.
+     * Default Constructor.
      */
-    List<Mail> findAll();
-
-    /**
-     * Find mail by given id.
-     *
-     * @param id mails id.
-     *
-     * @return optional mail object.
-     */
-    Mail findOne(String id);
+    public BadRequestException() {
+        super(Error.BAD_REQUEST);
+    }
 }

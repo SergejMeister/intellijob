@@ -18,9 +18,12 @@ package com.intellijob.mail.enums;
 
 import java.io.Serializable;
 
+/**
+ * Enums to handle mail connection errors.
+ */
 public enum MailError implements Serializable {
 
-    BAD_REQUEST(100400, "Bad Request"),
+    BAD_REQUEST(100400, "Bad Mail Request"),
     BAD_AUTHENTICATION(100200, "Access is denied. Incorrect username/password!"),
     NOT_SUPPORTED_CONNECTION_TYPE(100000, "This connection type is not supported!"),
     NOT_SUPPORTED_MAIL_ACCOUNT(100000, "This mail account is not supported!"),
@@ -29,24 +32,44 @@ public enum MailError implements Serializable {
     private int code;
     private String message;
 
-    private MailError(Integer code, String message) {
+    MailError(Integer code, String message) {
         this.code = code;
         this.message = message;
     }
 
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
+    /**
+     * Returns error message.
+     *
+     * @return message as string.
+     */
     public String getMessage() {
         return message;
     }
 
+    /**
+     * Sets error message.
+     *
+     * @param message message.
+     */
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    /**
+     * Returns error code.
+     *
+     * @return error code.
+     */
+    public Integer getCode() {
+        return code;
+    }
+
+    /**
+     * Sets error code.
+     *
+     * @param code error code.
+     */
+    public void setCode(Integer code) {
+        this.code = code;
     }
 }

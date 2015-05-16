@@ -16,9 +16,11 @@
 
 package com.intellijob.webservices;
 
-import com.intellijob.domain.Mail;
+import com.intellijob.controllers.MailController;
+import com.intellijob.controllers.ProfileController;
 import com.intellijob.dto.ResponseError;
 import com.intellijob.dto.ResponseMailListData;
+import com.intellijob.exceptions.NotMailSyncException;
 import com.intellijob.mail.components.MailReceiver;
 import com.intellijob.mail.controllers.MailFacade;
 import com.intellijob.mail.dto.RequestMailData;
@@ -27,7 +29,6 @@ import com.intellijob.mail.exception.BaseMailException;
 import com.intellijob.mail.exception.NotSupportedMailAccount;
 import com.intellijob.mail.exception.PermissionDeniedException;
 import com.intellijob.mail.models.MailModel;
-import com.intellijob.repository.MailRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -62,14 +64,20 @@ public class MailServices extends BaseServices {
     private MailFacade mailFacade;
 
     @Autowired
-    private MailRepository mailRepository;
+    private MailController mailController;
 
 
+    @Autowired
+    private ProfileController profileController;
 
     /**
      * Request search mails in mail box.
      * <p>
      * When connection type is null, than default connection type imap.
+     * When last mail sync date for this profile exist, than search mails than greater or equal last sync date.
+     * When last mail sync date for this profile doesn't exist, than search all mails.
+     * Save Mails in database.
+     * Save current date <code>new Date()</code> as last mail sync date for this profile.
      *
      * @param requestMailData required attributes username, password, mail account.
      *
@@ -82,9 +90,17 @@ public class MailServices extends BaseServices {
         validate(requestMailData);
         MailReceiver mailReceiver = mailFacade.getReceiver(requestMailData);
         List<String> froms = Arrays.asList("info@jobagent.stepstone.de", "jagent@route.monster.com");
-        //Set<Mail> inboxMails = mailReceiver.searchByFromTermAndDate(froms, Boolean.TRUE, new Date(2015,5,12));
-        Set<MailModel> inboxMails = mailReceiver.searchByFromTerm(froms, Boolean.TRUE);
+        List<MailModel> inboxMails;
+        Date newLastMailSyncDate = new Date();
+        try {
+            Date lastMailSyncDate = profileController.getLastMailSyncDate();
+            inboxMails = mailReceiver.searchByFromTermAndDate(froms, Boolean.TRUE, lastMailSyncDate);
+        } catch (NotMailSyncException nmse) {
+            inboxMails = mailReceiver.searchByFromTerm(froms, Boolean.TRUE);
+        }
 
+        mailController.saveModel(inboxMails);
+        profileController.simpleSave(newLastMailSyncDate);
         return new ResponseMailSearchData(inboxMails.size() + " mails founded.");
     }
 
@@ -96,16 +112,6 @@ public class MailServices extends BaseServices {
      */
     @RequestMapping(value = ENDPOINT, method = RequestMethod.GET)
     public @ResponseBody ResponseMailListData getMail() throws Exception {
-        //List<Mail> mails = mailRepository.findAll();
-        Mail testMail = new Mail();
-        testMail.setSentAddress("testSentAddress");
-        testMail.setContentType("Text/HTML");
-        testMail.setSubject("Betreff");
-        testMail.setContent("Das ist ein mail!");
-
-        mailRepository.save(testMail);
-
-
         return new ResponseMailListData();
     }
 

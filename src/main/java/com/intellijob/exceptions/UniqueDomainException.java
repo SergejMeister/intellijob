@@ -14,31 +14,21 @@
  * limitations under the License.
  */
 
-package com.intellijob.repository;
+package com.intellijob.exceptions;
 
-import com.intellijob.domain.Mail;
-import org.springframework.data.mongodb.repository.MongoRepository;
-
-import java.util.List;
+import com.intellijob.enums.Error;
 
 /**
- * Repository interface for domain object mail.
+ * Exception, if one element expected, but return null or more items.
+ * <p>
+ * Error Code - 5000001 <code>Error.NOT_UNIQUE_RESULT</code>
  */
-public interface MailRepository extends MongoRepository<Mail, String> {
+public class UniqueDomainException extends BaseException {
 
     /**
-     * Returns all mails.
-     *
-     * @return list of mails.
+     * Default constructor.
      */
-    List<Mail> findAll();
-
-    /**
-     * Find mail by given id.
-     *
-     * @param id mails id.
-     *
-     * @return optional mail object.
-     */
-    Mail findOne(String id);
+    public UniqueDomainException() {
+        super(Error.NOT_UNIQUE_RESULT);
+    }
 }

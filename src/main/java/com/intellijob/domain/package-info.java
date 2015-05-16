@@ -13,32 +13,8 @@
  *  See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package com.intellijob.repository;
-
-import com.intellijob.domain.Mail;
-import org.springframework.data.mongodb.repository.MongoRepository;
-
-import java.util.List;
-
 /**
- * Repository interface for domain object mail.
+ *
  */
-public interface MailRepository extends MongoRepository<Mail, String> {
+package com.intellijob.domain;
 
-    /**
-     * Returns all mails.
-     *
-     * @return list of mails.
-     */
-    List<Mail> findAll();
-
-    /**
-     * Find mail by given id.
-     *
-     * @param id mails id.
-     *
-     * @return optional mail object.
-     */
-    Mail findOne(String id);
-}
