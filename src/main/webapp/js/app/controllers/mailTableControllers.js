@@ -31,8 +31,8 @@ intelliJobControllers.controller(
             function ($scope, $rootScope, $location, $http, $cookieStore, $routeParams, $route, MailServices) {
 
                 $scope.mails;
-                MailServices.getMails().success(function (responseMailListData) {
-                    $scope.mails = responseMailListData.mails;
+                MailServices.getMails().success(function (response) {
+                    $scope.mails = response.mails;
                 }).error(function (error) {
                     $rootScope.error(error);
                 });

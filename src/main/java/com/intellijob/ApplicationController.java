@@ -59,6 +59,13 @@ public class ApplicationController extends WebMvcConfigurerAdapter {
                 + "=========================================================================>\n");
     }
 
+//    @Override
+//    public void addViewControllers( ViewControllerRegistry registry ) {
+//        registry.addViewController( "/" ).setViewName( "forward:/intellijob" );
+//        registry.setOrder( Ordered.HIGHEST_PRECEDENCE );
+//        super.addViewControllers(registry);
+//    }
+
     /**
      * Returns application context.
      *

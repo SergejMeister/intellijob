@@ -18,7 +18,7 @@ angular.module('intelliJob')
             function ($http) {
 
                 //var urlBase = "intellijob/mails";
-                var urlBase = "/intellijob/mails";
+                var urlBase = "/intellijob/api/mails";
                 var mailServices = {};
 
                 /**

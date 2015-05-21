@@ -29,7 +29,7 @@ public class MailServicesTest extends BaseWebServiceTester {
         map.put(PROP_KEY_MAIL_PASSWORD, requestMailData.getPassword());
 
         MvcResult result = mockMvc.perform(
-                MockMvcRequestBuilders.post(MailServices.URL_MAIL_SEARCH)
+                MockMvcRequestBuilders.post(Endpoints.MAIL_SEARCH)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(requestMailData))
                         .accept(MediaType.APPLICATION_JSON))

@@ -16,6 +16,8 @@
 
 package com.intellijob.dto;
 
+import com.intellijob.domain.Mail;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,12 +34,21 @@ public class ResponseMailListData extends ResponseData {
         this.mailsCount = 0;
     }
 
+    public ResponseMailListData(List<Mail> mails) {
+        this.mails = new ArrayList<>();
+        for (Mail mail : mails) {
+            this.mails.add(new ResponseMailData(mail));
+        }
+
+        this.mailsCount = this.mails.size();
+    }
+
     public List<ResponseMailData> getMails() {
         return mails;
     }
 
-    public void setMails(List<ResponseMailData> mails) {
-        this.mails = mails;
+    public void setMails(List<ResponseMailData> responseMailDataList) {
+        this.mails = responseMailDataList;
     }
 
     public Integer getMailsCount() {

@@ -16,6 +16,7 @@
 
 package com.intellijob.dto;
 
+import com.intellijob.domain.Mail;
 import com.intellijob.mail.models.MailModel;
 
 import java.util.Date;
@@ -33,6 +34,11 @@ public class ResponseMailData extends ResponseData {
     private String content;
 
 
+    /**
+     * Constructor for mailModel.
+     *
+     * @param mailModel model object <code>mailModel</code>.
+     */
     public ResponseMailData(MailModel mailModel) {
         this.sentAddress = mailModel.getFrom().toString();
         this.subject = mailModel.getSubject();
@@ -41,6 +47,20 @@ public class ResponseMailData extends ResponseData {
         this.receivedDate = mailModel.getReceivedDate();
         this.contentType = mailModel.getContentType();
         this.content = mailModel.getContent();
+    }
+
+    /**
+     * Constructor for domain object mail.
+     *
+     * @param mailDomain mail.
+     */
+    public ResponseMailData(Mail mailDomain) {
+        this.sentAddress = mailDomain.getSentAddress();
+        this.subject = mailDomain.getSubject();
+        this.sentDate = mailDomain.getSentDate();
+        this.receivedDate = mailDomain.getReceivedDate();
+        this.contentType = mailDomain.getContentType();
+        this.content = mailDomain.getContent();
     }
 
     public String getSentAddress() {

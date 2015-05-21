@@ -29,8 +29,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ViewController {
 
     @RequestMapping(value = {
+            "/",
             "/home",
-            "/"}, method = RequestMethod.GET)
+            "/mails",
+            "/view/**"}, method = RequestMethod.GET)
     public String index() {
         return "/index";
     }

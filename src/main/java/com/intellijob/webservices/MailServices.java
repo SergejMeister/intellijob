@@ -18,6 +18,7 @@ package com.intellijob.webservices;
 
 import com.intellijob.controllers.MailController;
 import com.intellijob.controllers.ProfileController;
+import com.intellijob.domain.Mail;
 import com.intellijob.dto.ResponseError;
 import com.intellijob.dto.ResponseMailListData;
 import com.intellijob.exceptions.NotMailSyncException;
@@ -50,13 +51,13 @@ import java.util.Set;
 
 /**
  * Mail Web-Services.
+ *
+ * Handle all request with endpoints <code>/mails**</code>
  */
 @RestController
 public class MailServices extends BaseServices {
 
-    public static final String ENDPOINT = "/mails";
 
-    public static final String URL_MAIL_SEARCH = ENDPOINT + "/search";
 
     private final static Logger LOG = LoggerFactory.getLogger(MailServices.class);
 
@@ -84,7 +85,7 @@ public class MailServices extends BaseServices {
      * @return data transfer object <code>ResponseMailSearchData.java</code>
      * @throws Exception handle exceptions.
      */
-    @RequestMapping(value = URL_MAIL_SEARCH, method = RequestMethod.POST)
+    @RequestMapping(value = Endpoints.MAIL_SEARCH, method = RequestMethod.POST)
     public @ResponseBody ResponseMailSearchData searchMail(@RequestBody RequestMailData requestMailData)
             throws Exception {
         validate(requestMailData);
@@ -110,9 +111,10 @@ public class MailServices extends BaseServices {
      * @return data transfer object <code>ResponseMailSearchData.java</code>
      * @throws Exception handle exceptions.
      */
-    @RequestMapping(value = ENDPOINT, method = RequestMethod.GET)
+    @RequestMapping(value = Endpoints.MAIL, method = RequestMethod.GET)
     public @ResponseBody ResponseMailListData getMail() throws Exception {
-        return new ResponseMailListData();
+        List<Mail> mails = mailController.findAll();
+        return new ResponseMailListData(mails);
     }
 
     @SuppressWarnings("unused")
