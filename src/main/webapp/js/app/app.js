@@ -41,6 +41,9 @@ intelliJob.config([
         }).when('/intellijob/mails', {
             templateUrl: '/intellijob/views/mailTable.html',
             controller: 'MailTableCtrl'
+        }).when('/intellijob/mails/:mailId', {
+            templateUrl: '/intellijob/views/mailContext.html',
+            controller: 'MailContextCtrl'
         }).when('/intellijob/index', {
             templateUrl: '/intellijob/views/mailSearchForm.html',
             controller: 'MailCtrl'

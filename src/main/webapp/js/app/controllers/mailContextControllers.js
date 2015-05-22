@@ -15,10 +15,10 @@
  */
 
 /**
- * Mail Table Controller.
+ * Mail Context Controller.
  */
 intelliJobControllers.controller(
-        'MailTableCtrl',
+        'MailContextCtrl',
         [
             '$scope',
             '$rootScope',
@@ -26,24 +26,15 @@ intelliJobControllers.controller(
             '$http',
             '$cookieStore',
             '$routeParams',
-            '$route',
             'MailServices',
-            function ($scope, $rootScope, $location, $http, $cookieStore, $routeParams, $route, MailServices) {
+            function ($scope, $rootScope, $location, $http, $cookieStore, $routeParams, MailServices) {
 
-                $scope.mails;
-                MailServices.getMails().success(function (response) {
-                    $scope.mails = response.mails;
+                var mailId = $routeParams.mailId;
+                $scope.mailData;
+                MailServices.getMail(mailId).success(function (response) {
+                    $scope.mailData = response;
                 }).error(function (error) {
                     console.log(error);
                 });
-
-
-                /**
-                 * Get mail by given id.
-                 */
-                $scope.showContext = function (mailId) {
-                    $location.path("/intellijob/mails/" + mailId);
-                    //window.open('/intellijob/mails/' + mailId);
-                };
 
             }]);

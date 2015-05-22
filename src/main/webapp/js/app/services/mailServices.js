@@ -17,7 +17,6 @@ angular.module('intelliJob')
         .factory('MailServices', ['$http', '$rootScope',
             function ($http) {
 
-                //var urlBase = "intellijob/mails";
                 var urlBase = "/intellijob/api/mails";
                 var mailServices = {};
 
@@ -33,12 +32,21 @@ angular.module('intelliJob')
                 };
 
                 /**
-                 * Get mails.
+                 * Get all mails.
                  *
                  * @returns {HttpPromise}
                  */
                 mailServices.getMails = function () {
                     return $http.get(urlBase);
+                };
+
+                /**
+                 * Get mail by given id.
+                 *
+                 * @returns {HttpPromise}
+                 */
+                mailServices.getMail = function (mailId) {
+                    return $http.get(urlBase + "/" + mailId);
                 };
 
 

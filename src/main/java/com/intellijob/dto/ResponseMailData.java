@@ -26,6 +26,7 @@ import java.util.Date;
  */
 public class ResponseMailData extends ResponseData {
 
+    private String id;
     private String sentAddress;
     private String subject;
     private Date sentDate;
@@ -55,6 +56,7 @@ public class ResponseMailData extends ResponseData {
      * @param mailDomain mail.
      */
     public ResponseMailData(Mail mailDomain) {
+        this.id = mailDomain.getId();
         this.sentAddress = mailDomain.getSentAddress();
         this.subject = mailDomain.getSubject();
         this.sentDate = mailDomain.getSentDate();
@@ -109,5 +111,13 @@ public class ResponseMailData extends ResponseData {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

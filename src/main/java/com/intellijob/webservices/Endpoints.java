@@ -23,5 +23,6 @@ public class Endpoints {
 
     public static final String API = "/api";
     public static final String MAIL = API + "/mails";
+    public static final String MAIL_BY_ID = API + "/mails/{mailId}";
     public static final String MAIL_SEARCH = MAIL + "/search";
 }

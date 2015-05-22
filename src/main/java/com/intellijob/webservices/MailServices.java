@@ -20,6 +20,7 @@ import com.intellijob.controllers.MailController;
 import com.intellijob.controllers.ProfileController;
 import com.intellijob.domain.Mail;
 import com.intellijob.dto.ResponseError;
+import com.intellijob.dto.ResponseMailData;
 import com.intellijob.dto.ResponseMailListData;
 import com.intellijob.exceptions.NotMailSyncException;
 import com.intellijob.mail.components.MailReceiver;
@@ -36,6 +37,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -115,6 +117,18 @@ public class MailServices extends BaseServices {
     public @ResponseBody ResponseMailListData getMail() throws Exception {
         List<Mail> mails = mailController.findAll();
         return new ResponseMailListData(mails);
+    }
+
+    /**
+     * Request Get mails.
+     *
+     * @return data transfer object <code>ResponseMailSearchData.java</code>
+     * @throws Exception handle exceptions.
+     */
+    @RequestMapping(value = Endpoints.MAIL_BY_ID, method = RequestMethod.GET)
+    public @ResponseBody ResponseMailData getMail(@PathVariable String mailId) throws Exception {
+        Mail mail = mailController.findMail(mailId);
+        return new ResponseMailData(mail);
     }
 
     @SuppressWarnings("unused")
