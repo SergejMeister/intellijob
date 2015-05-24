@@ -6,7 +6,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 public class TestApplicationController extends ApplicationController {
 
-    private static final Logger LOG = Logger.getLogger(ApplicationController.class);
+    private static final Logger LOG = Logger.getLogger(TestApplicationController.class);
     private static ConfigurableApplicationContext context;
 
 

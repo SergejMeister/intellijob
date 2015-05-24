@@ -92,4 +92,17 @@ public class Mail {
     public void setReceivedDate(Date receivedDate) {
         this.receivedDate = receivedDate;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return "Mail{" +
+                "id='" + id + '\'' +
+                ", sentAddress='" + sentAddress + '\'' +
+                ", subject='" + subject + '\'' +
+                ", contentType='" + contentType + '\'' +
+                '}';
+    }
 }

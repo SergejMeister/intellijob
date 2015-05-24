@@ -62,7 +62,7 @@ public class MailModel {
             int multiPartCount = multiPart.getCount();
             for (int i = 0; i < multiPartCount; i++) {
                 BodyPart bodyPart = multiPart.getBodyPart(i);
-                if (isTextContent(bodyPart.getContentType())) {
+                if (isHtmlContent(bodyPart.getContentType())) {
                     this.contentType = bodyPart.getContentType();
                     this.content = bodyPart.getContent().toString();
                     return;
@@ -71,10 +71,15 @@ public class MailModel {
         }
     }
 
+    private Boolean isHtmlContent(String messageContentType) {
+        String lowerContentType = messageContentType.toLowerCase();
+        return lowerContentType.contains(TEXT_HTML);
+    }
+
+    @SuppressWarnings("unused")
     private Boolean isTextContent(String messageContentType) {
         String lowerContentType = messageContentType.toLowerCase();
-        //return lowerContentType.contains(TEXT_HTML) ;
-        return lowerContentType.contains(TEXT_PLAIN) || lowerContentType.contains(TEXT_HTML);
+        return lowerContentType.contains(TEXT_PLAIN);
     }
 
     public Address getFrom() {

@@ -16,8 +16,10 @@
 
 package com.intellijob.webservices;
 
+import com.intellijob.controllers.JobLinkController;
 import com.intellijob.controllers.MailController;
 import com.intellijob.controllers.ProfileController;
+import com.intellijob.domain.JobLink;
 import com.intellijob.domain.Mail;
 import com.intellijob.dto.ResponseError;
 import com.intellijob.dto.ResponseMailData;
@@ -69,6 +71,9 @@ public class MailServices extends BaseServices {
     @Autowired
     private MailController mailController;
 
+    @Autowired
+    private JobLinkController jobLinkController;
+
 
     @Autowired
     private ProfileController profileController;
@@ -102,9 +107,13 @@ public class MailServices extends BaseServices {
             inboxMails = mailReceiver.searchByFromTerm(froms, Boolean.TRUE);
         }
 
-        mailController.saveModel(inboxMails);
+        List<Mail> savedMails = mailController.saveModel(inboxMails);
         profileController.simpleSave(newLastMailSyncDate);
-        return new ResponseMailSearchData(inboxMails.size() + " mails founded.");
+
+        //search for job links and save.
+        List<JobLink> jobLinks = jobLinkController.findInMailsAndSave(savedMails);
+
+        return new ResponseMailSearchData(inboxMails.size() + " mails and " + jobLinks.size() + " job links founded.");
     }
 
     /**

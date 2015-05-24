@@ -1,17 +1,12 @@
 package com.intellijob.webservices;
 
 
-import com.intellijob.TestApplicationController;
+import com.intellijob.BaseTester;
 import com.intellijob.mail.dto.RequestMailData;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationContextLoader;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -20,15 +15,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {TestApplicationController.class}, loader = SpringApplicationContextLoader.class)
-@WebAppConfiguration
-public abstract class BaseWebServiceTester {
+public abstract class BaseWebServiceTester extends BaseTester {
 
     /**
      * Constants.
      */
-    protected final static Boolean RUNNING_LIVE = Boolean.FALSE;
     protected static final String FILENAME_DEVELOPER_MAIL_ACCOUNT = "developerMailAccount.properties";
     protected static final String FILENAME_TEST_MAIL_ACCOUNT = "testMailAccount.properties";
     protected final static String PROP_KEY_CONNECTION_TYPE = "connectiontype";
