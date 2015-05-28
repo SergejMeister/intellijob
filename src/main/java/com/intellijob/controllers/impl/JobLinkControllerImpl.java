@@ -25,6 +25,7 @@ import com.intellijob.repository.JobLinkRepository;
 import com.intellijob.utility.HtmlLinkParseFilter;
 import com.intellijob.utility.HtmlLinkParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
@@ -102,6 +103,7 @@ public class JobLinkControllerImpl implements JobLinkController {
         jobLink.setAtag(htmlLink.getAtag());
         jobLink.setHref(htmlLink.getHref());
         jobLink.setValue(htmlLink.getValue());
+        jobLink.setReceivedDate(mail.getReceivedDate());
         return jobLink;
     }
 
@@ -110,7 +112,7 @@ public class JobLinkControllerImpl implements JobLinkController {
      */
     @Override
     public List<JobLink> findAll() {
-        return jobLinkRepository.findAll();
+        //TODO: should be changed to order by received date!
+        return jobLinkRepository.findAll(new Sort(Sort.Direction.DESC, "id"));
     }
-
 }

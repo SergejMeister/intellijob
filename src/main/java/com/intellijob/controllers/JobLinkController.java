@@ -78,7 +78,7 @@ public interface JobLinkController {
     JobLink convertHtmlLinkToJobLink(Mail mail, HtmlLink htmlLink);
 
     /**
-     * Returns all jobLinks.
+     * Returns all jobLinks order by received date..
      *
      * @return list of jobLinks
      */

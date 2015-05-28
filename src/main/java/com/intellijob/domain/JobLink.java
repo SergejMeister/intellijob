@@ -20,6 +20,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Reference;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
+
 /**
  * This Domain object represent job links contains in mail context.
  */
@@ -31,6 +33,12 @@ public class JobLink {
      */
     @Id
     private String id;
+
+
+    /**
+     * Received date.
+     */
+    private Date receivedDate;
 
     /**
      *
@@ -99,6 +107,14 @@ public class JobLink {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public Date getReceivedDate() {
+        return receivedDate;
+    }
+
+    public void setReceivedDate(Date receivedDate) {
+        this.receivedDate = receivedDate;
     }
 
     @Override

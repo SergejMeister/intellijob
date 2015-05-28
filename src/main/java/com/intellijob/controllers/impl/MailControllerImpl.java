@@ -22,6 +22,7 @@ import com.intellijob.exceptions.UniqueDomainException;
 import com.intellijob.mail.models.MailModel;
 import com.intellijob.repository.MailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
@@ -67,7 +68,7 @@ public class MailControllerImpl implements MailController {
      */
     @Override
     public List<Mail> findAll() {
-        return mailRepository.findAll();
+        return mailRepository.findAll(new Sort(Sort.Direction.DESC, "receivedDate"));
     }
 
     private List<Mail> convertMailModelToMail(List<MailModel> mailModels) {

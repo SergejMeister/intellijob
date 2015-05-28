@@ -65,9 +65,9 @@ public interface MailController {
     Mail findMail(String mailId);
 
     /**
-     * Returns all mails.
+     * Returns all mails order by received date.
      *
-     * @return set of mails.
+     * @return list of mails.
      */
     List<Mail> findAll();
 }
