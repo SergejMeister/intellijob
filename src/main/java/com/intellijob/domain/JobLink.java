@@ -61,6 +61,13 @@ public class JobLink {
      */
     private String value;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public Mail getMail() {
         return mail;
@@ -105,13 +112,8 @@ public class JobLink {
 
         JobLink jobLink = (JobLink) o;
 
-        if (!id.equals(jobLink.id)) {
-            return false;
-        }
-        if (!getAtag().equals(jobLink.getAtag())) {
-            return false;
-        }
-        return getHref().equals(jobLink.getHref()) && getValue().equals(jobLink.getValue());
+        return id.equals(jobLink.id) && getAtag().equals(jobLink.getAtag()) && getHref().equals(jobLink.getHref()) &&
+                getValue().equals(jobLink.getValue());
     }
 
     @Override

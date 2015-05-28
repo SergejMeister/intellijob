@@ -105,4 +105,12 @@ public class JobLinkControllerImpl implements JobLinkController {
         return jobLink;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<JobLink> findAll() {
+        return jobLinkRepository.findAll();
+    }
+
 }

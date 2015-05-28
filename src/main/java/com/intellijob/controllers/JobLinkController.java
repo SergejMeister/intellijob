@@ -76,4 +76,11 @@ public interface JobLinkController {
      * @return converted job link - id is null.
      */
     JobLink convertHtmlLinkToJobLink(Mail mail, HtmlLink htmlLink);
+
+    /**
+     * Returns all jobLinks.
+     *
+     * @return list of jobLinks
+     */
+    List<JobLink> findAll();
 }

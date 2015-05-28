@@ -14,16 +14,21 @@
  * limitations under the License.
  */
 
-package com.intellijob.webservices;
+angular.module('intelliJob')
+        .factory('JobLinkServices', ['$http', '$rootScope',
+            function ($http) {
 
-/**
- * All endpoint constants.
- */
-public class Endpoints {
+                var urlBase = "api/joblinks";
+                var mailServices = {};
 
-    public static final String API = "/api";
-    public static final String MAIL = API + "/mails";
-    public static final String MAIL_BY_ID = API + "/mails/{mailId}";
-    public static final String MAIL_SEARCH = MAIL + "/search";
-    public static final String JOBLINKS = API + "/joblinks";
-}
+                /**
+                 * Get all mails.
+                 *
+                 * @returns {HttpPromise}
+                 */
+                mailServices.getJobLinks = function () {
+                    return $http.get(urlBase);
+                };
+
+                return mailServices;
+            }]);

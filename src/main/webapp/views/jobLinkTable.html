@@ -28,26 +28,20 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>From</th>
-                            <th>Subject</th>
-                            <th>Content type</th>
-                            <th>Sent date</th>
+                            <th>Source</th>
                             <th>Receive date</th>
-                            <th>Mail Content</th>
+                            <th>Value</th>
+                            <th>Link</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="mail in mails">
+                        <tr ng-repeat="jobLinkData in jobLinks">
                             <td>{{$index}}</td>
-                            <td>{{mail.sentAddress}}</td>
-                            <td>{{mail.subject}}</td>
-                            <td>{{mail.contentType}}</td>
-                            <td><p ng-bind="mail.sentDate | date:'dd.MM.yyyy HH:mm'"></td>
-                            <td><p ng-bind="mail.receivedDate | date:'dd.MM.yyyy HH:mm'"></td>
+                            <td>{{jobLinkData.source}}</td>
+                            <td><p ng-bind="jobLinkData.receivedDate | date:'dd.MM.yyyy HH:mm'"></p></td>
+                            <td>{{jobLinkData.value}}</td>
                             <td>
-                                <a target="_blank" ng-click="showContext(mail.id)">
-                                    <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                                </a>
+                                <a target="_blank" href="{{jobLinkData.link}}">Link</a>
                             </td>
                         </tr>
                     </tbody>

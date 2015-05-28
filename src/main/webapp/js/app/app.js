@@ -47,6 +47,9 @@ intelliJob.config([
         }).when('/intellijob/index', {
             templateUrl: '/intellijob/views/mailSearchForm.html',
             controller: 'MailCtrl'
+        }).when('/intellijob/joblinks', {
+            templateUrl: '/intellijob/views/jobLinkTable.html',
+            controller: 'JobLinkTableCtrl'
         }).otherwise({
             redirectTo: '/intellijob',
             templateUrl: '/intellijob/views/mailSearchForm.html',

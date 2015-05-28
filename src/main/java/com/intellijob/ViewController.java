@@ -31,7 +31,8 @@ public class ViewController {
     @RequestMapping(value = {
             "/",
             "/home",
-            "/mails"}, method = RequestMethod.GET)
+            "/mails",
+            "/joblinks"}, method = RequestMethod.GET)
     public String index() {
         return "/index";
     }
