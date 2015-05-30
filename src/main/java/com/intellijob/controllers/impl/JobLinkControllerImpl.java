@@ -26,6 +26,8 @@ import com.intellijob.repository.JobLinkRepository;
 import com.intellijob.utility.HtmlLinkParseFilter;
 import com.intellijob.utility.HtmlLinkParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 
@@ -115,6 +117,15 @@ public class JobLinkControllerImpl implements JobLinkController {
     @Override
     public List<JobLink> findAll() {
         return jobLinkRepository.findAll(new Sort(Sort.Direction.DESC, "receivedDate"));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Page<JobLink> findAll(int pageIndex, int limit) {
+        PageRequest request = new PageRequest(pageIndex, limit, new Sort(Sort.Direction.DESC, "receivedDate"));
+        return jobLinkRepository.findAll(request);
     }
 
     /**

@@ -20,6 +20,8 @@ import com.intellijob.controllers.JobLinkController;
 import com.intellijob.domain.JobLink;
 import com.intellijob.dto.ResponseJobLinkTableData;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -45,5 +47,17 @@ public class JobLinkServices extends BaseServices {
     public @ResponseBody ResponseJobLinkTableData getJobLinks() {
         List<JobLink> jobLinks = jobLinkController.findAll();
         return new ResponseJobLinkTableData(jobLinks);
+    }
+
+    /**
+     * Request Get all jobLinks.
+     *
+     * @return data transfer object <code>ResponseJobLinkTableData.java</code>
+     */
+    @RequestMapping(value = Endpoints.JOBLINKS_START_COUNT, method = RequestMethod.GET)
+    public @ResponseBody ResponseJobLinkTableData getJobLinks(@PathVariable int pageIndex, @PathVariable int limit) {
+        Page<JobLink> jobLinkPage = jobLinkController.findAll(pageIndex, limit);
+
+        return new ResponseJobLinkTableData(jobLinkPage);
     }
 }

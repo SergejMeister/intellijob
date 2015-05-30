@@ -20,6 +20,7 @@ import com.intellijob.domain.JobLink;
 import com.intellijob.domain.Mail;
 import com.intellijob.exceptions.DocumentNotFoundException;
 import com.intellijob.models.HtmlLink;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -84,6 +85,16 @@ public interface JobLinkController {
      * @return list of jobLinks
      */
     List<JobLink> findAll();
+
+    /**
+     * Returns all job links with paging.
+     *
+     * @param pageIndex page index.
+     * @param limit     size per page
+     *
+     * @return page of job links.
+     */
+    Page<JobLink> findAll(int pageIndex, int limit);
 
     /**
      * Returns jobLink by specified id.

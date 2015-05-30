@@ -17,6 +17,7 @@
 package com.intellijob.dto;
 
 import com.intellijob.domain.JobLink;
+import org.springframework.data.domain.Page;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +25,9 @@ import java.util.List;
 /**
  * Data transfer object represents table of jobLinks
  */
-public class ResponseJobLinkTableData extends ResponseData {
+public class ResponseJobLinkTableData extends ResponseTableData {
 
     List<ResponseJobLinkData> jobLinks;
-
 
     /**
      * Constructor with list of domain object <code>JobLink</code>.
@@ -37,6 +37,17 @@ public class ResponseJobLinkTableData extends ResponseData {
     public ResponseJobLinkTableData(List<JobLink> listOfDomainObjects) {
         this.jobLinks = new ArrayList<>();
         for (JobLink jobLink : listOfDomainObjects) {
+            ResponseJobLinkData responseJobLinkData = new ResponseJobLinkData(jobLink);
+            this.jobLinks.add(responseJobLinkData);
+        }
+        this.totalItemSize = this.jobLinks.size();
+    }
+
+    public ResponseJobLinkTableData(Page<JobLink> jobLinkPage) {
+        this.totalItemSize = jobLinkPage.getTotalElements();
+        this.totalPages = jobLinkPage.getTotalPages();
+        this.jobLinks = new ArrayList<>();
+        for (JobLink jobLink : jobLinkPage.getContent()) {
             ResponseJobLinkData responseJobLinkData = new ResponseJobLinkData(jobLink);
             this.jobLinks.add(responseJobLinkData);
         }

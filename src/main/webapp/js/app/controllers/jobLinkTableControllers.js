@@ -30,9 +30,24 @@ intelliJobControllers.controller(
             'JobLinkServices',
             function ($scope, $rootScope, $location, $http, $cookieStore, $routeParams, $route, JobLinkServices) {
 
+                $scope.jobLinksTableCurrentPage = 1;
+                $scope.jobLinksTableNumPerPage = 50;
+                $scope.jobLinksTableMaxPage = 10;
+                $scope.showPagination = false;
                 $scope.jobLinks;
-                JobLinkServices.getJobLinks().success(function (response) {
+                JobLinkServices.getJobLinksPage($scope.jobLinksTableCurrentPage, $scope.jobLinksTableNumPerPage).success(function (response) {
                     $scope.jobLinks = response.jobLinks;
+                    $scope.jobLinksTableTotalItems = response.totalItemSize;
+                    $scope.showPagination = true;
+                    //// Set watch on pagination numbers
+                    $scope.$watch('jobLinksTableCurrentPage + jobLinksTableNumPerPage', function () {
+                        var pageIndex = $scope.jobLinksTableCurrentPage - 1;
+                        JobLinkServices.getJobLinksPage(pageIndex, $scope.jobLinksTableNumPerPage).success(function (response) {
+                            $scope.jobLinks = response.jobLinks;
+                        }).error(function (error) {
+                            console.log(error);
+                        });
+                    });
                 }).error(function (error) {
                     console.log(error);
                 });

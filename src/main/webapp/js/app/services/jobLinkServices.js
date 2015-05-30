@@ -32,6 +32,15 @@ angular.module('intelliJob')
                 };
 
                 /**
+                 * Get all job links.
+                 *
+                 * @returns {HttpPromise}
+                 */
+                jobLinkServices.getJobLinksPage = function (pageIndex, limit) {
+                    return $http.get(urlBase + "/" + pageIndex + "/" + limit);
+                };
+
+                /**
                  * Download job links and return downloaded job object.
                  *
                  * @returns {HttpPromise}

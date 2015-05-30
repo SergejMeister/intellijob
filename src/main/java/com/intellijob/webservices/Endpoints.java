@@ -26,6 +26,7 @@ public class Endpoints {
     public static final String MAIL_BY_ID = API + MAILS + "/{mailId}";
     public static final String MAILS_SEARCH = MAILS + "/search";
     public static final String JOBLINKS = API + "/joblinks";
+    public static final String JOBLINKS_START_COUNT = JOBLINKS + "/{pageIndex}/{limit}";
     public static final String JOBS = API + "/jobs";
     public static final String JOBS_DOWNLOAD = JOBS + "/download";
     public static final String JOBS_BY_JOBLINK_ID_DOWNLOAD = JOBS + "/{jobLinkId}/download";
