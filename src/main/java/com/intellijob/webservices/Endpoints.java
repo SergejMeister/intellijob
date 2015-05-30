@@ -22,8 +22,11 @@ package com.intellijob.webservices;
 public class Endpoints {
 
     public static final String API = "/api";
-    public static final String MAIL = API + "/mails";
-    public static final String MAIL_BY_ID = API + "/mails/{mailId}";
-    public static final String MAIL_SEARCH = MAIL + "/search";
+    public static final String MAILS = API + "/mails";
+    public static final String MAIL_BY_ID = API + MAILS + "/{mailId}";
+    public static final String MAILS_SEARCH = MAILS + "/search";
     public static final String JOBLINKS = API + "/joblinks";
+    public static final String JOBS = API + "/jobs";
+    public static final String JOBS_DOWNLOAD = API + JOBS + "/download";
+    public static final String JOBS_BY_JOBLINK_ID_DOWNLOAD = API + JOBS + "/{jobLinkId}/download";
 }

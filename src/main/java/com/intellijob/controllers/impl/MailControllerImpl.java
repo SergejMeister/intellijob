@@ -18,7 +18,6 @@ package com.intellijob.controllers.impl;
 
 import com.intellijob.controllers.MailController;
 import com.intellijob.domain.Mail;
-import com.intellijob.exceptions.UniqueDomainException;
 import com.intellijob.mail.models.MailModel;
 import com.intellijob.repository.MailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +40,7 @@ public class MailControllerImpl implements MailController {
      * {@inheritDoc}
      */
     @Override
-    public Mail saveModel(MailModel mailModel) throws UniqueDomainException {
+    public Mail saveModel(MailModel mailModel) {
         Mail mail = convertMailModelToMail(mailModel);
         return mailRepository.save(mail);
     }

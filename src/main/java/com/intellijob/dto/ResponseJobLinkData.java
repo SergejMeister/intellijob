@@ -56,6 +56,11 @@ public class ResponseJobLinkData extends ResponseData {
      */
     private Date receivedDate;
 
+    /**
+     * Download flag.
+     */
+    private Boolean downloaded;
+
 
     public ResponseJobLinkData(JobLink jobLink) {
         this.jobLinkId = jobLink.getId();
@@ -63,6 +68,7 @@ public class ResponseJobLinkData extends ResponseData {
         this.value = jobLink.getValue();
         this.receivedDate = jobLink.getMail().getReceivedDate();
         this.source = jobLink.getMail().getSentAddress();
+        this.downloaded = jobLink.isDownloaded();
     }
 
     /**
@@ -155,5 +161,23 @@ public class ResponseJobLinkData extends ResponseData {
      */
     public void setReceivedDate(Date receivedDate) {
         this.receivedDate = receivedDate;
+    }
+
+    /**
+     * Is downloaded!
+     *
+     * @return downloaded.
+     */
+    public Boolean getDownloaded() {
+        return downloaded;
+    }
+
+    /**
+     * Sets download flag.
+     *
+     * @param downloaded downloaded flag.
+     */
+    public void setDownloaded(Boolean downloaded) {
+        this.downloaded = downloaded;
     }
 }

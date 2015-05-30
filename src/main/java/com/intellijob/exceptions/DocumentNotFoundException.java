@@ -14,20 +14,19 @@
  * limitations under the License.
  */
 
-package com.intellijob;
+package com.intellijob.exceptions;
 
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+import com.intellijob.enums.Error;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = TestApplicationController.class)
-@WebAppConfiguration
-public abstract class BaseTester {
+/**
+ * This is an exception, if a document is not founded by specified unique attribute (like id).
+ */
+public class DocumentNotFoundException extends BaseException {
 
     /**
-     * Constants.
+     * Default constructor.
      */
-    protected final static Boolean RUNNING_LIVE = Boolean.FALSE;
+    public DocumentNotFoundException() {
+        super(Error.NOT_FOUNDED_DOCUMENT);
+    }
 }

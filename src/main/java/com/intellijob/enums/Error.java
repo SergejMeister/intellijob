@@ -36,7 +36,22 @@ public enum Error implements Serializable {
     /**
      * Last date of mails synchronization is not founded.
      */
-    NOT_LAST_MAIL_SYNC_DATE(5000002, "Last date of mails synchronization is not founded!");
+    NOT_LAST_MAIL_SYNC_DATE(5000002, "Last date of mails synchronization is not founded!"),
+
+    /**
+     * Error, if required param null or empty.
+     */
+    NOT_VALID_PARAM(5000003, "Param is null or empty!"),
+
+    /**
+     * Error code, if a document or domain object is not founded.
+     */
+    NOT_FOUNDED_DOCUMENT(5000004, "Document is not founded!"),
+
+    /**
+     * Error code, if a job link is not founded.
+     */
+    NOT_FOUNDED_LINK(5000005, "Job Link is not founded!");
 
 
     private String message;

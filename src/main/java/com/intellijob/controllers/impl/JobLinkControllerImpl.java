@@ -20,6 +20,7 @@ import com.intellijob.controllers.JobLinkController;
 import com.intellijob.controllers.MailController;
 import com.intellijob.domain.JobLink;
 import com.intellijob.domain.Mail;
+import com.intellijob.exceptions.DocumentNotFoundException;
 import com.intellijob.models.HtmlLink;
 import com.intellijob.repository.JobLinkRepository;
 import com.intellijob.utility.HtmlLinkParseFilter;
@@ -104,6 +105,7 @@ public class JobLinkControllerImpl implements JobLinkController {
         jobLink.setHref(htmlLink.getHref());
         jobLink.setValue(htmlLink.getValue());
         jobLink.setReceivedDate(mail.getReceivedDate());
+        jobLink.setDownloaded(Boolean.FALSE);
         return jobLink;
     }
 
@@ -115,4 +117,48 @@ public class JobLinkControllerImpl implements JobLinkController {
         //TODO: should be changed to order by received date!
         return jobLinkRepository.findAll(new Sort(Sort.Direction.DESC, "id"));
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JobLink findById(String jobLinkId) throws DocumentNotFoundException {
+        JobLink jobLink = jobLinkRepository.findOne(jobLinkId);
+        if (jobLink != null) {
+            return jobLink;
+        }
+
+        throw new DocumentNotFoundException();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JobLink save(JobLink jobLink) {
+        jobLinkRepository.save(jobLink);
+        return jobLink;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<JobLink> findToDownload() {
+        return jobLinkRepository.findByDownloaded(Boolean.FALSE);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JobLink removeJobLink(JobLink jobLink) {
+        jobLinkRepository.delete(jobLink);
+
+        //TODO check mail
+        //Has this mail other job links, than ok, else delete mail too.
+        return jobLink;
+    }
+
+
 }

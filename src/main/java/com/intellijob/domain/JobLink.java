@@ -69,6 +69,29 @@ public class JobLink {
      */
     private String value;
 
+    /**
+     * Flag, if this job is downloaded.
+     */
+    private Boolean downloaded;
+
+    /**
+     * Is job content downloaded?
+     *
+     * @return download flag.
+     */
+    public Boolean isDownloaded() {
+        return downloaded;
+    }
+
+    /**
+     * Sets download flag.
+     *
+     * @param downloaded download flag.
+     */
+    public void setDownloaded(Boolean downloaded) {
+        this.downloaded = downloaded;
+    }
+
     public String getId() {
         return id;
     }
@@ -140,4 +163,6 @@ public class JobLink {
         result = 31 * result + getValue().hashCode();
         return result;
     }
+
+
 }

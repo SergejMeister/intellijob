@@ -18,6 +18,7 @@ package com.intellijob.controllers;
 
 import com.intellijob.domain.JobLink;
 import com.intellijob.domain.Mail;
+import com.intellijob.exceptions.DocumentNotFoundException;
 import com.intellijob.models.HtmlLink;
 
 import java.util.List;
@@ -83,4 +84,37 @@ public interface JobLinkController {
      * @return list of jobLinks
      */
     List<JobLink> findAll();
+
+    /**
+     * Returns jobLink by specified id.
+     *
+     * @param jobLinkId id of jobLink.
+     *
+     * @return jobLink.
+     * @throws DocumentNotFoundException if no document founded.
+     */
+    JobLink findById(String jobLinkId) throws DocumentNotFoundException;
+
+    /**
+     * Returns jobLink by specified id.
+     *
+     * @param jobLink jobLink to save.
+     *
+     * @return the same jobLink.
+     */
+    JobLink save(JobLink jobLink);
+
+    /**
+     * Returns jobLinks with downloaded = false.
+     *
+     * @return list of job links.
+     */
+    List<JobLink> findToDownload();
+
+    /**
+     * Remove this jobLink.
+     *
+     * @param jobLink remove this jobLink.
+     */
+    JobLink removeJobLink(JobLink jobLink);
 }

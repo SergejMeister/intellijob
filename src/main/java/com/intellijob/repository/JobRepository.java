@@ -14,20 +14,31 @@
  * limitations under the License.
  */
 
-package com.intellijob;
+package com.intellijob.repository;
 
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+import com.intellijob.domain.Job;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = TestApplicationController.class)
-@WebAppConfiguration
-public abstract class BaseTester {
+import java.util.List;
+
+/**
+ * Repository interface for domain object <code>Job</code>.
+ */
+public interface JobRepository extends MongoRepository<Job, String> {
 
     /**
-     * Constants.
+     * Returns all jobs.
+     *
+     * @return list of jobs.
      */
-    protected final static Boolean RUNNING_LIVE = Boolean.FALSE;
+    List<Job> findAll();
+
+    /**
+     * Find job by specified id.
+     *
+     * @param id job id.
+     *
+     * @return job object.
+     */
+    Job findOne(String id);
 }

@@ -17,7 +17,6 @@
 package com.intellijob.controllers;
 
 import com.intellijob.domain.Mail;
-import com.intellijob.exceptions.UniqueDomainException;
 import com.intellijob.mail.models.MailModel;
 
 import java.util.List;
@@ -40,7 +39,7 @@ public interface MailController {
      *
      * @return created or updated mail with id.
      */
-    Mail saveModel(MailModel mailModel) throws UniqueDomainException;
+    Mail saveModel(MailModel mailModel);
 
     /**
      * Save list of mail models.

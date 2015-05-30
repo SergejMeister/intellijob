@@ -14,20 +14,19 @@
  * limitations under the License.
  */
 
-package com.intellijob;
+package com.intellijob.exceptions;
 
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+import com.intellijob.enums.Error;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = TestApplicationController.class)
-@WebAppConfiguration
-public abstract class BaseTester {
+/**
+ * This is an exception for not valid parameters.
+ */
+public class BadParameterException extends BaseException {
 
     /**
-     * Constants.
+     * Default constructor.
      */
-    protected final static Boolean RUNNING_LIVE = Boolean.FALSE;
+    public BadParameterException() {
+        super(Error.NOT_VALID_PARAM);
+    }
 }

@@ -61,8 +61,6 @@ import java.util.Set;
 @RestController
 public class MailServices extends BaseServices {
 
-
-
     private final static Logger LOG = LoggerFactory.getLogger(MailServices.class);
 
     @Autowired
@@ -92,7 +90,7 @@ public class MailServices extends BaseServices {
      * @return data transfer object <code>ResponseMailSearchData.java</code>
      * @throws Exception handle exceptions.
      */
-    @RequestMapping(value = Endpoints.MAIL_SEARCH, method = RequestMethod.POST)
+    @RequestMapping(value = Endpoints.MAILS_SEARCH, method = RequestMethod.POST)
     public @ResponseBody ResponseMailSearchData searchMail(@RequestBody RequestMailData requestMailData)
             throws Exception {
         validate(requestMailData);
@@ -122,7 +120,7 @@ public class MailServices extends BaseServices {
      * @return data transfer object <code>ResponseMailSearchData.java</code>
      * @throws Exception handle exceptions.
      */
-    @RequestMapping(value = Endpoints.MAIL, method = RequestMethod.GET)
+    @RequestMapping(value = Endpoints.MAILS, method = RequestMethod.GET)
     public @ResponseBody ResponseMailListData getMail() throws Exception {
         List<Mail> mails = mailController.findAll();
         return new ResponseMailListData(mails);

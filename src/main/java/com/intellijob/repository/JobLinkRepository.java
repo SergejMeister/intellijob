@@ -29,16 +29,25 @@ public interface JobLinkRepository extends MongoRepository<JobLink, String> {
     /**
      * Returns all job links.
      *
-     * @return list of mails.
+     * @return list of job links.
      */
     List<JobLink> findAll();
 
     /**
      * Find jobLink by specified id.
      *
-     * @param id mails id.
+     * @param id job link id.
      *
-     * @return mail object.
+     * @return job link object.
      */
     JobLink findOne(String id);
+
+    /**
+     * Returns job links with specified downloaded flag.
+     *
+     * @param downloaded downloaded flag.
+     *
+     * @return list of founded job links.
+     */
+    List<JobLink> findByDownloaded(Boolean downloaded);
 }
