@@ -22,6 +22,8 @@ import com.intellijob.domain.JobLink;
 import com.intellijob.repository.JobLinkRepository;
 import com.intellijob.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 
@@ -108,5 +110,14 @@ public class JobControllerImpl implements JobController {
     @Override
     public List<Job> findAll() {
         return jobRepository.findAll(new Sort(Sort.Direction.DESC, "receivedDate"));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Page<Job> findPage(int pageIndex, int limit) {
+        PageRequest request = new PageRequest(pageIndex, limit, new Sort(Sort.Direction.DESC, "receivedDate"));
+        return jobRepository.findAll(request);
     }
 }

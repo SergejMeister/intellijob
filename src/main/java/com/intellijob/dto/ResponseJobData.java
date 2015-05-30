@@ -71,7 +71,7 @@ public class ResponseJobData extends ResponseData {
         this.jobId = job.getId();
         this.receivedDate = job.getReceivedDate();
         this.link = job.getJobLink().getHref();
-        this.source = job.getJobLink().getValue();
+        this.source = job.getJobLink().getMail().getSentAddress();
         this.name = job.getJobLink().getValue();
         if (hasContent) {
             this.content = job.getContent();

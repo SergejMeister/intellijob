@@ -18,6 +18,7 @@ package com.intellijob.controllers;
 
 import com.intellijob.domain.Job;
 import com.intellijob.domain.JobLink;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Map;
@@ -68,8 +69,17 @@ public interface JobController {
     /**
      * Returns all jobs.
      *
-     * @return lits of jobs.
+     * @return list of jobs.
      */
     List<Job> findAll();
 
+    /**
+     * Returns page of jobs.
+     *
+     * @param pageIndex page index.
+     * @param limit     limit items per page.
+     *
+     * @return page of jobs.
+     */
+    Page<Job> findPage(int pageIndex, int limit);
 }

@@ -29,24 +29,30 @@ intelliJobControllers.controller(
             '$route',
             'JobLinkServices',
             function ($scope, $rootScope, $location, $http, $cookieStore, $routeParams, $route, JobLinkServices) {
-
                 $scope.jobLinksTableCurrentPage = 1;
                 $scope.jobLinksTableNumPerPage = 50;
                 $scope.jobLinksTableMaxPage = 10;
                 $scope.showPagination = false;
                 $scope.jobLinks;
-                JobLinkServices.getJobLinksPage($scope.jobLinksTableCurrentPage, $scope.jobLinksTableNumPerPage).success(function (response) {
+                var pageIndex = $scope.jobLinksTableCurrentPage - 1;
+
+                //watch state should not be active by init page, to avoid 2 get request!
+                var isWatchActive = false;
+                JobLinkServices.getJobLinksPage(pageIndex, $scope.jobLinksTableNumPerPage).success(function (response) {
                     $scope.jobLinks = response.jobLinks;
                     $scope.jobLinksTableTotalItems = response.totalItemSize;
                     $scope.showPagination = true;
-                    //// Set watch on pagination numbers
+                    //Set watch on pagination numbers
                     $scope.$watch('jobLinksTableCurrentPage + jobLinksTableNumPerPage', function () {
-                        var pageIndex = $scope.jobLinksTableCurrentPage - 1;
-                        JobLinkServices.getJobLinksPage(pageIndex, $scope.jobLinksTableNumPerPage).success(function (response) {
-                            $scope.jobLinks = response.jobLinks;
-                        }).error(function (error) {
-                            console.log(error);
-                        });
+                        if (isWatchActive) {
+                            pageIndex = $scope.jobLinksTableCurrentPage - 1;
+                            JobLinkServices.getJobLinksPage(pageIndex, $scope.jobLinksTableNumPerPage).success(function (response) {
+                                $scope.jobLinks = response.jobLinks;
+                            }).error(function (error) {
+                                console.log(error);
+                            });
+                        }
+                        isWatchActive = true;
                     });
                 }).error(function (error) {
                     console.log(error);

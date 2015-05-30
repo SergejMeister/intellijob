@@ -32,10 +32,30 @@ intelliJobControllers.controller(
             '$route',
             'JobServices',
             function ($scope, $rootScope, $location, $http, $cookieStore, $routeParams, $route, JobServices) {
-
+                $scope.jobTableCurrentPage = 1;
+                $scope.jobTableNumPerPage = 50;
+                $scope.jobTableMaxPage = 10;
+                $scope.showPagination = false;
                 $scope.jobs;
-                JobServices.getAllJobs().success(function (response) {
+                var pageIndex = $scope.jobTableCurrentPage - 1;
+                //watch state should not be active by init page, to avoid 2 get request!
+                var isWatchActive = false;
+                JobServices.getJobPage(pageIndex, $scope.jobTableNumPerPage).success(function (response) {
                     $scope.jobs = response.jobs;
+                    $scope.jobTableTotalItems = response.totalItemSize;
+                    $scope.showPagination = true;
+                    //Set watch on pagination numbers
+                    $scope.$watch('jobTableCurrentPage + jobTableNumPerPage', function () {
+                        if (isWatchActive) {
+                            pageIndex = $scope.jobTableCurrentPage - 1;
+                            JobServices.getJobPage(pageIndex, $scope.jobTableNumPerPage).success(function (response) {
+                                $scope.jobs = response.jobs;
+                            }).error(function (error) {
+                                console.log(error);
+                            });
+                        }
+                        isWatchActive = true;
+                    });
                 }).error(function (error) {
                     console.log(error);
                 });
@@ -49,4 +69,6 @@ intelliJobControllers.controller(
                     //window.open('/intellijob/mails/' + mailId);
                 };
 
-            }]);
+            }
+        ])
+;

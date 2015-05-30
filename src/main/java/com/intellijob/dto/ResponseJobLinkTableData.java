@@ -44,8 +44,9 @@ public class ResponseJobLinkTableData extends ResponseTableData {
     }
 
     public ResponseJobLinkTableData(Page<JobLink> jobLinkPage) {
-        this.totalItemSize = jobLinkPage.getTotalElements();
-        this.totalPages = jobLinkPage.getTotalPages();
+        super(jobLinkPage);
+//        this.totalItemSize = jobLinkPage.getTotalElements();
+//        this.totalPages = jobLinkPage.getTotalPages();
         this.jobLinks = new ArrayList<>();
         for (JobLink jobLink : jobLinkPage.getContent()) {
             ResponseJobLinkData responseJobLinkData = new ResponseJobLinkData(jobLink);

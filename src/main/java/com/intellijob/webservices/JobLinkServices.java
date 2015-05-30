@@ -50,14 +50,13 @@ public class JobLinkServices extends BaseServices {
     }
 
     /**
-     * Request Get all jobLinks.
+     * Request Get all jobLinks with paging.
      *
      * @return data transfer object <code>ResponseJobLinkTableData.java</code>
      */
-    @RequestMapping(value = Endpoints.JOBLINKS_START_COUNT, method = RequestMethod.GET)
+    @RequestMapping(value = Endpoints.JOBLINKS_PAGING, method = RequestMethod.GET)
     public @ResponseBody ResponseJobLinkTableData getJobLinks(@PathVariable int pageIndex, @PathVariable int limit) {
         Page<JobLink> jobLinkPage = jobLinkController.findAll(pageIndex, limit);
-
         return new ResponseJobLinkTableData(jobLinkPage);
     }
 }

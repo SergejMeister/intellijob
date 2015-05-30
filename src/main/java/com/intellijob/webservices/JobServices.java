@@ -27,6 +27,7 @@ import com.intellijob.exceptions.JobLinkNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -74,6 +75,17 @@ public class JobServices extends BaseServices {
         List<Job> jobs = jobController.findAll();
         //returns without job content, only metadata.
         return new ResponseJobTableData(jobs, Boolean.FALSE);
+    }
+
+    /**
+     * Request Get all jobLinks with paging.
+     *
+     * @return data transfer object <code>ResponseJobLinkTableData.java</code>
+     */
+    @RequestMapping(value = Endpoints.JOBS_PAGING, method = RequestMethod.GET)
+    public @ResponseBody ResponseJobTableData getJobLinks(@PathVariable int pageIndex, @PathVariable int limit) {
+        Page<Job> jobPage = jobController.findPage(pageIndex, limit);
+        return new ResponseJobTableData(jobPage, Boolean.FALSE);
     }
 
     /**

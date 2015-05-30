@@ -30,5 +30,14 @@ angular.module('intelliJob')
                     return $http.get(urlBase);
                 };
 
+                /**
+                 * Get all job links.
+                 *
+                 * @returns {HttpPromise}
+                 */
+                jobServices.getJobPage = function (pageIndex, limit) {
+                    return $http.get(urlBase + "/" + pageIndex + "/" + limit);
+                };
+
                 return jobServices;
             }]);

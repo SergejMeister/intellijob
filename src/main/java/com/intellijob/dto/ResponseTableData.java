@@ -16,6 +16,8 @@
 
 package com.intellijob.dto;
 
+import org.springframework.data.domain.Page;
+
 /**
  * Base Data transfer object for all tables data.
  */
@@ -25,6 +27,11 @@ public abstract class ResponseTableData extends ResponseData {
     protected int totalPages;
 
     public ResponseTableData() {
+    }
+
+    public ResponseTableData(Page page) {
+        this.totalItemSize = page.getTotalElements();
+        this.totalPages = page.getTotalPages();
     }
 
     public ResponseTableData(long totalItemSize, int totalPages) {
