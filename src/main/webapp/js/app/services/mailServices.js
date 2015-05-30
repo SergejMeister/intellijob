@@ -41,6 +41,15 @@ angular.module('intelliJob')
                 };
 
                 /**
+                 * Get all job links.
+                 *
+                 * @returns {HttpPromise}
+                 */
+                mailServices.getMailPage = function (pageIndex, limit) {
+                    return $http.get(urlBase + "/" + pageIndex + "/" + limit);
+                };
+
+                /**
                  * Get mail by given id.
                  *
                  * @returns {HttpPromise}

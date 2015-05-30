@@ -23,7 +23,7 @@ import com.intellijob.domain.JobLink;
 import com.intellijob.domain.Mail;
 import com.intellijob.dto.ResponseError;
 import com.intellijob.dto.ResponseMailData;
-import com.intellijob.dto.ResponseMailListData;
+import com.intellijob.dto.ResponseMailTableData;
 import com.intellijob.exceptions.NotMailSyncException;
 import com.intellijob.mail.components.MailReceiver;
 import com.intellijob.mail.controllers.MailFacade;
@@ -36,6 +36,7 @@ import com.intellijob.mail.models.MailModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -121,9 +122,20 @@ public class MailServices extends BaseServices {
      * @throws Exception handle exceptions.
      */
     @RequestMapping(value = Endpoints.MAILS, method = RequestMethod.GET)
-    public @ResponseBody ResponseMailListData getMail() throws Exception {
+    public @ResponseBody ResponseMailTableData getMail() throws Exception {
         List<Mail> mails = mailController.findAll();
-        return new ResponseMailListData(mails);
+        return new ResponseMailTableData(mails);
+    }
+
+    /**
+     * Request Get all mails with paging.
+     *
+     * @return data transfer object <code>ResponseJobTableData.java</code>
+     */
+    @RequestMapping(value = Endpoints.MAILS_PAGING, method = RequestMethod.GET)
+    public @ResponseBody ResponseMailTableData getMails(@PathVariable int pageIndex, @PathVariable int limit) {
+        Page<Mail> mailPage = mailController.findPage(pageIndex, limit);
+        return new ResponseMailTableData(mailPage);
     }
 
     /**

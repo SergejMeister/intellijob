@@ -78,12 +78,12 @@ public class JobServices extends BaseServices {
     }
 
     /**
-     * Request Get all jobLinks with paging.
+     * Request Get all jobs with paging.
      *
-     * @return data transfer object <code>ResponseJobLinkTableData.java</code>
+     * @return data transfer object <code>ResponseJobTableData.java</code>
      */
     @RequestMapping(value = Endpoints.JOBS_PAGING, method = RequestMethod.GET)
-    public @ResponseBody ResponseJobTableData getJobLinks(@PathVariable int pageIndex, @PathVariable int limit) {
+    public @ResponseBody ResponseJobTableData getJobs(@PathVariable int pageIndex, @PathVariable int limit) {
         Page<Job> jobPage = jobController.findPage(pageIndex, limit);
         return new ResponseJobTableData(jobPage, Boolean.FALSE);
     }

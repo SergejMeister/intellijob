@@ -29,10 +29,30 @@ intelliJobControllers.controller(
             '$route',
             'MailServices',
             function ($scope, $rootScope, $location, $http, $cookieStore, $routeParams, $route, MailServices) {
-
+                $scope.mailTableCurrentPage = 1;
+                $scope.mailTableNumPerPage = 50;
+                $scope.mailTableMaxPage = 10;
+                $scope.showPagination = false;
                 $scope.mails;
-                MailServices.getMails().success(function (response) {
+                var pageIndex = $scope.mailTableCurrentPage - 1;
+                //watch state should not be active by init page, to avoid 2 get request!
+                var isWatchActive = false;
+                MailServices.getMailPage(pageIndex, $scope.mailTableNumPerPage).success(function (response) {
                     $scope.mails = response.mails;
+                    $scope.mailTableTotalItems = response.totalItemSize;
+                    $scope.showPagination = true;
+                    //Set watch on pagination numbers
+                    $scope.$watch('mailTableCurrentPage + mailTableNumPerPage', function () {
+                        if (isWatchActive) {
+                            pageIndex = $scope.mailTableCurrentPage - 1;
+                            MailServices.getMailPage(pageIndex, $scope.mailTableNumPerPage).success(function (response) {
+                                $scope.mails = response.mails;
+                            }).error(function (error) {
+                                console.log(error);
+                            });
+                        }
+                        isWatchActive = true;
+                    });
                 }).error(function (error) {
                     console.log(error);
                 });

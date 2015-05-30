@@ -18,6 +18,7 @@ package com.intellijob.controllers;
 
 import com.intellijob.domain.Mail;
 import com.intellijob.mail.models.MailModel;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -69,4 +70,14 @@ public interface MailController {
      * @return list of mails.
      */
     List<Mail> findAll();
+
+    /**
+     * Returns mail page.
+     *
+     * @param pageIndex page index.
+     * @param limit     limit mails per page.
+     *
+     * @return page of mails.
+     */
+    Page<Mail> findPage(int pageIndex, int limit);
 }

@@ -17,6 +17,7 @@
 package com.intellijob.dto;
 
 import com.intellijob.domain.Mail;
+import org.springframework.data.domain.Page;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,23 +25,29 @@ import java.util.List;
 /**
  * Response mail data to transfer list of model object <code>Mail</code>.
  */
-public class ResponseMailListData extends ResponseData {
+public class ResponseMailTableData extends ResponseTableData {
 
     private List<ResponseMailData> mails;
-    private Integer mailsCount;
 
-    public ResponseMailListData() {
+    public ResponseMailTableData() {
         this.mails = new ArrayList<>();
-        this.mailsCount = 0;
     }
 
-    public ResponseMailListData(List<Mail> mails) {
+    public ResponseMailTableData(List<Mail> mails) {
         this.mails = new ArrayList<>();
         for (Mail mail : mails) {
             this.mails.add(new ResponseMailData(mail));
         }
 
-        this.mailsCount = this.mails.size();
+        super.totalItemSize = this.mails.size();
+    }
+
+    public ResponseMailTableData(Page<Mail> mailPage) {
+        super(mailPage);
+        this.mails = new ArrayList<>();
+        for (Mail mail : mailPage.getContent()) {
+            this.mails.add(new ResponseMailData(mail));
+        }
     }
 
     public List<ResponseMailData> getMails() {
@@ -49,13 +56,5 @@ public class ResponseMailListData extends ResponseData {
 
     public void setMails(List<ResponseMailData> responseMailDataList) {
         this.mails = responseMailDataList;
-    }
-
-    public Integer getMailsCount() {
-        return mailsCount;
-    }
-
-    public void setMailsCount(Integer mailsCount) {
-        this.mailsCount = mailsCount;
     }
 }

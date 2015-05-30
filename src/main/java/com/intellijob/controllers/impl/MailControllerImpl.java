@@ -21,6 +21,8 @@ import com.intellijob.domain.Mail;
 import com.intellijob.mail.models.MailModel;
 import com.intellijob.repository.MailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 
@@ -68,6 +70,15 @@ public class MailControllerImpl implements MailController {
     @Override
     public List<Mail> findAll() {
         return mailRepository.findAll(new Sort(Sort.Direction.DESC, "receivedDate"));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Page<Mail> findPage(int pageIndex, int limit) {
+        PageRequest request = new PageRequest(pageIndex, limit, new Sort(Sort.Direction.DESC, "receivedDate"));
+        return mailRepository.findAll(request);
     }
 
     private List<Mail> convertMailModelToMail(List<MailModel> mailModels) {
