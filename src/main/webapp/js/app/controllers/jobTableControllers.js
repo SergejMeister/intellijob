@@ -15,10 +15,13 @@
  */
 
 /**
- * Job link table Controller.
+ * Job Controller.
+ */
+/**
+ * Mail Table Controller.
  */
 intelliJobControllers.controller(
-        'JobLinkTableCtrl',
+        'JobTableCtrl',
         [
             '$scope',
             '$rootScope',
@@ -27,24 +30,23 @@ intelliJobControllers.controller(
             '$cookieStore',
             '$routeParams',
             '$route',
-            'JobLinkServices',
-            function ($scope, $rootScope, $location, $http, $cookieStore, $routeParams, $route, JobLinkServices) {
+            'JobServices',
+            function ($scope, $rootScope, $location, $http, $cookieStore, $routeParams, $route, JobServices) {
 
-                $scope.jobLinks;
-                JobLinkServices.getJobLinks().success(function (response) {
-                    $scope.jobLinks = response.jobLinks;
+                $scope.jobs;
+                JobServices.getAllJobs().success(function (response) {
+                    $scope.jobs = response.jobs;
                 }).error(function (error) {
                     console.log(error);
                 });
 
+
                 /**
-                 * search mails in mail box.
+                 * Get mail by given id.
                  */
-                $scope.downloadById = function (jobLinkId) {
-                    JobLinkServices.downloadById(jobLinkId).success(function (responseJobData) {
-                        var downloadedJobData = responseJobData;
-                    }).error(function (error) {
-                        console.log(error);
-                    })
+                $scope.showJobContent = function (jobId) {
+                    $location.path("/intellijob/jobs/" + jobId);
+                    //window.open('/intellijob/mails/' + mailId);
                 };
+
             }]);

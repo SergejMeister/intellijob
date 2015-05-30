@@ -19,16 +19,39 @@ angular.module('intelliJob')
             function ($http) {
 
                 var urlBase = "api/joblinks";
-                var mailServices = {};
+                var apiJobDownload = "api/jobs"
+                var jobLinkServices = {};
 
                 /**
-                 * Get all mails.
+                 * Get all job links.
                  *
                  * @returns {HttpPromise}
                  */
-                mailServices.getJobLinks = function () {
+                jobLinkServices.getJobLinks = function () {
                     return $http.get(urlBase);
                 };
 
-                return mailServices;
+                /**
+                 * Download job links and return downloaded job object.
+                 *
+                 * @returns {HttpPromise}
+                 */
+                jobLinkServices.downloadById = function (jobLinkId) {
+                    var downloadUrl = apiJobDownload + "/" + jobLinkId + "/download";
+                    var emptyPayLoad = {}
+                    return $http.post(downloadUrl, emptyPayLoad);
+                };
+
+                /**
+                 * Download job links and return downloaded job object.
+                 *
+                 * @returns {HttpPromise}
+                 */
+                jobLinkServices.downloadAll = function () {
+                    var downloadUrl = apiJobDownload + "/download";
+                    var emptyPayLoad = {}
+                    return $http.post(downloadUrl, emptyPayLoad);
+                };
+
+                return jobLinkServices;
             }]);

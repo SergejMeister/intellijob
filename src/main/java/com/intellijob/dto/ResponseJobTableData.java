@@ -37,18 +37,18 @@ public class ResponseJobTableData extends ResponseData {
         init();
     }
 
-    public ResponseJobTableData(List<Job> listOfJob) {
+    public ResponseJobTableData(List<Job> listOfJob, Boolean hasContent) {
         init();
         for (Job job : listOfJob) {
-            ResponseJobData responseJobData = new ResponseJobData(job);
+            ResponseJobData responseJobData = new ResponseJobData(job, hasContent);
             jobs.add(responseJobData);
         }
     }
 
-    public ResponseJobTableData(List<Job> listWithDomainObjects, List<JobLink> listOfJobLinks) {
+    public ResponseJobTableData(List<Job> listWithDomainObjects, List<JobLink> listOfJobLinks, Boolean hasContent) {
         init();
         for (Job job : listWithDomainObjects) {
-            ResponseJobData responseJobData = new ResponseJobData(job);
+            ResponseJobData responseJobData = new ResponseJobData(job, hasContent);
             jobs.add(responseJobData);
         }
 

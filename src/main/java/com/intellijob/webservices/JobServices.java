@@ -32,13 +32,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -69,17 +67,13 @@ public class JobServices extends BaseServices {
      * New GET-request <code>url</code>
      * Save html response into jobs collection.
      *
-     * @param url internet url to job content.
-     *
      * @return job data.
      */
     @RequestMapping(value = Endpoints.JOBS, method = RequestMethod.GET)
-    public @ResponseBody ResponseJobData getByUrl(@RequestParam(value = "url", required = true) String url) {
-        if (url.equals(Endpoints.JOBS)) {
-            return new ResponseJobData();
-        }
-
-        throw new NotImplementedException();
+    public @ResponseBody ResponseJobTableData getAllJobs() {
+        List<Job> jobs = jobController.findAll();
+        //returns without job content, only metadata.
+        return new ResponseJobTableData(jobs, Boolean.FALSE);
     }
 
     /**
@@ -157,11 +151,9 @@ public class JobServices extends BaseServices {
                 notFoundedJobLinks.add(jobLink);
                 handleHttpClientErrorException(httpExc, jobLink);
             }
-
         }
 
         List<Job> newJobs = jobController.createJobAndMarkLinkAsDownloaded(jobLinksWithJobContent);
-
-        return new ResponseJobTableData(newJobs, notFoundedJobLinks);
+        return new ResponseJobTableData(newJobs, notFoundedJobLinks, Boolean.FALSE);
     }
 }

@@ -29,26 +29,25 @@
                         <tr>
                             <th>#</th>
                             <th>Source</th>
+                            <th>Job name</th>
                             <th>Received date</th>
-                            <th>Value</th>
                             <th>Link</th>
-                            <th>Downloaded</th>
+                            <th>Job Content</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="jobLinkData in jobLinks">
+                        <tr ng-repeat="job in jobs">
                             <td>{{$index}}</td>
-                            <td>{{jobLinkData.source}}</td>
-                            <td><p ng-bind="jobLinkData.receivedDate | date:'dd.MM.yyyy HH:mm'"></p></td>
-                            <td>{{jobLinkData.value}}</td>
+                            <td>{{job.source}}</td>
+                            <td>{{job.name}}</td>
+                            <td><p ng-bind="job.receivedDate | date:'dd.MM.yyyy HH:mm'"></td>
                             <td>
-                                <a target="_blank" href="{{jobLinkData.link}}">Link</a>
+                                <a target="_blank" href="{{job.link}}">Link</a>
                             </td>
                             <td>
-                                <a class="btn btn-info pull" ng-show="!jobLinkData.downloaded"
-                                   ng-click="downloadById(jobLinkData.jobLinkId)">download</a>
-                                <span class="glyphicon glyphicon-ok" aria-hidden="true"
-                                      ng-show="jobLinkData.downloaded"></span>
+                                <a target="_blank" ng-click="showJobContent(job.jobId)">
+                                    <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                                </a>
                             </td>
                         </tr>
                     </tbody>

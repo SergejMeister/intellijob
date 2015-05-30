@@ -64,4 +64,12 @@ public interface JobController {
      * @return list of created jobs.
      */
     List<Job> createJobAndMarkLinkAsDownloaded(Map<JobLink, String> jobLinksWithJobContent);
+
+    /**
+     * Returns all jobs.
+     *
+     * @return lits of jobs.
+     */
+    List<Job> findAll();
+
 }

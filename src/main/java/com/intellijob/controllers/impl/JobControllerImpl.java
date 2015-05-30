@@ -22,6 +22,7 @@ import com.intellijob.domain.JobLink;
 import com.intellijob.repository.JobLinkRepository;
 import com.intellijob.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
@@ -99,5 +100,13 @@ public class JobControllerImpl implements JobController {
         jobLinkRepository.save(jobLinksToSave);
 
         return jobsToSave;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Job> findAll() {
+        return jobRepository.findAll(new Sort(Sort.Direction.DESC, "receivedDate"));
     }
 }

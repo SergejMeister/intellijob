@@ -28,6 +28,18 @@ public class ResponseJobData extends ResponseData {
     private String jobId;
 
     /**
+     * Source.
+     * <p>
+     * By mail source is from address!
+     */
+    private String source;
+
+    /**
+     * Job name.
+     */
+    private String name;
+
+    /**
      * Received date.
      */
     private Date receivedDate;
@@ -50,7 +62,20 @@ public class ResponseJobData extends ResponseData {
         this.jobId = job.getId();
         this.receivedDate = job.getReceivedDate();
         this.link = job.getJobLink().getHref();
+        this.source = job.getJobLink().getValue();
+        this.name = job.getJobLink().getValue();
         this.content = job.getContent();
+    }
+
+    public ResponseJobData(Job job, Boolean hasContent) {
+        this.jobId = job.getId();
+        this.receivedDate = job.getReceivedDate();
+        this.link = job.getJobLink().getHref();
+        this.source = job.getJobLink().getValue();
+        this.name = job.getJobLink().getValue();
+        if (hasContent) {
+            this.content = job.getContent();
+        }
     }
 
     /**
@@ -125,5 +150,43 @@ public class ResponseJobData extends ResponseData {
      */
     public void setContent(String content) {
         this.content = content;
+    }
+
+    /**
+     * Returns job source.
+     * <p>
+     * By main source ist from address.
+     *
+     * @return job source.
+     */
+    public String getSource() {
+        return source;
+    }
+
+    /**
+     * Sets job source.
+     *
+     * @param source job source.
+     */
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    /**
+     * Returns job name.
+     *
+     * @return job name.
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Sets job name.
+     *
+     * @param name job name.
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 }

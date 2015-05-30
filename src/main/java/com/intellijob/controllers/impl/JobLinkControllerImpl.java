@@ -114,8 +114,7 @@ public class JobLinkControllerImpl implements JobLinkController {
      */
     @Override
     public List<JobLink> findAll() {
-        //TODO: should be changed to order by received date!
-        return jobLinkRepository.findAll(new Sort(Sort.Direction.DESC, "id"));
+        return jobLinkRepository.findAll(new Sort(Sort.Direction.DESC, "receivedDate"));
     }
 
     /**

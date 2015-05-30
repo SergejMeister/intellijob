@@ -15,7 +15,7 @@
  */
 
 /**
- * Index Controller.
+ * Mail Controller.
  */
 intelliJobControllers.controller(
         'MailCtrl',
