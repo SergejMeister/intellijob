@@ -18,7 +18,7 @@ angular.module('intelliJob')
         .factory('JobServices', ['$http', '$rootScope',
             function ($http) {
 
-                var urlBase = "api/jobs";
+                var urlBase = "/intellijob/api/jobs";
                 var jobServices = {};
 
                 /**
@@ -37,6 +37,15 @@ angular.module('intelliJob')
                  */
                 jobServices.getJobPage = function (pageIndex, limit) {
                     return $http.get(urlBase + "/" + pageIndex + "/" + limit);
+                };
+
+                /**
+                 * Get job by id.
+                 *
+                 * @returns {HttpPromise}
+                 */
+                jobServices.getJobById = function (jobId) {
+                    return $http.get(urlBase + "/" + jobId);
                 };
 
                 return jobServices;

@@ -41,9 +41,9 @@ intelliJob.config([
         }).when('/intellijob/mails', {
             templateUrl: '/intellijob/views/mailTable.html',
             controller: 'MailTableCtrl'
-        }).when('/intellijob/mails/:mailId', {
-            templateUrl: '/intellijob/views/mailContext.html',
-            controller: 'MailContextCtrl'
+        }).when('/intellijob/mails/:mailId/content', {
+            templateUrl: '/intellijob/views/mailContent.html',
+            controller: 'MailContentCtrl'
         }).when('/intellijob/index', {
             templateUrl: '/intellijob/views/mailSearchForm.html',
             controller: 'MailCtrl'
@@ -53,6 +53,9 @@ intelliJob.config([
         }).when('/intellijob/jobs', {
             templateUrl: '/intellijob/views/jobTable.html',
             controller: 'JobTableCtrl'
+        }).when('/intellijob/jobs/:jobId/content', {
+            templateUrl: '/intellijob/views/jobContent.html',
+            controller: 'JobContentCtrl'
         }).otherwise({
             redirectTo: '/intellijob',
             templateUrl: '/intellijob/views/mailSearchForm.html',

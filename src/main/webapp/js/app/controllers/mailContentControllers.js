@@ -18,7 +18,7 @@
  * Mail Context Controller.
  */
 intelliJobControllers.controller(
-        'MailContextCtrl',
+        'MailContentCtrl',
         [
             '$scope',
             '$rootScope',

@@ -18,6 +18,7 @@ package com.intellijob.controllers;
 
 import com.intellijob.domain.Job;
 import com.intellijob.domain.JobLink;
+import com.intellijob.exceptions.BaseException;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -82,4 +83,13 @@ public interface JobController {
      * @return page of jobs.
      */
     Page<Job> findPage(int pageIndex, int limit);
+
+    /**
+     * Returns job by id.
+     *
+     * @param jobId specified job id.
+     *
+     * @return job.
+     */
+    Job getByJobId(String jobId) throws BaseException;
 }

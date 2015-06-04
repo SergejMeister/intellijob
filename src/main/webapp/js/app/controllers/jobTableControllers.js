@@ -65,7 +65,7 @@ intelliJobControllers.controller(
                  * Get mail by given id.
                  */
                 $scope.showJobContent = function (jobId) {
-                    $location.path("/intellijob/jobs/" + jobId);
+                    $location.path("/intellijob/jobs/" + jobId + "/content");
                     //window.open('/intellijob/mails/' + mailId);
                 };
 

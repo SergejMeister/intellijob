@@ -19,6 +19,8 @@ package com.intellijob.controllers.impl;
 import com.intellijob.controllers.JobController;
 import com.intellijob.domain.Job;
 import com.intellijob.domain.JobLink;
+import com.intellijob.exceptions.BaseException;
+import com.intellijob.exceptions.DocumentNotFoundException;
 import com.intellijob.repository.JobLinkRepository;
 import com.intellijob.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -119,5 +121,18 @@ public class JobControllerImpl implements JobController {
     public Page<Job> findPage(int pageIndex, int limit) {
         PageRequest request = new PageRequest(pageIndex, limit, new Sort(Sort.Direction.DESC, "receivedDate"));
         return jobRepository.findAll(request);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Job getByJobId(String jobId) throws BaseException {
+        Job job = jobRepository.findOne(jobId);
+        if (job == null) {
+            throw new DocumentNotFoundException();
+        }
+
+        return job;
     }
 }

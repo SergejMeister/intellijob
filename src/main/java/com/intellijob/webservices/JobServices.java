@@ -89,6 +89,17 @@ public class JobServices extends BaseServices {
     }
 
     /**
+     * Request Get all jobs with paging.
+     *
+     * @return data transfer object <code>ResponseJobTableData.java</code>
+     */
+    @RequestMapping(value = Endpoints.JOBS_BY_ID, method = RequestMethod.GET)
+    public @ResponseBody ResponseJobData getJobContext(@PathVariable String jobId) throws Exception {
+        Job job = jobController.getByJobId(jobId);
+        return new ResponseJobData(job, Boolean.TRUE);
+    }
+
+    /**
      * Returns job data for specified link defined in jobLink object.
      * <p>
      * New GET-request <code>jobLink.getHref()</code>

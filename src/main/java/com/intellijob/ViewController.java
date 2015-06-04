@@ -33,7 +33,8 @@ public class ViewController {
             "/home",
             "/mails",
             "/joblinks",
-            "/jobs"}, method = RequestMethod.GET)
+            "/jobs",
+            "/jobs/*/content"}, method = RequestMethod.GET)
     public String index() {
         return "/index";
     }

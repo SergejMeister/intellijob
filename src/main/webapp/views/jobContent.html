@@ -18,20 +18,24 @@
 <div class="row">
     <div class="col-md-9">
         <fieldset>
-            <h2>Email Context</h2>
+            <h2>Job Content</h2>
 
             <div class="form-group">
-                <label>From:</label>
-                <label>{{mailData.sentAddress}}</label>
+                <label>Source:</label>
+                <label>{{jobData.source}}</label>
             </div>
             <div class="form-group">
-                <label class="col-md-20">Subject:</label>
-                <label>{{mailData.subject}}</label>
+                <label class="col-md-20">Name:</label>
+                <label>{{jobData.name}}</label>
+            </div>
+            <div class="form-group">
+                <label class="col-md-20">Link:</label>
+                <a target="_blank" href="{{jobData.link}}">Link</a>
             </div>
             <div class="form-group">
                 <label class="col-md-20">Content</label>
                 <hr>
-                <div id="mail-content">{{mailData.content}}</div>
+                <div id="mail-content">{{jobData.content}}</div>
             </div>
         </fieldset>
     </div>
