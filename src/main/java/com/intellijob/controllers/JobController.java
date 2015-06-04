@@ -92,4 +92,26 @@ public interface JobController {
      * @return job.
      */
     Job getByJobId(String jobId) throws BaseException;
+
+    /**
+     * Sets specified extracted value to the jobs in the list.
+     *
+     * @param jobs      job tu update with new extracted value.
+     * @param extracted new extracted value.
+     *
+     * @return list with updated jobs.
+     */
+    List<Job> setExtractedFlag(List<Job> jobs, Boolean extracted);
+
+    /**
+     * Sets specified extracted value to the job.
+     * <p>
+     * create new list, add affected job to the list and execute <code>setExtractedFlag(List<Job> jobs, Boolean extracted)</code>
+     *
+     * @param job       job tu update with new extracted value.
+     * @param extracted new extracted value.
+     *
+     * @return updated job.
+     */
+    Job setExtractedFlag(Job job, Boolean extracted);
 }

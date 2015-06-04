@@ -69,6 +69,19 @@ intelliJobControllers.controller(
                     //window.open('/intellijob/mails/' + mailId);
                 };
 
+                /**
+                 * download html content of given link.
+                 */
+                $scope.extractDataById = function (jobId) {
+                    JobServices.extractDataById(jobId).success(function (response) {
+                        // not implemented yet.
+                        var extractedJobData = response;
+                    }).error(function (error) {
+                        console.log(error);
+                    })
+                };
+
+
             }
         ])
 ;

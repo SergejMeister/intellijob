@@ -41,4 +41,13 @@ public interface JobRepository extends MongoRepository<Job, String> {
      * @return job object.
      */
     Job findOne(String id);
+
+    /**
+     * Returns jobs with specified extracted flag.
+     *
+     * @param extracted extracted flag.
+     *
+     * @return list of founded jobs.
+     */
+    List<Job> findByExtracted(Boolean extracted);
 }

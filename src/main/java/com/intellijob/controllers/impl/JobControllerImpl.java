@@ -135,4 +135,28 @@ public class JobControllerImpl implements JobController {
 
         return job;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Job> setExtractedFlag(List<Job> jobs, final Boolean extracted) {
+        List<Job> updatedJobs = new ArrayList<>();
+        for (Job job : jobs) {
+            job.setExtracted(extracted);
+            updatedJobs.add(job);
+        }
+        jobRepository.save(updatedJobs);
+        return updatedJobs;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Job setExtractedFlag(Job job, Boolean extracted) {
+        job.setExtracted(extracted);
+        jobRepository.save(job);
+        return job;
+    }
 }

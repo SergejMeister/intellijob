@@ -54,6 +54,11 @@ public class ResponseJobData extends ResponseData {
      */
     private String content;
 
+    /**
+     * Is job content extracted.
+     */
+    private Boolean extracted;
+
 
     public ResponseJobData() {
     }
@@ -65,6 +70,7 @@ public class ResponseJobData extends ResponseData {
         this.source = job.getJobLink().getValue();
         this.name = job.getJobLink().getValue();
         this.content = job.getContent();
+        this.extracted = job.isExtracted();
     }
 
     public ResponseJobData(Job job, Boolean hasContent) {
@@ -73,6 +79,7 @@ public class ResponseJobData extends ResponseData {
         this.link = job.getJobLink().getHref();
         this.source = job.getJobLink().getMail().getSentAddress();
         this.name = job.getJobLink().getValue();
+        this.extracted = job.isExtracted();
         if (hasContent) {
             this.content = job.getContent();
         }
@@ -188,5 +195,23 @@ public class ResponseJobData extends ResponseData {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * Returns is jobContent extracted.
+     *
+     * @return true, if extracted.
+     */
+    public Boolean getExtracted() {
+        return extracted;
+    }
+
+    /**
+     * Sets extracted value for job.
+     *
+     * @param extracted extracted.
+     */
+    public void setExtracted(Boolean extracted) {
+        this.extracted = extracted;
     }
 }

@@ -59,7 +59,7 @@ intelliJobControllers.controller(
                 });
 
                 /**
-                 * search mails in mail box.
+                 * download html content of given link.
                  */
                 $scope.downloadById = function (jobLinkId) {
                     JobLinkServices.downloadById(jobLinkId).success(function (responseJobData) {

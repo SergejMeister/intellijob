@@ -38,6 +38,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -94,9 +95,23 @@ public class JobServices extends BaseServices {
      * @return data transfer object <code>ResponseJobTableData.java</code>
      */
     @RequestMapping(value = Endpoints.JOBS_BY_ID, method = RequestMethod.GET)
-    public @ResponseBody ResponseJobData getJobContext(@PathVariable String jobId) throws Exception {
+    public @ResponseBody ResponseJobData getJobContent(@PathVariable String jobId) throws Exception {
         Job job = jobController.getByJobId(jobId);
         return new ResponseJobData(job, Boolean.TRUE);
+    }
+
+    /**
+     * Request Get all jobs with paging.
+     *
+     * @return data transfer object <code>ResponseJobTableData.java</code>
+     */
+    @RequestMapping(value = Endpoints.JOBS_BY_ID_EXTRACT, method = RequestMethod.POST)
+    public @ResponseBody ResponseJobData extractJobContent(@PathVariable String jobId) throws Exception {
+        //TODO: implementation is not finished, will be extended with next issue.
+//        Job job = jobController.getByJobId(jobId);
+//        Job updatedJob = jobController.setExtractedFlag(job,Boolean.TRUE);
+//        return new ResponseJobData(updatedJob);
+        throw new NotImplementedException();
     }
 
     /**

@@ -54,6 +54,12 @@ public class Job {
     private String content;
 
 
+    /**
+     * Is content analysed and extracted.
+     */
+    private Boolean extracted;
+
+
     public String getId() {
         return id;
     }
@@ -84,5 +90,13 @@ public class Job {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Boolean isExtracted() {
+        return extracted;
+    }
+
+    public void setExtracted(Boolean extracted) {
+        this.extracted = extracted;
     }
 }
