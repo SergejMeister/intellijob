@@ -103,6 +103,7 @@ public class ResponseJobDetailData extends ResponseData {
         this.name = jobDetail.getName();
         this.receivedDate = jobDetail.getReceivedDate();
         this.link = jobDetail.getLink();
+        this.applicationMail = jobDetail.getApplicationMail();
         this.contactPerson = initContactPersons(jobDetail.getContactPersons());
     }
 
@@ -213,10 +214,20 @@ public class ResponseJobDetailData extends ResponseData {
         this.homepage = homepage;
     }
 
+    /**
+     * Returns mail for sending job application.
+     *
+     * @return mail.
+     */
     public String getApplicationMail() {
         return applicationMail;
     }
 
+    /**
+     * Sets mail for sending job application.
+     *
+     * @param applicationMail mail format.
+     */
     public void setApplicationMail(String applicationMail) {
         this.applicationMail = applicationMail;
     }
@@ -244,6 +255,4 @@ public class ResponseJobDetailData extends ResponseData {
     public void setContent(String content) {
         this.content = content;
     }
-
-
 }

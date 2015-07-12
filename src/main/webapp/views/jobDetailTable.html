@@ -37,8 +37,9 @@
                             <th>#</th>
                             <th>Job name</th>
                             <th>Received date</th>
-                            <th>Link</th>
                             <th>Contact</th>
+                            <th>Mail</th>
+                            <th>Link</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,10 +47,11 @@
                             <td>{{$index}}</td>
                             <td>{{jobDetail.name}}</td>
                             <td><p ng-bind="jobDetail.receivedDate | date:'dd.MM.yyyy HH:mm'"></td>
+                            <td>{{jobDetail.contactPerson}}</td>
+                            <td>{{jobDetail.applicationMail}}</td>
                             <td>
                                 <a target="_blank" href="{{jobDetail.link}}">Link</a>
                             </td>
-                            <td>{{jobDetail.contactPerson}}</td>
 
                         </tr>
                     </tbody>

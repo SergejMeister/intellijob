@@ -65,6 +65,11 @@ public class JobDetail {
      */
     private List<ContactPerson> contactPersons;
 
+    /**
+     * Mail for sending application data.
+     */
+    private String applicationMail;
+
 
     /**
      * Default constructor to init list of contact persons.
@@ -194,5 +199,23 @@ public class JobDetail {
      */
     public void setContactPersons(List<ContactPerson> contactPersons) {
         this.contactPersons = contactPersons;
+    }
+
+    /**
+     * Returns mail for sending job application.
+     *
+     * @return mail.
+     */
+    public String getApplicationMail() {
+        return applicationMail;
+    }
+
+    /**
+     * Sets mail for sending job application.
+     *
+     * @param applicationMail mail format.
+     */
+    public void setApplicationMail(String applicationMail) {
+        this.applicationMail = applicationMail;
     }
 }

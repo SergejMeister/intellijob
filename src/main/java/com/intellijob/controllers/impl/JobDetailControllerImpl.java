@@ -66,7 +66,12 @@ public class JobDetailControllerImpl implements JobDetailController {
         String plainText = HtmlParser.parseToText(htmlContent);
         ContactPersonFinder contactPersonFinder = ModelFactory.getContactPersonFinder();
         List<ContactPersonSpan> contactPersonSpans = contactPersonFinder.find(plainText);
-        return new JobDetail(job, contactPersonSpans);
+        JobDetail jobDetail = new JobDetail(job, contactPersonSpans);
+
+        String mails = HtmlParser.parseEmail(plainText);
+        jobDetail.setApplicationMail(mails);
+
+        return jobDetail;
     }
 
     /**

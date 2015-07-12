@@ -33,6 +33,7 @@ import java.util.regex.Pattern;
 public abstract class HtmlParser {
 
     private static final Pattern REMOVE_TAGS = Pattern.compile("<.+?>");
+    private static final Pattern MAIL_PATTERN = Pattern.compile("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+");
 
     /**
      * Returns all html links.
@@ -122,6 +123,14 @@ public abstract class HtmlParser {
 
         Matcher m = REMOVE_TAGS.matcher(string);
         return m.replaceAll("");
+    }
+
+    public static String parseEmail(String str) {
+        Matcher m = MAIL_PATTERN.matcher(str);
+        while (m.find()) {
+            return m.group();
+        }
+        return null;
     }
 
 }
