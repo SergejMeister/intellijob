@@ -113,32 +113,6 @@ public abstract class HtmlParser {
         }
 
         return stringBuilder.toString();
-//        Elements elements = doc.body().select("*");
-//        Set<String> textNodes = new HashSet<>();
-//        for (Element element : elements) {
-//            for (Node child : element.childNodes()) {
-//                child.h
-//                if (child instanceof TextNode) {
-//                    String textNode = ((TextNode)child).text();
-//                    //String textNode = element.
-//                    if (textNode.contains(".")) {
-//                        String[] sentences = textNode.split(".");
-//                        for(int i=0; i<sentences.length; i++){
-//                            textNodes.add(sentences[i].trim());
-//                        }
-//                    }else{
-//                        textNodes.add(textNode.trim());
-//                    }
-//
-//                }
-//            }
-//        }
-//
-//        for (String textNode : textNodes) {
-//            stringBuilder.append(textNode);
-//            stringBuilder.append("\n");
-//        }
-//        return stringBuilder.toString();
     }
 
     public static String removeTags(String string) {
@@ -148,38 +122,6 @@ public abstract class HtmlParser {
 
         Matcher m = REMOVE_TAGS.matcher(string);
         return m.replaceAll("");
-    }
-
-//    public static String parseToText(final String htmlContent) {
-//
-//        StringBuilder stringBuilder = new StringBuilder();
-//        //List<String> sentences = new ArrayList<>();
-//        Document doc = Jsoup.parse(htmlContent);
-//        Elements elements = doc.body().select("*");
-//
-//        for (Element element : elements) {
-//
-//            String sentence = element.ownText();
-//            if (isValidText(sentence)) {
-//                String trimSentence = sentence.trim();
-//                stringBuilder.append(trimSentence);
-//                if (!trimSentence.endsWith(".")) {
-//                    stringBuilder.append(".");
-//                }
-//                stringBuilder.append("\n");
-//            }
-//        }
-//        return stringBuilder.toString();
-//    }
-
-    public static Boolean isValidText(String text) {
-        String result = text.replaceAll("[-+.^:,|<>{}]", "");
-        if (result.isEmpty()) {
-            return Boolean.FALSE;
-        }
-
-
-        return Boolean.TRUE;
     }
 
 }

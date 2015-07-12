@@ -100,16 +100,6 @@ public class JobDetailControllerImpl implements JobDetailController {
             } else {
                 LOG.error("JobLink is null. How can it be true? JobId: " + job.getId());
             }
-
-//            try {
-//                //TODO save a list of jobDetails at once - after bug fix with duplicated links!
-//                JobDetail jobDetail = extractJobDetailAndSave(job);
-//                result.add(jobDetail);
-//            } catch (Exception e) {
-//                //TODO remove this try catch block after bug fix with duplicated links!
-//                LOG.warn(
-//                        "Duplicated link exception. After bug fix with duplicated links, this exception should be removed!");
-//            }
         }
         return jobDetailRepository.save(toSave);
     }
