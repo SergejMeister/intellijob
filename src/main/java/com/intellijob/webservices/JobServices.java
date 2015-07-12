@@ -17,6 +17,7 @@
 package com.intellijob.webservices;
 
 import com.intellijob.controllers.JobController;
+import com.intellijob.controllers.JobDetailController;
 import com.intellijob.controllers.JobLinkController;
 import com.intellijob.domain.Job;
 import com.intellijob.domain.JobLink;
@@ -38,7 +39,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,14 +53,16 @@ import java.util.Map;
 @RestController
 public class JobServices extends BaseServices {
 
-    private final static Logger LOG = LoggerFactory.getLogger(JobServices.class);
-
+    private static final Logger LOG = LoggerFactory.getLogger(JobServices.class);
 
     @Autowired
     private JobLinkController jobLinkController;
 
     @Autowired
     private JobController jobController;
+
+    @Autowired
+    private JobDetailController jobDetailController;
 
 
     /**
@@ -101,18 +103,22 @@ public class JobServices extends BaseServices {
     }
 
     /**
-     * Request Get all jobs with paging.
+     * Request to extract job details from job html content.
+     * <p>
+     * find job for specified jobId.
+     * Extract job details from html context.
+     * Sets extractedFlag of job documents to true. (This means extracted!)
      *
      * @return data transfer object <code>ResponseJobTableData.java</code>
      */
     @RequestMapping(value = Endpoints.JOBS_BY_ID_EXTRACT, method = RequestMethod.POST)
     public @ResponseBody ResponseJobData extractJobContent(@PathVariable String jobId) throws Exception {
-        //TODO: implementation is not finished, will be extended with next issue.
-//        Job job = jobController.getByJobId(jobId);
-//        Job updatedJob = jobController.setExtractedFlag(job,Boolean.TRUE);
-//        return new ResponseJobData(updatedJob);
-        throw new NotImplementedException();
+        Job job = jobController.getByJobId(jobId);
+        jobDetailController.extractJobDetailAndSave(job);
+        Job updatedJob = jobController.setExtractedFlag(job, Boolean.TRUE);
+        return new ResponseJobData(updatedJob);
     }
+
 
     /**
      * Returns job data for specified link defined in jobLink object.

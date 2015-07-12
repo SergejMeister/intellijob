@@ -19,59 +19,47 @@
     <div class="col-md-9">
         <div class="row">
             <div class="col-md-12">
-                <h1>Jobs</h1>
+                <h1>Job details</h1>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <pagination class="pagination-sm" boundary-links="true" rotate="false"
                             ng-show="showPagination"
-                            max-size="jobTableMaxPage"
-                            total-items="jobTableTotalItems"
-                            items-per-page="jobTableNumPerPage"
-                            ng-model="jobTableCurrentPage">
+                            max-size="jobDetailTableMaxPage"
+                            total-items="jobDetailTableTotalItems"
+                            items-per-page="jobDetailTableNumPerPage"
+                            ng-model="jobDetailTableCurrentPage">
                 </pagination>
                 <table class="table">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Source</th>
                             <th>Job name</th>
                             <th>Received date</th>
                             <th>Link</th>
-                            <th>Job Content</th>
-                            <th>Extracted</th>
+                            <th>Contact</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="job in jobs">
+                        <tr ng-repeat="jobDetail in jobDetails">
                             <td>{{$index}}</td>
-                            <td>{{job.source}}</td>
-                            <td>{{job.name}}</td>
-                            <td><p ng-bind="job.receivedDate | date:'dd.MM.yyyy HH:mm'"></td>
+                            <td>{{jobDetail.name}}</td>
+                            <td><p ng-bind="jobDetail.receivedDate | date:'dd.MM.yyyy HH:mm'"></td>
                             <td>
-                                <a target="_blank" href="{{job.link}}">Link</a>
+                                <a target="_blank" href="{{jobDetail.link}}">Link</a>
                             </td>
-                            <td>
-                                <a target="_blank" ng-click="showJobContent(job.jobId)">
-                                    <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                                </a>
-                            </td>
-                            <td>
-                                <a class="btn btn-info pull" ng-show="!job.extracted"
-                                   ng-click="extractDataById(job.jobId)">extract data</a>
-                                <span class="glyphicon glyphicon-ok" aria-hidden="true"
-                                      ng-show="job.extracted"></span>
-                            </td>
+                            <td>{{jobDetail.contactPerson}}</td>
+
                         </tr>
                     </tbody>
                 </table>
                 <pagination class="pagination-sm" boundary-links="true" rotate="false"
                             ng-show="showPagination"
-                            max-size="jobTableMaxPage"
-                            total-items="jobTableTotalItems"
-                            items-per-page="jobTableNumPerPage"
-                            ng-model="jobTableCurrentPage">
+                            max-size="jobDetailTableMaxPage"
+                            total-items="jobDetailTableTotalItems"
+                            items-per-page="jobDetailTableNumPerPage"
+                            ng-model="jobDetailTableCurrentPage">
                 </pagination>
             </div>
         </div>

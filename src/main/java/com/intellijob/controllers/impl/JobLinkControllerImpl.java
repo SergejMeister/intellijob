@@ -24,7 +24,7 @@ import com.intellijob.exceptions.DocumentNotFoundException;
 import com.intellijob.models.HtmlLink;
 import com.intellijob.repository.JobLinkRepository;
 import com.intellijob.utility.HtmlLinkParseFilter;
-import com.intellijob.utility.HtmlLinkParser;
+import com.intellijob.utility.HtmlParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -74,7 +74,7 @@ public class JobLinkControllerImpl implements JobLinkController {
         //Find jobLinks in mails content.
         List<JobLink> jobLinksToSave = new ArrayList<>();
         for (Mail mail : mails) {
-            List<HtmlLink> htmlLinks = HtmlLinkParser.parse(mail.getContent(), htmlLinkParseFilter);
+            List<HtmlLink> htmlLinks = HtmlParser.parse(mail.getContent(), htmlLinkParseFilter);
             List<JobLink> loopResultOfJobLinks = convertHtmlLinkToJobLink(mail, htmlLinks);
             jobLinksToSave.addAll(loopResultOfJobLinks);
         }

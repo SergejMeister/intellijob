@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Data transfer object represents table of jobLinks
+ * Data transfer object represents table of jobLinks.
  */
 public class ResponseJobLinkTableData extends ResponseTableData {
 
@@ -45,8 +45,6 @@ public class ResponseJobLinkTableData extends ResponseTableData {
 
     public ResponseJobLinkTableData(Page<JobLink> jobLinkPage) {
         super(jobLinkPage);
-//        this.totalItemSize = jobLinkPage.getTotalElements();
-//        this.totalPages = jobLinkPage.getTotalPages();
         this.jobLinks = new ArrayList<>();
         for (JobLink jobLink : jobLinkPage.getContent()) {
             ResponseJobLinkData responseJobLinkData = new ResponseJobLinkData(jobLink);

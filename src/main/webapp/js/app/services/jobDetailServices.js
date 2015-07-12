@@ -15,51 +15,39 @@
  */
 
 angular.module('intelliJob')
-        .factory('JobServices', ['$http', '$rootScope',
+        .factory('JobDetailServices', ['$http', '$rootScope',
             function ($http) {
 
-                var urlBase = "/intellijob/api/jobs";
-                var jobServices = {};
+                var urlBase = "/intellijob/api/jobdetails";
+                var jobDetailServices = {};
 
                 /**
-                 * Get all jobs.
+                 * Get all jobDetails.
                  *
                  * @returns {HttpPromise}
                  */
-                jobServices.getAllJobs = function () {
+                jobDetailServices.getAllJobDetails = function () {
                     return $http.get(urlBase);
                 };
 
                 /**
-                 * Get page with fixed size of jobs.
+                 * Get page with fixed size of jobDetails.
                  *
                  * @returns {HttpPromise}
                  */
-                jobServices.getJobPage = function (pageIndex, limit) {
+                jobDetailServices.getJobDetailPage = function (pageIndex, limit) {
                     return $http.get(urlBase + "/" + pageIndex + "/" + limit);
                 };
 
                 /**
-                 * Get job by id.
+                 * Get jobDetail by id.
                  *
                  * @returns {HttpPromise}
                  */
-                jobServices.getJobById = function (jobId) {
-                    return $http.get(urlBase + "/" + jobId);
+                jobDetailServices.getJobDetailById = function (jobDetailId) {
+                    return $http.get(urlBase + "/" + jobDetailId);
                 };
 
-                /**
-                 * Run extract service.
-                 *
-                 * This service analyse the job content and extract specific information.
-                 * @param jobId affected job id.
-                 * @returns {HttpPromise}
-                 */
-                jobServices.extractDataById = function (jobId) {
-                    var extractUrl = urlBase + "/" + jobId + "/extract";
-                    var emptyPayLoad = {}
-                    return $http.post(extractUrl, emptyPayLoad);
-                }
 
-                return jobServices;
+                return jobDetailServices;
             }]);

@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * Test util html link parser.
  */
-public class HtmlLinkParserTest extends BaseTester {
+public class HtmlParserTest extends BaseTester {
 
     public static final String MONSTER_MAIL_PATH = "mails/monsterjobs.html";
     public static final String STEPSTONE_MAIL_PATH = "mails/stepstonejobs.html";
@@ -38,7 +38,7 @@ public class HtmlLinkParserTest extends BaseTester {
     @Test
     public void testFindAllHtmlLinksInMonserMail() {
         String monsterMailContent = getMailContent(MONSTER_MAIL_PATH);
-        List<HtmlLink> links = HtmlLinkParser.parse(monsterMailContent);
+        List<HtmlLink> links = HtmlParser.parse(monsterMailContent);
         Assert.assertEquals("This mail content include only 20 links!", 20, links.size());
     }
 
@@ -47,14 +47,14 @@ public class HtmlLinkParserTest extends BaseTester {
         String monsterMailContent = getMailContent(MONSTER_MAIL_PATH);
         List<String> linkMatchers = Collections.singletonList("stellenanzeige.monster.de");
         HtmlLinkParseFilter htmlLinkParseFilter = getHtmlParseFilter(linkMatchers);
-        List<HtmlLink> links = HtmlLinkParser.parse(monsterMailContent, htmlLinkParseFilter);
+        List<HtmlLink> links = HtmlParser.parse(monsterMailContent, htmlLinkParseFilter);
         Assert.assertEquals("This mail content include only 4 job links!", 4, links.size());
     }
 
     @Test
     public void testFindAllHtmlLinksInStepStoneMail() {
         String stepStoneMailContent = getMailContent(STEPSTONE_MAIL_PATH);
-        List<HtmlLink> links = HtmlLinkParser.parse(stepStoneMailContent);
+        List<HtmlLink> links = HtmlParser.parse(stepStoneMailContent);
         Assert.assertEquals("This mail content include only 32 links!", 32, links.size());
     }
 
@@ -64,7 +64,7 @@ public class HtmlLinkParserTest extends BaseTester {
         //ja.cfm in url means in stepstone mail job agent!
         List<String> linkMatchers = Collections.singletonList("www.stepstone.de/ja.cfm");
         HtmlLinkParseFilter htmlLinkParseFilter = getHtmlParseFilter(linkMatchers);
-        List<HtmlLink> links = HtmlLinkParser.parse(stepStoneMailContent, htmlLinkParseFilter);
+        List<HtmlLink> links = HtmlParser.parse(stepStoneMailContent, htmlLinkParseFilter);
         Assert.assertEquals("This mail content include only 16 job links!", 16, links.size());
     }
 

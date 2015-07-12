@@ -34,4 +34,6 @@ public class Endpoints {
     public static final String JOBS_BY_ID_EXTRACT = JOBS + "/{jobId}/extract";
     public static final String JOBS_BY_JOBLINK_ID_DOWNLOAD = JOBS + "/{jobLinkId}/download";
     public static final String JOBS_BY_ID = JOBS + "/{jobId}";
+    public static final String JOBDETAILS = API + "/jobdetails";
+    public static final String JOBDETAILS_PAGING = JOBDETAILS + "/{pageIndex}/{limit}";
 }
