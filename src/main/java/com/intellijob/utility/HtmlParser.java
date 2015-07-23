@@ -28,12 +28,21 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Utility class to parse html links.
+ * Utility class to parseLink html links.
  */
 public abstract class HtmlParser {
 
     private static final Pattern REMOVE_TAGS = Pattern.compile("<.+?>");
     private static final Pattern MAIL_PATTERN = Pattern.compile("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+");
+    //    private static final Pattern WEB_URL_PATTERN = Pattern.compile("http://.*|www\\..*");
+    //private static final Pattern WEB_URL_PATTERN = Pattern.compile("http://.*|www\\..*");
+    private static final String RESOURCE_NAME_PATTERN = "[\\w\\d.:#@%/;$()~_?\\+-=&]*";
+    private static final String WWW_PATTERN = "www\\." + RESOURCE_NAME_PATTERN ;
+    private static final String HTTP_PATTERN = "http://" + RESOURCE_NAME_PATTERN ;
+    private static final String HTTPS_PATTERN = "https://" + RESOURCE_NAME_PATTERN ;
+    private static final Pattern WEB_URL_PATTERN = Pattern.compile(HTTP_PATTERN + "|" + HTTPS_PATTERN + "|" + WWW_PATTERN);
+    //private static final Pattern HTTP_URL_PATTERN = Pattern.compile("((https?|ftp|gopher|telnet|file):((//)|(\\\\))+[\\w\\d:#@%/;$()~_?\\+-=\\\\\\.&]*)",Pattern.CASE_INSENSITIVE);
+    //private static final Pattern WEB_URL_PATTERN = Pattern.compile("((www?|ftp|gopher|telnet|file):((//)|(\\\\))+[\\w\\d:#@%/;$()~_?\\+-=\\\\\\.&]*)",Pattern.CASE_INSENSITIVE);
 
     /**
      * Returns all html links.
@@ -42,7 +51,7 @@ public abstract class HtmlParser {
      *
      * @return founded links.
      */
-    public static List<HtmlLink> parse(final String htmlContent) {
+    public static List<HtmlLink> parseLink(final String htmlContent) {
         List<HtmlLink> result = new ArrayList<>();
 
         Document doc = Jsoup.parse(htmlContent);
@@ -67,8 +76,8 @@ public abstract class HtmlParser {
      *
      * @return founded links.
      */
-    public static List<HtmlLink> parse(final String mailContent, HtmlLinkParseFilter htmlLinkParseFilter) {
-        List<HtmlLink> notFilteredResult = parse(mailContent);
+    public static List<HtmlLink> parseLink(final String mailContent, HtmlLinkParseFilter htmlLinkParseFilter) {
+        List<HtmlLink> notFilteredResult = parseLink(mailContent);
         return doFilter(notFilteredResult, htmlLinkParseFilter);
     }
 
@@ -89,8 +98,7 @@ public abstract class HtmlParser {
      *
      * @return text.
      */
-    public static String parseToText(final String htmlContent) {
-
+    public static String parseText(final String htmlContent) {
 
         //List<String> sentences = new ArrayList<>();
         Document doc = Jsoup.parse(htmlContent);
@@ -125,12 +133,33 @@ public abstract class HtmlParser {
         return m.replaceAll("");
     }
 
-    public static String parseEmail(String str) {
-        Matcher m = MAIL_PATTERN.matcher(str);
+    public static String parseEmail(String plainText) {
+        Matcher m = MAIL_PATTERN.matcher(plainText);
         while (m.find()) {
             return m.group();
         }
         return null;
+    }
+
+//    public static String parseURL(String plainText) {
+//        Matcher m = WEB_URL_PATTERN.matcher(plainText);
+//        while (m.find()) {
+//            return m.group();
+//        }
+//        return null;
+//    }
+
+    public static List<String> extractUrls(String value){
+        List<String> result = new ArrayList<>();
+        //String urlPattern = "((https?|ftp|gopher|telnet|file):((//)|(\\\\))+[\\w\\d:#@%/;$()~_?\\+-=\\\\\\.&]*)";
+        //String urlPattern = "((https?|ftp|gopher|telnet|file):((//)|(\\\\))+[\\w\\d:#@%/;$()~_?\\+-=\\\\\\.&]*)";
+        //Pattern p = Pattern.compile(urlPattern, Pattern.CASE_INSENSITIVE);
+        Matcher m = WEB_URL_PATTERN.matcher(value);
+        while (m.find()) {
+            //String foundedUrl = value.substring(m.start(0),m.end(0));
+            result.add(value.substring(m.start(0),m.end(0)));
+        }
+        return result;
     }
 
 }

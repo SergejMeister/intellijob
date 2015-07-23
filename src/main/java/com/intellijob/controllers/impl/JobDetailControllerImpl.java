@@ -22,6 +22,7 @@ import civis.com.utils.opennlp.ModelFactory;
 import com.intellijob.controllers.JobDetailController;
 import com.intellijob.domain.Job;
 import com.intellijob.domain.JobDetail;
+import com.intellijob.models.HtmlLink;
 import com.intellijob.repository.JobDetailRepository;
 import com.intellijob.utility.HtmlParser;
 import org.slf4j.Logger;
@@ -63,13 +64,18 @@ public class JobDetailControllerImpl implements JobDetailController {
     @Override
     public JobDetail extractJobDetail(Job job) {
         String htmlContent = job.getContent();
-        String plainText = HtmlParser.parseToText(htmlContent);
+        String plainText = HtmlParser.parseText(htmlContent);
         ContactPersonFinder contactPersonFinder = ModelFactory.getContactPersonFinder();
         List<ContactPersonSpan> contactPersonSpans = contactPersonFinder.find(plainText);
         JobDetail jobDetail = new JobDetail(job, contactPersonSpans);
 
+        // find mails
         String mails = HtmlParser.parseEmail(plainText);
         jobDetail.setApplicationMail(mails);
+
+        // find home pages
+        List<String> foundedHomepages = HtmlParser.extractUrls(plainText);
+        jobDetail.setHomepages(foundedHomepages);
 
         return jobDetail;
     }

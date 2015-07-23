@@ -28,6 +28,8 @@ import java.util.List;
  */
 public class ResponseJobDetailData extends ResponseData {
 
+    public static final String BLANK_CHAR = " ";
+
     private String jobDetailId;
 
     /**
@@ -70,6 +72,8 @@ public class ResponseJobDetailData extends ResponseData {
 
     /**
      * Homepage of organisation.
+     *
+     * More than one, than separate by comma.
      */
     private String homepage;
 
@@ -105,6 +109,7 @@ public class ResponseJobDetailData extends ResponseData {
         this.link = jobDetail.getLink();
         this.applicationMail = jobDetail.getApplicationMail();
         this.contactPerson = initContactPersons(jobDetail.getContactPersons());
+        this.homepage = initHomePage(jobDetail.getHomepages());
     }
 
     public ResponseJobDetailData(JobDetail jobDetail, Boolean hasContent) {
@@ -128,13 +133,29 @@ public class ResponseJobDetailData extends ResponseData {
             }
             contactPersonBuilder.append(contactPerson.getFirstAndSecondName());
             contactPersonBuilder.append(",");
+            contactPersonBuilder.append(BLANK_CHAR);
         }
-        //remove last comma.
+        //remove last comma and blank.
         if (contactPersonBuilder.length() > 0) {
-            contactPersonBuilder.setLength(contactPersonBuilder.length() - 1);
+            contactPersonBuilder.setLength(contactPersonBuilder.length() - 2);
         }
 
         return contactPersonBuilder.toString();
+    }
+
+    private String initHomePage(List<String> homepages) {
+        StringBuilder homePageBuilder = new StringBuilder();
+        for (String homepage : homepages) {
+            homePageBuilder.append(homepage);
+            homePageBuilder.append(",");
+            homePageBuilder.append(BLANK_CHAR);
+        }
+        //remove last comma and blank.
+        if (homePageBuilder.length() > 0) {
+            homePageBuilder.setLength(homePageBuilder.length() - 2);
+        }
+
+        return homePageBuilder.toString();
     }
 
     /**

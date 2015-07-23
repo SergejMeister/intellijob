@@ -66,7 +66,7 @@ public class JobLinkControllerImpl implements JobLinkController {
      */
     @Override
     public List<JobLink> findInMailsAndSave(List<Mail> mails) {
-        //create html parse filter.
+        //create html parseLink filter.
         HtmlLinkParseFilter htmlLinkParseFilter = new HtmlLinkParseFilter();
         htmlLinkParseFilter.setNullableText(Boolean.FALSE);
         htmlLinkParseFilter.setLinkMatchers(JOB_LINK_MATCHERS);
@@ -74,7 +74,7 @@ public class JobLinkControllerImpl implements JobLinkController {
         //Find jobLinks in mails content.
         List<JobLink> jobLinksToSave = new ArrayList<>();
         for (Mail mail : mails) {
-            List<HtmlLink> htmlLinks = HtmlParser.parse(mail.getContent(), htmlLinkParseFilter);
+            List<HtmlLink> htmlLinks = HtmlParser.parseLink(mail.getContent(), htmlLinkParseFilter);
             List<JobLink> loopResultOfJobLinks = convertHtmlLinkToJobLink(mail, htmlLinks);
             jobLinksToSave.addAll(loopResultOfJobLinks);
         }

@@ -38,7 +38,7 @@ public class HtmlParserTest extends BaseTester {
     @Test
     public void testFindAllHtmlLinksInMonserMail() {
         String monsterMailContent = getMailContent(MONSTER_MAIL_PATH);
-        List<HtmlLink> links = HtmlParser.parse(monsterMailContent);
+        List<HtmlLink> links = HtmlParser.parseLink(monsterMailContent);
         Assert.assertEquals("This mail content include only 20 links!", 20, links.size());
     }
 
@@ -47,14 +47,14 @@ public class HtmlParserTest extends BaseTester {
         String monsterMailContent = getMailContent(MONSTER_MAIL_PATH);
         List<String> linkMatchers = Collections.singletonList("stellenanzeige.monster.de");
         HtmlLinkParseFilter htmlLinkParseFilter = getHtmlParseFilter(linkMatchers);
-        List<HtmlLink> links = HtmlParser.parse(monsterMailContent, htmlLinkParseFilter);
+        List<HtmlLink> links = HtmlParser.parseLink(monsterMailContent, htmlLinkParseFilter);
         Assert.assertEquals("This mail content include only 4 job links!", 4, links.size());
     }
 
     @Test
     public void testFindAllHtmlLinksInStepStoneMail() {
         String stepStoneMailContent = getMailContent(STEPSTONE_MAIL_PATH);
-        List<HtmlLink> links = HtmlParser.parse(stepStoneMailContent);
+        List<HtmlLink> links = HtmlParser.parseLink(stepStoneMailContent);
         Assert.assertEquals("This mail content include only 32 links!", 32, links.size());
     }
 
@@ -64,8 +64,41 @@ public class HtmlParserTest extends BaseTester {
         //ja.cfm in url means in stepstone mail job agent!
         List<String> linkMatchers = Collections.singletonList("www.stepstone.de/ja.cfm");
         HtmlLinkParseFilter htmlLinkParseFilter = getHtmlParseFilter(linkMatchers);
-        List<HtmlLink> links = HtmlParser.parse(stepStoneMailContent, htmlLinkParseFilter);
+        List<HtmlLink> links = HtmlParser.parseLink(stepStoneMailContent, htmlLinkParseFilter);
         Assert.assertEquals("This mail content include only 16 job links!", 16, links.size());
+    }
+
+    @Test
+    public void testParseUrl() {
+        String url1 = "Dat ist ein Text mit einem Url http://www.test.de Punkt!";
+        String url2 = "Dat ist ein Text mit einem Url www.test.de Punkt!";
+        String url3 = "http://www.ubiteck.com/test/mypage.jsf?param1=ok http://simpleFileUrl.txt https://backslashUrl.txt";
+        String url4 = "Dat ist ein Text mit einem Url www.test1.de Punkt!";
+        String url5 = "Dat ist ein Text mit einem Url www.test.de/bewerbung Punkt!";
+        String url6 = "Dat ist ein Text mit einem Url https://www.test.de/bewerbung Punkt!";
+
+        List<String> test1 = HtmlParser.extractUrls(url1);
+        Assert.assertEquals("Should have only one url!", 1, test1.size());
+        Assert.assertEquals("http://www.test.de", test1.get(0));
+
+        List<String> test2 = HtmlParser.extractUrls(url2);
+        Assert.assertEquals("Should have only one url!", 1, test2.size());
+        Assert.assertEquals("www.test.de", test2.get(0));
+
+        List<String> test3 = HtmlParser.extractUrls(url3);
+        Assert.assertEquals("Should have only one url!", 3, test3.size());
+
+        List<String> test4 = HtmlParser.extractUrls(url4);
+        Assert.assertEquals("Should have only one url!", 1, test4.size());
+        Assert.assertEquals("www.test1.de", test4.get(0));
+
+        List<String> test5 = HtmlParser.extractUrls(url5);
+        Assert.assertEquals("Should have only one url!", 1, test5.size());
+        Assert.assertEquals("www.test.de/bewerbung", test5.get(0));
+
+        List<String> test6 = HtmlParser.extractUrls(url6);
+        Assert.assertEquals("Should have only one url!", 1, test6.size());
+        Assert.assertEquals("https://www.test.de/bewerbung", test6.get(0));
     }
 
     private String getMailContent(String fileName) {

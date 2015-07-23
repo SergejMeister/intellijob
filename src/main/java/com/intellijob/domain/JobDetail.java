@@ -70,6 +70,11 @@ public class JobDetail {
      */
     private String applicationMail;
 
+    /**
+     * Homepages of organisation.
+     */
+    private List<String> homepages;
+
 
     /**
      * Default constructor to init list of contact persons.
@@ -199,6 +204,24 @@ public class JobDetail {
      */
     public void setContactPersons(List<ContactPerson> contactPersons) {
         this.contactPersons = contactPersons;
+    }
+
+    /**
+     * Returns all founded company homepages.
+     *
+     * @return web links, like www.test.de, http://www.web.de, https://www.web.de.
+     */
+    public List<String> getHomepages() {
+        return homepages;
+    }
+
+    /**
+     * Sets company homepages.
+     *
+     * @param homepages homepages.
+     */
+    public void setHomepages(List<String> homepages) {
+        this.homepages = homepages;
     }
 
     /**

@@ -22,50 +22,52 @@
         <title>IntelliJob</title>
     </head>
     <body>
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="/intellijob/home">IntelliJob</a>
+        <div>
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid" >
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="/intellijob/home">IntelliJob</a>
+                    </div>
+                    <div>
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="/intellijob/home">Home</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul class="nav navbar-nav">
+                            <li><a href="/intellijob/mails">Mails</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul class="nav navbar-nav">
+                            <li><a href="/intellijob/joblinks">JobLinks</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul class="nav navbar-nav">
+                            <li><a href="/intellijob/jobs">Jobs</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul class="nav navbar-nav">
+                            <li><a href="/intellijob/jobdetails">JobDetails</a></li>
+                        </ul>
+                    </div>
                 </div>
-                <div>
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="/intellijob/home">Home</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <ul class="nav navbar-nav">
-                        <li><a href="/intellijob/mails">Mails</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <ul class="nav navbar-nav">
-                        <li><a href="/intellijob/joblinks">JobLinks</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <ul class="nav navbar-nav">
-                        <li><a href="/intellijob/jobs">Jobs</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <ul class="nav navbar-nav">
-                        <li><a href="/intellijob/jobdetails">JobDetails</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+            </nav>
 
-        <div class="container custom-alert">
-            <div class="alert alert-error" ng-show="error !== undefined">
-                {{error}}
+            <div class="container custom-alert">
+                <div class="alert alert-error" ng-show="error !== undefined">
+                    {{error}}
+                </div>
+                <div class="alert alert-success" ng-show="success !== undefined">
+                    {{success}}
+                </div>
             </div>
-            <div class="alert alert-success" ng-show="success !== undefined">
-                {{success}}
-            </div>
-        </div>
 
-        <div id="content" class="container-fluid" ng-view>
-            <!-- content -->
+            <div id="content" class="container-fluid" ng-view>
+                <!-- content -->
+            </div>
         </div>
 
         <!-- Libs -->
