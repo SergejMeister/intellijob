@@ -21,11 +21,11 @@ import org.springframework.test.context.ContextConfiguration;
 import java.io.IOException;
 
 @ActiveProfiles("test")
-@ContextConfiguration(classes = {ApplicationController.class})
+@ContextConfiguration(classes = {ApplicationConfig.class})
 @ComponentScan
-public class TestApplicationController {
+public class TestApplicationConfig {
 
-    private static final Logger LOG = Logger.getLogger(TestApplicationController.class);
+    private static final Logger LOG = Logger.getLogger(TestApplicationConfig.class);
     private static final String MONGO_DB_NAME = "db_intellijob";
     private static final String MONGO_LOCALHOST = "localhost";
     private static final Integer MONGO_DB_PORT = 27017;

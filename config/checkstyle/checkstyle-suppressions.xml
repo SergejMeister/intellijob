@@ -7,8 +7,8 @@
     <suppress files="\.properties" checks=".*"/>
 
     <!-- Application final -->
-    <suppress files="com.intellijob.ApplicationController" checks="FinalClassCheck"/>
-    <suppress files="com.intellijob.ApplicationController" checks="HideUtilityClassConstructorCheck"/>
+    <suppress files="com.intellijob.ApplicationConfig" checks="FinalClassCheck"/>
+    <suppress files="com.intellijob.ApplicationConfig" checks="HideUtilityClassConstructorCheck"/>
 
     <!-- Test -->
     <suppress files="[\\/]src[\\/]test[\\/].*" checks="JavadocPackage"/>

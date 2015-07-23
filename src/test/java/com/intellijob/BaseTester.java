@@ -23,12 +23,12 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {TestApplicationController.class})
+@ContextConfiguration(classes = {TestApplicationConfig.class})
 @WebAppConfiguration
 public abstract class BaseTester {
 
     /**
      * Constants.
      */
-    protected final static Boolean RUNNING_LIVE = TestApplicationController.LIVE_MONGODB;
+    protected final static Boolean RUNNING_LIVE = TestApplicationConfig.LIVE_MONGODB;
 }
