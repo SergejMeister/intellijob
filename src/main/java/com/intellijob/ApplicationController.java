@@ -42,6 +42,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 public class ApplicationController extends WebMvcConfigurerAdapter {
 
     private static final Logger LOG = Logger.getLogger(ApplicationController.class);
+
     private static ConfigurableApplicationContext context;
 
 

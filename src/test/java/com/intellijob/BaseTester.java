@@ -17,17 +17,18 @@
 package com.intellijob;
 
 import org.junit.runner.RunWith;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = TestApplicationController.class)
+@ContextConfiguration(classes = {TestApplicationController.class})
 @WebAppConfiguration
 public abstract class BaseTester {
 
     /**
      * Constants.
      */
-    protected final static Boolean RUNNING_LIVE = Boolean.FALSE;
+    protected final static Boolean RUNNING_LIVE = TestApplicationController.LIVE_MONGODB;
 }
