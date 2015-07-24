@@ -20,6 +20,7 @@ import com.intellijob.controllers.JobLinkController;
 import com.intellijob.controllers.MailController;
 import com.intellijob.domain.JobLink;
 import com.intellijob.domain.Mail;
+import com.intellijob.exceptions.BaseException;
 import com.intellijob.exceptions.DocumentNotFoundException;
 import com.intellijob.models.HtmlLink;
 import com.intellijob.repository.JobLinkRepository;
@@ -132,7 +133,7 @@ public class JobLinkControllerImpl implements JobLinkController {
      * {@inheritDoc}
      */
     @Override
-    public JobLink findById(String jobLinkId) throws DocumentNotFoundException {
+    public JobLink findById(String jobLinkId) throws BaseException {
         JobLink jobLink = jobLinkRepository.findOne(jobLinkId);
         if (jobLink != null) {
             return jobLink;
@@ -168,6 +169,16 @@ public class JobLinkControllerImpl implements JobLinkController {
         //TODO check mail
         //Has this mail other job links, than ok, else delete mail too.
         return jobLink;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JobLink deleteById(String jobLinkId) throws BaseException {
+        JobLink foundedJobLink = findById(jobLinkId);
+        jobLinkRepository.delete(foundedJobLink);
+        return foundedJobLink;
     }
 
 

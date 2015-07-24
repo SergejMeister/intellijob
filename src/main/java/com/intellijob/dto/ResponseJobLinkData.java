@@ -71,6 +71,10 @@ public class ResponseJobLinkData extends ResponseData {
         this.downloaded = jobLink.isDownloaded();
     }
 
+    public ResponseJobLinkData(String jobLinkId) {
+        this.jobLinkId = jobLinkId;
+    }
+
     /**
      * Returns id of jobLink.
      *

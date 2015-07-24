@@ -18,6 +18,7 @@ package com.intellijob.controllers;
 
 import com.intellijob.domain.JobLink;
 import com.intellijob.domain.Mail;
+import com.intellijob.exceptions.BaseException;
 import com.intellijob.exceptions.DocumentNotFoundException;
 import com.intellijob.models.HtmlLink;
 import org.springframework.data.domain.Page;
@@ -102,9 +103,9 @@ public interface JobLinkController {
      * @param jobLinkId id of jobLink.
      *
      * @return jobLink.
-     * @throws DocumentNotFoundException if no document founded.
+     * @throws BaseException if no document founded.
      */
-    JobLink findById(String jobLinkId) throws DocumentNotFoundException;
+    JobLink findById(String jobLinkId) throws BaseException;
 
     /**
      * Returns jobLink by specified id.
@@ -128,4 +129,13 @@ public interface JobLinkController {
      * @param jobLink remove this jobLink.
      */
     JobLink removeJobLink(JobLink jobLink);
+
+    /**
+     * Delete a jobLink by specified id.
+     *
+     * @param jobLinkId id of JobLink to delete.
+     * @return deleted JobLink
+     * @throws BaseException exception, if no jobLink found for specified id.
+     */
+    JobLink deleteById(String jobLinkId) throws BaseException;
 }

@@ -68,4 +68,28 @@ intelliJobControllers.controller(
                         console.log(error);
                     })
                 };
+
+                /**
+                 * Delete jobLink.
+                 */
+                $scope.deleteJobLink = function (jobLinkId) {
+                    JobLinkServices.deleteById(jobLinkId).success(function (response) {
+                        var deletedJobLinkId = response.jobLinkId;
+                        var index = -1;
+                        var jobLinkArr = eval($scope.jobLinks);
+                        for (var i = 0; i < jobLinkArr.length; i++) {
+                            if (jobLinkArr[i].jobLinkId === deletedJobLinkId) {
+                                index = i;
+                                break;
+                            }
+                        }
+                        if (index === -1) {
+                            alert("Something gone wrong");
+                        }
+                        $scope.jobLinks.splice(index, 1);
+                        $rootScope.success = "Deleted successfully! (Id - " + deletedJobLinkId + " )";
+                    }).error(function (error) {
+                        console.log(error);
+                    });
+                };
             }]);

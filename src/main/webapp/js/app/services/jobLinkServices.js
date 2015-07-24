@@ -62,5 +62,14 @@ angular.module('intelliJob')
                     return $http.post(downloadUrl, emptyPayLoad);
                 };
 
+                /**
+                 * Delete jobLink by id.
+                 *
+                 * @returns {HttpPromise}
+                 */
+                jobLinkServices.deleteById = function (jobLinkId) {
+                    return $http.delete(urlBase + "/" + jobLinkId);
+                };
+
                 return jobLinkServices;
             }]);

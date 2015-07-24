@@ -18,6 +18,7 @@ package com.intellijob.webservices;
 
 import com.intellijob.controllers.JobLinkController;
 import com.intellijob.domain.JobLink;
+import com.intellijob.dto.ResponseJobLinkData;
 import com.intellijob.dto.ResponseJobLinkTableData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -58,5 +59,16 @@ public class JobLinkServices extends BaseServices {
     public @ResponseBody ResponseJobLinkTableData getJobLinks(@PathVariable int pageIndex, @PathVariable int limit) {
         Page<JobLink> jobLinkPage = jobLinkController.findAll(pageIndex, limit);
         return new ResponseJobLinkTableData(jobLinkPage);
+    }
+
+    /**
+     * Request to delete a jobLink by specified id.
+     *
+     * @return data transfer object <code>ResponseJobLinkData</code>
+     */
+    @RequestMapping(value = Endpoints.JOBLINKS_BY_ID, method = RequestMethod.DELETE)
+    public @ResponseBody ResponseJobLinkData deleteJobLink(@PathVariable String jobLinkId) throws Exception {
+        jobLinkController.deleteById(jobLinkId);
+        return new ResponseJobLinkData(jobLinkId);
     }
 }

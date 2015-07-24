@@ -207,7 +207,7 @@ public class JobServices extends BaseServices {
      * @return data transfer object <code>ResponseJobData</code>
      */
     @RequestMapping(value = Endpoints.JOBS_BY_ID, method = RequestMethod.DELETE)
-    public @ResponseBody ResponseJobData deleteJobDetail(@PathVariable String jobId) throws Exception {
+    public @ResponseBody ResponseJobData deleteJob(@PathVariable String jobId) throws Exception {
         jobController.deleteById(jobId);
         return new ResponseJobData(jobId);
     }

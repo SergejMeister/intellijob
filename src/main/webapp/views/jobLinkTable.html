@@ -39,6 +39,7 @@
                             <th>Received date</th>
                             <th>Value</th>
                             <th>Link</th>
+                            <th></th>
                             <th>Downloaded</th>
                         </tr>
                     </thead>
@@ -50,6 +51,11 @@
                             <td>{{jobLinkData.value}}</td>
                             <td>
                                 <a target="_blank" href="{{jobLinkData.link}}">Link</a>
+                            </td>
+                            <td>
+                                <a target="_blank" ng-click="deleteJobLink(jobLinkData.jobLinkId)">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                </a>
                             </td>
                             <td>
                                 <a class="btn btn-info pull" ng-show="!jobLinkData.downloaded"
