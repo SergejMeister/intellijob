@@ -108,4 +108,13 @@ public interface JobDetailController {
      * @return founded jobDetail with content as text.
      */
     JobDetail findAndConvertContentToText(String jobDetailId) throws DocumentNotFoundException;
+
+    /**
+     * Delete jobDetail for specified id.
+     *
+     * @param jobDetailId id of JobDetail to delete.
+     *
+     * @return deleted jobDetail.
+     */
+    JobDetail deleteById(String jobDetailId) throws DocumentNotFoundException;
 }

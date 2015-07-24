@@ -48,6 +48,15 @@ angular.module('intelliJob')
                     return $http.get(urlBase + "/" + jobDetailId);
                 };
 
+                /**
+                 * Delete jobDetail by id.
+                 *
+                 * @returns {HttpPromise}
+                 */
+                jobDetailServices.deleteById = function (jobDetailId) {
+                    return $http.delete(urlBase + "/" + jobDetailId);
+                };
+
 
                 return jobDetailServices;
             }]);

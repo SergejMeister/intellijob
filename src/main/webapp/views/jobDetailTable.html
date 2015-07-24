@@ -40,8 +40,9 @@
                             <th>Contact</th>
                             <th>Homepage</th>
                             <th>Mail</th>
-                            <th>Link</th>
-                            <th>Text</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -58,6 +59,11 @@
                             <td>
                                 <a target="_blank" ng-click="showJobText(jobDetail.jobDetailId)">
                                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                </a>
+                            </td>
+                            <td>
+                                <a target="_blank" ng-click="deleteJobDetail(jobDetail.jobDetailId)">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                 </a>
                             </td>
                         </tr>

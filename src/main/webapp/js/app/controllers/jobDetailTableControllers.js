@@ -66,7 +66,30 @@ intelliJobControllers.controller(
                  */
                 $scope.showJobText = function (jobDetailId) {
                     $location.path("/intellijob/jobdetails/" + jobDetailId + "/detail");
-                    //window.open('/intellijob/mails/' + mailId);
+                };
+
+                /**
+                 * Get mail by given id.
+                 */
+                $scope.deleteJobDetail = function (jobDetailId) {
+                    JobDetailServices.deleteById(jobDetailId).success(function (response) {
+                        var deletedJobDetailId = response.jobDetailId;
+                        var index = -1;
+                        var jobDetailArr = eval($scope.jobDetails);
+                        for (var i = 0; i < jobDetailArr.length; i++) {
+                            if (jobDetailArr[i].jobDetailId === deletedJobDetailId) {
+                                index = i;
+                                break;
+                            }
+                        }
+                        if (index === -1) {
+                            alert("Something gone wrong");
+                        }
+                        $scope.jobDetails.splice(index, 1);
+                        $rootScope.success = "Deleted successfully! (Id - " + jobDetailId + " )";
+                    }).error(function (error) {
+                        console.log(error);
+                    });
                 };
             }
         ])

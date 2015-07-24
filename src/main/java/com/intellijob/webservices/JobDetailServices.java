@@ -64,7 +64,7 @@ public class JobDetailServices extends BaseServices {
      * @return data transfer object <code>ResponseJobDetailTableData.java</code>
      */
     @RequestMapping(value = Endpoints.JOBDETAILS_PAGING, method = RequestMethod.GET)
-    public @ResponseBody ResponseJobDetailTableData getJobs(@PathVariable int pageIndex, @PathVariable int limit) {
+    public @ResponseBody ResponseJobDetailTableData getJobDetails(@PathVariable int pageIndex, @PathVariable int limit) {
         Page<JobDetail> jobDetailsPage = jobDetailController.findPage(pageIndex, limit);
         return new ResponseJobDetailTableData(jobDetailsPage, Boolean.FALSE);
     }
@@ -75,8 +75,19 @@ public class JobDetailServices extends BaseServices {
      * @return data transfer object <code>ResponseJobDetailTableData.java</code>
      */
     @RequestMapping(value = Endpoints.JOBDETAILS_BY_ID, method = RequestMethod.GET)
-    public @ResponseBody ResponseJobDetailData getJobs(@PathVariable String jobDetailId) throws Exception {
+    public @ResponseBody ResponseJobDetailData getJobDetail(@PathVariable String jobDetailId) throws Exception {
         JobDetail jobDetail = jobDetailController.findAndConvertContentToText(jobDetailId);
         return new ResponseJobDetailData(jobDetail, Boolean.TRUE);
+    }
+
+    /**
+     * Request Get all job detail with paging.
+     *
+     * @return data transfer object <code>ResponseJobDetailTableData.java</code>
+     */
+    @RequestMapping(value = Endpoints.JOBDETAILS_BY_ID, method = RequestMethod.DELETE)
+    public @ResponseBody ResponseJobDetailData deleteJobDetail(@PathVariable String jobDetailId) throws Exception {
+        jobDetailController.deleteById(jobDetailId);
+        return new ResponseJobDetailData(jobDetailId);
     }
 }

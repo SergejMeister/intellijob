@@ -158,5 +158,13 @@ public class JobDetailControllerImpl implements JobDetailController {
         return foundedJobDetail;
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JobDetail deleteById(String jobDetailId) throws DocumentNotFoundException {
+        JobDetail jobDetailToDelete = findById(jobDetailId);
+        jobDetailRepository.delete(jobDetailToDelete);
+        return jobDetailToDelete;
+    }
 }

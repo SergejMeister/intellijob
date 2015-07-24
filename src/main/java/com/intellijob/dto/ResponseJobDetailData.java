@@ -102,6 +102,10 @@ public class ResponseJobDetailData extends ResponseData {
     public ResponseJobDetailData() {
     }
 
+    public ResponseJobDetailData(String jobDetailId) {
+        this.jobDetailId = jobDetailId ;
+    }
+
     public ResponseJobDetailData(JobDetail jobDetail) {
         this.jobDetailId = jobDetail.getId();
         this.name = jobDetail.getName();
