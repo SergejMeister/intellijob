@@ -37,7 +37,7 @@ import java.util.List;
  * Handle all request with endpoints <code>/jobs**</code>
  */
 @RestController
-public class JobDetailServices {
+public class JobDetailServices extends BaseServices {
 
 
     @Autowired
