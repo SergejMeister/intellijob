@@ -35,7 +35,8 @@ public class ViewController {
             "/joblinks",
             "/jobs",
             "/jobs/*/content",
-            "/jobdetails"}, method = RequestMethod.GET)
+            "/jobdetails,",
+            "/jobdetails/*/detail"}, method = RequestMethod.GET)
     public String index() {
         return "/index";
     }

@@ -61,26 +61,13 @@ intelliJobControllers.controller(
                 });
 
 
-                ///**
-                // * Get mail by given id.
-                // */
-                //$scope.showJobContent = function (jobId) {
-                //    $location.path("/intellijob/jobs/" + jobId + "/content");
-                //    //window.open('/intellijob/mails/' + mailId);
-                //};
-                //
-                ///**
-                // * download html content of given link.
-                // */
-                //$scope.extractDataById = function (jobId) {
-                //    JobServices.extractDataById(jobId).success(function (response) {
-                //        // not implemented yet.
-                //        var extractedJobData = response;
-                //    }).error(function (error) {
-                //        console.log(error);
-                //    })
-                //};
-
+                /**
+                 * Get mail by given id.
+                 */
+                $scope.showJobText = function (jobDetailId) {
+                    $location.path("/intellijob/jobdetails/" + jobDetailId + "/detail");
+                    //window.open('/intellijob/mails/' + mailId);
+                };
             }
         ])
 ;

@@ -18,6 +18,7 @@ package com.intellijob.controllers;
 
 import com.intellijob.domain.Job;
 import com.intellijob.domain.JobDetail;
+import com.intellijob.exceptions.DocumentNotFoundException;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -89,4 +90,22 @@ public interface JobDetailController {
      * @return page of jobDetail.
      */
     Page<JobDetail> findPage(int pageIndex, int limit);
+
+    /**
+     * Returns jobDetail for specified id.
+     *
+     * @param jobDetailId specified job detail id.
+     *
+     * @return founded jobDetail.
+     */
+    JobDetail findById(String jobDetailId) throws DocumentNotFoundException;
+
+    /**
+     * Find jobDetail for specified id and convert html content to plain text.
+     *
+     * @param jobDetailId specified job detail id.
+     *
+     * @return founded jobDetail with content as text.
+     */
+    JobDetail findAndConvertContentToText(String jobDetailId) throws DocumentNotFoundException;
 }

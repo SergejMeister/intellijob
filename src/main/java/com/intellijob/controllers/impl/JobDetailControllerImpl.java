@@ -22,6 +22,7 @@ import civis.com.utils.opennlp.ModelFactory;
 import com.intellijob.controllers.JobDetailController;
 import com.intellijob.domain.Job;
 import com.intellijob.domain.JobDetail;
+import com.intellijob.exceptions.DocumentNotFoundException;
 import com.intellijob.models.HtmlLink;
 import com.intellijob.repository.JobDetailRepository;
 import com.intellijob.utility.HtmlParser;
@@ -131,4 +132,31 @@ public class JobDetailControllerImpl implements JobDetailController {
         PageRequest request = new PageRequest(pageIndex, limit, new Sort(Sort.Direction.DESC, "receivedDate"));
         return jobDetailRepository.findAll(request);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JobDetail findById(String jobDetailId) throws DocumentNotFoundException {
+        JobDetail foundedJobDetail = jobDetailRepository.findOne(jobDetailId);
+        if(foundedJobDetail == null){
+            throw new DocumentNotFoundException();
+        }
+
+        return foundedJobDetail;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JobDetail findAndConvertContentToText(String jobDetailId) throws DocumentNotFoundException {
+        JobDetail foundedJobDetail = findById(jobDetailId);
+        String htmlContent = foundedJobDetail.getContent();
+        String plainText = HtmlParser.parseText(htmlContent);
+        foundedJobDetail.setContent(plainText);
+        return foundedJobDetail;
+    }
+
+
 }

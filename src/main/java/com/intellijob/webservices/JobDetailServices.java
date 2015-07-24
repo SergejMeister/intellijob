@@ -19,6 +19,7 @@ package com.intellijob.webservices;
 
 import com.intellijob.controllers.JobDetailController;
 import com.intellijob.domain.JobDetail;
+import com.intellijob.dto.ResponseJobDetailData;
 import com.intellijob.dto.ResponseJobDetailTableData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -66,5 +67,16 @@ public class JobDetailServices {
     public @ResponseBody ResponseJobDetailTableData getJobs(@PathVariable int pageIndex, @PathVariable int limit) {
         Page<JobDetail> jobDetailsPage = jobDetailController.findPage(pageIndex, limit);
         return new ResponseJobDetailTableData(jobDetailsPage, Boolean.FALSE);
+    }
+
+    /**
+     * Request Get all job detail with paging.
+     *
+     * @return data transfer object <code>ResponseJobDetailTableData.java</code>
+     */
+    @RequestMapping(value = Endpoints.JOBDETAILS_BY_ID, method = RequestMethod.GET)
+    public @ResponseBody ResponseJobDetailData getJobs(@PathVariable String jobDetailId) throws Exception {
+        JobDetail jobDetail = jobDetailController.findAndConvertContentToText(jobDetailId);
+        return new ResponseJobDetailData(jobDetail, Boolean.TRUE);
     }
 }
