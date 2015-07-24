@@ -62,14 +62,14 @@ intelliJobControllers.controller(
 
 
                 /**
-                 * Get mail by given id.
+                 * Show job content in plain text.
                  */
                 $scope.showJobText = function (jobDetailId) {
                     $location.path("/intellijob/jobdetails/" + jobDetailId + "/detail");
                 };
 
                 /**
-                 * Get mail by given id.
+                 * Delete job detail.
                  */
                 $scope.deleteJobDetail = function (jobDetailId) {
                     JobDetailServices.deleteById(jobDetailId).success(function (response) {

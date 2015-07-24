@@ -85,6 +85,10 @@ public class ResponseJobData extends ResponseData {
         }
     }
 
+    public ResponseJobData(String jobId) {
+        this.jobId = jobId;
+    }
+
     /**
      * Returns job id.
      *

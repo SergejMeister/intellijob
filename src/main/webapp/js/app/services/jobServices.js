@@ -61,5 +61,14 @@ angular.module('intelliJob')
                     return $http.post(extractUrl, emptyPayLoad);
                 }
 
+                /**
+                 * Delete job by id.
+                 *
+                 * @returns {HttpPromise}
+                 */
+                jobServices.deleteById = function (jobId) {
+                    return $http.delete(urlBase + "/" + jobId);
+                };
+
                 return jobServices;
             }]);

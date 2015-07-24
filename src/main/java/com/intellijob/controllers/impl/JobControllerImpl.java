@@ -127,7 +127,7 @@ public class JobControllerImpl implements JobController {
      * {@inheritDoc}
      */
     @Override
-    public Job getByJobId(String jobId) throws BaseException {
+    public Job findById(String jobId) throws BaseException {
         Job job = jobRepository.findOne(jobId);
         if (job == null) {
             throw new DocumentNotFoundException();
@@ -158,5 +158,15 @@ public class JobControllerImpl implements JobController {
         job.setExtracted(extracted);
         jobRepository.save(job);
         return job;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Job deleteById(String jobId) throws BaseException {
+        Job jobToDelete = findById(jobId);
+        jobRepository.delete(jobToDelete);
+        return jobToDelete;
     }
 }

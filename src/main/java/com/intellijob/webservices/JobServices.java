@@ -98,7 +98,7 @@ public class JobServices extends BaseServices {
      */
     @RequestMapping(value = Endpoints.JOBS_BY_ID, method = RequestMethod.GET)
     public @ResponseBody ResponseJobData getJobContent(@PathVariable String jobId) throws Exception {
-        Job job = jobController.getByJobId(jobId);
+        Job job = jobController.findById(jobId);
         return new ResponseJobData(job, Boolean.TRUE);
     }
 
@@ -113,7 +113,7 @@ public class JobServices extends BaseServices {
      */
     @RequestMapping(value = Endpoints.JOBS_BY_ID_EXTRACT, method = RequestMethod.POST)
     public @ResponseBody ResponseJobData extractJobContent(@PathVariable String jobId) throws Exception {
-        Job job = jobController.getByJobId(jobId);
+        Job job = jobController.findById(jobId);
         jobDetailController.extractJobDetailAndSave(job);
         Job updatedJob = jobController.setExtractedFlag(job, Boolean.TRUE);
         return new ResponseJobData(updatedJob);
@@ -199,5 +199,16 @@ public class JobServices extends BaseServices {
 
         List<Job> newJobs = jobController.createJobAndMarkLinkAsDownloaded(jobLinksWithJobContent);
         return new ResponseJobTableData(newJobs, notFoundedJobLinks, Boolean.FALSE);
+    }
+
+    /**
+     * Request to delete a job by specified id.
+     *
+     * @return data transfer object <code>ResponseJobData</code>
+     */
+    @RequestMapping(value = Endpoints.JOBS_BY_ID, method = RequestMethod.DELETE)
+    public @ResponseBody ResponseJobData deleteJobDetail(@PathVariable String jobId) throws Exception {
+        jobController.deleteById(jobId);
+        return new ResponseJobData(jobId);
     }
 }

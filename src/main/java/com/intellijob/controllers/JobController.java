@@ -91,7 +91,7 @@ public interface JobController {
      *
      * @return job.
      */
-    Job getByJobId(String jobId) throws BaseException;
+    Job findById(String jobId) throws BaseException;
 
     /**
      * Sets specified extracted value to the jobs in the list.
@@ -114,4 +114,13 @@ public interface JobController {
      * @return updated job.
      */
     Job setExtractedFlag(Job job, Boolean extracted);
+
+    /**
+     * Delete a job by specified id.
+     *
+     * @param jobId jobId to delete.
+     *
+     * @return deleted job.
+     */
+    Job deleteById(String jobId) throws BaseException;
 }

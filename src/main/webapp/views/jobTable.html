@@ -41,6 +41,7 @@
                             <th>Link</th>
                             <th>Job Content</th>
                             <th>Extracted</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -62,6 +63,11 @@
                                    ng-click="extractDataById(job.jobId)">extract data</a>
                                 <span class="glyphicon glyphicon-ok" aria-hidden="true"
                                       ng-show="job.extracted"></span>
+                            </td>
+                            <td>
+                                <a target="_blank" ng-click="deleteJob(job.jobId)">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                </a>
                             </td>
                         </tr>
                     </tbody>

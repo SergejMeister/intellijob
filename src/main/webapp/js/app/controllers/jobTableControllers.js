@@ -81,6 +81,29 @@ intelliJobControllers.controller(
                     })
                 };
 
+                /**
+                 * Delete job.
+                 */
+                $scope.deleteJob = function (jobId) {
+                    JobServices.deleteById(jobId).success(function (response) {
+                        var deletedJobId = response.jobId;
+                        var index = -1;
+                        var jobArr = eval($scope.jobs);
+                        for (var i = 0; i < jobArr.length; i++) {
+                            if (jobArr[i].jobId === deletedJobId) {
+                                index = i;
+                                break;
+                            }
+                        }
+                        if (index === -1) {
+                            alert("Something gone wrong");
+                        }
+                        $scope.jobs.splice(index, 1);
+                        $rootScope.success = "Deleted successfully! (Id - " + deletedJobId + " )";
+                    }).error(function (error) {
+                        console.log(error);
+                    });
+                };
 
             }
         ])

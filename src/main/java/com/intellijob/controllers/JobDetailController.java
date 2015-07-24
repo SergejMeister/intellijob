@@ -18,6 +18,7 @@ package com.intellijob.controllers;
 
 import com.intellijob.domain.Job;
 import com.intellijob.domain.JobDetail;
+import com.intellijob.exceptions.BaseException;
 import com.intellijob.exceptions.DocumentNotFoundException;
 import org.springframework.data.domain.Page;
 
@@ -98,7 +99,7 @@ public interface JobDetailController {
      *
      * @return founded jobDetail.
      */
-    JobDetail findById(String jobDetailId) throws DocumentNotFoundException;
+    JobDetail findById(String jobDetailId) throws BaseException;
 
     /**
      * Find jobDetail for specified id and convert html content to plain text.
@@ -107,7 +108,7 @@ public interface JobDetailController {
      *
      * @return founded jobDetail with content as text.
      */
-    JobDetail findAndConvertContentToText(String jobDetailId) throws DocumentNotFoundException;
+    JobDetail findAndConvertContentToText(String jobDetailId) throws BaseException;
 
     /**
      * Delete jobDetail for specified id.
@@ -116,5 +117,5 @@ public interface JobDetailController {
      *
      * @return deleted jobDetail.
      */
-    JobDetail deleteById(String jobDetailId) throws DocumentNotFoundException;
+    JobDetail deleteById(String jobDetailId) throws BaseException;
 }

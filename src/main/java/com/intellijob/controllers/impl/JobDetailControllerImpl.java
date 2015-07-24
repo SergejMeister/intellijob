@@ -22,6 +22,7 @@ import civis.com.utils.opennlp.ModelFactory;
 import com.intellijob.controllers.JobDetailController;
 import com.intellijob.domain.Job;
 import com.intellijob.domain.JobDetail;
+import com.intellijob.exceptions.BaseException;
 import com.intellijob.exceptions.DocumentNotFoundException;
 import com.intellijob.models.HtmlLink;
 import com.intellijob.repository.JobDetailRepository;
@@ -137,7 +138,7 @@ public class JobDetailControllerImpl implements JobDetailController {
      * {@inheritDoc}
      */
     @Override
-    public JobDetail findById(String jobDetailId) throws DocumentNotFoundException {
+    public JobDetail findById(String jobDetailId) throws BaseException {
         JobDetail foundedJobDetail = jobDetailRepository.findOne(jobDetailId);
         if(foundedJobDetail == null){
             throw new DocumentNotFoundException();
@@ -150,7 +151,7 @@ public class JobDetailControllerImpl implements JobDetailController {
      * {@inheritDoc}
      */
     @Override
-    public JobDetail findAndConvertContentToText(String jobDetailId) throws DocumentNotFoundException {
+    public JobDetail findAndConvertContentToText(String jobDetailId) throws BaseException {
         JobDetail foundedJobDetail = findById(jobDetailId);
         String htmlContent = foundedJobDetail.getContent();
         String plainText = HtmlParser.parseText(htmlContent);
@@ -162,7 +163,7 @@ public class JobDetailControllerImpl implements JobDetailController {
      * {@inheritDoc}
      */
     @Override
-    public JobDetail deleteById(String jobDetailId) throws DocumentNotFoundException {
+    public JobDetail deleteById(String jobDetailId) throws BaseException {
         JobDetail jobDetailToDelete = findById(jobDetailId);
         jobDetailRepository.delete(jobDetailToDelete);
         return jobDetailToDelete;
