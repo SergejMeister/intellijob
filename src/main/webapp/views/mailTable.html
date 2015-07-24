@@ -41,6 +41,7 @@
                             <th>Sent date</th>
                             <th>Receive date</th>
                             <th>Mail Content</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -54,6 +55,11 @@
                             <td>
                                 <a target="_blank" ng-click="showContext(mail.id)">
                                     <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                                </a>
+                            </td>
+                            <td>
+                                <a target="_blank" ng-click="deleteMail(mail.id)">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                 </a>
                             </td>
                         </tr>

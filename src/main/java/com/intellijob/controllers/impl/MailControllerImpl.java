@@ -18,6 +18,8 @@ package com.intellijob.controllers.impl;
 
 import com.intellijob.controllers.MailController;
 import com.intellijob.domain.Mail;
+import com.intellijob.exceptions.BaseException;
+import com.intellijob.exceptions.DocumentNotFoundException;
 import com.intellijob.mail.models.MailModel;
 import com.intellijob.repository.MailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,8 +62,12 @@ public class MailControllerImpl implements MailController {
      * {@inheritDoc}
      */
     @Override
-    public Mail findMail(String mailId) {
-        return mailRepository.findOne(mailId);
+    public Mail findMail(String mailId) throws BaseException {
+        Mail foundedMail = mailRepository.findOne(mailId);
+        if (foundedMail == null) {
+            throw new DocumentNotFoundException();
+        }
+        return foundedMail;
     }
 
     /**
@@ -79,6 +85,16 @@ public class MailControllerImpl implements MailController {
     public Page<Mail> findPage(int pageIndex, int limit) {
         PageRequest request = new PageRequest(pageIndex, limit, new Sort(Sort.Direction.DESC, "receivedDate"));
         return mailRepository.findAll(request);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Mail deleteById(String mailId) throws BaseException {
+        Mail mailToDelete = findMail(mailId);
+        mailRepository.delete(mailToDelete);
+        return mailToDelete;
     }
 
     private List<Mail> convertMailModelToMail(List<MailModel> mailModels) {

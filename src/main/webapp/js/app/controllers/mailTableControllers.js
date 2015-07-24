@@ -66,4 +66,28 @@ intelliJobControllers.controller(
                     //window.open('/intellijob/mails/' + mailId);
                 };
 
+                /**
+                 * Delete jobLink.
+                 */
+                $scope.deleteMail= function (mailId) {
+                    MailServices.deleteById(mailId).success(function (response) {
+                        var deletedMailId = response.id;
+                        var index = -1;
+                        var mailArr = eval($scope.mails);
+                        for (var i = 0; i < mailArr.length; i++) {
+                            if (mailArr[i].id === deletedMailId) {
+                                index = i;
+                                break;
+                            }
+                        }
+                        if (index === -1) {
+                            alert("Something gone wrong");
+                        }
+                        $scope.mails.splice(index, 1);
+                        $rootScope.success = "Deleted successfully! (Id - " + deletedMailId + " )";
+                    }).error(function (error) {
+                        console.log(error);
+                    });
+                };
+
             }]);

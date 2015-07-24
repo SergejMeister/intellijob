@@ -150,6 +150,18 @@ public class MailServices extends BaseServices {
         return new ResponseMailData(mail);
     }
 
+    /**
+     * Request Get mails.
+     *
+     * @return data transfer object <code>ResponseMailSearchData.java</code>
+     * @throws Exception handle exceptions.
+     */
+    @RequestMapping(value = Endpoints.MAIL_BY_ID, method = RequestMethod.DELETE)
+    public @ResponseBody ResponseMailData deleteMail(@PathVariable String mailId) throws Exception {
+        mailController.deleteById(mailId);
+        return new ResponseMailData(mailId);
+    }
+
     @SuppressWarnings("unused")
     private void logInfoMails(Set<MailModel> mails) {
         LOG.info("Total Messages:- " + mails.size());

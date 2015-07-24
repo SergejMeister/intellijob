@@ -65,6 +65,10 @@ public class ResponseMailData extends ResponseData {
         this.content = mailDomain.getContent();
     }
 
+    public ResponseMailData(String mailId) {
+        this.id = mailId;
+    }
+
     public String getSentAddress() {
         return sentAddress;
     }

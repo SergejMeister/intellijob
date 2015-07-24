@@ -58,6 +58,15 @@ angular.module('intelliJob')
                     return $http.get(urlBase + "/" + mailId);
                 };
 
+                /**
+                 * Delete mail by given id.
+                 *
+                 * @returns {HttpPromise}
+                 */
+                mailServices.deleteById = function (mailId) {
+                    return $http.delete(urlBase + "/" + mailId);
+                };
+
 
                 return mailServices;
             }]);

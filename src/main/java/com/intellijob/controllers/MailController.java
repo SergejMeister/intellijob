@@ -17,6 +17,7 @@
 package com.intellijob.controllers;
 
 import com.intellijob.domain.Mail;
+import com.intellijob.exceptions.BaseException;
 import com.intellijob.mail.models.MailModel;
 import org.springframework.data.domain.Page;
 
@@ -62,7 +63,7 @@ public interface MailController {
      *
      * @return founded mail.
      */
-    Mail findMail(String mailId);
+    Mail findMail(String mailId) throws BaseException;
 
     /**
      * Returns all mails order by received date.
@@ -80,4 +81,14 @@ public interface MailController {
      * @return page of mails.
      */
     Page<Mail> findPage(int pageIndex, int limit);
+
+    /**
+     * Delete mail by specified id.
+     * @param mailId mailId to delete.
+     *
+     * @return deleted Mail.
+     *
+     * @throws BaseException exception, if no mail found for specified id.
+     */
+    Mail deleteById(String mailId) throws BaseException;
 }
