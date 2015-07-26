@@ -16,15 +16,15 @@
 
 package com.intellijob.controllers.impl;
 
-import civis.com.utils.opennlp.ContactPersonFinder;
-import civis.com.utils.opennlp.ContactPersonSpan;
-import civis.com.utils.opennlp.ModelFactory;
+
+import com.civis.utils.opennlp.models.ModelFactory;
+import com.civis.utils.opennlp.models.contactperson.ContactPersonFinder;
+import com.civis.utils.opennlp.models.contactperson.ContactPersonSpan;
 import com.intellijob.controllers.JobDetailController;
 import com.intellijob.domain.Job;
 import com.intellijob.domain.JobDetail;
 import com.intellijob.exceptions.BaseException;
 import com.intellijob.exceptions.DocumentNotFoundException;
-import com.intellijob.models.HtmlLink;
 import com.intellijob.repository.JobDetailRepository;
 import com.intellijob.utility.HtmlParser;
 import org.slf4j.Logger;

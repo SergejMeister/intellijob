@@ -16,7 +16,7 @@
 
 package com.intellijob.domain;
 
-import civis.com.utils.opennlp.ContactPersonSpan;
+import com.civis.utils.opennlp.models.contactperson.ContactPersonSpan;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
