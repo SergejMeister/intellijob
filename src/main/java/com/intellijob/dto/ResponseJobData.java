@@ -59,6 +59,11 @@ public class ResponseJobData extends ResponseData {
      */
     private Boolean extracted;
 
+    /**
+     * JobLink id.
+     */
+    private String jobLinkId;
+
 
     public ResponseJobData() {
     }
@@ -70,6 +75,7 @@ public class ResponseJobData extends ResponseData {
         this.source = job.getJobLink().getValue();
         this.name = job.getJobLink().getValue();
         this.content = job.getContent();
+        this.jobLinkId = job.getJobLink().getId();
         this.extracted = job.isExtracted();
     }
 
@@ -80,6 +86,7 @@ public class ResponseJobData extends ResponseData {
         this.source = job.getJobLink().getMail().getSentAddress();
         this.name = job.getJobLink().getValue();
         this.extracted = job.isExtracted();
+        this.jobLinkId = job.getJobLink().getId();
         if (hasContent) {
             this.content = job.getContent();
         }
@@ -217,5 +224,23 @@ public class ResponseJobData extends ResponseData {
      */
     public void setExtracted(Boolean extracted) {
         this.extracted = extracted;
+    }
+
+    /**
+     * Returns id of jobLinks.
+     *
+     * @return id of JobLinks.
+     */
+    public String getJobLinkId() {
+        return jobLinkId;
+    }
+
+    /**
+     * Sets jobLink id.
+     *
+     * @param jobLinkId jobLink id.
+     */
+    public void setJobLinkId(String jobLinkId) {
+        this.jobLinkId = jobLinkId;
     }
 }
