@@ -19,6 +19,7 @@ package com.intellijob.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Reference;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -45,7 +46,7 @@ public class JobLink {
     /**
      *
      */
-    @Reference
+    @DBRef
     private Mail mail;
 
     /**
@@ -61,6 +62,7 @@ public class JobLink {
      * Example: <a href="testhref">Demolabel</a>.
      * href=testhref.
      */
+    @Indexed(unique = true)
     private String href;
 
     /**

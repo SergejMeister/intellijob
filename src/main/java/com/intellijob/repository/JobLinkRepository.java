@@ -20,6 +20,7 @@ import com.intellijob.domain.JobLink;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Repository interface for domain object <code>JobLink</code>.
@@ -50,4 +51,6 @@ public interface JobLinkRepository extends MongoRepository<JobLink, String> {
      * @return list of founded job links.
      */
     List<JobLink> findByDownloaded(Boolean downloaded);
+
+    List<JobLink> findByHrefIn(Set<String> hrefs);
 }

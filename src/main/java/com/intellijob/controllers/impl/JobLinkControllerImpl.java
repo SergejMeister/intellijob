@@ -34,7 +34,9 @@ import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * This is a implementation of interface <code>JobLinkController</code>.
@@ -43,7 +45,7 @@ import java.util.List;
 public class JobLinkControllerImpl implements JobLinkController {
 
     //TODO: It's not really good and should be improved.
-    //ja.cfm in url means in stepstone mail job agent!
+    //ja.cfm in url means a job mail from stepstone search agent!
     public final static List<String> JOB_LINK_MATCHERS =
             Arrays.asList("stellenanzeige.monster.de", "www.stepstone.de/ja.cfm");
 
@@ -67,21 +69,70 @@ public class JobLinkControllerImpl implements JobLinkController {
      */
     @Override
     public List<JobLink> findInMailsAndSave(List<Mail> mails) {
+        //extract JobLinks from mail
+        List<JobLink> newJobLinks = extractJobLinks(mails);
+
+        //check in db for new href
+        List<JobLink> jobLinksToSave = filterUniqueJobLinks(newJobLinks);
+
+        //save all job links in db.
+        return jobLinkRepository.save(jobLinksToSave);
+    }
+
+    private List<JobLink> filterUniqueJobLinks(List<JobLink> jobLinksToFilter) {
+
+        //filter for current affected jobLinks
+        Set<String> hrefs = new HashSet<>();
+        List<JobLink> listOfUniqueJobLinks = new ArrayList<>();
+        for(JobLink jobLink : jobLinksToFilter) {
+            if(!hrefs.contains(jobLink.getHref())){
+                listOfUniqueJobLinks.add(jobLink);
+                hrefs.add(jobLink.getHref());
+            }
+        }
+
+        //filter for persisted JobLinks.
+        List<JobLink> storedJobLinks = jobLinkRepository.findByHrefIn(hrefs);
+        if(storedJobLinks.isEmpty()){
+            return listOfUniqueJobLinks ;
+        }
+
+        List<JobLink> result = new ArrayList<>();
+        for(JobLink jobLink : listOfUniqueJobLinks) {
+            if (hrefNotExistIn(jobLink.getHref(), storedJobLinks)) {
+                result.add(jobLink);
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * Find all unique links in mail content and convert in to <code>JobLink</code>.
+     */
+    private List<JobLink> extractJobLinks(List<Mail> mails) {
+        List<JobLink> result = new ArrayList<>();
+
         //create html parseLink filter.
         HtmlLinkParseFilter htmlLinkParseFilter = new HtmlLinkParseFilter();
         htmlLinkParseFilter.setNullableText(Boolean.FALSE);
         htmlLinkParseFilter.setLinkMatchers(JOB_LINK_MATCHERS);
-
-        //Find jobLinks in mails content.
-        List<JobLink> jobLinksToSave = new ArrayList<>();
         for (Mail mail : mails) {
             List<HtmlLink> htmlLinks = HtmlParser.parseLink(mail.getContent(), htmlLinkParseFilter);
-            List<JobLink> loopResultOfJobLinks = convertHtmlLinkToJobLink(mail, htmlLinks);
-            jobLinksToSave.addAll(loopResultOfJobLinks);
+            List<JobLink> mailJobLinks = convertHtmlLinkToJobLink(mail, htmlLinks);
+            result.addAll(mailJobLinks);
+        }
+        return result;
+    }
+
+    private boolean hrefNotExistIn(String href, List<JobLink> storedJobLinks) {
+        for(JobLink jobLink : storedJobLinks){
+            if(jobLink.getHref().equals(href)){
+                return Boolean.FALSE;
+            }
         }
 
-        //save all job links in db.
-        return jobLinkRepository.save(jobLinksToSave);
+        return Boolean.TRUE;
     }
 
     /**
