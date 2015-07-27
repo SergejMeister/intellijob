@@ -62,10 +62,9 @@ intelliJobControllers.controller(
                  * download html content of given link.
                  */
                 $scope.downloadById = function (jobLinkId) {
-                    JobLinkServices.downloadById(jobLinkId).success(function (responseJobData) {
-                        //var downloadedJobData = responseJobData;
+                    JobLinkServices.downloadById(jobLinkId).success(function (response) {
                         for (var i = 0; i < $scope.jobLinks.length; i++) {
-                            if ($scope.jobLinks[i].jobLinkId === responseJobData.jobLinkId) {
+                            if ($scope.jobLinks[i].jobLinkId === response.jobLinkId) {
                                 $scope.jobLinks[i].downloaded = true;
                                 $rootScope.success = "Downloaded successfully!";
                                 break;

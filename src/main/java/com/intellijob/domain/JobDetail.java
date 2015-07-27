@@ -56,6 +56,12 @@ public class JobDetail {
     private String link;
 
     /**
+     * Link unique.
+     */
+    @Indexed(unique = true)
+    private String jobId;
+
+    /**
      * Job content.
      */
     private String content;
@@ -84,6 +90,7 @@ public class JobDetail {
     }
 
     public JobDetail(Job job, List<ContactPersonSpan> contactPersonSpans) {
+        this.jobId = job.getId();
         this.name = job.getJobLink().getValue();
         this.receivedDate = job.getReceivedDate();
         this.link = job.getJobLink().getHref();
@@ -240,5 +247,23 @@ public class JobDetail {
      */
     public void setApplicationMail(String applicationMail) {
         this.applicationMail = applicationMail;
+    }
+
+    /**
+     * Returns jobId of this JobDetail.
+     *
+     * @return jobId.
+     */
+    public String getJobId() {
+        return jobId;
+    }
+
+    /**
+     * Sets jobId.
+     *
+     * @param jobId jobId.
+     */
+    public void setJobId(String jobId) {
+        this.jobId = jobId;
     }
 }

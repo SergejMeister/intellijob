@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * Utility class to parseLink html links.
@@ -34,15 +35,12 @@ public abstract class HtmlParser {
 
     private static final Pattern REMOVE_TAGS = Pattern.compile("<.+?>");
     private static final Pattern MAIL_PATTERN = Pattern.compile("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+");
-    //    private static final Pattern WEB_URL_PATTERN = Pattern.compile("http://.*|www\\..*");
-    //private static final Pattern WEB_URL_PATTERN = Pattern.compile("http://.*|www\\..*");
     private static final String RESOURCE_NAME_PATTERN = "[\\w\\d.:#@%/;$()~_?\\+-=&]*";
-    private static final String WWW_PATTERN = "www\\." + RESOURCE_NAME_PATTERN ;
-    private static final String HTTP_PATTERN = "http://" + RESOURCE_NAME_PATTERN ;
-    private static final String HTTPS_PATTERN = "https://" + RESOURCE_NAME_PATTERN ;
-    private static final Pattern WEB_URL_PATTERN = Pattern.compile(HTTP_PATTERN + "|" + HTTPS_PATTERN + "|" + WWW_PATTERN);
-    //private static final Pattern HTTP_URL_PATTERN = Pattern.compile("((https?|ftp|gopher|telnet|file):((//)|(\\\\))+[\\w\\d:#@%/;$()~_?\\+-=\\\\\\.&]*)",Pattern.CASE_INSENSITIVE);
-    //private static final Pattern WEB_URL_PATTERN = Pattern.compile("((www?|ftp|gopher|telnet|file):((//)|(\\\\))+[\\w\\d:#@%/;$()~_?\\+-=\\\\\\.&]*)",Pattern.CASE_INSENSITIVE);
+    private static final String WWW_PATTERN = "www\\." + RESOURCE_NAME_PATTERN;
+    private static final String HTTP_PATTERN = "http://" + RESOURCE_NAME_PATTERN;
+    private static final String HTTPS_PATTERN = "https://" + RESOURCE_NAME_PATTERN;
+    private static final Pattern WEB_URL_PATTERN =
+            Pattern.compile(HTTP_PATTERN + "|" + HTTPS_PATTERN + "|" + WWW_PATTERN);
 
     /**
      * Returns all html links.
@@ -98,14 +96,12 @@ public abstract class HtmlParser {
      *
      * @return text.
      */
-    public static String parseText(final String htmlContent) {
-
-        //List<String> sentences = new ArrayList<>();
+    public static String toPlainText(final String htmlContent) {
         Document doc = Jsoup.parse(htmlContent);
         String plainTextWithHTags = doc.text();
         String plainText = removeTags(plainTextWithHTags);
         String[] words = plainText.split(" ");
-        int wordCountPerSentence = 20;
+        int wordCountPerSentence = 25;
         int wordCount = 0;
         StringBuilder stringBuilder = new StringBuilder();
         for (String word : words) {
@@ -141,25 +137,18 @@ public abstract class HtmlParser {
         return null;
     }
 
-//    public static String parseURL(String plainText) {
-//        Matcher m = WEB_URL_PATTERN.matcher(plainText);
-//        while (m.find()) {
-//            return m.group();
-//        }
-//        return null;
-//    }
 
-    public static List<String> extractUrls(String value){
+    public static List<String> extractUrls(String value) {
         List<String> result = new ArrayList<>();
-        //String urlPattern = "((https?|ftp|gopher|telnet|file):((//)|(\\\\))+[\\w\\d:#@%/;$()~_?\\+-=\\\\\\.&]*)";
-        //String urlPattern = "((https?|ftp|gopher|telnet|file):((//)|(\\\\))+[\\w\\d:#@%/;$()~_?\\+-=\\\\\\.&]*)";
-        //Pattern p = Pattern.compile(urlPattern, Pattern.CASE_INSENSITIVE);
         Matcher m = WEB_URL_PATTERN.matcher(value);
         while (m.find()) {
-            //String foundedUrl = value.substring(m.start(0),m.end(0));
-            result.add(value.substring(m.start(0),m.end(0)));
+            result.add(value.substring(m.start(0), m.end(0)));
         }
-        return result;
+        return removeDuplicated(result);
+    }
+
+    private static List<String> removeDuplicated(List<String> urls) {
+        return urls.parallelStream().distinct().collect(Collectors.toList());
     }
 
 }

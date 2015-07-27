@@ -20,9 +20,11 @@ import com.intellijob.controllers.JobController;
 import com.intellijob.controllers.JobDetailController;
 import com.intellijob.controllers.JobLinkController;
 import com.intellijob.domain.Job;
+import com.intellijob.domain.JobDetail;
 import com.intellijob.domain.JobLink;
 import com.intellijob.dto.ResponseError;
 import com.intellijob.dto.ResponseJobData;
+import com.intellijob.dto.ResponseJobDetailData;
 import com.intellijob.dto.ResponseJobTableData;
 import com.intellijob.exceptions.JobLinkNotFoundException;
 import org.slf4j.Logger;
@@ -30,6 +32,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +43,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -112,11 +116,10 @@ public class JobServices extends BaseServices {
      * @return data transfer object <code>ResponseJobTableData.java</code>
      */
     @RequestMapping(value = Endpoints.JOBS_BY_ID_EXTRACT, method = RequestMethod.POST)
-    public @ResponseBody ResponseJobData extractJobContent(@PathVariable String jobId) throws Exception {
+    public @ResponseBody ResponseJobDetailData extractJobContent(@PathVariable String jobId) throws Exception {
         Job job = jobController.findById(jobId);
-        jobDetailController.extractJobDetailAndSave(job);
-        Job updatedJob = jobController.setExtractedFlag(job, Boolean.TRUE);
-        return new ResponseJobData(updatedJob);
+        JobDetail extractedJobDetails = jobDetailController.extractJobDetailAndSave(job);
+        return new ResponseJobDetailData(extractedJobDetails);
     }
 
 
@@ -136,6 +139,7 @@ public class JobServices extends BaseServices {
 
         //Get-JOB-Content
         RestTemplate restTemplate = new RestTemplate();
+        restTemplate.getMessageConverters().add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
         try {
             String jobContent = restTemplate.getForObject(jobLink.getHref(), String.class);
             //Create new job and mark jobLink as downloaded=true.

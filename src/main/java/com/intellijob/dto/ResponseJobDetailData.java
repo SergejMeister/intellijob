@@ -72,7 +72,7 @@ public class ResponseJobDetailData extends ResponseData {
 
     /**
      * Homepage of organisation.
-     *
+     * <p>
      * More than one, than separate by comma.
      */
     private String homepage;
@@ -98,16 +98,22 @@ public class ResponseJobDetailData extends ResponseData {
      */
     private String content;
 
+    /**
+     * Job Id.
+     */
+    private String jobId;
+
 
     public ResponseJobDetailData() {
     }
 
     public ResponseJobDetailData(String jobDetailId) {
-        this.jobDetailId = jobDetailId ;
+        this.jobDetailId = jobDetailId;
     }
 
     public ResponseJobDetailData(JobDetail jobDetail) {
         this.jobDetailId = jobDetail.getId();
+        this.jobId = jobDetail.getJobId();
         this.name = jobDetail.getName();
         this.receivedDate = jobDetail.getReceivedDate();
         this.link = jobDetail.getLink();
@@ -273,11 +279,47 @@ public class ResponseJobDetailData extends ResponseData {
         this.applicationPeriod = applicationPeriod;
     }
 
+    /**
+     * Returns job content.
+     * <p>
+     * <p>
+     * NOTE: Content can be in html of plain text!
+     * </p>
+     *
+     * @return job content.
+     */
     public String getContent() {
         return content;
     }
 
+    /**
+     * Sets job content.
+     * <p>
+     * NOTE: Content can be in html of plain text!
+     * </p>
+     *
+     *
+     * @param content content.
+     */
     public void setContent(String content) {
         this.content = content;
+    }
+
+    /**
+     * Returns jobId of this details.
+     *
+     * @return job id.
+     */
+    public String getJobId() {
+        return jobId;
+    }
+
+    /**
+     * Sets jobId.
+     *
+     * @param jobId jobId.
+     */
+    public void setJobId(String jobId) {
+        this.jobId = jobId;
     }
 }

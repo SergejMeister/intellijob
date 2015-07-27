@@ -66,7 +66,6 @@ intelliJobControllers.controller(
                  */
                 $scope.showJobContent = function (jobId) {
                     $location.path("/intellijob/jobs/" + jobId + "/content");
-                    //window.open('/intellijob/mails/' + mailId);
                 };
 
                 /**
@@ -74,8 +73,13 @@ intelliJobControllers.controller(
                  */
                 $scope.extractDataById = function (jobId) {
                     JobServices.extractDataById(jobId).success(function (response) {
-                        // not implemented yet.
-                        var extractedJobData = response;
+                        for (var i = 0; i < $scope.jobs.length; i++) {
+                            if ($scope.jobs[i].jobId === response.jobId) {
+                                $scope.jobs[i].extracted = true;
+                                $rootScope.success = "Extracted successfully!";
+                                break;
+                            }
+                        }
                     }).error(function (error) {
                         console.log(error);
                     })

@@ -20,6 +20,7 @@ package com.intellijob.controllers.impl;
 import com.civis.utils.opennlp.models.ModelFactory;
 import com.civis.utils.opennlp.models.contactperson.ContactPersonFinder;
 import com.civis.utils.opennlp.models.contactperson.ContactPersonSpan;
+import com.intellijob.controllers.JobController;
 import com.intellijob.controllers.JobDetailController;
 import com.intellijob.domain.Job;
 import com.intellijob.domain.JobDetail;
@@ -27,8 +28,6 @@ import com.intellijob.exceptions.BaseException;
 import com.intellijob.exceptions.DocumentNotFoundException;
 import com.intellijob.repository.JobDetailRepository;
 import com.intellijob.utility.HtmlParser;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -36,9 +35,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * This is a implementation of interface <code>JobDetailController</code>.
@@ -46,10 +43,11 @@ import java.util.Set;
 @Controller
 public class JobDetailControllerImpl implements JobDetailController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(JobDetailControllerImpl.class);
-
     @Autowired
     private JobDetailRepository jobDetailRepository;
+
+    @Autowired
+    private JobController jobController;
 
     /**
      * {@inheritDoc}
@@ -66,7 +64,7 @@ public class JobDetailControllerImpl implements JobDetailController {
     @Override
     public JobDetail extractJobDetail(Job job) {
         String htmlContent = job.getContent();
-        String plainText = HtmlParser.parseText(htmlContent);
+        String plainText = HtmlParser.toPlainText(htmlContent);
         ContactPersonFinder contactPersonFinder = ModelFactory.getContactPersonFinder();
         List<ContactPersonSpan> contactPersonSpans = contactPersonFinder.find(plainText);
         JobDetail jobDetail = new JobDetail(job, contactPersonSpans);
@@ -88,7 +86,9 @@ public class JobDetailControllerImpl implements JobDetailController {
     @Override
     public JobDetail extractJobDetailAndSave(Job job) {
         JobDetail jobDetail = extractJobDetail(job);
-        return save(jobDetail);
+        JobDetail persistedJobDetail = save(jobDetail);
+        jobController.setExtractedFlag(job, Boolean.TRUE);
+        return persistedJobDetail;
     }
 
     /**
@@ -97,24 +97,14 @@ public class JobDetailControllerImpl implements JobDetailController {
     @Override
     public List<JobDetail> extractJobDetailAndSave(List<Job> jobs) {
         List<JobDetail> toSave = new ArrayList<>();
-        Set<String> links = new HashSet<>();
         for (Job job : jobs) {
-            if (job.getJobLink() != null) {
-                if (links.contains(job.getJobLink().getHref())) {
-                    //TODO remove this check after bug fix with duplicated links!
-                    LOG.warn(
-                            "Duplicated link exception. After bug fix with duplicated links, this exception should be removed!");
-                } else {
-                    JobDetail jobDetail = extractJobDetail(job);
-                    toSave.add(jobDetail);
-                    //TODO remove link unique check - after bug fix with duplicated links!
-                    links.add(job.getJobLink().getHref());
-                }
-            } else {
-                LOG.error("JobLink is null. How can it be true? JobId: " + job.getId());
-            }
+            JobDetail jobDetail = extractJobDetail(job);
+            toSave.add(jobDetail);
         }
-        return jobDetailRepository.save(toSave);
+
+        List<JobDetail> result = jobDetailRepository.save(toSave);
+        jobController.setExtractedFlag(jobs, Boolean.TRUE);
+        return result;
     }
 
     /**
@@ -140,7 +130,7 @@ public class JobDetailControllerImpl implements JobDetailController {
     @Override
     public JobDetail findById(String jobDetailId) throws BaseException {
         JobDetail foundedJobDetail = jobDetailRepository.findOne(jobDetailId);
-        if(foundedJobDetail == null){
+        if (foundedJobDetail == null) {
             throw new DocumentNotFoundException();
         }
 
@@ -154,7 +144,7 @@ public class JobDetailControllerImpl implements JobDetailController {
     public JobDetail findAndConvertContentToText(String jobDetailId) throws BaseException {
         JobDetail foundedJobDetail = findById(jobDetailId);
         String htmlContent = foundedJobDetail.getContent();
-        String plainText = HtmlParser.parseText(htmlContent);
+        String plainText = HtmlParser.toPlainText(htmlContent);
         foundedJobDetail.setContent(plainText);
         return foundedJobDetail;
     }
