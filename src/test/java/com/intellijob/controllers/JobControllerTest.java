@@ -18,7 +18,6 @@ package com.intellijob.controllers;
 
 import com.intellijob.BaseTester;
 import com.intellijob.domain.Job;
-import com.intellijob.domain.JobLink;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,46 +58,5 @@ public class JobControllerTest extends BaseTester {
         List<Job> updatedJobs = jobController.setExtractedFlag(allJobs, Boolean.FALSE);
         Assert.assertEquals(allJobs.size(), updatedJobs.size());
         Assert.assertFalse(updatedJobs.get(0).isExtracted());
-    }
-
-//    @Test
-//    public void cleanUpJobs() {
-//        if (!RUNNING_LIVE) {
-//            Assert.assertTrue("Don't run this test.", Boolean.TRUE);
-//            return;
-//        }
-//
-//        List<Job> allBackupJobs = jobController.findAll();
-//        List<JobLink> jobLinks = jobLinkController.findAll();
-//        List<JobNew> newJobs = new ArrayList<>();
-//        Set<String> hrefs = new HashSet<>();
-//        for (Job jobBackup : allBackupJobs) {
-//            if(jobBackup.getJobLink() != null){
-//                String href = jobBackup.getJobLink().getHref();
-//                if (!hrefs.contains(href)) {
-//                    JobLink jobLink = getIfExist(href,jobLinks);
-//                    if(jobLink != null){
-//                        hrefs.add(href);
-//                        JobNew jobNew = new JobNew();
-//                        jobNew.setContent(jobBackup.getContent());
-//                        jobNew.setExtracted(jobBackup.isExtracted());
-//                        jobNew.setReceivedDate(jobBackup.getReceivedDate());
-//                        jobNew.setJobLink(jobLink);
-//                        newJobs.add(jobNew);
-//                    }
-//                }
-//            }
-//        }
-//
-//        jobRepositoryNew.save(newJobs);
-//    }
-
-    private JobLink getIfExist(String href, List<JobLink> jobLinks) {
-        for (JobLink jobLink : jobLinks) {
-            if (jobLink.getHref().equals(href)) {
-                return jobLink;
-            }
-        }
-        return null;
     }
 }
