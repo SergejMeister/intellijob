@@ -18,6 +18,7 @@ package com.intellijob.repository;
 
 import com.intellijob.domain.JobDetail;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 
 import java.util.List;
 
@@ -41,4 +42,30 @@ public interface JobDetailRepository extends MongoRepository<JobDetail, String> 
      * @return job detail object.
      */
     JobDetail findOne(String id);
+
+    /**
+     * Get count of jobDetail with empty list of contactPersons.
+     * <p>
+     * Native query:
+     * <code>
+     * db.getCollection('jobdetails').find({"contactPersons":{$size:0}}).count();
+     * </code>
+     *
+     * @return count.
+     */
+    @Query(value = "{'contactPersons': {$size: 0}}", count = true)
+    Long countEmptyContactPersons();
+
+    /**
+     * Get count of jobDetail with not empty list of contactPersons.
+     * <p>
+     * Native query:
+     * <code>
+     * db.getCollection('jobdetails').find( {"contactPersons" : {$exists:true}, $where:'this.contactPersons.length>0'} ).count()
+     * </code>
+     *
+     * @return count.
+     */
+    @Query(value = "{'contactPersons': {$exists:true}, $where:'this.contactPersons.length>0'}}", count = true)
+    Long countNotEmptyContactPersons();
 }

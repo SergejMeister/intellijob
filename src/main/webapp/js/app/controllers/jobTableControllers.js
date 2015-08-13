@@ -62,7 +62,7 @@ intelliJobControllers.controller(
 
 
                 /**
-                 * Get mail by given id.
+                 * Show job content by given id.
                  */
                 $scope.showJobContent = function (jobId) {
                     $location.path("/intellijob/jobs/" + jobId + "/content");

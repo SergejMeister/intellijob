@@ -34,7 +34,7 @@ import java.util.List;
 /**
  * JobDetail-Services.
  * <p>
- * Handle all request with endpoints <code>/jobs**</code>
+ * Handle all request with endpoints <code>/jobdetails**</code>
  */
 @RestController
 public class JobDetailServices extends BaseServices {
@@ -81,9 +81,9 @@ public class JobDetailServices extends BaseServices {
     }
 
     /**
-     * Request Get all job detail with paging.
+     * Delete jobDetails by id.
      *
-     * @return data transfer object <code>ResponseJobDetailTableData.java</code>
+     * @return data transfer object <code>ResponseJobDetailData.java</code>
      */
     @RequestMapping(value = Endpoints.JOBDETAILS_BY_ID, method = RequestMethod.DELETE)
     public @ResponseBody ResponseJobDetailData deleteJobDetail(@PathVariable String jobDetailId) throws Exception {

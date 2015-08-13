@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!--
+  ~ Copyright 2015 Sergej Meister
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~  http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~  Unless required by applicable law or agreed to in writing, software
+  ~  distributed under the License is distributed on an "AS IS" BASIS,
+  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<div class="row">
+    <div class="col-md-9">
+        <fieldset>
+            <h2>Current audit data</h2>
+            <div class="form-group">
+                <label class="col-md-20">Count-jobDetails:</label>
+                <label>{{currentAuditData.countJobDetails}}</label>
+            </div>
+            <div class="form-group">
+                <label class="col-md-20">Count-contact found:</label>
+                <label>{{currentAuditData.countNotEmptyContactPersons}}</label>
+            </div>
+            <div class="form-group">
+                <label class="col-md-20">Count-contact empty: </label>
+                <label>{{currentAuditData.countEmptyContactPersons}}</label>
+            </div>
+            <div class="actions">
+                <button class="btn btn-info pull" ng-click="saveCurrentAuditData()">save</button>
+            </div>
+        </fieldset>
+        <fieldset>
+            <h2>History audit data</h2>
+
+            <pagination class="pagination-sm" boundary-links="true" rotate="false"
+                        ng-show="showPagination"
+                        max-size="auditHistoryTableMaxPage"
+                        total-items="auditHistoryTableTotalItems"
+                        items-per-page="auditHistoryTableNumPerPage"
+                        ng-model="auditHistoryTableCurrentPage">
+            </pagination>
+            <table class="table table-condensed table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Count-jobDetails</th>
+                        <th>Count-contact found</th>
+                        <th>Count-contact empty</th>
+                        <th>created</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="auditData in historyAuditData">
+                        <td>{{$index}}</td>
+                        <td>{{auditData.countJobDetails}}</td>
+                        <td>{{auditData.countNotEmptyContactPersons}}</td>
+                        <td>{{auditData.countEmptyContactPersons}}</td>
+                        <td><p ng-bind="auditData.createdDate | date:'dd.MM.yyyy HH:mm'"></td>
+                        <td>
+                            <a target="_blank" ng-click="showAuditHistory(auditData.id)">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                            </a>
+                        </td>
+                        <td>
+                            <a target="_blank" ng-click="deleteAuditHistory(auditData.id)">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <pagination class="pagination-sm" boundary-links="true" rotate="false"
+                        ng-show="showPagination"
+                        max-size="auditHistoryTableMaxPage"
+                        total-items="auditHistoryTableTotalItems"
+                        items-per-page="auditHistoryTableNumPerPage"
+                        ng-model="auditHistoryTableCurrentPage">
+            </pagination>
+
+        </fieldset>
+    </div>
+</div>

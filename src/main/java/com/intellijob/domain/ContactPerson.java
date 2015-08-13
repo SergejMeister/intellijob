@@ -21,7 +21,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.util.StringUtils;
 
 /**
- * Model ContactPerson.
+ * Document ContactPerson.
  */
 @Document(collection = "contactPerson")
 public class ContactPerson {
