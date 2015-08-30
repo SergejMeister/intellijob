@@ -17,6 +17,8 @@
 package com.intellijob.controllers.impl;
 
 
+import com.civis.utils.html.parser.HtmlParseFilter;
+import com.civis.utils.html.parser.HtmlParser;
 import com.civis.utils.opennlp.models.ModelFactory;
 import com.civis.utils.opennlp.models.contactperson.ContactPersonFinder;
 import com.civis.utils.opennlp.models.contactperson.ContactPersonSpan;
@@ -27,7 +29,6 @@ import com.intellijob.domain.JobDetail;
 import com.intellijob.exceptions.BaseException;
 import com.intellijob.exceptions.DocumentNotFoundException;
 import com.intellijob.repository.JobDetailRepository;
-import com.intellijob.utility.HtmlParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -35,6 +36,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -64,17 +66,23 @@ public class JobDetailControllerImpl implements JobDetailController {
     @Override
     public JobDetail extractJobDetail(Job job) {
         String htmlContent = job.getContent();
-        String plainText = HtmlParser.toPlainText(htmlContent);
+        String plainText = new HtmlParser(htmlContent).toPlainText().getContent();
         ContactPersonFinder contactPersonFinder = ModelFactory.getContactPersonFinder();
         List<ContactPersonSpan> contactPersonSpans = contactPersonFinder.find(plainText);
         JobDetail jobDetail = new JobDetail(job, contactPersonSpans);
 
+
         // find mails
-        String mails = HtmlParser.parseEmail(plainText);
+        String mails = new HtmlParser(htmlContent).parse().getMail();
         jobDetail.setApplicationMail(mails);
 
         // find home pages
-        List<String> foundedHomepages = HtmlParser.extractUrls(plainText);
+        HtmlParseFilter htmlParseFilter = new HtmlParseFilter();
+        htmlParseFilter.setNullableText(Boolean.FALSE);
+        htmlParseFilter.setIgnore(
+                Arrays.asList("www.tecoloco.com", "www.irishjobs.ie", "www.estascontratado.com", "www.myjob.mu",
+                        "www.caribbeanjobs.com", "www.nijobs.com", "www.jobs.lu", "www.pnet.co.za"));
+        List<String> foundedHomepages = new HtmlParser(htmlContent, htmlParseFilter).toPlainText().parse().getUrls();
         jobDetail.setHomepages(foundedHomepages);
 
         return jobDetail;
@@ -144,7 +152,7 @@ public class JobDetailControllerImpl implements JobDetailController {
     public JobDetail findAndConvertContentToText(String jobDetailId) throws BaseException {
         JobDetail foundedJobDetail = findById(jobDetailId);
         String htmlContent = foundedJobDetail.getContent();
-        String plainText = HtmlParser.toPlainText(htmlContent);
+        String plainText = new HtmlParser(htmlContent).toPlainText().getContent();
         foundedJobDetail.setContent(plainText);
         return foundedJobDetail;
     }

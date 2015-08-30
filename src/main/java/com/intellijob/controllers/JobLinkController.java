@@ -16,11 +16,10 @@
 
 package com.intellijob.controllers;
 
+import com.civis.utils.html.models.HtmlLink;
 import com.intellijob.domain.JobLink;
 import com.intellijob.domain.Mail;
 import com.intellijob.exceptions.BaseException;
-import com.intellijob.exceptions.DocumentNotFoundException;
-import com.intellijob.models.HtmlLink;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -134,6 +133,7 @@ public interface JobLinkController {
      * Delete a jobLink by specified id.
      *
      * @param jobLinkId id of JobLink to delete.
+     *
      * @return deleted JobLink
      * @throws BaseException exception, if no jobLink found for specified id.
      */

@@ -16,16 +16,16 @@
 
 package com.intellijob.controllers.impl;
 
+import com.civis.utils.html.models.HtmlLink;
+import com.civis.utils.html.parser.HtmlParseFilter;
+import com.civis.utils.html.parser.HtmlParser;
 import com.intellijob.controllers.JobLinkController;
 import com.intellijob.controllers.MailController;
 import com.intellijob.domain.JobLink;
 import com.intellijob.domain.Mail;
 import com.intellijob.exceptions.BaseException;
 import com.intellijob.exceptions.DocumentNotFoundException;
-import com.intellijob.models.HtmlLink;
 import com.intellijob.repository.JobLinkRepository;
-import com.intellijob.utility.HtmlLinkParseFilter;
-import com.intellijob.utility.HtmlParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -114,11 +114,11 @@ public class JobLinkControllerImpl implements JobLinkController {
         List<JobLink> result = new ArrayList<>();
 
         //create html parseLink filter.
-        HtmlLinkParseFilter htmlLinkParseFilter = new HtmlLinkParseFilter();
-        htmlLinkParseFilter.setNullableText(Boolean.FALSE);
-        htmlLinkParseFilter.setLinkMatchers(JOB_LINK_MATCHERS);
+        HtmlParseFilter htmlParseFilter = new HtmlParseFilter();
+        htmlParseFilter.setNullableText(Boolean.FALSE);
+        htmlParseFilter.setLinkMatcherList(JOB_LINK_MATCHERS);
         for (Mail mail : mails) {
-            List<HtmlLink> htmlLinks = HtmlParser.parseLink(mail.getContent(), htmlLinkParseFilter);
+            List<HtmlLink> htmlLinks = new HtmlParser(mail.getContent(), htmlParseFilter).parse().getLinks();
             List<JobLink> mailJobLinks = convertHtmlLinkToJobLink(mail, htmlLinks);
             result.addAll(mailJobLinks);
         }
