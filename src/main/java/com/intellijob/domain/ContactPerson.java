@@ -16,7 +16,6 @@
 
 package com.intellijob.domain;
 
-import com.civis.utils.opennlp.models.contactperson.ContactPersonSpan;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.util.StringUtils;
 
@@ -55,12 +54,6 @@ public class ContactPerson {
         this.firstName = firstName;
         this.secondName = secondName;
         this.sex = sex;
-    }
-
-    public ContactPerson(ContactPersonSpan contactPersonSpan) {
-        this.firstName = contactPersonSpan.getFirstName();
-        this.secondName = contactPersonSpan.getSecondName();
-        this.sex = contactPersonSpan.getSex();
     }
 
     /**

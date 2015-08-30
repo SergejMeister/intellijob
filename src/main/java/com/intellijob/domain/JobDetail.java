@@ -16,12 +16,11 @@
 
 package com.intellijob.domain;
 
-import com.civis.utils.opennlp.models.contactperson.ContactPersonSpan;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -71,6 +70,8 @@ public class JobDetail {
      */
     private List<ContactPerson> contactPersons;
 
+    private List<Address> addresses;
+
     /**
      * Mail for sending application data.
      */
@@ -86,20 +87,8 @@ public class JobDetail {
      * Default constructor to init list of contact persons.
      */
     public JobDetail() {
-        this.contactPersons = new ArrayList<>();
-    }
-
-    public JobDetail(Job job, List<ContactPersonSpan> contactPersonSpans) {
-        this.jobId = job.getId();
-        this.name = job.getJobLink().getValue();
-        this.receivedDate = job.getReceivedDate();
-        this.link = job.getJobLink().getHref();
-        this.content = job.getContent();
-        this.contactPersons = new ArrayList<>();
-        for (ContactPersonSpan contactPersonSpan : contactPersonSpans) {
-            ContactPerson contactPerson = new ContactPerson(contactPersonSpan);
-            this.contactPersons.add(contactPerson);
-        }
+        setContactPersons(Collections.emptyList());
+        setAddresses(Collections.emptyList());
     }
 
     /**
@@ -207,7 +196,7 @@ public class JobDetail {
     /**
      * Sets list of contact persons.
      *
-     * @param contactPersons
+     * @param contactPersons contact persons data.
      */
     public void setContactPersons(List<ContactPerson> contactPersons) {
         this.contactPersons = contactPersons;
@@ -265,5 +254,13 @@ public class JobDetail {
      */
     public void setJobId(String jobId) {
         this.jobId = jobId;
+    }
+
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
     }
 }

@@ -48,21 +48,6 @@ public class AuditModel {
     private Page<AuditData> pageHistories;
 
     /**
-     * Default constructor.
-     */
-    public AuditModel() {
-    }
-
-    /**
-     * Init list and page of histories with list param.
-     *
-     * @param histories list of histories.
-     */
-    public AuditModel(List<AuditData> histories) {
-        this.listHistories = histories;
-    }
-
-    /**
      * Init list and page histories with page param.
      *
      * @param histories pages of histories.
@@ -110,7 +95,7 @@ public class AuditModel {
             return pageHistories.getContent();
         }
 
-        return Collections.EMPTY_LIST;
+        return Collections.emptyList();
     }
 
 
@@ -132,6 +117,6 @@ public class AuditModel {
             return this.pageHistories;
         }
 
-        return new PageImpl<>((Collections.EMPTY_LIST));
+        return new PageImpl<>((Collections.emptyList()));
     }
 }

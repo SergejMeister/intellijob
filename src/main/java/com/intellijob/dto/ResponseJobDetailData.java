@@ -16,6 +16,7 @@
 
 package com.intellijob.dto;
 
+import com.intellijob.domain.Address;
 import com.intellijob.domain.ContactPerson;
 import com.intellijob.domain.JobDetail;
 import org.springframework.util.StringUtils;
@@ -62,6 +63,9 @@ public class ResponseJobDetailData extends ResponseData {
 
     /**
      * Address of organisation.
+     * <p>
+     * If more than one, than separate by comma ( , ) .
+     * Example: Reamurstr. 13 12207 Berlin, Brandenburger Tor 1 12345 Berlin.
      */
     private String address;
 
@@ -103,22 +107,19 @@ public class ResponseJobDetailData extends ResponseData {
      */
     private String jobId;
 
-
-    public ResponseJobDetailData() {
-    }
-
     public ResponseJobDetailData(String jobDetailId) {
-        this.jobDetailId = jobDetailId;
+        setJobDetailId(jobDetailId);
     }
 
     public ResponseJobDetailData(JobDetail jobDetail) {
-        this.jobDetailId = jobDetail.getId();
-        this.jobId = jobDetail.getJobId();
-        this.name = jobDetail.getName();
-        this.receivedDate = jobDetail.getReceivedDate();
-        this.link = jobDetail.getLink();
-        this.applicationMail = jobDetail.getApplicationMail();
+        setJobDetailId(jobDetail.getId());
+        setJobId(jobDetail.getJobId());
+        setName(jobDetail.getName());
+        setReceivedDate(jobDetail.getReceivedDate());
+        setLink(jobDetail.getLink());
+        setApplicationMail(jobDetail.getApplicationMail());
         this.contactPerson = initContactPersons(jobDetail.getContactPersons());
+        this.address = initAddresses(jobDetail.getAddresses());
         this.homepage = initHomePage(jobDetail.getHomepages());
     }
 
@@ -130,27 +131,42 @@ public class ResponseJobDetailData extends ResponseData {
     }
 
     private String initContactPersons(List<ContactPerson> contactPersons) {
-        StringBuilder contactPersonBuilder = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         for (ContactPerson contactPerson : contactPersons) {
             if (StringUtils.hasLength(contactPerson.getSex())) {
                 if (ContactPerson.SEX_PREFIX_MAN.equals(contactPerson.getSex())) {
-                    contactPersonBuilder.append("Herr ");
+                    sb.append("Herr ");
                 } else if (ContactPerson.SEX_PREFIX_WOMEN.equals(contactPerson.getSex())) {
-                    contactPersonBuilder.append("Frau ");
+                    sb.append("Frau ");
                 } else {
                     //don't append for unknown :)
                 }
             }
-            contactPersonBuilder.append(contactPerson.getFirstAndSecondName());
-            contactPersonBuilder.append(",");
-            contactPersonBuilder.append(BLANK_CHAR);
+            sb.append(contactPerson.getFirstAndSecondName());
+            sb.append(",");
+            sb.append(BLANK_CHAR);
         }
         //remove last comma and blank.
-        if (contactPersonBuilder.length() > 0) {
-            contactPersonBuilder.setLength(contactPersonBuilder.length() - 2);
+        if (sb.length() > 1) {
+            sb.setLength(sb.length() - 2);
         }
 
-        return contactPersonBuilder.toString();
+        return sb.toString();
+    }
+
+    private String initAddresses(List<Address> addresses) {
+        StringBuilder sb = new StringBuilder();
+        for (Address address : addresses) {
+            sb.append(address.getAll());
+            sb.append(",");
+            sb.append(BLANK_CHAR);
+        }
+        //remove last comma and blank.
+        if (sb.length() > 1) {
+            sb.setLength(sb.length() - 2);
+        }
+
+        return sb.toString();
     }
 
     private String initHomePage(List<String> homepages) {
@@ -297,7 +313,6 @@ public class ResponseJobDetailData extends ResponseData {
      * <p>
      * NOTE: Content can be in html of plain text!
      * </p>
-     *
      *
      * @param content content.
      */

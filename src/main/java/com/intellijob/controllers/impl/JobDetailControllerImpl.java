@@ -20,12 +20,13 @@ package com.intellijob.controllers.impl;
 import com.civis.utils.html.parser.HtmlParseFilter;
 import com.civis.utils.html.parser.HtmlParser;
 import com.civis.utils.opennlp.models.ModelFactory;
-import com.civis.utils.opennlp.models.contactperson.ContactPersonFinder;
+import com.civis.utils.opennlp.models.address.AddressSpan;
 import com.civis.utils.opennlp.models.contactperson.ContactPersonSpan;
 import com.intellijob.controllers.JobController;
 import com.intellijob.controllers.JobDetailController;
 import com.intellijob.domain.Job;
 import com.intellijob.domain.JobDetail;
+import com.intellijob.domain.builder.JobDetailBuilder;
 import com.intellijob.exceptions.BaseException;
 import com.intellijob.exceptions.DocumentNotFoundException;
 import com.intellijob.repository.JobDetailRepository;
@@ -67,14 +68,15 @@ public class JobDetailControllerImpl implements JobDetailController {
     public JobDetail extractJobDetail(Job job) {
         String htmlContent = job.getContent();
         String plainText = new HtmlParser(htmlContent).toPlainText().getContent();
-        ContactPersonFinder contactPersonFinder = ModelFactory.getContactPersonFinder();
-        List<ContactPersonSpan> contactPersonSpans = contactPersonFinder.find(plainText);
-        JobDetail jobDetail = new JobDetail(job, contactPersonSpans);
 
+        //Find contact persons in text
+        List<ContactPersonSpan> contactPersonSpans = ModelFactory.getContactPersonFinder().find(plainText);
 
-        // find mails
+        //find addresses in text
+        List<AddressSpan> addressSpans = ModelFactory.getAddressFinder().find(plainText);
+
+        // find mails in text
         String mails = new HtmlParser(htmlContent).parse().getMail();
-        jobDetail.setApplicationMail(mails);
 
         // find home pages
         HtmlParseFilter htmlParseFilter = new HtmlParseFilter();
@@ -83,7 +85,10 @@ public class JobDetailControllerImpl implements JobDetailController {
                 Arrays.asList("www.tecoloco.com", "www.irishjobs.ie", "www.estascontratado.com", "www.myjob.mu",
                         "www.caribbeanjobs.com", "www.nijobs.com", "www.jobs.lu", "www.pnet.co.za"));
         List<String> foundedHomepages = new HtmlParser(htmlContent, htmlParseFilter).toPlainText().parse().getUrls();
-        jobDetail.setHomepages(foundedHomepages);
+
+
+        JobDetail jobDetail = new JobDetailBuilder(job).setApplicationMail(mails).setHomepages(
+                foundedHomepages).addContactPersons(contactPersonSpans).addAddresses(addressSpans).build();
 
         return jobDetail;
     }
