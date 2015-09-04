@@ -41,6 +41,16 @@ public class RequestAuditData extends RequestData {
      */
     private long countNotEmptyContactPersons;
 
+    /**
+     * Contact details with empty list of address.
+     */
+    private long countEmptyAddress;
+
+    /**
+     * Contact details with not empty list of address.
+     */
+    private long countNotEmptyAddress;
+
     private Date createdDate;
 
 
@@ -107,5 +117,21 @@ public class RequestAuditData extends RequestData {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public long getCountEmptyAddress() {
+        return countEmptyAddress;
+    }
+
+    public void setCountEmptyAddress(long countEmptyAddress) {
+        this.countEmptyAddress = countEmptyAddress;
+    }
+
+    public long getCountNotEmptyAddress() {
+        return countNotEmptyAddress;
+    }
+
+    public void setCountNotEmptyAddress(long countNotEmptyAddress) {
+        this.countNotEmptyAddress = countNotEmptyAddress;
     }
 }

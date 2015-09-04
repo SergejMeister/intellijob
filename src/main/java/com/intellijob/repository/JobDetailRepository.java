@@ -68,4 +68,17 @@ public interface JobDetailRepository extends MongoRepository<JobDetail, String> 
      */
     @Query(value = "{'contactPersons': {$exists:true}, $where:'this.contactPersons.length>0'}}", count = true)
     Long countNotEmptyContactPersons();
+
+    /**
+     * Get count of jobDetail with empty list of addresses.
+     * <p>
+     * Native query:
+     * <code>
+     * db.getCollection('jobdetails').find({"addresses":{$size:0}}).count();
+     * </code>
+     *
+     * @return count.
+     */
+    @Query(value = "{'addresses': {$size: 0}}", count = true)
+    Long countEmptyAddress();
 }

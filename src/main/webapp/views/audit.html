@@ -31,6 +31,15 @@
                 <label class="col-md-20">Count-contact empty: </label>
                 <label>{{currentAuditData.countEmptyContactPersons}}</label>
             </div>
+            <div class="form-group">
+                <label class="col-md-20">Count-address found:</label>
+                <label>{{currentAuditData.countNotEmptyAddress}}</label>
+            </div>
+            <div class="form-group">
+                <label class="col-md-20">Count-address empty:</label>
+                <label>{{currentAuditData.countEmptyAddress}}</label>
+            </div>
+
             <div class="actions">
                 <button class="btn btn-info pull" ng-click="saveCurrentAuditData()">save</button>
             </div>
@@ -52,6 +61,8 @@
                         <th>Count-jobDetails</th>
                         <th>Count-contact found</th>
                         <th>Count-contact empty</th>
+                        <th>Count-address found</th>
+                        <th>Count-address empty</th>
                         <th>created</th>
                         <th></th>
                         <th></th>
@@ -63,6 +74,8 @@
                         <td>{{auditData.countJobDetails}}</td>
                         <td>{{auditData.countNotEmptyContactPersons}}</td>
                         <td>{{auditData.countEmptyContactPersons}}</td>
+                        <td>{{auditData.countNotEmptyAddress}}</td>
+                        <td>{{auditData.countEmptyAddress}}</td>
                         <td><p ng-bind="auditData.createdDate | date:'dd.MM.yyyy HH:mm'"></td>
                         <td>
                             <a target="_blank" ng-click="showAuditHistory(auditData.id)">

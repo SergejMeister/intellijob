@@ -63,13 +63,21 @@ public class AuditControllerImpl implements AuditController {
     @Override
     public AuditData createCurrentAuditData() {
         long countJobDetails = jobDetailRepository.count();
+
+        //contact persons
         long countEmptyContactPersons = jobDetailRepository.countEmptyContactPersons();
         long countNotEmptyContactPersons = countJobDetails - countEmptyContactPersons;
+
+        //address
+        long countEmptyAddress = jobDetailRepository.countEmptyAddress();
+        long countNotEmptyAddress = countJobDetails - countEmptyAddress;
 
         AuditData currentAuditData = new AuditData();
         currentAuditData.setCountJobDetails(countJobDetails);
         currentAuditData.setCountEmptyContactPersons(countEmptyContactPersons);
         currentAuditData.setCountNotEmptyContactPersons(countNotEmptyContactPersons);
+        currentAuditData.setCountEmptyAddress(countEmptyAddress);
+        currentAuditData.setCountNotEmptyAddress(countNotEmptyAddress);
 
         return currentAuditData;
     }

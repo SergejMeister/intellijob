@@ -66,6 +66,8 @@ public class AuditServices extends BaseServices {
         currentAuditDataToSave.setCountJobDetails(requestAuditData.getCountJobDetails());
         currentAuditDataToSave.setCountNotEmptyContactPersons(requestAuditData.getCountNotEmptyContactPersons());
         currentAuditDataToSave.setCountEmptyContactPersons(requestAuditData.getCountEmptyContactPersons());
+        currentAuditDataToSave.setCountNotEmptyAddress(requestAuditData.getCountNotEmptyAddress());
+        currentAuditDataToSave.setCountEmptyAddress(requestAuditData.getCountEmptyAddress());
 
         AuditData newHistoryAuditData = auditController.saveCurrentAuditData(currentAuditDataToSave);
         return new ResponseAuditData(newHistoryAuditData);

@@ -43,6 +43,16 @@ public class ResponseAuditData extends ResponseData {
      */
     private long countNotEmptyContactPersons;
 
+    /**
+     * Contact details with empty list of address.
+     */
+    private long countEmptyAddress;
+
+    /**
+     * Contact details with not empty list of address.
+     */
+    private long countNotEmptyAddress;
+
     private Date createdDate;
 
 
@@ -53,18 +63,22 @@ public class ResponseAuditData extends ResponseData {
      * This constructor initialize ResponseAuditData parameter with currentAuditData <code>auditModel.getCurrentData()</code>.
      */
     public ResponseAuditData(AuditModel auditModel) {
-        this.id = auditModel.getCurrentData().getId();
-        this.countJobDetails = auditModel.getCurrentData().getCountJobDetails();
-        this.countEmptyContactPersons = auditModel.getCurrentData().getCountEmptyContactPersons();
-        this.countNotEmptyContactPersons = auditModel.getCurrentData().getCountNotEmptyContactPersons();
+        setId(auditModel.getCurrentData().getId());
+        setCountJobDetails(auditModel.getCurrentData().getCountJobDetails());
+        setCountNotEmptyContactPersons(auditModel.getCurrentData().getCountNotEmptyContactPersons());
+        setCountEmptyContactPersons(auditModel.getCurrentData().getCountEmptyContactPersons());
+        setCountEmptyAddress(auditModel.getCurrentData().getCountEmptyAddress());
+        setCountNotEmptyAddress(auditModel.getCurrentData().getCountNotEmptyAddress());
     }
 
     public ResponseAuditData(AuditData auditData) {
-        this.id = auditData.getId();
-        this.countJobDetails = auditData.getCountJobDetails();
-        this.countNotEmptyContactPersons = auditData.getCountNotEmptyContactPersons();
-        this.countEmptyContactPersons = auditData.getCountEmptyContactPersons();
-        this.createdDate = auditData.getCreatedDate();
+        setId(auditData.getId());
+        setCountJobDetails(auditData.getCountJobDetails());
+        setCountNotEmptyContactPersons(auditData.getCountNotEmptyContactPersons());
+        setCountEmptyContactPersons(auditData.getCountEmptyContactPersons());
+        setCountEmptyAddress(auditData.getCountEmptyAddress());
+        setCountNotEmptyAddress(auditData.getCountNotEmptyAddress());
+        setCreatedDate(auditData.getCreatedDate());
     }
 
     public ResponseAuditData(String auditId) {
@@ -139,5 +153,21 @@ public class ResponseAuditData extends ResponseData {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public long getCountEmptyAddress() {
+        return countEmptyAddress;
+    }
+
+    public void setCountEmptyAddress(long countEmptyAddress) {
+        this.countEmptyAddress = countEmptyAddress;
+    }
+
+    public long getCountNotEmptyAddress() {
+        return countNotEmptyAddress;
+    }
+
+    public void setCountNotEmptyAddress(long countNotEmptyAddress) {
+        this.countNotEmptyAddress = countNotEmptyAddress;
     }
 }

@@ -50,6 +50,16 @@ public class AuditData {
     private long countNotEmptyContactPersons;
 
     /**
+     * Contact details with empty list of address.
+     */
+    private long countEmptyAddress;
+
+    /**
+     * Contact details with not empty list of address.
+     */
+    private long countNotEmptyAddress;
+
+    /**
      * Received date.
      */
     @Indexed
@@ -148,5 +158,27 @@ public class AuditData {
      */
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
+    }
+
+    /**
+     * Count of JobDetails, witch doesn't have an address.
+     */
+    public long getCountEmptyAddress() {
+        return countEmptyAddress;
+    }
+
+    public void setCountEmptyAddress(long countEmptyAddress) {
+        this.countEmptyAddress = countEmptyAddress;
+    }
+
+    /**
+     * Count of JobDetails with address.
+     */
+    public long getCountNotEmptyAddress() {
+        return countNotEmptyAddress;
+    }
+
+    public void setCountNotEmptyAddress(long countNotEmptyAddress) {
+        this.countNotEmptyAddress = countNotEmptyAddress;
     }
 }
