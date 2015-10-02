@@ -22,7 +22,7 @@
 
     <groupId>com.civis</groupId>
     <artifactId>intellijob</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <licenses>
         <license>
@@ -49,6 +49,7 @@
         <log.path>target/log</log.path>
         <start-class>java.com.intellijob.ApplicationConfig</start-class>
         <version.spring.mongodb>1.7.0.RELEASE</version.spring.mongodb>
+        <version.civis>1.0.0</version.civis>
     </properties>
 
     <parent>
@@ -155,7 +156,7 @@
         <dependency>
             <groupId>com.civis.civis-tools</groupId>
             <artifactId>civis-opennlp</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${version.civis}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>
@@ -171,7 +172,7 @@
         <dependency>
             <groupId>com.civis.civis-tools</groupId>
             <artifactId>civis-util</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${version.civis}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>
