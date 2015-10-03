@@ -47,7 +47,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <log.path>target/log</log.path>
-        <start-class>java.com.intellijob.ApplicationConfig</start-class>
+        <start-class>com.intellijob.ApplicationConfig</start-class>
         <version.spring.mongodb>1.7.0.RELEASE</version.spring.mongodb>
         <version.civis>1.0.0</version.civis>
     </properties>
