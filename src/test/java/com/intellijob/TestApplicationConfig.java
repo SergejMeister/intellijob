@@ -44,7 +44,7 @@ public class TestApplicationConfig {
     /**
      * Constants.
      */
-    public static final Boolean LIVE_MONGODB = Boolean.TRUE;
+    public static final Boolean LIVE_MONGODB = Boolean.FALSE;
     private static final Logger LOG = Logger.getLogger(TestApplicationConfig.class);
     private static final String MONGO_DB_NAME = "db_intellijob";
     private static final String MONGO_LOCALHOST = "localhost";
@@ -60,11 +60,11 @@ public class TestApplicationConfig {
 
     @Bean(destroyMethod = "close")
     public Mongo mongo() throws IOException {
-        if(LIVE_MONGODB){
+        if (LIVE_MONGODB) {
             properties.setDatabase(MONGO_DB_NAME);
             properties.setHost(MONGO_LOCALHOST);
             properties.setPort(MONGO_DB_PORT);
-        }else{
+        } else {
             Net net = mongod().getConfig().net();
             properties.setHost(net.getServerAddress().getHostName());
             properties.setPort(net.getPort());
