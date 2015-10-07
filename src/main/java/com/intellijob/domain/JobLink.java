@@ -17,7 +17,6 @@
 package com.intellijob.domain;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Reference;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -76,14 +75,14 @@ public class JobLink {
     /**
      * Flag, if this job is downloaded.
      */
-    private Boolean downloaded;
+    private boolean downloaded;
 
     /**
      * Is job content downloaded?
      *
      * @return download flag.
      */
-    public Boolean isDownloaded() {
+    public boolean isDownloaded() {
         return downloaded;
     }
 
@@ -92,7 +91,7 @@ public class JobLink {
      *
      * @param downloaded download flag.
      */
-    public void setDownloaded(Boolean downloaded) {
+    public void setDownloaded(boolean downloaded) {
         this.downloaded = downloaded;
     }
 

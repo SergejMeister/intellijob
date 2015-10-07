@@ -17,7 +17,6 @@
 package com.intellijob.controllers;
 
 import com.intellijob.BaseTester;
-import com.intellijob.domain.Job;
 import com.intellijob.domain.JobDetail;
 import org.junit.Assert;
 import org.junit.Test;
@@ -43,9 +42,7 @@ public class JobDetailControllerTest extends BaseTester {
             return;
         }
 
-        List<Job> allJobs = jobController.findAll();
-        Assert.assertTrue("Should be not null or empty", allJobs.size() > 0);
-        List<JobDetail> jobDetails = jobDetailController.extractJobDetailAndSave(allJobs);
+        List<JobDetail> jobDetails = jobDetailController.extractJobs();
         Assert.assertFalse(jobDetails.isEmpty());
         Assert.assertTrue(jobDetails.size() > 1);
     }

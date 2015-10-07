@@ -30,7 +30,11 @@ import com.intellijob.domain.builder.JobDetailBuilder;
 import com.intellijob.exceptions.BaseException;
 import com.intellijob.exceptions.DocumentNotFoundException;
 import com.intellijob.repository.JobDetailRepository;
+import com.intellijob.repository.JobRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -46,8 +50,13 @@ import java.util.List;
 @Controller
 public class JobDetailControllerImpl implements JobDetailController {
 
+    private static final Logger LOG = LoggerFactory.getLogger(JobDetailControllerImpl.class);
+
     @Autowired
     private JobDetailRepository jobDetailRepository;
+
+    @Autowired
+    private JobRepository jobRepository;
 
     @Autowired
     private JobController jobController;
@@ -109,15 +118,27 @@ public class JobDetailControllerImpl implements JobDetailController {
      */
     @Override
     public List<JobDetail> extractJobDetailAndSave(List<Job> jobs) {
-        List<JobDetail> toSave = new ArrayList<>();
+        List<JobDetail> result = new ArrayList<>();
         for (Job job : jobs) {
             JobDetail jobDetail = extractJobDetail(job);
-            toSave.add(jobDetail);
+            try {
+                jobDetailRepository.save(jobDetail);
+                result.add(jobDetail);
+            } catch (DuplicateKeyException dke) {
+                LOG.debug("Duplicated Link Exception. Should not be happen! Link: {}", dke.getMessage());
+            }
         }
-
-        List<JobDetail> result = jobDetailRepository.save(toSave);
         jobController.setExtractedFlag(jobs, Boolean.TRUE);
         return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<JobDetail> extractJobs() {
+        List<Job> jobsToExtract = jobRepository.findByExtracted(Boolean.FALSE);
+        return extractJobDetailAndSave(jobsToExtract);
     }
 
     /**

@@ -17,7 +17,7 @@
 package com.intellijob.webservices;
 
 
-import com.intellijob.dto.ResponseJobTableData;
+import com.intellijob.dto.DownloadResultData;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.http.MediaType;
@@ -46,9 +46,8 @@ public class JobServicesTest extends BaseWebServiceTester {
                 .andReturn();
 
         String content = result.getResponse().getContentAsString();
-        ResponseJobTableData responseJobTableData = mapper.readValue(content, ResponseJobTableData.class);
-        Assert.assertNotNull(responseJobTableData);
-        Assert.assertNotNull(responseJobTableData.getJobs());
-        Assert.assertFalse("Should not be empty!", responseJobTableData.getJobs().isEmpty());
+        DownloadResultData downloadResultData = mapper.readValue(content, DownloadResultData.class);
+        Assert.assertNotNull(downloadResultData);
+        Assert.assertNotNull(downloadResultData.getDownloadedCount());
     }
 }

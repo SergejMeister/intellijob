@@ -19,7 +19,6 @@ package com.intellijob.controllers;
 import com.intellijob.domain.Job;
 import com.intellijob.domain.JobDetail;
 import com.intellijob.exceptions.BaseException;
-import com.intellijob.exceptions.DocumentNotFoundException;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -68,11 +67,21 @@ public interface JobDetailController {
      * execute <code>extractJobDetail(job)</code>
      * execute <code>save(jobDetail)</code>
      *
-     *@param jobs list of affected jobs.
+     * @param jobs list of affected jobs.
      *
      * @return jobDetail document with id.
      */
     List<JobDetail> extractJobDetailAndSave(List<Job> jobs);
+
+    /**
+     * Find all not extracted jobs and extract this.
+     * <p>
+     * execute <code>findJobsByExtracted(False)</code>
+     * execute <code>extractJobDetailAndSave(List)</code>
+     *
+     * @return jobDetail document with id.
+     */
+    List<JobDetail> extractJobs();
 
 
     /**
