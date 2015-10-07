@@ -22,7 +22,7 @@
 
     <groupId>com.civis</groupId>
     <artifactId>intellijob</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3-SNAPSHOT</version>
 
     <licenses>
         <license>
@@ -205,30 +205,30 @@
         </testResources>
         <plugins>
             <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-checkstyle-plugin</artifactId>-->
-                <!--<version>2.12</version>-->
-                <!--&lt;!&ndash; This configuration is outside of the execution, so it's also valid for the "checkstyle:checkstyle" goal. &ndash;&gt;-->
-                <!--<configuration>-->
-                    <!--<configLocation>config/checkstyle/checkstyle.xml-->
-                    <!--</configLocation>-->
-                    <!--<propertiesLocation>-->
-                        <!--config/checkstyle/checkstyle-maven.properties-->
-                    <!--</propertiesLocation>-->
-                    <!--<encoding>UTF-8</encoding>-->
-                    <!--<consoleOutput>true</consoleOutput>-->
-                    <!--<failsOnError>true</failsOnError>-->
-                    <!--<linkXRef>false</linkXRef>-->
-                <!--</configuration>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<id>install</id>-->
-                        <!--<phase>install</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>check</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-checkstyle-plugin</artifactId>-->
+            <!--<version>2.12</version>-->
+            <!--&lt;!&ndash; This configuration is outside of the execution, so it's also valid for the "checkstyle:checkstyle" goal. &ndash;&gt;-->
+            <!--<configuration>-->
+            <!--<configLocation>config/checkstyle/checkstyle.xml-->
+            <!--</configLocation>-->
+            <!--<propertiesLocation>-->
+            <!--config/checkstyle/checkstyle-maven.properties-->
+            <!--</propertiesLocation>-->
+            <!--<encoding>UTF-8</encoding>-->
+            <!--<consoleOutput>true</consoleOutput>-->
+            <!--<failsOnError>true</failsOnError>-->
+            <!--<linkXRef>false</linkXRef>-->
+            <!--</configuration>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<id>install</id>-->
+            <!--<phase>install</phase>-->
+            <!--<goals>-->
+            <!--<goal>check</goal>-->
+            <!--</goals>-->
+            <!--</execution>-->
+            <!--</executions>-->
             <!--</plugin>-->
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
