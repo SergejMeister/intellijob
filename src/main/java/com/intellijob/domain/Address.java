@@ -17,12 +17,10 @@
 package com.intellijob.domain;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * Document to represent address of organisation.
  */
-@Document(collection = "address")
 public class Address {
 
     public static final String CHAR_SEPARATOR_WHITESPACE = " ";

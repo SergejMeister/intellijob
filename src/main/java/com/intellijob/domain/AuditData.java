@@ -16,7 +16,6 @@
 
 package com.intellijob.domain;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -26,13 +25,7 @@ import java.util.Date;
  * Document HistoryAuditData.
  */
 @Document(collection = "auditdata")
-public class AuditData {
-
-    /**
-     * Object id.
-     */
-    @Id
-    private String id;
+public class AuditData extends BaseDocument {
 
     /**
      * All contact details.
@@ -66,24 +59,6 @@ public class AuditData {
     private Date createdDate;
 
     public AuditData() {
-    }
-
-    /**
-     * Returns id.
-     *
-     * @return id.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Sets id.
-     *
-     * @param id id.
-     */
-    public void setId(String id) {
-        this.id = id;
     }
 
     /**

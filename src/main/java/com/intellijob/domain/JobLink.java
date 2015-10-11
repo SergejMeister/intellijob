@@ -16,7 +16,6 @@
 
 package com.intellijob.domain;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -27,14 +26,7 @@ import java.util.Date;
  * This Domain object represent job links contains in mail context.
  */
 @Document(collection = "joblinks")
-public class JobLink {
-
-    /**
-     * Object id.
-     */
-    @Id
-    private String id;
-
+public class JobLink extends BaseDocument {
 
     /**
      * Received date.
@@ -95,14 +87,6 @@ public class JobLink {
         this.downloaded = downloaded;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public Mail getMail() {
         return mail;
     }
@@ -154,13 +138,14 @@ public class JobLink {
 
         JobLink jobLink = (JobLink) o;
 
-        return id.equals(jobLink.id) && getAtag().equals(jobLink.getAtag()) && getHref().equals(jobLink.getHref()) &&
+        return getId().equals(jobLink.getId()) && getAtag().equals(jobLink.getAtag()) &&
+                getHref().equals(jobLink.getHref()) &&
                 getValue().equals(jobLink.getValue());
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
+        int result = getId().hashCode();
         result = 31 * result + getAtag().hashCode();
         result = 31 * result + getHref().hashCode();
         result = 31 * result + getValue().hashCode();

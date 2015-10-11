@@ -16,13 +16,11 @@
 
 package com.intellijob.domain;
 
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.util.StringUtils;
 
 /**
  * Document ContactPerson.
  */
-@Document(collection = "contactPerson")
 public class ContactPerson {
 
     public static final String SEX_PREFIX_MAN = "M";

@@ -16,7 +16,6 @@
 
 package com.intellijob.domain;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -25,10 +24,7 @@ import java.util.Date;
  * Domain object mail.
  */
 @Document(collection = "mails")
-public class Mail {
-
-    @Id
-    private String id;
+public class Mail extends BaseDocument {
 
     private String sentAddress;
     private String subject;
@@ -36,14 +32,6 @@ public class Mail {
     private Date receivedDate;
     private String contentType;
     private String content;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getSentAddress() {
         return sentAddress;
@@ -99,7 +87,7 @@ public class Mail {
     @Override
     public String toString() {
         return "Mail{" +
-                "id='" + id + '\'' +
+                "id='" + getId() + '\'' +
                 ", sentAddress='" + sentAddress + '\'' +
                 ", subject='" + subject + '\'' +
                 ", contentType='" + contentType + '\'' +

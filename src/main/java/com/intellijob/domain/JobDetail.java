@@ -16,7 +16,6 @@
 
 package com.intellijob.domain;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -28,14 +27,7 @@ import java.util.List;
  * This Domain object represents job details.
  */
 @Document(collection = "jobdetails")
-public class JobDetail {
-
-    /**
-     * Object id.
-     */
-    @Id
-    private String id;
-
+public class JobDetail extends BaseDocument {
 
     /**
      * Job name.
@@ -89,24 +81,6 @@ public class JobDetail {
     public JobDetail() {
         setContactPersons(Collections.emptyList());
         setAddresses(Collections.emptyList());
-    }
-
-    /**
-     * Returns document id.
-     *
-     * @return id.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Sets document id.
-     *
-     * @param id id.
-     */
-    public void setId(String id) {
-        this.id = id;
     }
 
     /**
