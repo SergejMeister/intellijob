@@ -16,7 +16,10 @@
 
 package com.intellijob;
 
+import com.intellijob.domain.Profile;
+import com.intellijob.domain.User;
 import org.junit.runner.RunWith;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -25,10 +28,27 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {TestApplicationConfig.class})
 @WebAppConfiguration
+@ComponentScan
 public abstract class BaseTester {
+
+    protected static final String USER_PROFILE_DEFAULT_FIRSTNAME = "TestFirstName";
+    protected static final String USER_PROFILE_DEFAULT_SECONDNAME = "TestSecondName";
+    protected static final String USER_PROFILE_DEFAULT_SEX = "M";
+
 
     /**
      * Constants.
      */
     protected final static Boolean RUNNING_LIVE = TestApplicationConfig.LIVE_MONGODB;
+
+    protected User initDefaultUser() {
+        Profile profile = new Profile();
+        profile.setFirstName(USER_PROFILE_DEFAULT_FIRSTNAME);
+        profile.setSecondName(USER_PROFILE_DEFAULT_SECONDNAME);
+        profile.setSex(USER_PROFILE_DEFAULT_SEX);
+
+        User defaultUser = new User();
+        defaultUser.setProfile(profile);
+        return defaultUser;
+    }
 }

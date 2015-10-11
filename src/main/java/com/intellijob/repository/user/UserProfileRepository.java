@@ -14,13 +14,25 @@
  * limitations under the License.
  */
 
-package com.intellijob.repository;
+package com.intellijob.repository.user;
 
-import com.intellijob.domain.Profile;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import com.intellijob.domain.User;
+import org.springframework.data.mongodb.repository.Query;
 
 /**
- * Repository for profile document.
+ * Repository for user profile.
+ * <p>
+ * Include only methods to handle user profile data.
  */
-public interface ProfileRepository extends MongoRepository<Profile, String> {
+public interface UserProfileRepository extends UserRepository {
+
+    /**
+     * Returns user object with userid and profile data.
+     *
+     * @param userId affected user id.
+     *
+     * @return user with userId and profile data.
+     */
+    @Query(value = "{ 'id' : ?0 }", fields = "{ 'profile' : 1}")
+    User findByUserId(String userId);
 }

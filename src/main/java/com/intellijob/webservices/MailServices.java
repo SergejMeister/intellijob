@@ -5,12 +5,12 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
@@ -18,15 +18,17 @@ package com.intellijob.webservices;
 
 import com.intellijob.controllers.JobLinkController;
 import com.intellijob.controllers.MailController;
-import com.intellijob.controllers.ProfileController;
+import com.intellijob.controllers.UserController;
 import com.intellijob.domain.JobLink;
 import com.intellijob.domain.Mail;
+import com.intellijob.domain.User;
 import com.intellijob.dto.ResponseError;
 import com.intellijob.dto.ResponseMailData;
 import com.intellijob.dto.ResponseMailTableData;
 import com.intellijob.exceptions.NotMailSyncException;
+import com.intellijob.exceptions.UserNotFoundException;
 import com.intellijob.mail.components.MailReceiver;
-import com.intellijob.mail.controllers.MailFacade;
+import com.intellijob.mail.controllers.MailFactory;
 import com.intellijob.mail.dto.RequestMailData;
 import com.intellijob.mail.dto.ResponseMailSearchData;
 import com.intellijob.mail.exception.BaseMailException;
@@ -56,7 +58,7 @@ import java.util.Set;
 
 /**
  * Mail Web-Services.
- *
+ * <p>
  * Handle all request with endpoints <code>/mails**</code>
  */
 @RestController
@@ -65,7 +67,7 @@ public class MailServices extends BaseServices {
     private final static Logger LOG = LoggerFactory.getLogger(MailServices.class);
 
     @Autowired
-    private MailFacade mailFacade;
+    private MailFactory mailFactory;
 
     @Autowired
     private MailController mailController;
@@ -75,7 +77,7 @@ public class MailServices extends BaseServices {
 
 
     @Autowired
-    private ProfileController profileController;
+    private UserController userController;
 
     /**
      * Request search mails in mail box.
@@ -95,19 +97,27 @@ public class MailServices extends BaseServices {
     public @ResponseBody ResponseMailSearchData searchMail(@RequestBody RequestMailData requestMailData)
             throws Exception {
         validate(requestMailData);
-        MailReceiver mailReceiver = mailFacade.getReceiver(requestMailData);
+        MailReceiver mailReceiver = mailFactory.getReceiver(requestMailData);
         List<String> froms = Arrays.asList("info@jobagent.stepstone.de", "jagent@route.monster.com");
         List<MailModel> inboxMails;
-        Date newLastMailSyncDate = new Date();
         try {
-            Date lastMailSyncDate = profileController.getLastMailSyncDate();
+            Date lastMailSyncDate = userController.getLastMailSyncDate();
+            //search mails after lastMailSyncDate
             inboxMails = mailReceiver.searchByFromTermAndDate(froms, Boolean.TRUE, lastMailSyncDate);
-        } catch (NotMailSyncException nmse) {
+        } catch (NotMailSyncException | UserNotFoundException multiException) {
+            //search all mails
             inboxMails = mailReceiver.searchByFromTerm(froms, Boolean.TRUE);
         }
 
         List<Mail> savedMails = mailController.saveModel(inboxMails);
-        profileController.simpleSave(newLastMailSyncDate);
+
+        User user = new User();
+        try {
+            user = userController.getUniqueUser();
+        } catch (UserNotFoundException unfe) {
+            LOG.warn("User not found, create new user with profile!");
+        }
+        userController.updateMailSyncDate(user);
 
         //search for job links and save.
         List<JobLink> jobLinks = jobLinkController.findInMailsAndSave(savedMails);

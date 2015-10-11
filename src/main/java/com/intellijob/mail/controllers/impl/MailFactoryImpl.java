@@ -5,12 +5,12 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
@@ -19,7 +19,7 @@ package com.intellijob.mail.controllers.impl;
 import com.intellijob.mail.components.MailReceiver;
 import com.intellijob.mail.components.MailSender;
 import com.intellijob.mail.components.beans.MailReceiverBean;
-import com.intellijob.mail.controllers.MailFacade;
+import com.intellijob.mail.controllers.MailFactory;
 import com.intellijob.mail.dto.ReceiverConnectionData;
 import com.intellijob.mail.dto.RequestMailData;
 import com.intellijob.mail.enums.MailAccount;
@@ -48,9 +48,9 @@ import java.util.Properties;
  * Init components MailReceiver and MailSender.
  */
 @Controller
-public class MailFacadeImpl implements MailFacade {
+public class MailFactoryImpl implements MailFactory {
 
-    private final static Logger LOG = LoggerFactory.getLogger(MailFacadeImpl.class);
+    private final static Logger LOG = LoggerFactory.getLogger(MailFactoryImpl.class);
 
     private final static String MAIL_IMAPS_HOST_KEY = "mail.imaps.host";
     private final static String MAIL_POP3_USER_KEY = "mail.pop3.user";

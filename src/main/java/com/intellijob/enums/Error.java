@@ -51,7 +51,12 @@ public enum Error implements Serializable {
     /**
      * Error code, if a job link is not founded.
      */
-    NOT_FOUNDED_LINK(5000005, "Job Link is not founded!");
+    NOT_FOUNDED_LINK(5000005, "Job Link is not founded!"),
+
+    /**
+     * Error code, if user is not founded.
+     */
+    NOT_FOUNDED_USER(5000006, "User is not founded!");
 
 
     private String message;

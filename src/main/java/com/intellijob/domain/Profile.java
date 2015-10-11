@@ -16,9 +16,6 @@
 
 package com.intellijob.domain;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.util.Date;
 
 /**
@@ -26,34 +23,60 @@ import java.util.Date;
  * <p>
  * Note: This class is not complete.
  */
-@Document(collection = "profiles")
 public class Profile {
 
-    @Id
-    private String id;
+    private String firstName;
+
+    private String secondName;
+
+    private String sex;
 
     private Date lastMailSyncDate;
 
     /**
-     * Returns profile unique id.
-     *
-     * @return profile unique id.
+     * Returns user first name.
      */
-    public String getId() {
-        return id;
+    public String getFirstName() {
+        return firstName;
     }
 
     /**
-     * Sets profile unique id.
-     *
-     * @param id profile id.
+     * Sets user first name.
      */
-    public void setId(String id) {
-        this.id = id;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     /**
-     * Returns lasd mail sync date.
+     * Returns user second name.
+     */
+    public String getSecondName() {
+        return secondName;
+    }
+
+    /**
+     * Sets user second name.
+     */
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
+    }
+
+    /**
+     * Returns user sex.
+     */
+    public String getSex() {
+        return sex;
+    }
+
+    /**
+     * Sets user sex.
+     */
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    /**
+     * Returns last mail sync date.
      * <p>
      * This date is the last mail search date!
      *
