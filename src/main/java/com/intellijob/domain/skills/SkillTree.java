@@ -14,32 +14,26 @@
  * limitations under the License.
  */
 
-package com.intellijob.domain;
+package com.intellijob.domain.skills;
 
-import com.intellijob.domain.skills.Skills;
+import com.intellijob.domain.BaseDocument;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
- * User document to represent all user data.
+ * Created by Sergej Meister on 10/13/15.
  */
-@Document(collection = "users")
-public class User extends BaseDocument {
+@Document(collection = "skill_tree")
+public class SkillTree extends BaseDocument {
 
-    private Profile profile;
+    @DBRef
+    private SkillLanguage languageSkills;
 
-    private Skills skills;
-
-    /**
-     * Returns user profile data.
-     */
-    public Profile getProfile() {
-        return profile;
+    public SkillLanguage getLanguageSkills() {
+        return languageSkills;
     }
 
-    /**
-     * Sets user profile data.
-     */
-    public void setProfile(Profile profile) {
-        this.profile = profile;
+    public void setLanguageSkills(SkillLanguage languageSkills) {
+        this.languageSkills = languageSkills;
     }
 }

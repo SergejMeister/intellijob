@@ -14,32 +14,17 @@
  * limitations under the License.
  */
 
-package com.intellijob.domain;
+package com.intellijob.repository.skills;
 
-import com.intellijob.domain.skills.Skills;
-import org.springframework.data.mongodb.core.mapping.Document;
+import com.intellijob.domain.skills.SkillLanguage;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
- * User document to represent all user data.
+ * Repository interface for domain object <code>SkillLanguage</code>.
  */
-@Document(collection = "users")
-public class User extends BaseDocument {
+public interface SkillLanguageRepository extends MongoRepository<SkillLanguage, String> {
 
-    private Profile profile;
-
-    private Skills skills;
-
-    /**
-     * Returns user profile data.
-     */
-    public Profile getProfile() {
-        return profile;
-    }
-
-    /**
-     * Sets user profile data.
-     */
-    public void setProfile(Profile profile) {
-        this.profile = profile;
-    }
+    //@Query(value = "{$limit: 1}")
+    //SkillLanguage findFirst();
+    SkillLanguage findFirstByOrderByIdAsc();
 }

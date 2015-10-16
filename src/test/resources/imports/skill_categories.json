@@ -1,0 +1,8 @@
+[
+  { "_id" : { "$oid" : "561d286f6b90a0250e48bac9" }, "type" : 3, "name" : "Knowledges", "description" : "type for all knowledges categories,  like it, bau etc." },
+  { "_id" : { "$oid" : "561d2c6c6b90a0250e48baca" }, "type" : 4, "name" : "Languages", "description" : "type for all language skills" },
+  { "_id" : { "$oid" : "561d2c766b90a0250e48bacb" }, "type" : 5, "name" : "Personal strengths", "description" : "type for all categories of personal strength" },
+  { "_id" : { "$oid" : "561d2c7b6b90a0250e48bacc" }, "type" : 6, "name" : "Mobility", "description" : "type for Driving licences and driving cars" },
+  { "_id" : { "$oid" : "561d38ed6b90a0250e48bacd" }, "type" : 1, "name" : "Experience", "description" : "type for all experience data." },
+  { "_id" : { "$oid" : "561d39206b90a0250e48bace" }, "type" : 2, "name" : "Education", "description" : "type for all education data." }
+]

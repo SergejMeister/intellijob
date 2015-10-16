@@ -19,14 +19,19 @@ package com.intellijob;
 
 import com.mongodb.Mongo;
 import com.mongodb.MongoClientOptions;
+import de.flapdoodle.embed.mongo.MongoImportExecutable;
+import de.flapdoodle.embed.mongo.MongoImportStarter;
 import de.flapdoodle.embed.mongo.MongodExecutable;
 import de.flapdoodle.embed.mongo.MongodProcess;
 import de.flapdoodle.embed.mongo.MongodStarter;
+import de.flapdoodle.embed.mongo.config.IMongoImportConfig;
 import de.flapdoodle.embed.mongo.config.IMongodConfig;
+import de.flapdoodle.embed.mongo.config.MongoImportConfigBuilder;
 import de.flapdoodle.embed.mongo.config.MongodConfigBuilder;
 import de.flapdoodle.embed.mongo.config.Net;
 import de.flapdoodle.embed.mongo.distribution.Version;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.mongo.MongoProperties;
 import org.springframework.context.annotation.Bean;
@@ -35,6 +40,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 
 import java.io.IOException;
+import java.net.URL;
 
 @ActiveProfiles("test")
 @ContextConfiguration(classes = {ApplicationConfig.class})
@@ -45,11 +51,13 @@ public class TestApplicationConfig {
      * Constants.
      */
     public static final Boolean LIVE_MONGODB = Boolean.FALSE;
-    private static final Logger LOG = Logger.getLogger(TestApplicationConfig.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TestApplicationConfig.class);
     private static final String MONGO_DB_NAME = "db_intellijob";
+    private static final String MONGO_DB_NAME_TEST = "test";
     private static final String MONGO_LOCALHOST = "localhost";
     private static final Integer MONGO_DB_PORT = 27017;
-    private static final MongodStarter starter = MongodStarter.getDefaultInstance();
+    private static final Integer MONGO_DB_PORT_TEST = 45678;
+    private static Net net;
 
     @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
@@ -58,6 +66,40 @@ public class TestApplicationConfig {
     @Autowired(required = false)
     private MongoClientOptions options;
 
+    /**
+     * Reload collection skill_categories.
+     * <p>
+     * Drop collection if exist, create a new collection and load data.
+     * Read data from skill_categories.json
+     *
+     * @throws IOException exception.
+     */
+    public static void reloadCollectionSkillCategories() throws IOException {
+        URL skillCategoriesURL = Thread.currentThread().getContextClassLoader()
+                .getResource("imports/skill_categories.json");
+        IMongoImportConfig mongoImportConfig = new MongoImportConfigBuilder()
+                .version(Version.Main.PRODUCTION)
+                .net(net)
+                .db(MONGO_DB_NAME_TEST)
+                .collection("skill_categories")
+                .upsert(true)
+                .dropCollection(true)
+                .jsonArray(true)
+                .importFile(skillCategoriesURL.getPath())
+                .build();
+
+        MongoImportExecutable mongoImportExecutable =
+                MongoImportStarter.getDefaultInstance().prepare(mongoImportConfig);
+        mongoImportExecutable.start();
+    }
+
+    private static void loadCollections() throws IOException {
+        reloadCollectionSkillCategories();
+    }
+
+    /**
+     * Mongo embedded client.
+     */
     @Bean(destroyMethod = "close")
     public Mongo mongo() throws IOException {
         if (LIVE_MONGODB) {
@@ -65,26 +107,25 @@ public class TestApplicationConfig {
             properties.setHost(MONGO_LOCALHOST);
             properties.setPort(MONGO_DB_PORT);
         } else {
-            Net net = mongod().getConfig().net();
+            net = mongod().getConfig().net();
             properties.setHost(net.getServerAddress().getHostName());
             properties.setPort(net.getPort());
         }
 
-        return properties.createMongoClient(this.options);
+        LOG.info("Mongo client is running on host {} port {}", net.getServerAddress().getHostName(), net.getPort());
+        Mongo client = properties.createMongoClient(this.options);
+        loadCollections();
+        return client;
     }
 
+    /**
+     * Mongo embedded Server.
+     */
     @Bean(destroyMethod = "stop")
     public MongodProcess mongod() throws IOException {
-        return mongodExe().start();
+        IMongodConfig mongoConfig = new MongodConfigBuilder().version(Version.Main.PRODUCTION).build();
+        MongodExecutable mongodExecutable = MongodStarter.getDefaultInstance().prepare(mongoConfig);
+        return mongodExecutable.start();
     }
 
-    @Bean(destroyMethod = "stop")
-    public MongodExecutable mongodExe() throws IOException {
-        return starter.prepare(mongodConfig());
-    }
-
-    @Bean
-    public IMongodConfig mongodConfig() throws IOException {
-        return new MongodConfigBuilder().version(Version.Main.PRODUCTION).build();
-    }
 }

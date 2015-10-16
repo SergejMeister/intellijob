@@ -14,32 +14,22 @@
  * limitations under the License.
  */
 
-package com.intellijob.domain;
+package com.intellijob.repository.skills;
 
-import com.intellijob.domain.skills.Skills;
-import org.springframework.data.mongodb.core.mapping.Document;
+import com.intellijob.domain.skills.SkillCategory;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
- * User document to represent all user data.
+ * Repository interface for domain object <code>SkillLanguage</code>.
  */
-@Document(collection = "users")
-public class User extends BaseDocument {
-
-    private Profile profile;
-
-    private Skills skills;
+public interface SkillCategoryRepository extends MongoRepository<SkillCategory, String> {
 
     /**
-     * Returns user profile data.
+     * Find skill category by specified type.
+     *
+     * @param type category type.
+     *
+     * @return founded skill category.
      */
-    public Profile getProfile() {
-        return profile;
-    }
-
-    /**
-     * Sets user profile data.
-     */
-    public void setProfile(Profile profile) {
-        this.profile = profile;
-    }
+    SkillCategory findByType(Integer type);
 }

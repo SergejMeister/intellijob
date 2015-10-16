@@ -20,6 +20,7 @@ import com.intellijob.domain.Profile;
 import com.intellijob.domain.User;
 import org.junit.runner.RunWith;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -29,12 +30,13 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @ContextConfiguration(classes = {TestApplicationConfig.class})
 @WebAppConfiguration
 @ComponentScan
+@Configuration
 public abstract class BaseTester {
 
     protected static final String USER_PROFILE_DEFAULT_FIRSTNAME = "TestFirstName";
     protected static final String USER_PROFILE_DEFAULT_SECONDNAME = "TestSecondName";
     protected static final String USER_PROFILE_DEFAULT_SEX = "M";
-
+    protected final static String DEFAULT_ENCODING = "UTF-8";
 
     /**
      * Constants.
