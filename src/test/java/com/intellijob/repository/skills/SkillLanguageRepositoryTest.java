@@ -22,6 +22,7 @@ import com.intellijob.domain.skills.SkillLanguage;
 import com.intellijob.domain.skills.SkillNode;
 import com.intellijob.enums.SkillCategoryEnum;
 import junit.framework.Assert;
+import org.bson.types.ObjectId;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,7 +70,7 @@ public class SkillLanguageRepositoryTest extends BaseTester {
                 .getResourceAsStream(DEFAULT_LANGUAGE_RES)) {
             br = new BufferedReader(new InputStreamReader(inputStream, DEFAULT_ENCODING));
             while ((line = br.readLine()) != null) {
-                SkillNode skillNode = new SkillNode();
+                SkillNode skillNode = new SkillNode(new ObjectId());
                 skillNode.setName(line);
                 result.add(skillNode);
             }

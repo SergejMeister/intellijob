@@ -110,11 +110,14 @@ public class TestApplicationConfig {
             net = mongod().getConfig().net();
             properties.setHost(net.getServerAddress().getHostName());
             properties.setPort(net.getPort());
+            LOG.info("Mongo client is running on host {} port {}", net.getServerAddress().getHostName(), net.getPort());
         }
 
-        LOG.info("Mongo client is running on host {} port {}", net.getServerAddress().getHostName(), net.getPort());
         Mongo client = properties.createMongoClient(this.options);
-        loadCollections();
+        if (!LIVE_MONGODB) {
+            loadCollections();
+        }
+
         return client;
     }
 

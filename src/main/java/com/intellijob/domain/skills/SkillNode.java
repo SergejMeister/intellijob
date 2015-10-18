@@ -16,18 +16,26 @@
 
 package com.intellijob.domain.skills;
 
+import com.intellijob.domain.BaseDocument;
+import org.bson.types.ObjectId;
+
 import java.util.List;
 
 /**
  * Skill node model to represents skill document.
  */
-public class SkillNode {
+public class SkillNode extends BaseDocument {
 
     List<SkillNode> nodes;
-
     private String name;
-
     private String Description;
+
+    public SkillNode() {
+    }
+
+    public SkillNode(final ObjectId id) {
+        setId(id.toHexString());
+    }
 
     public String getName() {
         return name;
