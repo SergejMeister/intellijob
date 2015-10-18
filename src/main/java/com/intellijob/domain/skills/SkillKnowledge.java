@@ -16,24 +16,24 @@
 
 package com.intellijob.domain.skills;
 
+import com.intellijob.domain.BaseDocument;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
 /**
- * Skill language model to represents all skill_languages documents.
+ * Model to represents all skill knowledge.
  */
-@Document(collection = "skill_languages")
-public class SkillLanguage extends SkillRoot {
+@Document(collection = "skill_knowledges")
+public class SkillKnowledge extends BaseDocument {
 
+    private List<SkillNode> knowledges;
 
-    private List<SkillNode> languages;
-
-    public List<SkillNode> getLanguages() {
-        return languages;
+    public List<SkillNode> getKnowledges() {
+        return knowledges;
     }
 
-    public void setLanguages(List<SkillNode> languages) {
-        this.languages = languages;
+    public void setKnowledges(List<SkillNode> knowledges) {
+        this.knowledges = knowledges;
     }
 }

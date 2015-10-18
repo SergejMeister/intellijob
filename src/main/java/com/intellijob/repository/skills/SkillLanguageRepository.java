@@ -24,7 +24,13 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  */
 public interface SkillLanguageRepository extends MongoRepository<SkillLanguage, String> {
 
-    //@Query(value = "{$limit: 1}")
-    //SkillLanguage findFirst();
+
+    /**
+     * Find first document.
+     * <p>
+     * ascending order by id.
+     *
+     * @return null or founded document.
+     */
     SkillLanguage findFirstByOrderByIdAsc();
 }

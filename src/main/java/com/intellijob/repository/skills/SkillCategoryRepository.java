@@ -20,7 +20,7 @@ import com.intellijob.domain.skills.SkillCategory;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
- * Repository interface for domain object <code>SkillLanguage</code>.
+ * Repository interface for domain object <code>SkillCategory</code>.
  */
 public interface SkillCategoryRepository extends MongoRepository<SkillCategory, String> {
 

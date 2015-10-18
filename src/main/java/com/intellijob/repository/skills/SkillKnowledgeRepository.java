@@ -14,26 +14,22 @@
  * limitations under the License.
  */
 
-package com.intellijob.domain.skills;
+package com.intellijob.repository.skills;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.util.List;
+import com.intellijob.domain.skills.SkillKnowledge;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
- * Skill language model to represents all skill_languages documents.
+ * Repository interface for domain object <code>SkillKnowledge</code>.
  */
-@Document(collection = "skill_languages")
-public class SkillLanguage extends SkillRoot {
+public interface SkillKnowledgeRepository extends MongoRepository<SkillKnowledge, String> {
 
-
-    private List<SkillNode> languages;
-
-    public List<SkillNode> getLanguages() {
-        return languages;
-    }
-
-    public void setLanguages(List<SkillNode> languages) {
-        this.languages = languages;
-    }
+    /**
+     * Find first document.
+     * <p>
+     * ascending order by id.
+     *
+     * @return null or founded document.
+     */
+    SkillKnowledge findFirstByOrderByIdAsc();
 }
