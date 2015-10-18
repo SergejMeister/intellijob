@@ -32,7 +32,7 @@ angular.module('intelliJob')
                  * POST-request to save current audit data.
                  */
                 auditServices.save = function (currentAuditData) {
-                    return $http.post(urlBase,currentAuditData);
+                    return $http.post(urlBase, currentAuditData);
                 };
 
                 /**

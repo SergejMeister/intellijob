@@ -37,7 +37,7 @@ public class Endpoints {
     public static final String JOBS_BY_ID = JOBS + "/{jobId}";
     public static final String JOBDETAILS = API + "/jobdetails";
     public static final String JOBDETAILS_PAGING = JOBDETAILS + "/{pageIndex}/{limit}";
-    public static final String JOBDETAILS_BY_ID= JOBDETAILS + "/{jobDetailId}";
+    public static final String JOBDETAILS_BY_ID = JOBDETAILS + "/{jobDetailId}";
     public static final String AUDIT = API + "/audit";
     public static final String AUDIT_PAGING = AUDIT + "/{pageIndex}/{limit}";
     public static final String AUDIT_BY_ID = AUDIT + "/{auditId}";

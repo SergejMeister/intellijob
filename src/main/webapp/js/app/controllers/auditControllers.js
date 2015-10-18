@@ -41,7 +41,7 @@ intelliJobControllers.controller(
                     $scope.currentAuditData = response.currentAuditData;
                     $scope.historyAuditData = response.historyData;
                     $scope.auditHistoryTableTotalItems = response.totalItemSize;
-                    if($scope.auditHistoryTableTotalItems > $scope.auditHistoryTableNumPerPage) {
+                    if ($scope.auditHistoryTableTotalItems > $scope.auditHistoryTableNumPerPage) {
                         $scope.showPagination = true;
                     }
 
@@ -69,7 +69,7 @@ intelliJobControllers.controller(
                     AuditServices.save($scope.currentAuditData).success(function (response) {
                         var newHistoryAuditData = response;
                         $scope.historyAuditData.push(newHistoryAuditData);
-                        $scope.auditHistoryTableTotalItems = $scope.auditHistoryTableTotalItems + 1 ;
+                        $scope.auditHistoryTableTotalItems = $scope.auditHistoryTableTotalItems + 1;
                         $rootScope.success = "Current audit data is added to the history!";
                     }).error(function (error) {
                         console.log(error);

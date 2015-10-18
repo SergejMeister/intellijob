@@ -84,10 +84,10 @@ public interface MailController {
 
     /**
      * Delete mail by specified id.
+     *
      * @param mailId mailId to delete.
      *
      * @return deleted Mail.
-     *
      * @throws BaseException exception, if no mail found for specified id.
      */
     Mail deleteById(String mailId) throws BaseException;

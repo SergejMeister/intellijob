@@ -69,7 +69,7 @@ intelliJobControllers.controller(
                 /**
                  * Delete jobLink.
                  */
-                $scope.deleteMail= function (mailId) {
+                $scope.deleteMail = function (mailId) {
                     MailServices.deleteById(mailId).success(function (response) {
                         var deletedMailId = response.id;
                         var index = -1;

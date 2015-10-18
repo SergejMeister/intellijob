@@ -1,3 +1,19 @@
+/*
+ * Copyright 2015 Sergej Meister
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 /**
  * @license AngularJS v1.2.16
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -1201,11 +1217,11 @@
             if (isArray(value)) {
                 forEach(value, function (arrayValue) {
                     parts.push(encodeUriQuery(key, true) +
-                    (arrayValue === true ? '' : '=' + encodeUriQuery(arrayValue, true)));
+                            (arrayValue === true ? '' : '=' + encodeUriQuery(arrayValue, true)));
                 });
             } else {
                 parts.push(encodeUriQuery(key, true) +
-                (value === true ? '' : '=' + encodeUriQuery(value, true)));
+                        (value === true ? '' : '=' + encodeUriQuery(value, true)));
             }
         });
         return parts.length ? parts.join('&') : '';
@@ -1486,7 +1502,7 @@
         }
 
         assertArg(isFunction(arg), name, 'not a function, got ' +
-        (arg && typeof arg == 'object' ? arg.constructor.name || 'Object' : typeof arg));
+                (arg && typeof arg == 'object' ? arg.constructor.name || 'Object' : typeof arg));
         return arg;
     }
 
@@ -1644,8 +1660,8 @@
                 return ensure(modules, name, function () {
                     if (!requires) {
                         throw $injectorMinErr('nomod', "Module '{0}' is not available! You either misspelled " +
-                        "the module name or forgot to load it. If registering a module ensure that you " +
-                        "specify the dependencies as the second argument.", name);
+                                "the module name or forgot to load it. If registering a module ensure that you " +
+                                "specify the dependencies as the second argument.", name);
                     }
 
                     /** @type {!Array.<Array.<*>>} */
@@ -4616,8 +4632,8 @@
                         // - 4096 bytes per cookie
                         if (cookieLength > 4096) {
                             $log.warn("Cookie '" + name +
-                            "' possibly not set or overflowed because it was too large (" +
-                            cookieLength + " > 4096 bytes)!");
+                                    "' possibly not set or overflowed because it was too large (" +
+                                    cookieLength + " > 4096 bytes)!");
                         }
                     }
                 }
@@ -6317,7 +6333,7 @@
                                 $template = groupScan(compileNode, attrStart, attrEnd);
                                 $compileNode = templateAttrs.$$element =
                                         jqLite(document.createComment(' ' + directiveName + ': ' +
-                                        templateAttrs[directiveName] + ' '));
+                                                templateAttrs[directiveName] + ' '));
                                 compileNode = $compileNode[0];
                                 replaceWith(jqCollection, jqLite(sliceArgs($template)), compileNode);
 
@@ -8312,7 +8328,7 @@
                                 v = toJson(v);
                             }
                             parts.push(encodeUriQuery(key) + '=' +
-                            encodeUriQuery(v));
+                                    encodeUriQuery(v));
                         });
                     });
                     if (parts.length > 0) {
@@ -10514,7 +10530,7 @@
             if ((token = this.expect('='))) {
                 if (!left.assign) {
                     this.throwError('implies assignment but [' +
-                    this.text.substring(0, token.index) + '] can not be assigned to', token);
+                            this.text.substring(0, token.index) + '] can not be assigned to', token);
                 }
                 right = this.ternary();
                 return function (scope, locals) {
@@ -11161,7 +11177,7 @@
                 if (!$parseOptions.logPromiseWarnings || promiseWarningCache.hasOwnProperty(fullExp)) return;
                 promiseWarningCache[fullExp] = true;
                 $log.warn('[$parse] Promise found in the expression `' + fullExp + '`. ' +
-                'Automatic unwrapping of promises in Angular expressions is deprecated.');
+                        'Automatic unwrapping of promises in Angular expressions is deprecated.');
             };
 
             return function (exp) {
@@ -19844,7 +19860,7 @@
                 forEach(whens, function (expression, key) {
                     whensExpFns[key] =
                             $interpolate(expression.replace(BRACE, startSymbol + numberExp + '-' +
-                            offset + endSymbol));
+                                    offset + endSymbol));
                 });
 
                 scope.$watch(function ngPluralizeWatch() {

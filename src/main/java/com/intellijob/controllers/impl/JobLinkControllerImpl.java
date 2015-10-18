@@ -84,8 +84,8 @@ public class JobLinkControllerImpl implements JobLinkController {
         //filter for current affected jobLinks
         Set<String> hrefs = new HashSet<>();
         List<JobLink> listOfUniqueJobLinks = new ArrayList<>();
-        for(JobLink jobLink : jobLinksToFilter) {
-            if(!hrefs.contains(jobLink.getHref())){
+        for (JobLink jobLink : jobLinksToFilter) {
+            if (!hrefs.contains(jobLink.getHref())) {
                 listOfUniqueJobLinks.add(jobLink);
                 hrefs.add(jobLink.getHref());
             }
@@ -93,12 +93,12 @@ public class JobLinkControllerImpl implements JobLinkController {
 
         //filter for persisted JobLinks.
         List<JobLink> storedJobLinks = jobLinkRepository.findByHrefIn(hrefs);
-        if(storedJobLinks.isEmpty()){
-            return listOfUniqueJobLinks ;
+        if (storedJobLinks.isEmpty()) {
+            return listOfUniqueJobLinks;
         }
 
         List<JobLink> result = new ArrayList<>();
-        for(JobLink jobLink : listOfUniqueJobLinks) {
+        for (JobLink jobLink : listOfUniqueJobLinks) {
             if (hrefNotExistIn(jobLink.getHref(), storedJobLinks)) {
                 result.add(jobLink);
             }
@@ -126,8 +126,8 @@ public class JobLinkControllerImpl implements JobLinkController {
     }
 
     private boolean hrefNotExistIn(String href, List<JobLink> storedJobLinks) {
-        for(JobLink jobLink : storedJobLinks){
-            if(jobLink.getHref().equals(href)){
+        for (JobLink jobLink : storedJobLinks) {
+            if (jobLink.getHref().equals(href)) {
                 return Boolean.FALSE;
             }
         }

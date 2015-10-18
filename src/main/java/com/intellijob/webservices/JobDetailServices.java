@@ -52,7 +52,9 @@ public class JobDetailServices extends BaseServices {
      * @return job data.
      */
     @RequestMapping(value = Endpoints.JOBDETAILS, method = RequestMethod.GET)
-    public @ResponseBody ResponseJobDetailTableData getAllJobDetails() {
+    public
+    @ResponseBody
+    ResponseJobDetailTableData getAllJobDetails() {
         List<JobDetail> jobDetails = jobDetailController.findAll();
         //returns without job content, only metadata.
         return new ResponseJobDetailTableData(jobDetails, Boolean.FALSE);
@@ -64,7 +66,9 @@ public class JobDetailServices extends BaseServices {
      * @return data transfer object <code>ResponseJobDetailTableData.java</code>
      */
     @RequestMapping(value = Endpoints.JOBDETAILS_PAGING, method = RequestMethod.GET)
-    public @ResponseBody ResponseJobDetailTableData getJobDetails(@PathVariable int pageIndex, @PathVariable int limit) {
+    public
+    @ResponseBody
+    ResponseJobDetailTableData getJobDetails(@PathVariable int pageIndex, @PathVariable int limit) {
         Page<JobDetail> jobDetailsPage = jobDetailController.findPage(pageIndex, limit);
         return new ResponseJobDetailTableData(jobDetailsPage, Boolean.FALSE);
     }
@@ -75,7 +79,9 @@ public class JobDetailServices extends BaseServices {
      * @return data transfer object <code>ResponseJobDetailTableData.java</code>
      */
     @RequestMapping(value = Endpoints.JOBDETAILS_BY_ID, method = RequestMethod.GET)
-    public @ResponseBody ResponseJobDetailData getJobDetail(@PathVariable String jobDetailId) throws Exception {
+    public
+    @ResponseBody
+    ResponseJobDetailData getJobDetail(@PathVariable String jobDetailId) throws Exception {
         JobDetail jobDetail = jobDetailController.findAndConvertContentToText(jobDetailId);
         return new ResponseJobDetailData(jobDetail, Boolean.TRUE);
     }
@@ -86,7 +92,9 @@ public class JobDetailServices extends BaseServices {
      * @return data transfer object <code>ResponseJobDetailData.java</code>
      */
     @RequestMapping(value = Endpoints.JOBDETAILS_BY_ID, method = RequestMethod.DELETE)
-    public @ResponseBody ResponseJobDetailData deleteJobDetail(@PathVariable String jobDetailId) throws Exception {
+    public
+    @ResponseBody
+    ResponseJobDetailData deleteJobDetail(@PathVariable String jobDetailId) throws Exception {
         jobDetailController.deleteById(jobDetailId);
         return new ResponseJobDetailData(jobDetailId);
     }

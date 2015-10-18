@@ -47,7 +47,9 @@ public class AuditServices extends BaseServices {
      * @return data transfer object <code>ResponseAuditModelData.java</code>
      */
     @RequestMapping(value = Endpoints.AUDIT_PAGING, method = RequestMethod.GET)
-    public @ResponseBody ResponseAuditModelData getAudit(@PathVariable int pageIndex, @PathVariable int limit) {
+    public
+    @ResponseBody
+    ResponseAuditModelData getAudit(@PathVariable int pageIndex, @PathVariable int limit) {
         AuditModel auditModel = auditController.createAuditModel(pageIndex, limit);
         return new ResponseAuditModelData(auditModel);
     }
@@ -61,7 +63,9 @@ public class AuditServices extends BaseServices {
      * @return job data.
      */
     @RequestMapping(value = Endpoints.AUDIT, method = RequestMethod.POST)
-    public @ResponseBody ResponseAuditData saveCurrentAuditData(@RequestBody RequestAuditData requestAuditData) {
+    public
+    @ResponseBody
+    ResponseAuditData saveCurrentAuditData(@RequestBody RequestAuditData requestAuditData) {
         AuditData currentAuditDataToSave = new AuditData();
         currentAuditDataToSave.setCountJobDetails(requestAuditData.getCountJobDetails());
         currentAuditDataToSave.setCountNotEmptyContactPersons(requestAuditData.getCountNotEmptyContactPersons());
@@ -79,7 +83,9 @@ public class AuditServices extends BaseServices {
      * @return data transfer object <code>ResponseJobDetailData.java</code>
      */
     @RequestMapping(value = Endpoints.AUDIT_BY_ID, method = RequestMethod.DELETE)
-    public @ResponseBody ResponseAuditData deleteJobDetail(@PathVariable String auditId) throws Exception {
+    public
+    @ResponseBody
+    ResponseAuditData deleteJobDetail(@PathVariable String auditId) throws Exception {
         auditController.deleteById(auditId);
         return new ResponseAuditData(auditId);
     }

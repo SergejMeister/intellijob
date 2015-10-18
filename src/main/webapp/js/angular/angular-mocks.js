@@ -1,3 +1,19 @@
+/*
+ * Copyright 2015 Sergej Meister
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 /**
  * @license AngularJS v1.2.16
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -422,13 +438,13 @@
                     angular.forEach($log[logLevel].logs, function (log) {
                         angular.forEach(log, function (logItem) {
                             errors.push('MOCK $log (' + logLevel + '): ' + String(logItem) + '\n' +
-                            (logItem.stack || ''));
+                                    (logItem.stack || ''));
                         });
                     });
                 });
                 if (errors.length) {
                     errors.unshift("Expected $log to be empty! Either a message was logged unexpectedly, or " +
-                    "an expected log message was not checked and removed:");
+                            "an expected log message was not checked and removed:");
                     errors.push('');
                     throw new Error(errors.join('\n---------\n'));
                 }
@@ -1159,12 +1175,12 @@
             if (expectation && expectation.match(method, url)) {
                 if (!expectation.matchData(data))
                     throw new Error('Expected ' + expectation + ' with different data\n' +
-                    'EXPECTED: ' + prettyPrint(expectation.data) + '\nGOT:      ' + data);
+                            'EXPECTED: ' + prettyPrint(expectation.data) + '\nGOT:      ' + data);
 
                 if (!expectation.matchHeaders(headers))
                     throw new Error('Expected ' + expectation + ' with different headers\n' +
-                    'EXPECTED: ' + prettyPrint(expectation.headers) + '\nGOT:      ' +
-                    prettyPrint(headers));
+                            'EXPECTED: ' + prettyPrint(expectation.headers) + '\nGOT:      ' +
+                            prettyPrint(headers));
 
                 expectations.shift();
 
@@ -1190,7 +1206,7 @@
             throw wasExpected ?
                     new Error('No response defined !') :
                     new Error('Unexpected request: ' + method + ' ' + url + '\n' +
-                    (expectation ? 'Expected ' + expectation : 'No more request expected'));
+                            (expectation ? 'Expected ' + expectation : 'No more request expected'));
         }
 
         /**
@@ -1666,7 +1682,7 @@
         $delegate.verifyNoPendingTasks = function () {
             if ($browser.deferredFns.length) {
                 throw new Error('Deferred tasks to flush (' + $browser.deferredFns.length + '): ' +
-                formatPendingTasksAsString($browser.deferredFns));
+                        formatPendingTasksAsString($browser.deferredFns));
             }
         };
 

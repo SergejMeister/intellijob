@@ -1,3 +1,19 @@
+/*
+ * Copyright 2015 Sergej Meister
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 /**
  * @license AngularJS v1.2.16
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -189,13 +205,13 @@
 
 // Safe Block Elements - HTML5
     var blockElements = angular.extend({}, optionalEndTagBlockElements, makeMap("address,article," +
-    "aside,blockquote,caption,center,del,dir,div,dl,figure,figcaption,footer,h1,h2,h3,h4,h5," +
-    "h6,header,hgroup,hr,ins,map,menu,nav,ol,pre,script,section,table,ul"));
+            "aside,blockquote,caption,center,del,dir,div,dl,figure,figcaption,footer,h1,h2,h3,h4,h5," +
+            "h6,header,hgroup,hr,ins,map,menu,nav,ol,pre,script,section,table,ul"));
 
 // Inline Elements - HTML5
     var inlineElements = angular.extend({}, optionalEndTagInlineElements, makeMap("a,abbr,acronym,b," +
-    "bdi,bdo,big,br,cite,code,del,dfn,em,font,i,img,ins,kbd,label,map,mark,q,ruby,rp,rt,s," +
-    "samp,small,span,strike,strong,sub,sup,time,tt,u,var"));
+            "bdi,bdo,big,br,cite,code,del,dfn,em,font,i,img,ins,kbd,label,map,mark,q,ruby,rp,rt,s," +
+            "samp,small,span,strike,strong,sub,sup,time,tt,u,var"));
 
 
 // Special Elements (can contain anything)
@@ -310,7 +326,7 @@
 
             if (html == last) {
                 throw $sanitizeMinErr('badparse', "The sanitizer was unable to parse the following block " +
-                "of html: {0}", html);
+                        "of html: {0}", html);
             }
             last = html;
         }
