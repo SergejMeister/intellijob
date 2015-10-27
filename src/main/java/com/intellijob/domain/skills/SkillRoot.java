@@ -32,6 +32,13 @@ public class SkillRoot extends BaseDocument {
     @DBRef
     private SkillCategory category;
 
+    public SkillRoot() {
+    }
+
+    public SkillRoot(SkillCategory skillCategory) {
+        setCategory(skillCategory);
+    }
+
     public SkillCategory getCategory() {
         return category;
     }

@@ -26,8 +26,14 @@ import java.util.List;
 @Document(collection = "skill_languages")
 public class SkillLanguage extends SkillRoot {
 
-
     private List<SkillNode> languages;
+
+    public SkillLanguage() {
+    }
+
+    public SkillLanguage(SkillCategory skillCategory) {
+        super(skillCategory);
+    }
 
     public List<SkillNode> getLanguages() {
         return languages;

@@ -16,7 +16,6 @@
 
 package com.intellijob.domain.skills;
 
-import com.intellijob.domain.BaseDocument;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -25,9 +24,18 @@ import java.util.List;
  * Model to represents all skill knowledge.
  */
 @Document(collection = "skill_knowledges")
-public class SkillKnowledge extends BaseDocument {
+public class SkillKnowledge extends SkillRoot {
 
     private List<SkillNode> knowledges;
+
+    public SkillKnowledge() {
+    }
+
+    public SkillKnowledge(SkillCategory skillCategory) {
+        super(skillCategory);
+    }
+
+
 
     public List<SkillNode> getKnowledges() {
         return knowledges;
