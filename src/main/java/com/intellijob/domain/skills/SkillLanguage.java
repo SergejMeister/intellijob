@@ -18,6 +18,7 @@ package com.intellijob.domain.skills;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,11 +30,14 @@ public class SkillLanguage extends SkillRoot {
     private List<SkillNode> languages;
 
     public SkillLanguage() {
+        setLanguages(new ArrayList<>());
     }
 
     public SkillLanguage(SkillCategory skillCategory) {
         super(skillCategory);
+        setLanguages(new ArrayList<>());
     }
+
 
     public List<SkillNode> getLanguages() {
         return languages;

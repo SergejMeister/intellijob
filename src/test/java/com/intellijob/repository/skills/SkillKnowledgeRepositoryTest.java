@@ -22,7 +22,6 @@ import com.intellijob.domain.skills.SkillKnowledge;
 import com.intellijob.domain.skills.SkillNode;
 import com.intellijob.enums.SkillCategoryEnum;
 import junit.framework.Assert;
-import org.bson.types.ObjectId;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -128,7 +127,7 @@ public class SkillKnowledgeRepositoryTest extends BaseTester {
     }
 
     private SkillNode initSimpleSkillNode(String name, String description) {
-        SkillNode skillNode = new SkillNode(new ObjectId());
+        SkillNode skillNode = new SkillNode();
         skillNode.setName(name);
         skillNode.setDescription(description);
         return skillNode;

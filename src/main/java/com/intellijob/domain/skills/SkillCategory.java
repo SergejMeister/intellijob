@@ -17,6 +17,7 @@
 package com.intellijob.domain.skills;
 
 import com.intellijob.domain.BaseDocument;
+import com.intellijob.domain.localization.LocalizableObject;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -28,10 +29,26 @@ public class SkillCategory extends BaseDocument {
 
     private String name;
 
+    private LocalizableObject localizableObject;
+
     @Indexed(unique = true)
     private Integer type;
 
     private String description;
+
+    public SkillCategory() {
+    }
+
+    public SkillCategory(String name, LocalizableObject localizableObject) {
+        setName(name);
+        setLocalizableObject(localizableObject);
+    }
+
+    public SkillCategory(String name, LocalizableObject localizableObject, Integer type) {
+        setName(name);
+        setLocalizableObject(localizableObject);
+        setType(type);
+    }
 
     public String getName() {
         return name;
@@ -55,5 +72,13 @@ public class SkillCategory extends BaseDocument {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public LocalizableObject getLocalizableObject() {
+        return localizableObject;
+    }
+
+    public void setLocalizableObject(LocalizableObject localizableObject) {
+        this.localizableObject = localizableObject;
     }
 }

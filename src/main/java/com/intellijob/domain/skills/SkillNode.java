@@ -17,8 +17,10 @@
 package com.intellijob.domain.skills;
 
 import com.intellijob.domain.BaseDocument;
+import com.intellijob.domain.localization.LocalizableObject;
 import org.bson.types.ObjectId;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,11 +32,28 @@ public class SkillNode extends BaseDocument {
     private String name;
     private String Description;
 
+    private LocalizableObject localizableObject;
+
     public SkillNode() {
+        setNodes(new ArrayList<>());
     }
 
-    public SkillNode(final ObjectId id) {
-        setId(id.toHexString());
+    public SkillNode(LocalizableObject localizableObject) {
+        setLocalizableObject(localizableObject);
+        setNodes(new ArrayList<>());
+    }
+
+    public SkillNode(ObjectId objectId, LocalizableObject localizableObject) {
+        setId(objectId.toHexString());
+        setLocalizableObject(localizableObject);
+        setNodes(new ArrayList<>());
+    }
+
+    public SkillNode(String name, LocalizableObject localizableObject) {
+        setId(new ObjectId().toHexString());
+        setName(name);
+        setLocalizableObject(localizableObject);
+        setNodes(new ArrayList<>());
     }
 
     public String getName() {
@@ -59,5 +78,13 @@ public class SkillNode extends BaseDocument {
 
     public void setNodes(List<SkillNode> nodes) {
         this.nodes = nodes;
+    }
+
+    public LocalizableObject getLocalizableObject() {
+        return localizableObject;
+    }
+
+    public void setLocalizableObject(LocalizableObject localizableObject) {
+        this.localizableObject = localizableObject;
     }
 }

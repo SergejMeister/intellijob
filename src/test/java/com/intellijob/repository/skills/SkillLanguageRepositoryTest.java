@@ -16,21 +16,21 @@
 
 package com.intellijob.repository.skills;
 
+import com.civis.utils.csv.common.CSVData;
+import com.civis.utils.csv.common.CSVReader;
 import com.intellijob.BaseTester;
+import com.intellijob.domain.localization.LocalizableObject;
 import com.intellijob.domain.skills.SkillCategory;
 import com.intellijob.domain.skills.SkillLanguage;
 import com.intellijob.domain.skills.SkillNode;
 import com.intellijob.enums.SkillCategoryEnum;
 import junit.framework.Assert;
-import org.bson.types.ObjectId;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,8 +49,8 @@ public class SkillLanguageRepositoryTest extends BaseTester {
     @Test
     public void testCreateSkillLanguage() {
         SkillCategory category = skillCategoryRepository.findByType(SkillCategoryEnum.LANGUAGE.getTypeId());
-        SkillLanguage skillLanguage = new SkillLanguage();
-        skillLanguage.setCategory(category);
+
+        SkillLanguage skillLanguage = new SkillLanguage(category);
         List<SkillNode> languageNodes = readLanguageData();
         skillLanguage.setLanguages(languageNodes);
         skillLanguageRepository.save(skillLanguage);
@@ -62,21 +62,19 @@ public class SkillLanguageRepositoryTest extends BaseTester {
     }
 
     protected List<SkillNode> readLanguageData() {
-        List<SkillNode> result = new ArrayList<>();
+        URL languageUrl = Thread.currentThread().getContextClassLoader()
+                .getResource(DEFAULT_LANGUAGE_RES);
+        List<CSVData> csvDataList = CSVReader.read(DEFAULT_LANGUAGE_RES, ",");
+        Assert.assertNotNull(csvDataList);
+        Assert.assertFalse(csvDataList.isEmpty());
 
-        BufferedReader br = null;
-        String line = "";
-        try (InputStream inputStream = Thread.currentThread().getContextClassLoader()
-                .getResourceAsStream(DEFAULT_LANGUAGE_RES)) {
-            br = new BufferedReader(new InputStreamReader(inputStream, DEFAULT_ENCODING));
-            while ((line = br.readLine()) != null) {
-                SkillNode skillNode = new SkillNode(new ObjectId());
-                skillNode.setName(line);
-                result.add(skillNode);
-            }
-        } catch (Exception e) {
-            LOG.error("Error occurred while read file (" + DEFAULT_LANGUAGE_RES + ")", e);
-            Assert.fail("Can not read file");
+        List<SkillNode> result = new ArrayList<>();
+        for (CSVData language : csvDataList) {
+            Assert.assertNotNull(language.getItems());
+            Assert.assertEquals("Should be exact 2 items", 2, language.getItems().size());
+            String languageName = language.getItems().get(0);
+            LocalizableObject localizableObject = new LocalizableObject(language.getItems().get(1));
+            result.add(new SkillNode(languageName, localizableObject));
         }
 
         return result;

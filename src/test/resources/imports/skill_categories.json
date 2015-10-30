@@ -1,50 +1,74 @@
 [
   {
     "_id": {
-      "$oid": "561d286f6b90a0250e48bac9"
+      "$oid": "5633fe8544aefd11a76eac41"
+    },
+    "_class": "com.intellijob.domain.skills.SkillCategory",
+    "name": "Experience",
+    "localizableObject": {
+      "label": "Berufserfahrung"
+    },
+    "type": 1,
+    "description": "type for all experience data"
+  },
+  {
+    "_id": {
+      "$oid": "5633fe8544aefd11a76eac42"
+    },
+    "_class": "com.intellijob.domain.skills.SkillCategory",
+    "name": "Experience",
+    "localizableObject": {
+      "label": "Bildung"
+    },
+    "type": 2,
+    "description": "type for all education data."
+  },
+  {
+    "_id": {
+      "$oid": "5633fe8544aefd11a76eac43"
+    },
+    "_class": "com.intellijob.domain.skills.SkillCategory",
+    "name": "Knowledges",
+    "localizableObject": {
+      "label": "Kenntnisse und Fertigkeiten"
     },
     "type": 3,
-    "name": "Knowledges",
     "description": "type for all knowledges categories,  like it, bau etc."
   },
   {
     "_id": {
-      "$oid": "561d2c6c6b90a0250e48baca"
+      "$oid": "5633fe8544aefd11a76eac44"
+    },
+    "_class": "com.intellijob.domain.skills.SkillCategory",
+    "name": "Languages",
+    "localizableObject": {
+      "label": "Sprachen"
     },
     "type": 4,
-    "name": "Languages",
-    "description": "type for all language skills"
+    "description": "type for all language skills."
   },
   {
     "_id": {
-      "$oid": "561d2c766b90a0250e48bacb"
+      "$oid": "5633fe8544aefd11a76eac45"
+    },
+    "_class": "com.intellijob.domain.skills.SkillCategory",
+    "name": "Personal strengths",
+    "localizableObject": {
+      "label": "Persönliche Stärken"
     },
     "type": 5,
-    "name": "Personal strengths",
     "description": "type for all categories of personal strength"
   },
   {
     "_id": {
-      "$oid": "561d2c7b6b90a0250e48bacc"
+      "$oid": "5633fe8544aefd11a76eac46"
+    },
+    "_class": "com.intellijob.domain.skills.SkillCategory",
+    "name": "Mobility",
+    "localizableObject": {
+      "label": "Mobilität"
     },
     "type": 6,
-    "name": "Mobility",
     "description": "type for Driving licences and driving cars"
-  },
-  {
-    "_id": {
-      "$oid": "561d38ed6b90a0250e48bacd"
-    },
-    "type": 1,
-    "name": "Experience",
-    "description": "type for all experience data."
-  },
-  {
-    "_id": {
-      "$oid": "561d39206b90a0250e48bace"
-    },
-    "type": 2,
-    "name": "Education",
-    "description": "type for all education data."
   }
 ]
