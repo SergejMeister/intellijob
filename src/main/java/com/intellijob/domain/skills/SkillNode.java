@@ -19,6 +19,7 @@ package com.intellijob.domain.skills;
 import com.intellijob.domain.BaseDocument;
 import com.intellijob.domain.localization.LocalizableObject;
 import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.index.Indexed;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,11 +29,14 @@ import java.util.List;
  */
 public class SkillNode extends BaseDocument {
 
-    List<SkillNode> nodes;
+    @Indexed
     private String name;
+
     private String Description;
 
     private LocalizableObject localizableObject;
+
+    private List<SkillNode> nodes;
 
     public SkillNode() {
         setNodes(new ArrayList<>());

@@ -1,0 +1,156 @@
+Agentur (Vermittlung)
+Alten-/Pflegeeinrichtung
+Anstaltswäscherei
+Architekturbüros
+Archiv
+Arztpraxis, Zahnarztpraxis
+Ausfluggaststätte
+Auslieferungslager
+Ausstellungsräume
+Bäder, Schwimmbäder
+Bananenreiferei
+Bank, Sparkasse
+Bausparkasse
+Baustellen
+Bekleidungsfachgeschäft
+Bibliothek
+Bibliothek, öffentliche
+Bildungseinrichtung
+Bistro
+Blockheizkraftwerk
+Bohrinsel
+Bootshaus
+Brauerei
+Bühnen (Gala, Show)
+Bühnen (Theater)
+Bundesbank
+Cafe, Eiscafe
+Call-Center
+Deponie, Müllplatz
+Detektei
+Discount
+Diskothek
+Donau-Bundeswasserstraße
+Drehbühne
+Drogeriemarkt
+Druckerei
+Eisbahn
+Fachgeschäft
+Fachschule
+Fahrgeschäft (Rummel)
+Film/Fernsehen
+Fließband, Transferstraße
+Flughafen
+Forschungsinstitut
+Freilichtbühnen
+Galerie
+Gaststätte, Restaurant
+Gehege
+Gemischtpraxis
+Gesamtschule
+Großbaustelle
+Großküche
+Großmarkt
+Hafen, Kai
+Hauptkasse
+Hort
+Hotel
+Ingenieurbüro
+Integrative Einrichtung
+Internat
+Jugendamt
+Jugendherberge
+Kantine, Kasino
+Käsetheke
+Kasse-Eintrittskarten
+Kasse-Sonstige
+Kaufhaus, Warenhaus
+Kegel-, Bowlingbahn
+Kernkraftwerk
+Kinderdorf
+Kindergarten
+Kindertagesstätte
+Kino
+Kleiderkammer
+Krankenhaus, Klinik
+Krankenhauswäscherei
+Kreißsaal
+Krippe/Krabbelstube
+Küche
+Kurklinik
+Kur- und Sporthotel
+Labor (klein)
+Labor (mittel, groß)
+Ladengeschäft, Shop
+Landeszentralbank
+Leihamt
+Leitstand
+Malersaal
+Mediothek
+Messe, Präsentation
+Musikschule
+Musiktheater
+Naturpark
+Nebenanlagen
+Notarkasse
+Ölmühle
+Pension, Hotel garni
+Pizzeria
+Plastikersaal
+Poststelle, Expedition
+Privathaushalt
+Privatschule
+Prüfstand
+Rechenzentrum
+Reederei
+Reifekeller
+Reinraum
+Reisebüro
+Rettungsdienst - Leitstelle
+Schießstand
+Schiffsküche
+Schlachthof
+Schlafwagen
+Schnellrestaurant
+Schreibkanzlei
+Schule
+Sekretariat
+Selbstbedienungsgaststätte
+Sitzkasse
+Sonderlager
+Sozialamt
+Speisewagen
+Spielhalle
+Spielkasino
+Spielstube, Miniclub
+Spinnerei
+Sportgeschäft
+Stationäre Anlagen
+Stehkasse
+Steinbruch
+Stellwerk
+Sudhaus
+Supermarkt
+Tankstelle, Kfz-Werkstätte
+Tanztheater
+Theater/Oper
+Tierheim
+Tierklinik
+Übersetzungsbüro
+Umtauschkasse
+Vergnügungslokal
+Vergnügungspark
+Versandgärtnerei
+Versuchsanlage
+Videothek
+Volkshochschule
+Wanderbühne
+Wäscherei und Chemischreinigung
+Wasserkraftwerk
+Weberei
+Weinstube, -restaurant
+Werbeagentur
+Werft
+Werkhallen
+Werkstatt
+Wissenschaftliche Bibliotheken

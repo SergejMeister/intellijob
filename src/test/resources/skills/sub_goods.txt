@@ -1,0 +1,16 @@
+Medizinischewaren
+Metall,Maschien- Werkzeugbau,Optik
+Bank,Versicherung,Immobilien
+Bau-, Bergbaumaschinen
+Bautechnik, Rohstoffe
+Buchhandel,Medien,Kultur,Kunst
+Elektro- und IT-technologie
+Fahrzeugbau,Verkehr,Transport
+Getränke
+Glas, Keramik
+Haushaltswaren, Möbel
+Land-,Forstwirtsch.,Gartenbau
+Nahrungs-, Genussmittel
+Schmuck,Geschenk,Uhren,Spielw.
+sonstige Produkte
+Textil, Bekleidung, Leder

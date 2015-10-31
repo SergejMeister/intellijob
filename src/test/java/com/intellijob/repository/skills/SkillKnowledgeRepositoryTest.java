@@ -17,19 +17,43 @@
 package com.intellijob.repository.skills;
 
 import com.intellijob.BaseTester;
+import com.intellijob.domain.localization.LocalizableObject;
 import com.intellijob.domain.skills.SkillCategory;
 import com.intellijob.domain.skills.SkillKnowledge;
 import com.intellijob.domain.skills.SkillNode;
 import com.intellijob.enums.SkillCategoryEnum;
 import junit.framework.Assert;
+import org.bson.types.ObjectId;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class SkillKnowledgeRepositoryTest extends BaseTester {
+
+    protected static final String KNOWLEDGES_RES_PATH = "skills/knowledgeRootCategories.txt";
+    protected static final String KNOWLEDGES_JOB_FORMS_RES_PATH = "skills/jobforms.txt";
+    protected static final String KNOWLEDGES_JOB_PLACES_RES_PATH = "skills/jobplaces.txt";
+    protected static final String KNOWLEDGES_BRANCH_RES_PATH = "skills/branch.txt";
+    protected static final String KNOWLEDGES_SUB_BUILDINNG_RES_PATH = "skills/sub_building.txt";
+    protected static final String KNOWLEDGES_SUB_JOB_SERVICES_RES_PATH = "skills/sub_job_services.txt";
+    protected static final String KNOWLEDGES_SUB_HOTEL_RES_PATH = "skills/sub_hotel_turismus.txt";
+    protected static final String KNOWLEDGES_SUB_IT_RES_PATH = "skills/sub_it.txt";
+    protected static final String KNOWLEDGES_SUB_GURDENING_RES_PATH = "skills/sub_gurdening.txt";
+    protected static final String KNOWLEDGES_SUB_MEDIEN_RES_PATH = "skills/sub_medien.txt";
+    protected static final String KNOWLEDGES_SUB_MANUFACTURE_RES_PATH = "skills/sub_manufacture.txt";
+    protected static final String KNOWLEDGES_SUB_SPORT_RES_PATH = "skills/sub_sport.txt";
+    protected static final String KNOWLEDGES_SUB_TRANSPORT_RES_PATH = "skills/sub_transport.txt";
+    protected static final String KNOWLEDGES_SUB_GOODS_RES_PATH = "skills/sub_goods.txt";
+    protected static final String KNOWLEDGES_SUB_ECONOMY_RES_PATH = "skills/sub_economy.txt";
+    protected static final String KNOWLEDGES_SUB_RESEARCH_RES_PATH = "skills/sub_research.txt";
+    protected static final String KNOWLEDGES_SUB_SUB_ARCHITECTURE_RES_PATH = "skills/sub_sub_architekture.txt";
+
 
     @Autowired
     private SkillCategoryRepository skillCategoryRepository;
@@ -39,12 +63,93 @@ public class SkillKnowledgeRepositoryTest extends BaseTester {
 
     @Test
     public void testSave() {
-        SkillKnowledge skillKnowledge = init();
+        SkillCategory category = skillCategoryRepository.findByType(SkillCategoryEnum.KNOWLEDGE.getTypeId());
+        SkillKnowledge skillKnowledge = new SkillKnowledge(category);
+        List<SkillNode> knowledges = initAllKnowledges();
+        skillKnowledge.setKnowledges(knowledges);
         skillKnowledgeRepository.save(skillKnowledge);
 
         SkillKnowledge testFind = skillKnowledgeRepository.findFirstByOrderByIdAsc();
         Assert.assertNotNull(testFind);
         Assert.assertFalse("Should not be empty!", testFind.getKnowledges().isEmpty());
+    }
+
+    private List<SkillNode> initAllKnowledges() {
+        List<SkillNode> rootCategories = readResourceData(KNOWLEDGES_RES_PATH);
+        List<SkillNode> newList =
+                addSubSkills("Arbeits-, Einsatzformen", rootCategories, KNOWLEDGES_JOB_FORMS_RES_PATH);
+        newList = addSubSkills("Arbeitsorte", newList, KNOWLEDGES_JOB_PLACES_RES_PATH);
+        newList = addSubSkills("Bau, Architektur", newList, KNOWLEDGES_SUB_BUILDINNG_RES_PATH);
+        addSubSkillsRecursiv("Architektur, Bauplanung, Bausachverständigenwesen", newList,
+                KNOWLEDGES_SUB_SUB_ARCHITECTURE_RES_PATH);
+
+        newList = addSubSkills("Branchen", newList, KNOWLEDGES_BRANCH_RES_PATH);
+        newList = addSubSkills("Dienstleistungen", newList, KNOWLEDGES_SUB_JOB_SERVICES_RES_PATH);
+        newList = addSubSkills("Hotel, Gaststätten, Tourismus", newList, KNOWLEDGES_SUB_HOTEL_RES_PATH);
+        newList = addSubSkills("IT, DV, Computer", newList, KNOWLEDGES_SUB_IT_RES_PATH);
+        newList = addSubSkills("Land-, Forstwirtschaft, Gartenbau", newList, KNOWLEDGES_SUB_GURDENING_RES_PATH);
+        newList = addSubSkills("Medien, Kunst, Gestaltung", newList, KNOWLEDGES_SUB_MEDIEN_RES_PATH);
+        newList = addSubSkills("Produktion, Verarbeitung, Technik", newList, KNOWLEDGES_SUB_MANUFACTURE_RES_PATH);
+        newList = addSubSkills("Soziales, Erziehung, Gesundheit, Sport", newList, KNOWLEDGES_SUB_SPORT_RES_PATH);
+        newList = addSubSkills("Ordners Transport, Verkehr", newList, KNOWLEDGES_SUB_TRANSPORT_RES_PATH);
+        newList = addSubSkills("Waren- und Produktkenntnisse", newList, KNOWLEDGES_SUB_GOODS_RES_PATH);
+        newList = addSubSkills("Wirtschaft, Verwaltung", newList, KNOWLEDGES_SUB_ECONOMY_RES_PATH);
+        newList = addSubSkills("Wissenschaft, Forschung, Entwicklung", newList, KNOWLEDGES_SUB_RESEARCH_RES_PATH);
+        return newList;
+    }
+
+    private List<SkillNode> addSubSkills(String skillName, List<SkillNode> list, String resPath) {
+        List<SkillNode> result = new ArrayList<>();
+        for (SkillNode skillNode : list) {
+            if (skillNode.getName().equals(skillName)) {
+                List<SkillNode> subSkills = readResourceData(resPath);
+                skillNode.setNodes(subSkills);
+                result.add(skillNode);
+            } else {
+                result.add(skillNode);
+            }
+        }
+
+        return result;
+    }
+
+    private void addSubSkillsRecursiv(String skillName, List<SkillNode> list, String resPath) {
+        if (list.isEmpty()) {
+            return;
+        }
+
+        for (SkillNode skillNode : list) {
+            if (skillNode.getName().equals(skillName)) {
+                List<SkillNode> subSkills = readResourceData(resPath);
+                skillNode.setNodes(subSkills);
+                return;
+            } else {
+                //call recursiv
+                addSubSkillsRecursiv(skillName, skillNode.getNodes(), resPath);
+            }
+        }
+    }
+
+    private List<SkillNode> readResourceData(String resourcePath) {
+        List<SkillNode> result = new ArrayList<>();
+
+        BufferedReader br;
+        String line;
+        try (InputStream inputStream = Thread.currentThread().getContextClassLoader()
+                .getResourceAsStream(resourcePath)) {
+            br = new BufferedReader(new InputStreamReader(inputStream, DEFAULT_ENCODING));
+            while ((line = br.readLine()) != null) {
+                LocalizableObject localizableObject = new LocalizableObject(line);
+                SkillNode skillNode = new SkillNode(new ObjectId(), localizableObject);
+                skillNode.setName(line);
+                result.add(skillNode);
+            }
+        } catch (Exception e) {
+            LOG.error("Error occurred while read file (" + resourcePath + ")", e);
+            Assert.fail("Can not read file");
+        }
+
+        return result;
     }
 
     private SkillKnowledge init() {

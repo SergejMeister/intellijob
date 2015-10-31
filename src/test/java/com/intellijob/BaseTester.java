@@ -19,6 +19,8 @@ package com.intellijob;
 import com.intellijob.domain.Profile;
 import com.intellijob.domain.User;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
@@ -37,11 +39,11 @@ public abstract class BaseTester {
     protected static final String USER_PROFILE_DEFAULT_SECONDNAME = "TestSecondName";
     protected static final String USER_PROFILE_DEFAULT_SEX = "M";
     protected final static String DEFAULT_ENCODING = "UTF-8";
-
     /**
      * Constants.
      */
     protected final static Boolean RUNNING_LIVE = TestApplicationConfig.LIVE_MONGODB;
+    protected final static Logger LOG = LoggerFactory.getLogger(BaseTester.class);
 
     protected User initDefaultUser() {
         Profile profile = new Profile();

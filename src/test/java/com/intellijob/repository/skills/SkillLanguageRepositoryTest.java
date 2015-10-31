@@ -26,11 +26,8 @@ import com.intellijob.domain.skills.SkillNode;
 import com.intellijob.enums.SkillCategoryEnum;
 import junit.framework.Assert;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +35,6 @@ import java.util.List;
 public class SkillLanguageRepositoryTest extends BaseTester {
 
     public static final String DEFAULT_LANGUAGE_RES = "skills/languages";
-    private final static Logger LOG = LoggerFactory.getLogger(SkillLanguageRepositoryTest.class);
 
     @Autowired
     private SkillCategoryRepository skillCategoryRepository;
@@ -62,8 +58,6 @@ public class SkillLanguageRepositoryTest extends BaseTester {
     }
 
     protected List<SkillNode> readLanguageData() {
-        URL languageUrl = Thread.currentThread().getContextClassLoader()
-                .getResource(DEFAULT_LANGUAGE_RES);
         List<CSVData> csvDataList = CSVReader.read(DEFAULT_LANGUAGE_RES, ",");
         Assert.assertNotNull(csvDataList);
         Assert.assertFalse(csvDataList.isEmpty());
