@@ -1,0 +1,40 @@
+Anforderungsmanagement
+Backupkonzepte (IT)
+Benchmark-Test
+Betriebssystemvirtualisierung
+CAD-Organisation
+Case Tools anwenden, bereitstellen
+Cloud Computing
+Datenfernübertragung (DFÜ)
+Datennetzinstallation
+Datenschutz
+Datenübernahme, Datenaufbereitung
+Dokumentenmanagementsysteme einsetzen
+E-Commerce, E-Business
+EDV-Anwender-Training
+First-Level-Support
+Grid-Computing
+Hardwareinstallation, Softwareinstallation
+High-Performance-Computing (HPC/Parallele Rechner)
+HIL (Hardware in the Loop)-Simulation
+Internet-, Intranettechnik
+Internetkompetenz
+IT-Architekturmanagement
+IT-Koordination
+IT-Organisation
+IT-Service-Management nach ITIL
+IT-Umzüge
+Konfigurationsmanagement (IT)
+Konfigurieren
+Netzwerkadministration, -management, -organisation
+Netzwerkmonitoring
+Operating
+Output-Management
+Second-Level-Support
+Sicherheitssysteme (IT), Datensicherheit
+Streaming-Technologie
+Systembetreuung, Systemadministration, Systemverwaltung
+Systemintegration
+Third-Level-Support
+Visualisieren (EDV)
+Web-Administration

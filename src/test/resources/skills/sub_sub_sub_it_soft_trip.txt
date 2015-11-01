@@ -1,0 +1,24 @@
+Camping- und Caravaning-Software Caracamp
+Hotelverwaltungs-, Reservierungssystem GASTROdat
+Hotelverwaltungs-, Reservierungssystem Host Front Office
+Hotelverwaltungs-, Reservierungssystem Hotline
+Hotelverwaltungs-, Reservierungssystem Opera
+Hotelverwaltungs-, Reservierungssystem Protel
+Hotelverwaltungs-, Reservierungssystem Sihot
+Hotelverwaltungs-, Reservierungssystem VelHotel
+Informations- und Reservierungssystem Feratel
+Orderman Bestell- und Abrechnungssysteme
+Reisebürosoftware BistroPortal
+Reisebürosoftware myJack/Jack Plus
+Reisebürosoftware ReiseZ.I.E.L.
+Reisebürosoftware WBS Blank
+Reiseinfo-, Reservierungssysteme
+Reiseinfo-, Reservierungssystem Galileo
+Reiseinfo-, Reservierungssystem Hogatex
+Reiseinfo-, Reservierungssystem IRIS/IRIS Plus
+Reiseinfo-, Reservierungssystem MySabre/merlin
+Reiseinfo-, Reservierungssystem SABRE
+Reisereservierungssystem START
+Reservierungs-, Hotel- und Gastronomiesystem Micros-Fidelio
+Reservierungssystem ORKA (Jugendherbergen)
+Vertriebs- und Reservierungssystem Amadeus Selling Platform

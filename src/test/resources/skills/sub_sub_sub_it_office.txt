@@ -1,0 +1,31 @@
+Bürokommunikation Lotus Smart Suite
+Bürokommunikation StarOffice
+Büromanagementsoftware Büro Plus NexT
+Dokumentenkonvertierungssoftware OmniPage
+DTP-Anwendung Publisher (MS Office)
+E-Mail-Programm Evolution (Linux)
+E-Mail-Programm Outlook (MS Office)
+E-Mail-Programm Pegasus Mail
+E-Mail-Programm Thunderbird (Mozilla)
+E-Mail-Ticket-System Request Tracker (RT)
+Groupware Lotus Notes and Domino
+Gruppenmanagementsystem Lotus Quickplace
+Gruppenmanagementsystem Lotus Quickr
+MS Windows SharePoint Services
+Open Office Bürosoftware
+Open Ticket Request System (OTRS)
+Planungs- und Kommunikationssoftware MindManager
+Präsentationsprogramm Keynote
+Präsentationsprogramm PowerPoint (MS Office)
+Projektplanungssoftware MS Project (MS Office)
+Spracherkennungssoftware
+Tabellenkalkulation Excel (MS Office)
+Tabellenkalkulation Lotus 1-2-3
+Tabellenkalkulation Multiplan
+Textverarbeitung Euroscript, XYWrite
+Textverarbeitung PC Text 4, 5
+Textverarbeitung Word (MS Office)
+Textverarbeitung Wordpro, Starwriter
+Visualisierungs- und Grafikprogramm OmniGraffle
+Visualisierungs- und Grafikprogramm Visio (MS Office)
+Visualisierungs- und Kommunikationssoftware MindManager

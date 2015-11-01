@@ -1,0 +1,43 @@
+Architektensoftware
+Asterisk VoIP Software
+Augenoptikprogramme, -anwendungen
+Automatisierungssoftware UC4
+CE-Praxissoftware Safexpert
+Diagnosesoftware DiagRA
+Einrichtungs- und Küchenplanungssoftware CARAT
+Einrichtungs- und Küchenplanungssoftware KPS
+Einrichtungs- und Küchenplanungssoftware Winner
+ELSA
+ELFI
+ELWIS
+ETKA
+ERWIN
+Energiepass- und Beratungssoftware HS Energieberater
+Expertensysteme, Künstliche Intelligenz
+Fahrplanprogramme
+Fensterbausoftware KLAES
+Fensterbausoftware Prefco/PrefSuite
+Fensterbausoftware SchüCad
+Fensterbausoftware SchüCal
+Fertigungsmanagementsystem WorkStream
+Holzbausoftware SEMA
+Informationssysteme Tierhaltung
+Installationsprogramm Microsoft Windows Installer
+Installationsprogramm Wise
+Konstruktions- und Kalkulationssoftware LogiKal
+Laborsteuersoftware (DasyLab, Visio, Labview)
+Lagerverwaltungssysteme
+Manufacturing Execution System (MES)
+Messdatenauswertungssoftware GlyphWorks
+Messprogramm Calypso
+Messprogramm Holos
+Monitoringsoftware Nagios
+Netzwerkinformationssystem BaSYS
+Plant Engineering Software - COMOS
+Projektprüfungssoftware Navisworks
+Verkehrsplanungssoftware AMPEL
+Verkehrsüberwachungssystem Leica LEIVTEC
+Verkehrsüberwachungssystem Planet
+Windenergie-Projektierungssoftware WindPRO
+Wissensmanagementsysteme
+Workflowsoftware Agfa Apogee

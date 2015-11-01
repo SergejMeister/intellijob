@@ -1,0 +1,17 @@
+AIX (Advanced Interactive eXecutive)
+Android
+DEC/VMS
+DPPX
+eCos
+Linux
+Macintosh Mac OS
+MS DOS
+NextStep
+Symbian OS
+Windows
+Windows Phone
+Virtualisierungssoftware KVM/QEMU
+Virtualisierungssoftware Microsoft
+Virtualisierungssoftware Oracle VM
+Virtualisierungssoftware VMware
+Virtualisierungssoftware Xen

@@ -1,0 +1,15 @@
+SPS-System ABB
+SPS-System Allen Bradley
+SPS-System B&R
+SPS-System Beckhoff
+SPS-System Foxborough
+SPS-System Hitachi
+SPS-System Klöckner Möller
+SPS-System Mitsubishi
+SPS-System Modicon
+SPS-System Omron
+SPS-System Philips
+SPS-System SIMATIC S5
+SPS-System SIMATIC S7
+SPS-System Teleperm
+SPS-System TwinCAT

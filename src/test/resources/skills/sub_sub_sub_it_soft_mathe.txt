@@ -1,0 +1,17 @@
+GNU Octave
+Konstruktionsberechnungssoftware Mathcad
+Mathematik- und Programmiersoftware Maple
+Mathematik- und Programmiersoftware Mathematica
+QDA-Software (Qualitative Datenanalyse)
+EViews
+Statistiksoftware LISREL
+Statistiksoftware Minitab
+Statistiksoftware Pegasus
+Statistiksoftware R
+Statistiksoftware SAS
+Statistiksoftware SigmaStat
+Statistiksoftware Sphinx
+Statistiksoftware SPSS
+Statistiksoftware Stata
+Statistiksoftware Statistica
+Statistik- und Datenanalysesoftware S-Plus

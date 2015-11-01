@@ -1,0 +1,84 @@
+Backup-Software ArcServe
+Backup-Software BackupExec
+Backup-Software HP Data Protector
+Backup-Software Legato Networker
+Backup-Software Retrospect
+Backup-Software Tivoli Storage Manager
+Business-Intelligence-Software MicroStrategy
+Chemiedatenbank Crossfire Beilstein
+Chemiedatenbank Crossfire Gmelin
+Content-Management-System (CMS) Alfresco
+Content-Management-System (CMS) IBM DB2
+Content-Management-System (CMS) Imperia
+Content-Management-System (CMS) RedDot
+Content-Management-System (CMS) Sitevision
+Content-Management-System (CMS) TYPO3
+Content-Management-Systeme (CMS) einsetzen
+Data Warehouse
+Daten-, Festplattenverwaltung
+Datenanalyseprogramm OLAP
+Datenbank Access (MS Office)
+Datenbank ADABAS
+Datenbank Borland Database Engine (BDE)
+Datenbank Caché
+Datenbank Centura
+Datenbank Clipper
+Datenbank DB2
+Datenbank db4o
+Datenbank dBase, xBase
+Datenbank DL/1
+Datenbank FileMaker
+Datenbank Firebird
+Datenbank FoxPro
+Datenbank Gupta
+Datenbank IMS
+Datenbank Informix
+Datenbank INGRES
+Datenbank Interbase
+Datenbankmanagementsystem Progress
+Datenbank MongoDB
+Datenbank MySQL
+Datenbank Oracle
+Datenbank Paradox
+Datenbank Poet
+Datenbank PostgreSQL
+Datenbank SAP DB/Max DB
+Datenbanksprache QMF
+Datenbanksprache SQL
+Datenbank SQL
+Datenbank SyBase
+Datenbanktechnologie SAP HANA
+Datenbank und Datenanalysesoftware Teradata
+Datenbank Unify
+Datenerfassungs- und -analyseprogramm Spike2
+Datenintegrations- und -Conversionssoftware iWay DataMigrator
+Daten- und Dokumentenmanagementsystem Canto Cumulus
+Daten- und Dokumentenmanagementsystem DIAdem
+Daten- und Dokumentenmanagementsystem Documentum
+Daten- und Dokumentenmanagementsystem EASY Archiv
+Daten- und Dokumentenmanagementsystem FileNet
+Daten- und Dokumentenmanagementsystem Lotus Domino
+Daten- und Dokumentenmanagementsystem PowerCenter
+Datenverwaltungsprogramm Adobe Bridge
+Datenvisualisierungs- und Analysesoftware Origin
+Dokumentenmanagementsystem ELO
+Entity-Relationship-Modell
+ETL-Prozess
+Informations- und Schriftgutmanagementsystem RegiSafe
+MS-SQL Server
+NetBackup-Software
+Produktinformationsmanagement-Systeme (PIM)
+proSoft Communication Server
+RDBMS (Relational Database Management System)
+Signalanalysesoftware FAMOS
+SQL Server Integration Services (SSIS)
+SQL Server Reporting Services (SSRS)
+Storage- und Backupsysteme
+Versionsverwaltungsprogr. Microsoft Visual SourceSafe (VSS)
+Versionsverwaltungsprogramm Adobe VersionCue
+Versionsverwaltungsprogramm CVS
+Versionsverwaltungsprogramm git
+Versionsverwaltungsprogramm Mercurial
+Versionsverwaltungsprogramm Perforce
+Versionsverwaltungsprogramm Subversion
+Verzeichnisdienst Active Directory

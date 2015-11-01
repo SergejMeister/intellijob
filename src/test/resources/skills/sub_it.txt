@@ -5,7 +5,7 @@ IT-Zertifikate
 Netzprotokolle
 Netzwerktechnik
 Netzwerkzertifizierungen
-Programmiersprachen, Programmbibl., Entwicklungsumgebungen
+Programmiersprachen, Entwicklungsumgebungen
 Softwareentwicklung, Programmierung
 Software - kaufmännische Anwendungsgebiete
 Software - technische Anwendungsgebiete

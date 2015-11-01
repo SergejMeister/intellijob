@@ -1,0 +1,24 @@
+ACMT (Apple Certified Macintosh Technician)
+ACSP (Apple Certified Support Professional)
+Adobe Certified Expert (ACE)
+Advanced Certified Novell Administrator (ACNA)
+CompTIA Zertifizierung A+
+CompTIA Zertifizierung Linux+
+CompTIA Zertifizierung Network+
+CompTIA Zertifizierung Security+
+CompTIA Zertifizierung Server+
+European Computer Driving Licence (ECDL)
+ISTQB Certified Tester
+LPI Zertifizierung Level 1 (Junior Level Admin.)
+LPI Zertifizierung Level 2 (Intermediate Level Admin.)
+MCITP (Microsoft Certified IT Professional)
+MCPD (Microsoft Certified Professional Developer)
+MCSA (Microsoft Certified Solutions Associate)
+MCSE (Microsoft Certified Solutions Expert)
+MCT (Microsoft Certified Trainer)
+MCTS (Microsoft Certified Technology Specialist)
+Microsoft Licensing Specialist
+MTA (Microsoft Technology Associate)
+NetApp Zertifizierung
+Red Hat Certified Engineer (RHCE)
+Red Hat Certified Technician (RHCT)

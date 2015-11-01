@@ -1,0 +1,32 @@
+Application Server BEA WebLogic
+Application Server JBoss
+Application Server Tomcat
+Application Server Glassfish
+Macromedia Homesite
+Adobe Dreamweaver
+Adobe GoLive
+Frontpage
+Intelligent Proxy Library (IPL)
+Online-Shop-Systeme
+Portal-Software Liferay
+Suchserver Elasticsearch
+Suchserver Solr
+Webanwendungsserver ZOPE
+Webbrowser Google Chrome
+Webbrowser Internet Explorer
+Webbrowser Mozilla Firefox
+Webbrowser Netscape
+Webbrowser Opera
+(CMS) Drupal
+(CMS) eZ Publish
+(CMS) Livelink
+CMS) Mambo / Joomla
+(CMS) Plone
+(CMS) Site-Machine
+(CMS) TYPOlight
+(CMS) Web Edition
+(CMS) WordPress
+Webserver Apache
+Webserver Lotus Domino
+Webserver nginx
+Java JAX-WS

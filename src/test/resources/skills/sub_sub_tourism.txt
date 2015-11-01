@@ -1,0 +1,24 @@
+Animation (Tourismus)
+Bäderwesen
+Bahntouristik
+Bustouristik
+Charterverkehr
+Fahrscheinverkauf, Ticketing
+Firmendienst (Reiseverkehr)
+Flugtouristik
+Gästebetreuung
+Gesundheitstourismus
+Gruppenreisen
+Individualreisen
+Inlands- und Regionaltourismus
+Internationaler Reiseverkehr
+Kurverwaltung
+Pauschalreisen
+Reiseeinkauf
+Reiseleitung
+Reiseveranstaltung
+Reisevermittlung
+Reservierung, Buchung (Reiseverkehr)
+Schiffstouristik, Kreuzfahrten
+Wissenschaftliche Reisebetreuung
+Zimmervermittlung

@@ -1,0 +1,123 @@
+CAD-/CAM-Anwendung Cerec
+CAD-/CAM-Anwendung Cimatron (Formen- u. Werkzeugbau)
+CAD-/CAM-Anwendung DraftBoard
+CAD-/CAM-Anwendung GIBcam
+CAD-/CAM-Anwendung Mastercam
+CAD-/CAM-Anwendung TopSolid
+CAD-/CAM-Anwendung VISI (Formen- u. Werkzeugbau)
+CAD/CAM Design-Software Assyst
+CAD-Anwendung, Planung- u. Präsentationssoftware PYTHA
+CAD-Anwendung ABIS PLAN
+CAD-Anwendung ACAD-BAU
+CAD-Anwendung Advance
+CAD-Anwendung ALIAS
+CAD-Anwendung Alibre
+CAD-Anwendung Archicad
+CAD-Anwendung Architectural Desktop
+CAD-Anwendung ARCHline
+CAD-Anwendung ArCon
+CAD-Anwendung ARRIBA
+CAD-Anwendung AutoCAD
+CAD-Anwendung AutoCAD Land Development
+CAD-Anwendung AutoCAD Map 3D
+CAD-Anwendung AutoCAD Mechanical
+CAD-Anwendung AutoCAD MEP
+CAD-Anwendung Auto Sketch
+CAD-Anwendung Bauset
+CAD-Anwendung BOCAD
+CAD-Anwendung Bravo
+CAD-Anwendung CADAM
+CAD-Anwendung CADDS 5
+CAD-Anwendung CADDY
+CAD-Anwendung CADprocess/IsoDraw
+CAD-Anwendung CADRA
+CAD-Anwendung Cadvance
+CAD-Anwendung cadwork
+CAD-Anwendung CARD/1
+CAD-Anwendung CATIA
+CAD-Anwendung Creo Parametric, Creo Elements/Pro
+CAD-Anwendung DDS-CAD
+CAD-Anwendung E3
+CAD-Anwendung Eagle
+CAD-Anwendung ecscad
+CAD-Anwendung ELCAD
+CAD-Anwendung EliteCAD Architektur
+CAD-Anwendung EliteCAD Mechanik
+CAD-Anwendung EPLAN
+CAD-Anwendung EUCLID
+CAD-Anwendung Genius
+CAD-Anwendung GEOgraf
+CAD-Anwendung GeoMedia
+CAD-Anwendung GeoVision
+CAD-Anwendung Glaser - isb cad -
+CAD-Anwendung Grafis (Schnitt- u. Bekleidungskonstruktion)
+CAD-Anwendung Helix
+CAD-Anwendung HiCAD
+CAD-Anwendung ICEM
+CAD-Anwendung I-DEAS
+CAD-Anwendung InfoCAD
+CAD-Anwendung Intergraph
+CAD-Anwendung Inventor
+CAD-Anwendung Koppermann Tex-Design
+CAD-Anwendung Lectra
+CAD-Anwendung LOGOCAD
+CAD-Anwendung ME10/OneSpace Designer Drafting
+CAD-Anwendung ME30/Solid Designer/OneSpace Designer Modeling
+CAD-Anwendung Mechanical Desktop
+CAD-Anwendung Medusa
+CAD-Anwendung MegaCAD
+CAD-Anwendung MicroStation
+CAD-Anwendung Nemetschek Allplan
+CAD-Anwendung OrCAD
+CAD-Anwendung Overlay
+CAD-Anwendung P-CAD
+CAD-Anwendung PC-Draft
+CAD-Anwendung PIPECAD
+CAD-Anwendung pit-cup
+CAD-Anwendung PKS
+CAD-Anwendung Plancal nova
+CAD-Anwendung Pointmaster
+CAD-Anwendung PRIMUS ELEKTRO-CAD
+CAD-Anwendung ProCAD
+CAD-Anwendung ProSteel
+CAD-Anwendung Protel
+CAD-Anwendung ProVI
+CAD-Anwendung RACOS
+CAD-Anwendung Revit
+CAD-Anwendung Rhino
+CAD-Anwendung RIBCON
+CAD-Anwendung RobCAD
+CAD-Anwendung RohrCAD
+CAD-Anwendung RUKON-Haustechnik
+CAD-Anwendung RUPLAN
+CAD-Anwendung Sigraph
+CAD-Anwendung SOFiCAD
+CAD-Anwendung Solid Edge
+CAD-Anwendung SolidWorks
+CAD-Anwendung Speedikon
+CAD-Anwendung Spirit
+CAD-Anwendung STRAKON
+CAD-Anwendung STRATIS
+CAD-Anwendung SYRKO
+CAD-Anwendung TARGET
+CAD-Anwendung TEBIS
+CAD-Anwendung TRIBON
+CAD-Anwendung TRICAD
+CAD-Anwendung und Planungssoftware RAUCAD/RAUWIN
+CAD-Anwendung VARCAD
+CAD-Anwendung VectorWorks
+CAD-Anwendung VermCAD
+CAD-Anwendung VESTRA
+CAD-Anwendung ViCADo
+CAD-Anwendung WSCAD
+CAD-Anwendung Xsteel
+CAD-Modul Lcable/Vobes (Kfz-Bordnetzentwicklung)
+CAD-Modul LDorado (Kfz-Bordnetzentwicklung)
+CAD-Programm C.A.T.S
+CAD-System LiNear
+CAM-Anwendung CAM350
+Diagnosesoftware ODIS
+Leiterplatten-Designsoftware Visula
+Leiterplatten-Designsysteme (PCB-Design)
+PDMS (Anlagenplanungssoftware) VANTAGE (Aveva)
+Schaltungsentwurfssoftware Microwave Office (AWR)

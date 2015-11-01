@@ -1,0 +1,22 @@
+Ausgleichsprogramme (SISTRA, Kafka u.a.)
+Electronic Chart Display and Information System (ECDIS)
+Fernerkundungssoftware ERDAS IMAGINE
+Fernerkundungssoftware PCI Geomatica
+Geobüro (Verwaltungsprogramm für Vermessungen)
+Geodaten-Anwendung ALK-GIAP
+Geodaten-Anwendung Surfer
+GeODin (Datenmanagement)
+Geografie-Software MapInfo
+Geoinformationssystem (GIS) ArcInfo
+Geoinformationssystem (GIS) GeoMedia
+Geoinformationssystem (GIS) Smallworld
+Geoinformationssystem ArcGIS
+Geoinformationssystem Moskito GIS
+Geoinformationssystem PolyGIS
+GIS (Geo-Info-System)
+GPS Global Positioning System
+Kartografiesoftware Arc View
+Katasterinformationssystem SICAD
+Kataster- und Vermessungssoftware KIVID
+MINKA (geodätisches Berechnungsprogramm)
+Web-Mapping-Software

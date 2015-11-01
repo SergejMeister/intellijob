@@ -1,0 +1,169 @@
+Apache Wicket Framework
+bash
+Build-Management-Tool Apache Ant
+Build-Management-Tool Apache Maven
+Build-Management-Tool CMake
+CakePHP Framework
+DCL (Digital Command Language)
+Doctrine Framework
+Druckersprache PCL (Printer Command Language)
+Druckersprache Prescribe
+Entwicklungsplattform Java ME (J2ME)
+Entwicklungsplattform Microsoft Silverlight
+Entwicklungsumgebung .NET Framework
+Entwicklungsumgebung 4D
+Entwicklungsumgebung ACE
+Entwicklungsumgebung Android SDK
+Entwicklungsumgebung Eclipse
+Entwicklungsumgebung Google Web Toolkit (GWT)
+Entwicklungsumgebung IntelliJ IDEA
+Entwicklungsumgebung JBuilder
+Entwicklungsumgebung NetBeans
+Entwicklungsumgebung Oracle Forms
+Entwicklungsumgebung Project Builder
+Entwicklungsumgebung TOAD
+Entwicklungsumgebung Tomcat
+Entwicklungsumgebung Trolltech Qt4
+Entwicklungsumgebung Visual C++
+Entwicklungsumgebung Visual Studio/Visual Studio.NET
+Entwicklungsumgebung Xcode
+Formatierungssprache CSS
+Hadoop Framework
+Hibernate Framework
+HTML
+XML
+XAML
+XSLT
+HTML/CSS Framework YAML
+JavaScript-Framework Backbone
+JavaScript-Framework Ember
+JavaScript-Framework Ext
+JavaScript-Framework Jasmine
+JavaScript-Framework jQuery
+JavaScript-Framework Knockout
+JavaScript-Framework MooTools
+Modellierungs- und Simulationssprache SystemC
+MSL (mIRC Scripting Language)
+NSIS (Nullsoft Scriptable Install System)
+PHP-Entwicklungsumgebung Zend Studio
+Programmbibliothek CORBA
+Programmbibliothek Motif
+Programmbibliothek SQLite
+Programmiersprache/Software MATLAB
+Programmiersprache 4GL
+Programmiersprache ABAP (SAP)
+Programmiersprache ActionScript
+Programmiersprache ActiveX
+Programmiersprache ADA
+Programmiersprache ADO.NET
+Programmiersprache Algol
+Programmiersprache APL
+Programmiersprache AppleScript
+Programmiersprache APT, EXAPT, EXAPTplus
+Programmiersprache ARIS
+Programmiersprache ASP
+Programmiersprache ASP.NET
+Programmiersprache Assembler
+Programmiersprache ATL
+Programmiersprache AWK
+Programmiersprache Basic, Turbo Basic
+Programmiersprache C
+Programmiersprache C#
+Programmiersprache C++
+Programmiersprache Clipper
+Programmiersprache Cobol
+Programmiersprache CoDeSys
+Programmiersprache CoffeeScript
+Programmiersprache ColdFusion
+Programmiersprache COM+
+Programmiersprache Delphi
+Programmiersprache Designer/2000
+Programmiersprache Developer/2000
+Programmiersprache Easytrieve Plus
+Programmiersprache Erlang
+Programmiersprache Esterel, Esterel studio
+Programmiersprache Fortran
+Programmiersprache Groovy
+Programmiersprache Haskell
+Programmiersprache IDL (Interactive Data Language)
+Programmiersprache Installscript
+Programmiersprache Installshield
+Programmiersprache J#
+Programmiersprache Java
+Programmiersprache Java EE
+Programmiersprache JavaScript
+Programmiersprache Jscript.NET
+Programmiersprache JSP (Java Server Pages)
+Programmiersprache LESS
+Programmiersprache LINGO
+Programmiersprache Lisp
+Programmiersprache Logo
+Programmiersprache LotusScript
+Programmiersprache Lustre
+Programmiersprache Modula
+Programmiersprache Natural
+Programmiersprache Oberon
+Programmiersprache Objective-C
+Programmiersprache Pascal, Turbo Pascal
+Programmiersprache PEARL
+Programmiersprache Perl
+Programmiersprache PHP
+Programmiersprache PL/SQL
+Programmiersprache PL1
+Programmiersprache PowerBuilder
+Programmiersprache PowerDesigner
+Programmiersprache PreS (Printsoft)
+Programmiersprache Progress OpenEdge ABL
+Programmiersprache Prolog
+Programmiersprache Python
+Programmiersprache Rational Rose
+Programmiersprache REBOL
+Programmiersprache Remedy
+Programmiersprache REXX
+Programmiersprache RPG
+Programmiersprache Ruby
+Programmiersprache SASS
+Programmiersprache Scala
+Programmiersprache SED
+Programmiersprache SGML
+Programmiersprache Smalltalk
+Programmiersprache SVG
+Programmiersprache Swift
+Programmiersprache Tcl/TK
+Programmiersprache TeX
+Programmiersprache VB.NET
+Programmiersprache VBA
+Programmiersprache VBScript
+Programmiersprache VC.NET
+Programmiersprache Verilog
+Programmiersprache VHDL
+Programmiersprache Visual Age
+Programmiersprache Visual Basic
+Programmiersprache Visual Basic (VB 6)
+Programmiersprache Visual J++
+Programmiersprache VRML
+Programmiersprache WML (Wireless Markup Language)
+Programmiersprache X++
+Programmiersprache xBase
+Programmiertechnik Ajax
+Programmiertechnik DHTML
+Qt Framework
+Rails (Ruby on Rails) Framework
+SAS Base/Macro Programmierung
+Schnittstellensprache IDL (Interface Definition Language)
+Schnittstellen Tool WebDynpro (SAP)
+Software CruiseControl (kontinuierliche Integration)
+Software Hudson (kontinuierliche Integration)
+Softwarekomponenten Enterprise JavaBeans (EJB)
+Spring Framework
+Symfony Framework
+Unified Modelling Language (UML)
+Unify SQLWindows
+Windows PowerShell
+Windows Presentation Foundation (WPF)
+Windows Script Host (WSH)
+WQL (Windows Query Language)
+WSDL (Web Services Description Language)
+XML web Services (.NET)
+Yii Framework
+Zend Framework

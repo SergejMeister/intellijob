@@ -1,0 +1,74 @@
+CAE-Anwendung Hypermesh
+CAE-Anwendung MSC
+CAE-Anwendung Nastran
+CFD-Software (Strömungssimulation)
+Dimensionierungssoftware SIMARIS design
+Engineering-Data-Management (EDM) Teamcenter
+Engineering Tool Software ETS
+Entwicklungssoftware ASCET
+Entwicklungssoftware CANape
+Entwicklungssoftware INCA
+Entwicklungssoftware Mentor Graphics
+Entwicklungssoftware RSLogix
+Entwicklungs- und Designsoftware Altium Designer
+Entwicklungs- und Design-Software Gerber
+Entwicklungs- und Simulationssoftware Stateflow
+Entwicklungs- und Testsoftware CANoe
+FEM-Anwendung ABAQUS
+FEM-Anwendung Algor
+FEM-Anwendung Ansys
+FEM-Anwendung AutoForm
+FEM-Anwendung Cadmould
+FEM-Anwendung CAEDS
+FEM-Anwendung Fatigue
+FEM-Anwendung I-DEAS
+FEM-Anwendung Marc
+FEM-Anwendung MEDINA
+FEM-Anwendung Mouldflow
+FEM-Anwendung Nastran
+FEM-Anwendung Patran
+FEM-Anwendung Plaxis
+FEM-Anwendung Pro/Mechanica
+FEM-Anwendung - RFEM
+FEM-Anwendung winLIFE
+FEM- und CAE-Anwendung LS-DYNA
+Fertigungsplanungssoftware eM-Planner
+Ingenieurbau-Komplettsystem Ing+
+Materialfluss-Simulationssoftware Taylor
+Mess- und Prüfsoftware PC-DMIS
+Mess- und Prüfsoftware Quindos
+Optik-Design-Software
+Pre- and Postprocessing-Tools
+Produktdatenmanagement-Software
+Produktentwicklungs-Software NX
+Produktentwicklungs- und Usability-Test-Software Morae
+Produktions- u. Logistiksimulation Plant Simulation
+Prozessplanungssoftware Delmia
+Prozesssimulationssoftware Aspen Plus
+Schaltkreis-Simulator Titan
+Simualtionssoftware AutoMod
+Simulationssoftware (CNC-Bearbeitung) IMAWinCAD
+Simulationssoftware (CNC-Bearbeitung) IMAWop
+Simulationssoftware 3DCreate
+Simulationssoftware Adams
+Simulationssoftware COMSOL Multiphysics
+Simulationssoftware DSP
+Simulationssoftware Flexsim
+Simulationssoftware Flotran
+Simulationssoftware Labview
+Simulationssoftware Maxwell
+Simulationssoftware ModelSim
+Simulationssoftware Moldflow
+Simulationssoftware PAM-CRASH
+Simulationssoftware PowerFactory
+Simulationssoftware PSpice
+Simulationssoftware SIMPACK
+Simulationssoftware SIMPLORER
+Simulationssoftware Simulink
+Simulationssoftware TRNSYS
+Simulations- und Entwicklungssoftware MathModelica
+Spritzgusssimulation C-MOLD
+Statikprogramm RSTAB
+Statikprogramm SOFiSTiK
+Synopsys
+COPA-DATA

@@ -1,0 +1,15 @@
+Agrarinformatik
+Angewandte Informatik
+Bauinformatik
+Bioinformatik
+Digitale Bild- und Sprachverarbeitung (Mustererkennung)
+Geoinformatik
+Industrielle Bildverarbeitung
+Medieninformatik
+Medizinische Informatik
+Sozialinformatik
+Technische Informatik
+Theoretische Informatik
+Umweltinformatik
+Verwaltungsinformatik
+Wirtschaftsinformatik

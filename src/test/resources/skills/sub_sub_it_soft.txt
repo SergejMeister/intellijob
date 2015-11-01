@@ -1,0 +1,64 @@
+Anwenderberatung, Anwender-Support (IT)
+Augmented Reality
+Barrierefreies Webdesign (Accessibility)
+Batch-Programme erstellen
+Behaviour-driven Development (BDD)
+Benutzerschnittstellen, Benutzeroberflächen
+CGI(Common Gateway Interface)-Programmierung
+CompTIA CDIA+
+CUDA Programmierung
+Datenanalyse
+Datenbankadministration, -management, -organisation
+Datenbankentwicklung
+Datenverschlüsselung (Kryptografie)
+Design Patterns
+Dynamic Link Library (DLL)
+Electronic Data Interchange (EDI)
+Fehlerverwaltungsprogramm Jira
+Flash- und Flex-Entwicklung
+Grafische Datenverarbeitung
+Informationsarchitektur
+Informations- und Kommunikationsmanagement
+Konfigurationsmanagementsoftware Rational ClearCase
+Macintosh-Anwendungen
+Maschinelle Spracherkennung
+Microsoft Foundation Classes (MFC)
+Mikroprozessor-Programmierung
+Modellbildung, Simulation (IT)
+MS System Center Operations Manager
+MS Systems Management Server/Configuration Manager
+Multimedia-Programmierung
+Multi-Tier-Programmierung
+Objektorientierte Programmierung (OO-Programmierung)
+Open DataBase Connectivity (ODBC)
+OSGi-Framework
+Paralleles Programmieren
+Paralleles Programmieren mit MPI (Message Passing Interface)
+Paralleles Programmieren mit OpenMP
+Paralleles Programmieren mit POSIX Threads
+Programmieren
+Projektmanagement- und Entwicklungsmethode Scrum
+SA/SADT
+Screendesign
+Shell-Programmierung, Shellscripting
+Softwareanpassung (Customizing)
+Softwarearchitektur
+Softwaredesign
+Softwareergonomie
+Software-Implementierung
+Softwarelokalisierung
+Softwarepaketierung
+Softwarestandard AUTOSAR
+Softwarestandard V-Modell
+Softwaretechnik, Software-Engineering
+Software testen
+Speichervirtualisierung
+SPICE Prozess Assessment
+Systemsoftware (Entwicklung, Programmierung, Analyse)
+Team Foundation Server (TFS)
+Test-driven Development (TDD)
+Treiberprogrammierung
+Unix-Windows-Integration
+Web-Applikationen (Entwicklung, Programmierung)
+Webdesign
+WMI (Windows Management Instrumentation)

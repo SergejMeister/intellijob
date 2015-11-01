@@ -1,0 +1,76 @@
+3D-Grafik-Software SketchUp
+3D-Visualisierungsprogramme
+Adobe Acrobat
+Adobe After Effects
+Audiosoftware Adobe Soundbooth
+Audiosoftware WaveSurfer
+Authoring-Software Adobe Encore
+Autorensysteme (Macromedia Director, Toolbook u.a.)
+Bildbearbeitungsprogramm Adobe Photoshop
+Bildbearbeitungsprogramm GIMP
+Bildbearbeitungsprogramm Paintshop Pro
+Bildbearbeitungsprogramm Picasa
+Bildbearbeitungsprogramm Picture Publisher
+Bildbearbeitungsprogramm Ulead PhotoImpact
+Broadcast-Software DigaSystem
+Datenvisualisierungs- und Analysesoftware Igor Pro
+Designumgebung DFII
+DTP-Anwendung Adobe InDesign
+DTP-Anwendung Adobe PageMaker
+DTP-Anwendung ArtPro
+DTP-Anwendung FrameMaker
+DTP-Anwendung QuarkXPress
+DTP-Anwendung RagTime
+DTP-Anwendung Scribus
+DTP-Anwendung Ventura Publisher
+Grafikbibliothek OpenGL
+Grafikprogramm 3D Studio Max/3ds Max
+Grafikprogramm Adobe Fireworks
+Grafikprogramm Adobe Flash
+Grafikprogramm Adobe Freehand
+Grafikprogramm Adobe Illustrator
+Grafikprogramm Corel Designer Technical Suite
+Grafikprogramm CorelDraw
+Grafikprogramm form.Z
+Grafikprogramm Inkscape
+Grafikprogramm Micrografx Graphics Suite
+Grafikprogramm Sodipodi
+Grafikschnittstelle Direct 3D
+Grafik- und Animationssoftware CINEMA 4D
+Grafik- und Datenvisualisierungssoftware Xact
+Illustrations- und Malsoftware Corel Painter
+Mindmapping-Visualisierungssoftware
+Multimediasoftware Adobe Captivate
+Musik-/Audio-Software Ableton Live
+Musik-/Audio-Software Adobe Audition, Cool Edit
+Musik-/Audio-Software Audacity
+Musik-/Audio-Software Cubase
+Musik-/Audiosoftware Fruity Loops Studio
+Musik-/Audio-Software Logic
+Musik-/Audio-Software Pro Tools
+Musik-/Audio-Software Reason
+Musik-/Audiosoftware Samplitude
+Musik-/Audio-Software Soundforge
+Präsentationsprogramm Freelance Graphics
+Präsentationsprogramm Harvard Graphics
+Redaktions- und Textverwaltungsprogramm Adobe InCopy
+Schnittsystem Fast (Software)
+Schnittsystem FinalCut (Software)
+Textsatzsystem Tex, LaTeX
+Unity 3D-Engine (Entwicklungsumgebung)
+Video-/Audio-Software Avid
+Video-/Audio-Software DirectShow
+Video-/Film-Software Adobe Premiere
+Video-/Film-Software Combustion
+Video-/Film-Software Digital Fusion
+Video-/Film-Software Final Cut Pro
+Videobearbeitungs-Software Pinnacle Studio
+Visualisierungssystem Citec
+Visualisierungssystem COROS
+Visualisierungssystem Genesis
+Visualisierungssystem iFix
+Visualisierungssystem VisiWinNET
+Visualisierungssystem WinCC
+Visualisierungs- und Animationssoftware Blender
+Visualisierungs- und Animationssoftware Maya
+Zeichenprogramm für chem. Strukuren CS ChemDraw

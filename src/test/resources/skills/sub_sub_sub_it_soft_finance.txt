@@ -1,0 +1,114 @@
+AECMA SPEC 2000 M
+Anlagenbuchführungssoftware ANLAG (Datev)
+Banksoftware agree
+Betriebswirtschaftssoftware Evolution/APERTU
+Betriebswirtschaftssoftware Infor COM
+Betriebswirtschaftssoftware Integris
+Budgetierungs- und Planungssoftware Professional Planner
+Business-Performance-Management-Software Hyperion
+Business-Programm AB VENTANA
+Business-Programm Business Objects
+Business-Programm QlikView
+Business-Programm WebFOCUS
+Business-Software Gesys Business Success
+Controlling Software Corporate Planner
+Customer-Relationship-Management(CRM)-Software Goldmine
+Customer-Relationship-Management(CRM)-Software Kundenagent
+Customer-Relationship-Management-Software ACT!
+Customer-Relationship-Management-Software CAS genesisWorld
+Customer-Relationship-Management-Software Salesforce
+Customer-Relationship-Management-Software Siebel CRM Suite
+Datev-Programm Rechnungswesen
+Datev-Programm Warenwirtschaft
+Enterprise-Content-Management (ECM) Saperion
+Enterprise-Resource-Planning (ERP) Microsoft Dynamics
+Enterprise-Resource-Planning(ERP)-Programm abas
+Enterprise-Resource-Planning(ERP)-Programm Baan
+Enterprise-Resource-Planning(ERP)-Programm FRIDA
+Enterprise-Resource-Planning (ERP)-Programm IFS Applications
+Enterprise-Resource-Planning(ERP)-Programm Infor XPPS
+Enterprise-Resource-Planning(ERP)-Programm JDEdwards
+Enterprise-Resource-Planning(ERP)-Programm MAJESTY
+Enterprise-Resource-Planning(ERP)-Programm MFG pro
+Enterprise-Resource-Planning(ERP)-Programm proALPHA
+Enterprise-Resource-Planning(ERP)-Programm WINLine
+ERP-Software Exact.Pro/Exact Globe
+ERP-Software Sage New Classic
+FIBU-Programme
+Finanzbuchhaltungssoftware Diamant
+Finanzsoftware Infor FMS (Financial Management System)
+Finanzsoftware NSK (New System Kommunal)
+Geschäftsprozessmanagement-Software ADONIS
+Geschäftsprozessmanagement-Software ARIS
+Haushaltsrechnungssoftware DATEVkommunal
+HP OpenView
+Inkasso-Software Ikaros
+Integrations- und Anwendungsinfrastruktursoftware WebSphere
+Integrations- und Anwendungsplattform SAP Netweaver
+Investment-Management-System SimCorp Dimension
+Kaufmännische Software SelectLine
+Lexware
+Lucanet (Software)
+Marktforschungssoftware Conjoint Analysis (Sawtooth)
+Meldewesensoftware ABACUS/DaVinci
+Microsoft BizTalk Server
+Microsoft Dynamics CRM - Customer Relationship Management
+mySAP.com
+Product-Lifecycle-Management(PLM)-Software
+Produktionsplanungssysteme (PPS)
+Produktmanagementsystem VP/MS (Versicherungen)
+Projektmanagement-Software Asta Powerproject
+Projektmanagement-Software Primavera
+Projektmanagement-Software RPlan
+Projektsimulationssoftware Simultrain
+Rechnungswesensoftware Sage Office Line
+Reportingsoftware Crystal Reports
+Reporting- u. Business Intelligence Software Cognos
+SAP-Basis-System
+SAP Business ByDesign
+SAP Business Explorer Suite (BEx)
+SAP BusinessObjects-Lösungen (Business Intelligence)
+SAP Business One
+SAP BW (Business Information Warehouse)
+SAP ERP
+SAP-Modul AFS (Bekleidungs- und Schuhindustrie)
+SAP-Modul APO (Advanced Planning and Optimization)
+SAP-Modul CO (Controlling)
+SAP-Modul CRM (Customer Relationship Management)
+SAP-Modul CS (Customer Service)
+SAP-Modul EC-CS (Konsolidierung)
+SAP-Modul EDM (Energiedatenmanagement)
+SAP-Modul EH&S (Environment, Health & Safety)
+SAP-Modul ENHW (Einkauf Nichthandelsware)
+SAP-Modul FI (Rechnungswesen - Buchhaltung)
+SAP-Modul FICO (Finanz Controlling)
+SAP-Modul IM (Investitionsmanagement)
+SAP-Modul IS-U (Verbrauchsabrechnung)
+SAP-Modul LE (Logistics Execution)
+SAP-Modul MM (Materialwirtschaft)
+SAP-Modul PDM (Produktdatenmanagement)
+SAP-Modul PM (Instandhaltung)
+SAP-Modul PP (Produktionsplanung)
+SAP-Modul PS (Projektabwicklung)
+SAP-Modul QM (Qualitätsmanagement)
+SAP-Modul RE (Immobilienmanagement)
+SAP-Modul SD (Vertrieb)
+SAP-Modul SEM-BCS (Konsolidierung)
+SAP-Modul SRM (Supplier Relationship Management)
+SAP-Modul TM (Transportation Management)
+SAP-Modul WF (Workflow)
+SAP-Modul WM (Warehouse Management)
+SAP R/2
+SAP R/3
+Steuerberatungs- und Finanzsoftware [tse:nit]
+Steuerberatungs- und Finanzsoftware Schleupen
+Steuerberatungs- und Finanzsoftware Simba
+Steuerberatungs- und Wirtschaftsprüfungssoftware Addison
+Termin- und Kapazitätsplanungssystem TKP
+TOPIX
+Unfallversicherungssoftware GUSO
+Warenwirtschaftssysteme
+Wirtschaftsdatenanalysesoftware Saphir
+Workflow-Management-Systeme
+Workflow-Management-System Lotus Workflow
+Workflow- und ARS-System (Action Request System) Remedy

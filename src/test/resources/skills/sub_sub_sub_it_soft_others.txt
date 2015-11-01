@@ -1,0 +1,52 @@
+Adressverwaltungssoftware cobra Adress PLUS
+Adressverwaltungssoftware combit address manager
+Adressverwaltungssoftware CONVENTO
+Anforderungsmanagement-Software Telelogic Doors
+Bibliothekssoftware Bibliotheca
+Bibliotheks- und Archivsoftware Allegro
+Bibliotheks- und Archivsoftware Augias Archiv
+Bibliotheks- und Archivsoftware FAUST
+Bibliotheks- und Archivsoftware PICA
+Bibliotheks- und Archivsoftware SISIS-SunRise
+Börseninformationssysteme
+CALL (Computer Assisted Language Learning)
+Computersysteme Filmgeschäftsführung SESAM/MovieMagic
+Computersysteme Produktionsleitung SESAM/MovieMagic
+Dealer-Management-System (VW/Audi) VAUDIS
+Druckereisoftware Prinance/Printy (Alphagraph)
+E-Commerce-Plattform Magento
+E-Commerce-Software Enfinity
+Ersatzteilekatalogsystem ETKA/ETOS
+Fraud-Systeme
+Groupware Microsoft Exchange Server
+Homebanking-Standard HBCI
+Infrastrukturmanagementsoftware Aperture
+Kfz-Anwendungen Audatex
+Kommunikationssoftware Skype for Business
+Kommunikations- und Dokumentmanagementsoftware Streamserve
+Literaturverwaltungssoftware EndNote
+Literaturverwaltungssystem LIDOS
+Logistik-, Speditions-, Transportsoftware Trans A.I.D.
+MovieMagic Budgeting (Software)
+MovieMagic Scheduling (Software)
+Museumsverwaltungssoftware MuseumPlus
+Nachrichtenredaktionssoftware FastNews
+SAP-Modul GTS (Global Trade Services)
+SESAM Budgeting (Software)
+SESAM Scheduling (Software)
+Software Datev pro
+Systemadministration Lotus Notes/Domino
+TeamViewer Fernwartungs- und Online Meeting Software
+Transportmanagement-System CargoSoft
+Übersetzungssoftware across
+Übersetzungssoftware memoQ
+Übersetzungssoftware Translation Memory Trados
+Übersetzungssoftware Translation Memory Transit
+VerBIS (Vermittl.,Berat.,Infosystem d. Bundesagentur f. Arb)
+Verlagssoftware Verlagsmanager
+Vertriebsanalysesoftware RegioGraph 10
+Vertriebsplanungssoftware District 10
+Warenwirtschaftssoftware BRZ (Baumaterialien und -geräte)
+Web-Applikation MESO Internetauskunft
+Wissenschafts- und Bibliotheksoftware dSpace
+Zoll-Softwaresystem ATLAS
