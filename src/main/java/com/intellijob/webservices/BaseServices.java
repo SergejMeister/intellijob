@@ -16,7 +16,7 @@
 
 package com.intellijob.webservices;
 
-import com.intellijob.dto.ResponseError;
+import com.intellijob.dto.response.ResponseError;
 import com.intellijob.exceptions.BaseException;
 import com.intellijob.exceptions.DocumentNotFoundException;
 import com.intellijob.mail.exception.BaseMailException;

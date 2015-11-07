@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.intellijob.dto;
+package com.intellijob.dto.response;
 
 import com.intellijob.domain.AuditData;
 import com.intellijob.models.AuditModel;

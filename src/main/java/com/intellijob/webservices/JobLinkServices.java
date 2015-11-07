@@ -18,8 +18,8 @@ package com.intellijob.webservices;
 
 import com.intellijob.controllers.JobLinkController;
 import com.intellijob.domain.JobLink;
-import com.intellijob.dto.ResponseJobLinkData;
-import com.intellijob.dto.ResponseJobLinkTableData;
+import com.intellijob.dto.response.ResponseJobLinkData;
+import com.intellijob.dto.response.ResponseJobLinkTableData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.PathVariable;

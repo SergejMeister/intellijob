@@ -17,7 +17,7 @@
 package com.intellijob.webservices;
 
 
-import com.intellijob.dto.DownloadResultData;
+import com.intellijob.dto.response.DownloadResultData;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.http.MediaType;

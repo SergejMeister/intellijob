@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.intellijob.dto;
+package com.intellijob.dto.response;
 
 import com.intellijob.domain.JobDetail;
 import org.springframework.data.domain.Page;

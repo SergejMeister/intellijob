@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.intellijob.dto;
+package com.intellijob.dto.response;
 
 /**
  * Data transfer object to represent download result.

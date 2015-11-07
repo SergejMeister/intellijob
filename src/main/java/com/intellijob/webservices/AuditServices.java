@@ -18,9 +18,9 @@ package com.intellijob.webservices;
 
 import com.intellijob.controllers.AuditController;
 import com.intellijob.domain.AuditData;
-import com.intellijob.dto.RequestAuditData;
-import com.intellijob.dto.ResponseAuditData;
-import com.intellijob.dto.ResponseAuditModelData;
+import com.intellijob.dto.request.RequestAuditData;
+import com.intellijob.dto.response.ResponseAuditData;
+import com.intellijob.dto.response.ResponseAuditModelData;
 import com.intellijob.models.AuditModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;

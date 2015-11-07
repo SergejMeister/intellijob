@@ -14,12 +14,8 @@
  * limitations under the License.
  */
 
-package com.intellijob.dto;
-
-import java.io.Serializable;
-
 /**
- * Default response - data transfer object.
+ *
  */
-public class ResponseData implements Serializable {
-}
+package com.intellijob.dto.response;
+

@@ -19,8 +19,8 @@ package com.intellijob.webservices;
 
 import com.intellijob.controllers.JobDetailController;
 import com.intellijob.domain.JobDetail;
-import com.intellijob.dto.ResponseJobDetailData;
-import com.intellijob.dto.ResponseJobDetailTableData;
+import com.intellijob.dto.response.ResponseJobDetailData;
+import com.intellijob.dto.response.ResponseJobDetailTableData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.PathVariable;

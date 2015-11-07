@@ -14,8 +14,12 @@
  * limitations under the License.
  */
 
-/**
- *
- */
-package com.intellijob.dto;
+package com.intellijob.dto.request;
 
+import java.io.Serializable;
+
+/**
+ * Default Request - data transfer object.
+ */
+public class RequestData implements Serializable {
+}
