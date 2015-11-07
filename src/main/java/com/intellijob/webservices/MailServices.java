@@ -94,9 +94,7 @@ public class MailServices extends BaseServices {
      * @throws Exception handle exceptions.
      */
     @RequestMapping(value = Endpoints.MAILS_SEARCH, method = RequestMethod.POST)
-    public
-    @ResponseBody
-    ResponseMailSearchData searchMail(@RequestBody RequestMailData requestMailData)
+    public @ResponseBody ResponseMailSearchData searchMail(@RequestBody RequestMailData requestMailData)
             throws Exception {
         validate(requestMailData);
         MailReceiver mailReceiver = mailFactory.getReceiver(requestMailData);
@@ -134,9 +132,7 @@ public class MailServices extends BaseServices {
      * @throws Exception handle exceptions.
      */
     @RequestMapping(value = Endpoints.MAILS, method = RequestMethod.GET)
-    public
-    @ResponseBody
-    ResponseMailTableData getMail() throws Exception {
+    public @ResponseBody ResponseMailTableData getMail() throws Exception {
         List<Mail> mails = mailController.findAll();
         return new ResponseMailTableData(mails);
     }
@@ -147,9 +143,7 @@ public class MailServices extends BaseServices {
      * @return data transfer object <code>ResponseJobTableData.java</code>
      */
     @RequestMapping(value = Endpoints.MAILS_PAGING, method = RequestMethod.GET)
-    public
-    @ResponseBody
-    ResponseMailTableData getMails(@PathVariable int pageIndex, @PathVariable int limit) {
+    public @ResponseBody ResponseMailTableData getMails(@PathVariable int pageIndex, @PathVariable int limit) {
         Page<Mail> mailPage = mailController.findPage(pageIndex, limit);
         return new ResponseMailTableData(mailPage);
     }
@@ -161,9 +155,7 @@ public class MailServices extends BaseServices {
      * @throws Exception handle exceptions.
      */
     @RequestMapping(value = Endpoints.MAIL_BY_ID, method = RequestMethod.GET)
-    public
-    @ResponseBody
-    ResponseMailData getMail(@PathVariable String mailId) throws Exception {
+    public @ResponseBody ResponseMailData getMail(@PathVariable String mailId) throws Exception {
         Mail mail = mailController.findMail(mailId);
         return new ResponseMailData(mail);
     }
@@ -175,9 +167,7 @@ public class MailServices extends BaseServices {
      * @throws Exception handle exceptions.
      */
     @RequestMapping(value = Endpoints.MAIL_BY_ID, method = RequestMethod.DELETE)
-    public
-    @ResponseBody
-    ResponseMailData deleteMail(@PathVariable String mailId) throws Exception {
+    public @ResponseBody ResponseMailData deleteMail(@PathVariable String mailId) throws Exception {
         mailController.deleteById(mailId);
         return new ResponseMailData(mailId);
     }
@@ -209,18 +199,14 @@ public class MailServices extends BaseServices {
      */
     @ExceptionHandler(PermissionDeniedException.class)
     @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
-    public
-    @ResponseBody
-    ResponseError handleException(PermissionDeniedException pde) {
+    public @ResponseBody ResponseError handleException(PermissionDeniedException pde) {
         LOG.warn(pde.getMailError().getMessage(), pde);
         return handleException(HttpStatus.UNAUTHORIZED, pde);
     }
 
     @ExceptionHandler(BaseMailException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    public
-    @ResponseBody
-    ResponseError handleException(BaseMailException bme) {
+    public @ResponseBody ResponseError handleException(BaseMailException bme) {
         LOG.error(bme.getMailError().getMessage(), bme);
         return handleException(HttpStatus.BAD_REQUEST, bme);
     }

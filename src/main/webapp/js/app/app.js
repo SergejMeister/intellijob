@@ -5,12 +5,12 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
@@ -65,6 +65,9 @@ intelliJob.config([
         }).when('/intellijob/audit', {
             templateUrl: '/intellijob/views/audit.html',
             controller: 'AuditCtrl'
+        }).when('/intellijob/users', {
+            templateUrl: '/intellijob/views/user.html',
+            controller: 'UserCtrl'
         }).otherwise({
             redirectTo: '/intellijob',
             templateUrl: '/intellijob/views/mailSearchForm.html',
@@ -85,6 +88,8 @@ intelliJob.config([
                 var status = response.status;
 
                 if (status == 401) {
+                    $cookieStore.remove("user");
+                    delete $rootScope.user;
                     $rootScope.error = status + ": " + response.data.message;
                 }
 
@@ -98,7 +103,7 @@ intelliJob.config([
 
         $httpProvider.responseInterceptors.push(interceptor);
 
-    }]).run(function ($rootScope) {
+    }]).run(function ($rootScope, $cookieStore, UserServices) {
     //Reset error and success when a new view is loaded
     $rootScope.$on('$viewContentLoaded', function () {
         delete $rootScope.error;
@@ -109,6 +114,24 @@ intelliJob.config([
             $rootScope.transferSuccess = false;
         }
     });
+
+    $rootScope.$on('$routeChangeSuccess', function () {
+        /* Try getting valid user from cookie*/
+        $rootScope.user = $cookieStore.get('user');
+        if (!$rootScope.isUserValid()) {
+            //user not valid, request getUser
+            UserServices.getUser().success(function (response) {
+                $rootScope.user = response;
+                $cookieStore.put("user", $rootScope.user);
+            }).error(function (error) {
+                $rootScope.error = status + ": " + error.data.message;
+            });
+        }
+    });
+
+    $rootScope.isUserValid = function () {
+        return $rootScope.user !== undefined && $rootScope.user.userId !== undefined;
+    };
 
     console.log($rootScope);
 });

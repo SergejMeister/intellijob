@@ -60,7 +60,17 @@
                     </div>
                     <div>
                         <ul class="nav navbar-nav pull-right">
-                            <li><a href="/intellijob/user">User</a></li>
+                            <li ng-show="isUserValid()">
+                                <a href="/intellijob/users">
+                                    <span class="glyphicon glyphicon-user" aria-hidden="true">
+                                        <span>{{user.responseProfileData.fullName}}</span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li ng-hide="isUserValid()">
+                                <a href="/intellijob/users">Registrieren</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -99,6 +109,7 @@
         <script src="/intellijob/js/app/services/jobServices.js"></script>
         <script src="/intellijob/js/app/services/jobDetailServices.js"></script>
         <script src="/intellijob/js/app/services/auditServices.js"></script>
+        <script src="/intellijob/js/app/services/userServices.js"></script>
 
         <!-- Controller -->
         <script src="/intellijob/js/app/controllers/mailControllers.js"></script>
@@ -110,6 +121,7 @@
         <script src="/intellijob/js/app/controllers/jobDetailTableControllers.js"></script>
         <script src="/intellijob/js/app/controllers/jobDetailControllers.js"></script>
         <script src="/intellijob/js/app/controllers/auditControllers.js"></script>
+        <script src="/intellijob/js/app/controllers/userControllers.js"></script>
 
         <!-- Directives -->
         <!--<script src="/js/app/directives/imagedirectives.js"></script>-->

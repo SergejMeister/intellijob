@@ -80,9 +80,7 @@ public class JobServices extends BaseServices {
      * @return job data.
      */
     @RequestMapping(value = Endpoints.JOBS, method = RequestMethod.GET)
-    public
-    @ResponseBody
-    ResponseJobTableData getAllJobs() {
+    public @ResponseBody ResponseJobTableData getAllJobs() {
         List<Job> jobs = jobController.findAll();
         //returns without job content, only metadata.
         return new ResponseJobTableData(jobs, Boolean.FALSE);
@@ -94,9 +92,7 @@ public class JobServices extends BaseServices {
      * @return data transfer object <code>ResponseJobTableData.java</code>
      */
     @RequestMapping(value = Endpoints.JOBS_PAGING, method = RequestMethod.GET)
-    public
-    @ResponseBody
-    ResponseJobTableData getJobs(@PathVariable int pageIndex, @PathVariable int limit) {
+    public @ResponseBody ResponseJobTableData getJobs(@PathVariable int pageIndex, @PathVariable int limit) {
         Page<Job> jobPage = jobController.findPage(pageIndex, limit);
         return new ResponseJobTableData(jobPage, Boolean.FALSE);
     }
@@ -107,9 +103,7 @@ public class JobServices extends BaseServices {
      * @return data transfer object <code>ResponseJobTableData.java</code>
      */
     @RequestMapping(value = Endpoints.JOBS_BY_ID, method = RequestMethod.GET)
-    public
-    @ResponseBody
-    ResponseJobData getJobContent(@PathVariable String jobId) throws Exception {
+    public @ResponseBody ResponseJobData getJobContent(@PathVariable String jobId) throws Exception {
         Job job = jobController.findById(jobId);
         return new ResponseJobData(job, Boolean.TRUE);
     }
@@ -124,9 +118,7 @@ public class JobServices extends BaseServices {
      * @return data transfer object <code>ResponseJobTableData.java</code>
      */
     @RequestMapping(value = Endpoints.JOBS_BY_ID_EXTRACT, method = RequestMethod.POST)
-    public
-    @ResponseBody
-    ResponseJobDetailData extractJobContent(@PathVariable String jobId) throws Exception {
+    public @ResponseBody ResponseJobDetailData extractJobContent(@PathVariable String jobId) throws Exception {
         Job job = jobController.findById(jobId);
         JobDetail extractedJobDetails = jobDetailController.extractJobDetailAndSave(job);
         return new ResponseJobDetailData(extractedJobDetails);
@@ -144,9 +136,7 @@ public class JobServices extends BaseServices {
      * @return job data.
      */
     @RequestMapping(value = Endpoints.JOBS_BY_JOBLINK_ID_DOWNLOAD, method = RequestMethod.POST)
-    public
-    @ResponseBody
-    ResponseJobData downloadByJobLinkId(@PathVariable String jobLinkId) throws Exception {
+    public @ResponseBody ResponseJobData downloadByJobLinkId(@PathVariable String jobLinkId) throws Exception {
         JobLink jobLink = jobLinkController.findById(jobLinkId);
 
         //Get-JOB-Content
@@ -183,9 +173,7 @@ public class JobServices extends BaseServices {
      */
     @ExceptionHandler(JobLinkNotFoundException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    public
-    @ResponseBody
-    ResponseError handleException(JobLinkNotFoundException e) {
+    public @ResponseBody ResponseError handleException(JobLinkNotFoundException e) {
         LOG.error(e.getError().getMessage(), e);
         return handleException(HttpStatus.NOT_FOUND, e);
     }
@@ -199,9 +187,7 @@ public class JobServices extends BaseServices {
      * @return job data.
      */
     @RequestMapping(value = Endpoints.JOBS_DOWNLOAD, method = RequestMethod.POST)
-    public
-    @ResponseBody
-    DownloadResultData downloadAll() throws Exception {
+    public @ResponseBody DownloadResultData downloadAll() throws Exception {
         List<JobLink> jobLinksToDownlaod = jobLinkController.findToDownload();
 
         RestTemplate restTemplate = new RestTemplate();
@@ -250,9 +236,7 @@ public class JobServices extends BaseServices {
      * @return data transfer object <code>ResponseJobData</code>
      */
     @RequestMapping(value = Endpoints.JOBS_BY_ID, method = RequestMethod.DELETE)
-    public
-    @ResponseBody
-    ResponseJobData deleteJob(@PathVariable String jobId) throws Exception {
+    public @ResponseBody ResponseJobData deleteJob(@PathVariable String jobId) throws Exception {
         jobController.deleteById(jobId);
         return new ResponseJobData(jobId);
     }

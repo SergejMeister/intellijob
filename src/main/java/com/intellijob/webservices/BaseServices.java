@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  */
 public abstract class BaseServices {
 
-    private final static Logger LOG = LoggerFactory.getLogger(MailServices.class);
+    private final static Logger LOG = LoggerFactory.getLogger(BaseServices.class);
 
     protected ResponseError handleException(HttpStatus status, BaseMailException bme) {
         return new ResponseError(status.value(), bme.getMailError().getCode(), bme.getMailError().getMessage());
