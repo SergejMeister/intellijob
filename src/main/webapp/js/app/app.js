@@ -89,7 +89,7 @@ intelliJob.config([
 
                 if (status == 401) {
                     $cookieStore.remove("user");
-                    delete $rootScope.user;
+                    delete $rootScope.globalUser;
                     $rootScope.error = status + ": " + response.data.message;
                 }
 
@@ -117,12 +117,12 @@ intelliJob.config([
 
     $rootScope.$on('$routeChangeSuccess', function () {
         /* Try getting valid user from cookie*/
-        $rootScope.user = $cookieStore.get('user');
+        $rootScope.globalUser = $cookieStore.get('user');
         if (!$rootScope.isUserValid()) {
             //user not valid, request getUser
             UserServices.getUser().success(function (response) {
-                $rootScope.user = response;
-                $cookieStore.put("user", $rootScope.user);
+                $rootScope.globalUser = response;
+                $cookieStore.put("user", $rootScope.globalUser);
             }).error(function (error) {
                 $rootScope.error = status + ": " + error.data.message;
             });
@@ -130,7 +130,7 @@ intelliJob.config([
     });
 
     $rootScope.isUserValid = function () {
-        return $rootScope.user !== undefined && $rootScope.user.userId !== undefined;
+        return $rootScope.globalUser !== undefined && $rootScope.globalUser.userId !== undefined;
     };
 
     console.log($rootScope);

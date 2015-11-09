@@ -30,9 +30,36 @@ intelliJobControllers.controller(
             'UserServices',
             function ($scope, $rootScope, $location, $http, $cookieStore, $routeParams, $route, UserServices) {
 
+                $scope.showSimpleSearchDialog = false;
+                $scope.showComplexSearchDialog = false;
+
+                UserServices.getUser().success(function (response) {
+                    $scope.user = response;
+                    $scope.syncMail = response.responseProfileData.lastMailSyncDate;
+                }).error(function (error) {
+                    console.log(error);
+                });
+
                 /**
                  * search mails in mail box.
                  */
                 $scope.save = function () {
                 };
+
+                /**
+                 * search mails in mail box.
+                 */
+                $scope.changeSearchEngine = function (selectedSearchEngine) {
+                    if (selectedSearchEngine === 'simpleSearch') {
+                        $scope.showSimpleSearchDialog = true;
+                        $scope.showComplexSearchDialog = false;
+                    } else if (selectedSearchEngine === 'complexSearch') {
+                        $scope.showSimpleSearchDialog = false;
+                        $scope.showComplexSearchDialog = true;
+                    } else {
+                        $scope.showSimpleSearchDialog = false;
+                        $scope.showComplexSearchDialog = false;
+                    }
+                };
+
             }]);
