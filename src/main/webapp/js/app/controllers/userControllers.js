@@ -32,6 +32,7 @@ intelliJobControllers.controller(
 
                 $scope.showSimpleSearchDialog = false;
                 $scope.showComplexSearchDialog = false;
+                $scope.readonly = true;
 
                 UserServices.getUserById($rootScope.globalUser.userId).success(function (response) {
                     $scope.user = response.userData;
@@ -48,7 +49,7 @@ intelliJobControllers.controller(
                 $scope.save = function (userData) {
                     UserServices.updateUser(userData).success(function (response) {
                         $rootScope.success = response.message;
-                        $cookieStore.put("user",userData);
+                        $cookieStore.put("user", userData);
                     }).error(function (error) {
                         console.log(error);
                     });
@@ -76,6 +77,10 @@ intelliJobControllers.controller(
                         $scope.showSimpleSearchDialog = false;
                         $scope.showComplexSearchDialog = false;
                     }
+                };
+
+                $scope.activeEditMode = function() {
+                    $scope.readonly = false;
                 };
 
             }]);

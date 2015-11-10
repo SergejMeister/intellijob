@@ -15,7 +15,7 @@
   ~ limitations under the License.
   -->
 
-<form name="userForm" class="form-horizontal" role="form" name="form" ng-submit="save(user)">
+<form name="userForm" class="form-horizontal" role="form">
 
     <h1>Benutzerdaten</h1>
 
@@ -26,12 +26,12 @@
                 <div class="col-sm-6">
                     <label for="firstname">Vorname</label>
                     <input id="firstname" class="form-control input-group-lg reg_name" type="text" name="firstName"
-                           ng-model="user.profileData.firstName" placeholder="Vorname">
+                           ng-model="user.profileData.firstName" placeholder="Vorname" ng-readonly="readonly">
                 </div>
                 <div class="col-sm-6">
                     <label for="lastname">Nachname</label>
                     <input id="lastname" class="form-control input-group-lg reg_name" type="text" name="lastName"
-                           ng-model="user.profileData.secondName" placeholder="Nachname">
+                           ng-model="user.profileData.secondName" placeholder="Nachname" ng-readonly="readonly">
                 </div>
             </div>
             <br>
@@ -54,18 +54,18 @@
                 <div class="col-sm-20">
                     <label for="noSearch">
                         Keine
-                        <input id="noSearch" type="radio" ng-model="searchEngine" value="UNKNOWN"
-                               ng-change="changeSearchEngine(searchEngine)"/>
+                        <input id="noSearch" type="radio" ng-model='searchEngine' value='UNKNOWN'
+                               ng-change="changeSearchEngine(searchEngine)" ng-disabled='readonly'/>
                     </label>
                     <label for="radioSimpleSearch">
                         Einfache Suche
-                        <input id="radioSimpleSearch" type="radio" ng-model="searchEngine" value="SIMPLE"
-                               ng-change="changeSearchEngine(searchEngine)"/>
+                        <input id="radioSimpleSearch" type="radio" ng-model='searchEngine' value='SIMPLE'
+                               ng-change="changeSearchEngine(searchEngine)" ng-disabled='readonly'/>
                     </label>
-                    <label for="radioComplexSearch">
+                    <label for='radioComplexSearch'>
                         Erweiterte Suche
-                        <input id="radioComplexSearch" type="radio" ng-model="searchEngine" value="COMPLEX"
-                               ng-change="changeSearchEngine(searchEngine)"/>
+                        <input id='radioComplexSearch' type='radio' ng-model='searchEngine' value='COMPLEX'
+                               ng-change='changeSearchEngine(searchEngine)' ng-disabled='readonly'/>
                     </label>
                 </div>
             </div>
@@ -77,7 +77,7 @@
         <fieldset>
             <legend class="scheduler-border">Suche nach</legend>
             <div class="input-group">
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" ng-readonly='readonly'>
             </div>
         </fieldset>
     </div>
@@ -86,13 +86,14 @@
         <fieldset>
             <legend class="scheduler-border">Persönliche Fähigkeiten</legend>
             <div class="input-group">
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" ng-readonly='readonly'>
             </div>
         </fieldset>
     </div>
     <br>
 
     <div class="actions">
-        <button class="btn btn-info pull" type="submit">Speichern</button>
+        <button class="btn btn-info pull" ng-hide="readonly" ng-click="save(user)">Speichern</button>
+        <button class="btn btn-info pull" ng-show="readonly" ng-click="activeEditMode()">Ändern</button>
     </div>
 </form>
