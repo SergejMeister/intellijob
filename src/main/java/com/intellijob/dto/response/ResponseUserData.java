@@ -17,6 +17,7 @@
 package com.intellijob.dto.response;
 
 import com.intellijob.domain.User;
+import com.intellijob.dto.ProfileData;
 
 /**
  * Data transfer object represents domain object <code>User</code>
@@ -25,22 +26,22 @@ public class ResponseUserData extends ResponseData {
 
     private String userId;
 
-    private ResponseProfileData responseProfileData;
+    private ProfileData profileData;
 
     public ResponseUserData() {
     }
 
     public ResponseUserData(User user) {
         setUserId(user.getId());
-        this.responseProfileData = new ResponseProfileData(user.getProfile());
+        setProfileData(new ProfileData(user.getProfile()));
     }
 
-    public ResponseProfileData getResponseProfileData() {
-        return responseProfileData;
+    public ProfileData getProfileData() {
+        return profileData;
     }
 
-    public void setResponseProfileData(ResponseProfileData responseProfileData) {
-        this.responseProfileData = responseProfileData;
+    public void setProfileData(ProfileData profileData) {
+        this.profileData = profileData;
     }
 
     public String getUserId() {

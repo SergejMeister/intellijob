@@ -33,27 +33,43 @@ intelliJobControllers.controller(
                 $scope.showSimpleSearchDialog = false;
                 $scope.showComplexSearchDialog = false;
 
-                UserServices.getUser().success(function (response) {
-                    $scope.user = response;
-                    $scope.syncMail = response.responseProfileData.lastMailSyncDate;
+                UserServices.getUserById($rootScope.globalUser.userId).success(function (response) {
+                    $scope.user = response.userData;
+                    //$scope.syncMail = response.profileData.lastMailSyncDate;
+                    $scope.searchEngine = $scope.user.profileData.searchEngine;
+                    $scope.switchSearchEngine($scope.searchEngine);
                 }).error(function (error) {
                     console.log(error);
                 });
 
                 /**
-                 * search mails in mail box.
+                 * Save user data.
                  */
-                $scope.save = function () {
+                $scope.save = function (userData) {
+                    UserServices.updateUser(userData).success(function (response) {
+                        $rootScope.success = response.message;
+                        $cookieStore.put("user",userData);
+                    }).error(function (error) {
+                        console.log(error);
+                    });
                 };
 
                 /**
                  * search mails in mail box.
                  */
                 $scope.changeSearchEngine = function (selectedSearchEngine) {
-                    if (selectedSearchEngine === 'simpleSearch') {
+                    $scope.user.profileData.searchEngine = selectedSearchEngine;
+                    $scope.switchSearchEngine(selectedSearchEngine);
+                };
+
+                /**
+                 * search mails in mail box.
+                 */
+                $scope.switchSearchEngine = function (selectedSearchEngine) {
+                    if (selectedSearchEngine === 'SIMPLE') {
                         $scope.showSimpleSearchDialog = true;
                         $scope.showComplexSearchDialog = false;
-                    } else if (selectedSearchEngine === 'complexSearch') {
+                    } else if (selectedSearchEngine === 'COMPLEX') {
                         $scope.showSimpleSearchDialog = false;
                         $scope.showComplexSearchDialog = true;
                     } else {

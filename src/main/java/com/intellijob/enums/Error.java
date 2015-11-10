@@ -56,7 +56,7 @@ public enum Error implements Serializable {
     /**
      * Error code, if user is not founded.
      */
-    NOT_FOUNDED_USER(5000006, "User is not founded!");
+    NOT_FOUNDED_USER(5000006, "User can not be found!");
 
 
     private String message;

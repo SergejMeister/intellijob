@@ -16,6 +16,8 @@
 
 package com.intellijob.domain;
 
+import com.intellijob.enums.SearchEngineEnum;
+
 import java.util.Date;
 
 /**
@@ -32,6 +34,29 @@ public class Profile {
     private String sex;
 
     private Date lastMailSyncDate;
+
+    private SearchEngineEnum searchEngine = SearchEngineEnum.UNKNOWN;
+
+    /**
+     * Returns search engine.
+     * <p>
+     * Default search engine is UNKNOWN.
+     * </p>
+     *
+     * @return selected search engine.
+     */
+    public SearchEngineEnum getSearchEngine() {
+        return searchEngine;
+    }
+
+    /**
+     * Sets search engine.
+     *
+     * @param searchEngine search engine.
+     */
+    public void setSearchEngine(SearchEngineEnum searchEngine) {
+        this.searchEngine = searchEngine;
+    }
 
     /**
      * Returns user first name.

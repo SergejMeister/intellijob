@@ -14,17 +14,18 @@
  * limitations under the License.
  */
 
-package com.intellijob.dto.response;
+package com.intellijob.dto;
 
 import com.intellijob.domain.Profile;
 import org.springframework.util.StringUtils;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Data transfer object represents domain object <code>Profile</code>
  */
-public class ResponseProfileData extends ResponseData {
+public class ProfileData implements Serializable {
 
     private String firstName;
 
@@ -36,20 +37,23 @@ public class ResponseProfileData extends ResponseData {
 
     private Date lastMailSyncDate;
 
+    private String searchEngine;
 
-    public ResponseProfileData() {
+
+    public ProfileData() {
     }
 
-    public ResponseProfileData(String firstName, String secondName, String sex) {
+    public ProfileData(String firstName, String secondName, String sex) {
         setFirstName(firstName);
         setSecondName(secondName);
         setSex(sex);
         setFullName(createFullName(firstName, secondName));
     }
 
-    public ResponseProfileData(Profile profile) {
+    public ProfileData(Profile profile) {
         this(profile.getFirstName(), profile.getSecondName(), profile.getSex());
         setLastMailSyncDate(profile.getLastMailSyncDate());
+        setSearchEngine(profile.getSearchEngine().name());
     }
 
     private String createFullName(String firstName, String secondName) {
@@ -66,6 +70,14 @@ public class ResponseProfileData extends ResponseData {
         }
 
         return sb.toString();
+    }
+
+    public String getSearchEngine() {
+        return searchEngine;
+    }
+
+    public void setSearchEngine(String searchEngine) {
+        this.searchEngine = searchEngine;
     }
 
     public String getFirstName() {

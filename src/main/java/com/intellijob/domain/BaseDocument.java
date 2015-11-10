@@ -26,6 +26,12 @@ public abstract class BaseDocument {
     @Id
     private String id;
 
+    protected BaseDocument() {
+    }
+
+    protected BaseDocument(String id) {
+        setId(id);
+    }
 
     /**
      * Returns id.

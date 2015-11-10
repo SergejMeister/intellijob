@@ -29,6 +29,13 @@ public class User extends BaseDocument {
 
     private Skills skills;
 
+    public User(){
+    }
+
+    public User(String id){
+        super(id);
+    }
+
     /**
      * Returns user profile data.
      */

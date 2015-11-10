@@ -16,20 +16,30 @@
 
 package com.intellijob.dto.request;
 
-import java.io.Serializable;
+import com.intellijob.dto.ProfileData;
 
 /**
- * Default Request - data transfer object.
+ * Request data transfer object to save user data.
  */
-public class RequestData implements Serializable {
+public class RequestUserData extends RequestData {
 
-    private String message;
+    private String userId;
 
-    public String getMessage() {
-        return message;
+    private ProfileData profileData;
+
+    public String getUserId() {
+        return userId;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public ProfileData getProfileData() {
+        return profileData;
+    }
+
+    public void setProfileData(ProfileData profileData) {
+        this.profileData = profileData;
     }
 }

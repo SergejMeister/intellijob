@@ -14,22 +14,29 @@
  * limitations under the License.
  */
 
-package com.intellijob.dto.request;
+package com.intellijob.dto.response;
 
-import java.io.Serializable;
+import com.intellijob.domain.User;
 
 /**
- * Default Request - data transfer object.
+ * Data transfer object represents user page.
  */
-public class RequestData implements Serializable {
+public class ResponseUserForm extends ResponseData {
 
-    private String message;
+    private ResponseUserData userData;
 
-    public String getMessage() {
-        return message;
+    public ResponseUserForm() {
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public ResponseUserForm(User user) {
+        setUserData(new ResponseUserData(user));
+    }
+
+    public ResponseUserData getUserData() {
+        return userData;
+    }
+
+    public void setUserData(ResponseUserData userData) {
+        this.userData = userData;
     }
 }

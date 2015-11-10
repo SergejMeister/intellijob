@@ -14,22 +14,25 @@
  * limitations under the License.
  */
 
-package com.intellijob.dto.request;
-
-import java.io.Serializable;
+package com.intellijob.enums;
 
 /**
- * Default Request - data transfer object.
+ *
  */
-public class RequestData implements Serializable {
+public enum SearchEngineEnum {
 
-    private String message;
+    /**
+     * Unknown.
+     */
+    UNKNOWN,
 
-    public String getMessage() {
-        return message;
-    }
+    /**
+     * Simple search Engine.
+     */
+    SIMPLE,
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
+    /**
+     * Complex search engine.
+     */
+    COMPLEX
 }

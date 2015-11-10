@@ -23,6 +23,8 @@ import com.intellijob.exceptions.NotMailSyncException;
 import com.intellijob.exceptions.UserNotFoundException;
 import com.intellijob.repository.user.UserProfileRepository;
 import com.intellijob.repository.user.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -35,6 +37,8 @@ import java.util.List;
  */
 @Controller
 public class UseControllerImpl implements UserController {
+
+    private final static Logger LOG = LoggerFactory.getLogger(UseControllerImpl.class);
 
     @Autowired
     private UserProfileRepository userProfileRepository;
@@ -95,7 +99,7 @@ public class UseControllerImpl implements UserController {
      */
     @Override
     public User getUniqueUser() throws UserNotFoundException {
-        List<User> allUsers = userProfileRepository.findAll();
+        List<User> allUsers = userRepository.findAll();
         if (allUsers == null || allUsers.isEmpty() || allUsers.size() > 1) {
             throw new UserNotFoundException();
         }
@@ -103,4 +107,35 @@ public class UseControllerImpl implements UserController {
         int firstUserIndex = 0;
         return allUsers.get(firstUserIndex);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public User getUser(String userId) throws UserNotFoundException {
+        User user = userRepository.findById(userId);
+        if (user == null) {
+            LOG.error("No user for id: " + userId);
+            throw new UserNotFoundException();
+        }
+        return user;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public User save(User user) {
+        User createUser = userRepository.save(user);
+        return createUser;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void deleteUser(String userId) {
+        userRepository.delete(userId);
+    }
+
 }

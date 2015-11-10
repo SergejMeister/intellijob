@@ -130,7 +130,7 @@ intelliJob.config([
     });
 
     $rootScope.isUserValid = function () {
-        return $rootScope.globalUser !== undefined && $rootScope.globalUser.userId !== undefined;
+        return $rootScope.globalUser !== undefined && $rootScope.globalUser.userId !== undefined && $rootScope.globalUser.userId !== null;
     };
 
     console.log($rootScope);

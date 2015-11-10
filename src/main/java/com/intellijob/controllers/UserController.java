@@ -77,8 +77,34 @@ public interface UserController {
      * If more than one users that trow UserNotFoundException.
      * If exact one user found, than get user.
      *
-     * @return last mail sync date.
+     * @return first founded user.
      * @throws UserNotFoundException exception if no user found for specified userId.
      */
     User getUniqueUser() throws UserNotFoundException;
+
+    /**
+     * Returns an user for specified id.
+     *
+     * @param userId user id
+     *
+     * @return user data.
+     * @throws UserNotFoundException if user not found.
+     */
+    User getUser(String userId) throws UserNotFoundException;
+
+    /**
+     * Create or update a user.
+     *
+     * @param user user to create.
+     *
+     * @return created user with id.
+     */
+    User save(User user);
+
+    /**
+     * Delete user by id.
+     *
+     * @param userId user id.
+     */
+    void deleteUser(String userId);
 }

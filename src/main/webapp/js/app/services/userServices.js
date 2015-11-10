@@ -18,7 +18,7 @@ angular.module('intelliJob')
         .factory('UserServices', ['$http', '$rootScope',
             function ($http) {
 
-                var urlBase = "/intellijob/api/users";
+                var urlBase = '/intellijob/api/users';
                 var userServices = {};
 
                 /**
@@ -28,6 +28,43 @@ angular.module('intelliJob')
                  */
                 userServices.getUser = function () {
                     return $http.get(urlBase);
+                };
+
+                /**
+                 * Get user by id.
+                 *
+                 * @returns {HttpPromise}
+                 */
+                userServices.getUserById = function (userId) {
+                    return $http.get(urlBase + '/' + userId);
+                };
+
+                /**
+                 * Post and create a new user.
+                 *
+                 * @returns {HttpPromise}
+                 */
+                userServices.createUser = function (newUser) {
+                    return $http.post(urlBase, newUser);
+                };
+
+                /**
+                 * Put and update a new user.
+                 *
+                 * @returns {HttpPromise}
+                 */
+                userServices.updateUser = function (user) {
+                    return $http.put(urlBase, user);
+                };
+
+                /**
+                 * Delete a user by id.
+                 *
+                 * @returns {HttpPromise}
+                 */
+                userServices.deleteUserById = function (userId) {
+                    var params = {userId: userId};
+                    return $http.delete(urlBase, params);
                 };
 
                 return userServices;

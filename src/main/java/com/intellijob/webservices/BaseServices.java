@@ -19,6 +19,7 @@ package com.intellijob.webservices;
 import com.intellijob.dto.response.ResponseError;
 import com.intellijob.exceptions.BaseException;
 import com.intellijob.exceptions.DocumentNotFoundException;
+import com.intellijob.exceptions.UserNotFoundException;
 import com.intellijob.mail.exception.BaseMailException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,10 +52,22 @@ public abstract class BaseServices {
      */
     @ExceptionHandler(DocumentNotFoundException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    public
-    @ResponseBody
-    ResponseError handleException(DocumentNotFoundException e) {
+    public @ResponseBody ResponseError handleException(DocumentNotFoundException e) {
         LOG.error(e.getError().getMessage(), e);
         return handleException(HttpStatus.NOT_FOUND, e);
+    }
+
+    /**
+     * Convert document not found exceptions to http status not found.
+     *
+     * @param e document not found exception.
+     *
+     * @return data transfer object <code>ResponseError.class</code> with status 404.
+     */
+    @ExceptionHandler(UserNotFoundException.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    public @ResponseBody ResponseError handleException(UserNotFoundException e) {
+        LOG.error(e.getError().getMessage(), e);
+        return handleException(HttpStatus.UNAUTHORIZED, e);
     }
 }

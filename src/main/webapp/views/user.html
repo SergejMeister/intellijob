@@ -15,7 +15,7 @@
   ~ limitations under the License.
   -->
 
-<form name="userForm" class="form-horizontal" role="form" name="form" ng-submit="save()">
+<form name="userForm" class="form-horizontal" role="form" name="form" ng-submit="save(user)">
 
     <h1>Benutzerdaten</h1>
 
@@ -26,12 +26,12 @@
                 <div class="col-sm-6">
                     <label for="firstname">Vorname</label>
                     <input id="firstname" class="form-control input-group-lg reg_name" type="text" name="firstName"
-                           ng-model="user.responseProfileData.firstName" placeholder="Vorname">
+                           ng-model="user.profileData.firstName" placeholder="Vorname">
                 </div>
                 <div class="col-sm-6">
                     <label for="lastname">Nachname</label>
                     <input id="lastname" class="form-control input-group-lg reg_name" type="text" name="lastName"
-                           ng-model="user.responseProfileData.secondName" placeholder="Nachname">
+                           ng-model="user.profileData.secondName" placeholder="Nachname">
                 </div>
             </div>
             <br>
@@ -40,7 +40,7 @@
                 <div class="col-sm-8">
                     <label for="mailSync">Letzte Mail Synchronesierung</label>
                     <input id="mailSync" class="form-control input-group-lg reg_name"
-                           value="{{user.responseProfileData.lastMailSyncDate |date:'dd.MM.yyyy HH:mm:ss'}}" readonly>
+                           value="{{user.profileData.lastMailSyncDate |date:'dd.MM.yyyy HH:mm:ss'}}" readonly>
                 </div>
             </div>
         </fieldset>
@@ -54,17 +54,17 @@
                 <div class="col-sm-20">
                     <label for="noSearch">
                         Keine
-                        <input id="noSearch" type="radio" ng-model="searchEngine" value="unknown"
+                        <input id="noSearch" type="radio" ng-model="searchEngine" value="UNKNOWN"
                                ng-change="changeSearchEngine(searchEngine)"/>
                     </label>
                     <label for="radioSimpleSearch">
                         Einfache Suche
-                        <input id="radioSimpleSearch" type="radio" ng-model="searchEngine" value="simpleSearch"
+                        <input id="radioSimpleSearch" type="radio" ng-model="searchEngine" value="SIMPLE"
                                ng-change="changeSearchEngine(searchEngine)"/>
                     </label>
                     <label for="radioComplexSearch">
                         Erweiterte Suche
-                        <input id="radioComplexSearch" type="radio" ng-model="searchEngine" value="complexSearch"
+                        <input id="radioComplexSearch" type="radio" ng-model="searchEngine" value="COMPLEX"
                                ng-change="changeSearchEngine(searchEngine)"/>
                     </label>
                 </div>
@@ -93,6 +93,6 @@
     <br>
 
     <div class="actions">
-        <button class="btn btn-info pull" type="submit" ng-click="save()">Speichern</button>
+        <button class="btn btn-info pull" type="submit">Speichern</button>
     </div>
 </form>

@@ -18,11 +18,17 @@ package com.intellijob.webservices;
 
 import com.intellijob.controllers.UserController;
 import com.intellijob.domain.User;
+import com.intellijob.dto.request.RequestUserData;
 import com.intellijob.dto.response.ResponseUserData;
+import com.intellijob.dto.response.ResponseUserForm;
 import com.intellijob.exceptions.UserNotFoundException;
+import com.intellijob.webservices.mappers.UserServiceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,7 +44,7 @@ public class UserServices extends BaseServices {
     private UserController userController;
 
     /**
-     * Returns job data for specified url.
+     * Returns unique user data.
      * <p>
      * New GET-request <code>url</code>
      * Save html response into jobs collection.
@@ -53,5 +59,59 @@ public class UserServices extends BaseServices {
         } catch (UserNotFoundException e) {
             return new ResponseUserData();
         }
+    }
+
+    /**
+     * Returns user data for specified userId.
+     *
+     * @return response user.
+     */
+    @RequestMapping(value = Endpoints.USERS_BY_ID, method = RequestMethod.GET)
+    public @ResponseBody ResponseUserForm getUser(@PathVariable String userId) throws Exception {
+        User user = userController.getUser(userId);
+        return new ResponseUserForm(user);
+    }
+
+    /**
+     * Update user resource.
+     *
+     * @return response message.
+     */
+    @RequestMapping(value = Endpoints.USERS, method = RequestMethod.PUT)
+    public @ResponseBody ResponseUserForm updateUser(@RequestBody RequestUserData userData) {
+        User user = UserServiceMapper.mapTo(userData);
+        userController.save(user);
+        ResponseUserForm responseUserForm = new ResponseUserForm();
+        responseUserForm.setMessage("User updated successfully!");
+        return responseUserForm;
+    }
+
+    /**
+     * Create a new user resource.
+     *
+     * @return response user data with id and message.
+     */
+    @RequestMapping(value = Endpoints.USERS, method = RequestMethod.POST)
+    public @ResponseBody ResponseUserForm createUser(@RequestBody RequestUserData userData) {
+        User user = UserServiceMapper.mapTo(userData);
+        User createdUser = userController.save(user);
+        ResponseUserForm responseUserForm = new ResponseUserForm(createdUser);
+        responseUserForm.setMessage("New user Created successfully!");
+        return responseUserForm;
+    }
+
+    /**
+     * Delete an user resource for specified id.
+     *
+     * @param userId userId.
+     *
+     * @return response user data with id.
+     */
+    @RequestMapping(value = Endpoints.USERS, method = RequestMethod.DELETE)
+    public @ResponseBody ResponseUserForm deleteUser(@RequestParam(value = "userId") String userId) {
+        userController.deleteUser(userId);
+        ResponseUserForm responseUserForm = new ResponseUserForm();
+        responseUserForm.setMessage("User is successfully deleted!");
+        return responseUserForm;
     }
 }
