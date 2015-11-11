@@ -27,12 +27,14 @@ public class User extends BaseDocument {
 
     private Profile profile;
 
+    private String simpleSearchField;
+
     private Skills skills;
 
-    public User(){
+    public User() {
     }
 
-    public User(String id){
+    public User(String id) {
         super(id);
     }
 
@@ -48,5 +50,21 @@ public class User extends BaseDocument {
      */
     public void setProfile(Profile profile) {
         this.profile = profile;
+    }
+
+    public String getSimpleSearchField() {
+        return simpleSearchField;
+    }
+
+    public void setSimpleSearchField(String simpleSearchField) {
+        this.simpleSearchField = simpleSearchField;
+    }
+
+    public Skills getSkills() {
+        return skills;
+    }
+
+    public void setSkills(Skills skills) {
+        this.skills = skills;
     }
 }

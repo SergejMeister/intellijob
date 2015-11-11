@@ -46,6 +46,7 @@ public final class UserServiceMapper {
         User user = new User(requestUserData.getUserId());
         Profile profile = mapTo(requestUserData.getProfileData());
         user.setProfile(profile);
+        user.setSimpleSearchField(requestUserData.getSimpleSearchField());
         return user;
     }
 }

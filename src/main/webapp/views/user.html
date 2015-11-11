@@ -76,8 +76,9 @@
     <div id="simpleSearchForm" ng-show="showSimpleSearchDialog">
         <fieldset>
             <legend class="scheduler-border">Suche nach</legend>
-            <div class="input-group">
-                <input type="text" class="form-control" ng-readonly='readonly'>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-group-lg reg_name"
+                       ng-model="user.simpleSearchField" ng-readonly='readonly'>
             </div>
         </fieldset>
     </div>
@@ -86,8 +87,14 @@
         <fieldset>
             <legend class="scheduler-border">Persönliche Fähigkeiten</legend>
             <div class="input-group">
-                <input type="text" class="form-control" ng-readonly='readonly'>
+                <input type="text" class="form-control input-group-lg reg_name" ng-readonly='readonly'>
             </div>
+            <!--<input type="text" value="ItemName" ng-model="newSearchField"-->
+            <!--placeholder="search field">-->
+            <!--<button ng-click="addItem()">Hinzufügen</button>-->
+            <!--<li ng-repeat="item in items.data" id="item{{item.id}}">-->
+            <!--<a href="#">{{item.title}}</a>  <a ng-click="deleteItem($index)" class="delete-item">x</a>-->
+            <!--</li>-->
         </fieldset>
     </div>
     <br>

@@ -37,14 +37,28 @@ intelliJobControllers.controller(
                 // For this use case is readonly mode false, otherwise true!
                 $scope.readonly = $rootScope.isUserValid();
 
+                var items = {};
+                $scope.items = items;
+                $scope.items.data = [];
                 UserServices.getUserById($rootScope.globalUser.userId).success(function (response) {
                     $scope.user = response.userData;
-                    //$scope.syncMail = response.profileData.lastMailSyncDate;
+                    //$scope.items.data = $scope.user.simpleSearchFields;
                     $scope.searchEngine = $scope.user.profileData.searchEngine;
                     $scope.switchSearchEngine($scope.searchEngine);
                 }).error(function (error) {
                     console.log(error);
                 });
+
+
+                $scope.deleteItem = function (index) {
+                    items.data.splice(index, 1);
+                };
+                $scope.addItem = function (index) {
+                    items.data.push({
+                        id: $scope.items.data.length + 1,
+                        title: $scope.newSearchField
+                    });
+                };
 
                 /**
                  * Save user data.
@@ -53,6 +67,7 @@ intelliJobControllers.controller(
                     UserServices.updateUser(userData).success(function (response) {
                         $rootScope.success = response.message;
                         $cookieStore.put("user", userData);
+                        $scope.readonly = true;
                     }).error(function (error) {
                         console.log(error);
                     });

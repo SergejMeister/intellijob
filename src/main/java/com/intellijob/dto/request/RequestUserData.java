@@ -27,6 +27,8 @@ public class RequestUserData extends RequestData {
 
     private ProfileData profileData;
 
+    private String simpleSearchField;
+
     public String getUserId() {
         return userId;
     }
@@ -41,5 +43,13 @@ public class RequestUserData extends RequestData {
 
     public void setProfileData(ProfileData profileData) {
         this.profileData = profileData;
+    }
+
+    public String getSimpleSearchField() {
+        return simpleSearchField;
+    }
+
+    public void setSimpleSearchField(String simpleSearchField) {
+        this.simpleSearchField = simpleSearchField;
     }
 }

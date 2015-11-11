@@ -28,12 +28,15 @@ public class ResponseUserData extends ResponseData {
 
     private ProfileData profileData;
 
+    private String simpleSearchField;
+
     public ResponseUserData() {
     }
 
     public ResponseUserData(User user) {
         setUserId(user.getId());
         setProfileData(new ProfileData(user.getProfile()));
+        setSimpleSearchField(user.getSimpleSearchField());
     }
 
     public ProfileData getProfileData() {
@@ -50,5 +53,13 @@ public class ResponseUserData extends ResponseData {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getSimpleSearchField() {
+        return simpleSearchField;
+    }
+
+    public void setSimpleSearchField(String simpleSearchField) {
+        this.simpleSearchField = simpleSearchField;
     }
 }
