@@ -32,7 +32,10 @@ intelliJobControllers.controller(
 
                 $scope.showSimpleSearchDialog = false;
                 $scope.showComplexSearchDialog = false;
-                $scope.readonly = true;
+
+                // If user not valid, that means a new user should be created!
+                // For this use case is readonly mode false, otherwise true!
+                $scope.readonly = $rootScope.isUserValid();
 
                 UserServices.getUserById($rootScope.globalUser.userId).success(function (response) {
                     $scope.user = response.userData;
@@ -79,7 +82,7 @@ intelliJobControllers.controller(
                     }
                 };
 
-                $scope.activeEditMode = function() {
+                $scope.activeEditMode = function () {
                     $scope.readonly = false;
                 };
 
