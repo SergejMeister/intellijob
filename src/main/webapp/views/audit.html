@@ -48,13 +48,13 @@
         <fieldset>
             <h2>History audit data</h2>
 
-            <pagination class="pagination-sm" boundary-links="true" rotate="false"
+            <uib-pagination class="pagination-sm" boundary-links="true" rotate="false"
                         ng-show="showPagination"
                         max-size="auditHistoryTableMaxPage"
                         total-items="auditHistoryTableTotalItems"
                         items-per-page="auditHistoryTableNumPerPage"
                         ng-model="auditHistoryTableCurrentPage">
-            </pagination>
+            </uib-pagination>
             <table class="table table-condensed table-bordered">
                 <thead>
                     <tr>
@@ -91,13 +91,13 @@
                     </tr>
                 </tbody>
             </table>
-            <pagination class="pagination-sm" boundary-links="true" rotate="false"
+            <uib-pagination class="pagination-sm" boundary-links="true" rotate="false"
                         ng-show="showPagination"
                         max-size="auditHistoryTableMaxPage"
                         total-items="auditHistoryTableTotalItems"
                         items-per-page="auditHistoryTableNumPerPage"
                         ng-model="auditHistoryTableCurrentPage">
-            </pagination>
+            </uib-pagination>
 
         </fieldset>
     </div>

@@ -18,10 +18,36 @@ var intelliJob = angular.module('intelliJob',
         [
             'ngRoute',
             'ngCookies',
+            'ngAnimate',
             'intelliJobControllers',
             'ui.bootstrap'
         ]);
 var intelliJobControllers = angular.module('intelliJobControllers', []);
+
+intelliJob.factory('HttpResponseInterceptor', ['$q', '$location', '$rootScope', '$cookieStore', function ($q, $location, $rootScope, $cookieStore) {
+    return function (promise) {
+        var success = function (response) {
+            delete $rootScope.success;
+            delete $rootScope.error;
+            return response;
+        };
+
+        var error = function (response) {
+            delete $rootScope.success;
+            delete $rootScope.error;
+            if (response.status == 401) {
+                $cookieStore.remove("user");
+                delete $rootScope.globalUser;
+                $location.path('/home');
+                return $q.reject(response);
+            }
+
+            return $q.reject(response);
+        };
+
+        return promise.then(success, error);
+    };
+}]);
 
 /**
  * App configuration.
@@ -30,10 +56,13 @@ intelliJob.config([
     '$routeProvider',
     '$locationProvider',
     '$httpProvider',
-
     function ($routeProvider, $locationProvider, $httpProvider) {
-        // Enable HTML5 strategy (without # in urls)
-        $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false
+        });
+
+        $httpProvider.interceptors.push('HttpResponseInterceptor');
 
         $routeProvider.when('/intellijob/home', {
             templateUrl: '/intellijob/views/mailSearchForm.html',
@@ -73,36 +102,6 @@ intelliJob.config([
             templateUrl: '/intellijob/views/mailSearchForm.html',
             controller: 'MailCtrl'
         });
-
-        /* Intercept http errors */
-        var interceptor = function ($rootScope, $cookieStore, $q) {
-            function success(response) {
-                delete $rootScope.success;
-                delete $rootScope.error;
-                return response;
-            }
-
-            function error(response) {
-                delete $rootScope.success;
-                delete $rootScope.error;
-                var status = response.status;
-
-                if (status == 401) {
-                    $cookieStore.remove("user");
-                    delete $rootScope.globalUser;
-                    $rootScope.error = status + ": " + response.data.message;
-                }
-
-                return $q.reject(response);
-            }
-
-            return function (promise) {
-                return promise.then(success, error);
-            };
-        };
-
-        $httpProvider.responseInterceptors.push(interceptor);
-
     }]).run(function ($rootScope, $cookieStore, UserServices) {
     //Reset error and success when a new view is loaded
     $rootScope.$on('$viewContentLoaded', function () {

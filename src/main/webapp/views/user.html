@@ -86,9 +86,35 @@
     <div id=complexSearchForm" ng-show="showComplexSearchDialog">
         <fieldset>
             <legend class="scheduler-border">Persönliche Fähigkeiten</legend>
-            <div class="input-group">
-                <input type="text" class="form-control input-group-lg reg_name" ng-readonly='readonly'>
-            </div>
+            <uib-accordion close-others="false">
+                <uib-accordion-group heading="Bildung und Erfahrung" is-open="panelStatus.isEducationSkillOpen" is-disabled="panelStatus.isEducationSkillDisabled">
+                    Kenntnisse und Fertigkeiten
+                </uib-accordion-group>
+                <uib-accordion-group heading="Kenntnisse und Fertigkeiten" is-open="panelStatus.isKnowledgeSkillOpen" is-disabled="panelStatus.isKnowledgeSkillDisabled">
+                    Kenntnisse und Fertigkeiten
+                </uib-accordion-group>
+                <uib-accordion-group heading="Persönliche Stärken" is-open="panelStatus.isPersonSkillOpen" is-disabled="panelStatus.isPersonSkillDisabled">
+                    <p>The body of the uib-accordion group grows to fit the contents</p>
+                    <button type="button" class="btn btn-default btn-sm" ng-click="addItem()">Add Item</button>
+                    <div ng-repeat="item in items">{{item}}</div>
+                </uib-accordion-group>
+                <uib-accordion-group heading="Sprachkenntnisse" is-open="panelStatus.isLanguageSkillOpen" is-disabled="panelStatus.isLanguageSkillDisabled">
+                    <p>The body of the uib-accordion group grows to fit the contents</p>
+                    <button type="button" class="btn btn-default btn-sm" ng-click="addItem()">Add Item</button>
+                    <div ng-repeat="item in items">{{item}}</div>
+                </uib-accordion-group>
+            </uib-accordion>
+            <!--<div class="spoiler">-->
+                <!--<div class="spoiler-btn">Sprachen</div>-->
+                <!--<div class="spoiler-body collapse">-->
+                    <!--<div class="col-md-4">-->
+                        <!--<input type="text" class="form-control input-group-lg reg_name" ng-readonly='readonly'>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="input-group">-->
+                <!--<input type="text" class="form-control input-group-lg reg_name" ng-readonly='readonly'>-->
+            <!--</div>-->
             <!--<input type="text" value="ItemName" ng-model="newSearchField"-->
             <!--placeholder="search field">-->
             <!--<button ng-click="addItem()">Hinzufügen</button>-->

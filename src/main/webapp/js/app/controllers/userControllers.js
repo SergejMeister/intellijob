@@ -49,6 +49,17 @@ intelliJobControllers.controller(
                     console.log(error);
                 });
 
+                $scope.panelStatus = {
+                    isEducationSkillOpen: true,
+                    isEducationSkillDisabled: false,
+                    isKnowledgeSkillOpen: true,
+                    isKnowledgeSkillDisabled: false,
+                    isPersonSkillOpen: true,
+                    isPersonSkillDisabled: false,
+                    isLanguageSkillOpen: true,
+                    isLanguageSkillDisabled: false
+                };
+
 
                 $scope.deleteItem = function (index) {
                     items.data.splice(index, 1);
