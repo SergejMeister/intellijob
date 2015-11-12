@@ -126,7 +126,12 @@
     <br>
 
     <div class="actions">
-        <button class="btn btn-info pull" ng-hide="readonly" ng-click="save(user)">Speichern</button>
-        <button class="btn btn-info pull" ng-show="readonly" ng-click="activeEditMode()">Ändern</button>
+        <div class="row">
+            <div class="col-sm-20">
+                <button class="btn btn-info pull" ng-hide="readonly" ng-click="save(user)">Speichern</button>
+                <button class="btn btn-info pull" ng-hide="readonly" ng-click="setReadOnlyMode(true)">Abbrechen</button>
+                <button class="btn btn-info pull" ng-show="readonly" ng-click="setReadOnlyMode(false)">Ändern</button>
+            </div>
+        </div>
     </div>
 </form>

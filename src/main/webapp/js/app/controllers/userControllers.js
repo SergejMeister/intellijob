@@ -108,8 +108,8 @@ intelliJobControllers.controller(
                     }
                 };
 
-                $scope.activeEditMode = function () {
-                    $scope.readonly = false;
+                $scope.setReadOnlyMode = function (value) {
+                    $scope.readonly = value;
                 };
 
             }]);

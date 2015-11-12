@@ -24,8 +24,10 @@ var intelliJob = angular.module('intelliJob',
         ]);
 var intelliJobControllers = angular.module('intelliJobControllers', []);
 
+//Interceptors
 intelliJob.factory('HttpResponseInterceptor', ['$q', '$location', '$rootScope', '$cookieStore', function ($q, $location, $rootScope, $cookieStore) {
     return function (promise) {
+
         var success = function (response) {
             delete $rootScope.success;
             delete $rootScope.error;
