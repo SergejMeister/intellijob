@@ -87,40 +87,63 @@
         <fieldset>
             <legend class="scheduler-border">Persönliche Fähigkeiten</legend>
             <uib-accordion close-others="false">
-                <uib-accordion-group heading="Bildung und Erfahrung" is-open="panelStatus.isEducationSkillOpen" is-disabled="panelStatus.isEducationSkillDisabled">
+                <uib-accordion-group heading="Bildung und Erfahrung" is-open="panelStatus.isEducationSkillOpen"
+                                     is-disabled="panelStatus.isEducationSkillDisabled">
+                    Bildung und Erfahrung
+                </uib-accordion-group>
+                <uib-accordion-group heading="Kenntnisse und Fertigkeiten" is-open="panelStatus.isKnowledgeSkillOpen"
+                                     is-disabled="panelStatus.isKnowledgeSkillDisabled">
                     Kenntnisse und Fertigkeiten
                 </uib-accordion-group>
-                <uib-accordion-group heading="Kenntnisse und Fertigkeiten" is-open="panelStatus.isKnowledgeSkillOpen" is-disabled="panelStatus.isKnowledgeSkillDisabled">
-                    Kenntnisse und Fertigkeiten
+                <uib-accordion-group heading="Persönliche Stärken" is-open="panelStatus.isPersonSkillOpen"
+                                     is-disabled="panelStatus.isPersonSkillDisabled">
+                    Persönliche Stärken
                 </uib-accordion-group>
-                <uib-accordion-group heading="Persönliche Stärken" is-open="panelStatus.isPersonSkillOpen" is-disabled="panelStatus.isPersonSkillDisabled">
-                    <p>The body of the uib-accordion group grows to fit the contents</p>
-                    <button type="button" class="btn btn-default btn-sm" ng-click="addItem()">Add Item</button>
-                    <div ng-repeat="item in items">{{item}}</div>
-                </uib-accordion-group>
-                <uib-accordion-group heading="Sprachkenntnisse" is-open="panelStatus.isLanguageSkillOpen" is-disabled="panelStatus.isLanguageSkillDisabled">
-                    <p>The body of the uib-accordion group grows to fit the contents</p>
-                    <button type="button" class="btn btn-default btn-sm" ng-click="addItem()">Add Item</button>
-                    <div ng-repeat="item in items">{{item}}</div>
+                <uib-accordion-group heading="Sprachkenntnisse" is-open="panelStatus.isLanguageSkillOpen"
+                                     is-disabled="panelStatus.isLanguageSkillDisabled">
+                    <div class="row"/>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div ng-repeat="language in languages">
+                                <!--<uib-rating class="rating-container rating-gly-star" ng-model="rate" max="max"-->
+                                            <!--on-hover="hoveringOver(value)" on-leave="overStar = null"-->
+                                            <!--titles="['one','two','three']"-->
+                                            <!--aria-labelledby="default-rating"></uib-rating>-->
+                                <div class="star-rating rating-md rating-active">
+                                    <label class='btn btn-info pull'>{{language}} <a class="pull-right"><span
+                                            class='glyphicon glyphicon-remove'></span></a>
+                                    </label>
+                                    <div class="clear-rating clear-rating-active" title="Clear">
+                                        <i class="glyphicon glyphicon-minus-sign"></i>
+                                    </div>
+                                    <div class="rating-container rating-gly-star" data-content="">
+                                        <div class="rating-stars" data-content="" style="width: 20%;"></div>
+                                        <input id="input-1" class="rating form-control hide" data-min="0" data-max="5"
+                                               data-step="1"></div>
+                                    <div class="caption"><span class="label label-success">Five Stars</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class='row'>
+                        <div class='col-md-2'>
+                            <input type='text' class='form-control input-group-lg reg_name'
+                                   ng-model='selectedLanguage' placeholder='Sprache' ng-readonly='readonly'>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class='btn btn-info'
+                                    ng-click='addLanguage(selectedLanguage)'>
+                                Hinzufügen
+                            </button>
+                            <button type='button' class='btn btn-info pull'>
+                                Auswählen
+                            </button>
+                        </div>
+                    </div>
                 </uib-accordion-group>
             </uib-accordion>
-            <!--<div class="spoiler">-->
-                <!--<div class="spoiler-btn">Sprachen</div>-->
-                <!--<div class="spoiler-body collapse">-->
-                    <!--<div class="col-md-4">-->
-                        <!--<input type="text" class="form-control input-group-lg reg_name" ng-readonly='readonly'>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="input-group">-->
-                <!--<input type="text" class="form-control input-group-lg reg_name" ng-readonly='readonly'>-->
-            <!--</div>-->
-            <!--<input type="text" value="ItemName" ng-model="newSearchField"-->
-            <!--placeholder="search field">-->
-            <!--<button ng-click="addItem()">Hinzufügen</button>-->
-            <!--<li ng-repeat="item in items.data" id="item{{item.id}}">-->
-            <!--<a href="#">{{item.title}}</a>  <a ng-click="deleteItem($index)" class="delete-item">x</a>-->
-            <!--</li>-->
         </fieldset>
     </div>
     <br>

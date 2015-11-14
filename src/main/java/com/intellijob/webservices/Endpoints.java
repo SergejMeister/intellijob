@@ -30,6 +30,9 @@ public class Endpoints {
     public static final String JOBLINKS_PAGING = JOBLINKS + "/{pageIndex}/{limit}";
     public static final String JOBLINKS_BY_ID = JOBLINKS + "/{jobLinkId}";
     public static final String JOBS = API + "/jobs";
+    public static final String API_VIEWS = API + "/views";
+    public static final String API_VIEWS_USERS = API_VIEWS + "/users";
+    public static final String API_VIEWS_USERS_BY_ID = API_VIEWS_USERS + "/{userId}";
     public static final String USERS = API + "/users";
     public static final String USERS_BY_ID = USERS + "/{userId}";
     public static final String JOBS_PAGING = JOBS + "/{pageIndex}/{limit}";

@@ -17,6 +17,10 @@
 package com.intellijob.dto.response;
 
 import com.intellijob.domain.User;
+import com.intellijob.models.SkillViewModel;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Data transfer object represents user page.
@@ -25,11 +29,21 @@ public class ResponseUserForm extends ResponseData {
 
     private ResponseUserData userData;
 
+    private Set<String> supportedLanguages;
+
     public ResponseUserForm() {
     }
 
     public ResponseUserForm(User user) {
+        this(user, null);
+    }
+
+    public ResponseUserForm(User user, SkillViewModel skillViewModel) {
         setUserData(new ResponseUserData(user));
+        Set<String> languages = skillViewModel.getLanguages().stream()
+                .map(languageNode -> languageNode.getLocalizableObject().getLabel()).collect(Collectors.toSet());
+
+        setSupportedLanguages(languages);
     }
 
     public ResponseUserData getUserData() {
@@ -38,5 +52,13 @@ public class ResponseUserForm extends ResponseData {
 
     public void setUserData(ResponseUserData userData) {
         this.userData = userData;
+    }
+
+    public Set<String> getSupportedLanguages() {
+        return supportedLanguages;
+    }
+
+    public void setSupportedLanguages(Set<String> supportedLanguages) {
+        this.supportedLanguages = supportedLanguages;
     }
 }

@@ -37,10 +37,7 @@ intelliJobControllers.controller(
                 // For this use case is readonly mode false, otherwise true!
                 $scope.readonly = $rootScope.isUserValid();
 
-                var items = {};
-                $scope.items = items;
-                $scope.items.data = [];
-                UserServices.getUserById($rootScope.globalUser.userId).success(function (response) {
+                UserServices.getViewUserModelById($rootScope.globalUser.userId).success(function (response) {
                     $scope.user = response.userData;
                     //$scope.items.data = $scope.user.simpleSearchFields;
                     $scope.searchEngine = $scope.user.profileData.searchEngine;
@@ -60,15 +57,28 @@ intelliJobControllers.controller(
                     isLanguageSkillDisabled: false
                 };
 
+                $scope.rate = 0;
+                $scope.max = 5;
+
+                $scope.hoveringOver = function (value) {
+                    $scope.overStar = value;
+                    $scope.percent = 100 * (value / $scope.max);
+                };
+
+
+                $scope.selectedLanguage = '';
+                var languages = [];
+                $scope.languages = languages;
 
                 $scope.deleteItem = function (index) {
-                    items.data.splice(index, 1);
+                    $scope.languages.splice(index, 1);
                 };
-                $scope.addItem = function (index) {
-                    items.data.push({
-                        id: $scope.items.data.length + 1,
-                        title: $scope.newSearchField
-                    });
+                $scope.addLanguage = function (newLanguage) {
+                    if (newLanguage !== '') {
+                        $scope.languages.push(newLanguage);
+                        newLanguage = '';
+                        $scope.selectedLanguage = '';
+                    }
                 };
 
                 /**
@@ -112,4 +122,5 @@ intelliJobControllers.controller(
                     $scope.readonly = value;
                 };
 
-            }]);
+            }
+        ]);

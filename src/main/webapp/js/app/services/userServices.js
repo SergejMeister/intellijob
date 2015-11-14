@@ -19,6 +19,9 @@ angular.module('intelliJob')
             function ($http) {
 
                 var urlBase = '/intellijob/api/users';
+
+                var urlViewsBase = '/intellijob/api/views/users';
+
                 var userServices = {};
 
                 /**
@@ -37,6 +40,15 @@ angular.module('intelliJob')
                  */
                 userServices.getUserById = function (userId) {
                     return $http.get(urlBase + '/' + userId);
+                };
+
+                /**
+                 * Get user by id.
+                 *
+                 * @returns {HttpPromise}
+                 */
+                userServices.getViewUserModelById = function (userId) {
+                    return $http.get(urlViewsBase + '/' + userId);
                 };
 
                 /**
