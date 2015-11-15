@@ -13,17 +13,11 @@
  *  See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-angular.module('intelliJob').directive('tagManager', function () {
+intelliJob.directive('tagManager', function () {
     return {
         restrict: 'E',
         scope: {tags: '='},
         templateUrl: '/views/templates/tag-language.html',
-        //template: '<div class="tags">' +
-        //'<a ng-repeat="(idx, tag) in tags" class="tag" ng-click="remove(idx)">{{tag}}</a>' +
-        //'</div>' +
-        //'<input type="text" placeholder="Add a tag..." ng-model="new_value"></input> ' +
-        //'<a class="btn" ng-click="add()">Add</a>',
         link: function ($scope, $element) {
             // FIXME: this is lazy and error-prone
             var input = angular.element($element.children()[1]);
@@ -49,8 +43,4 @@ angular.module('intelliJob').directive('tagManager', function () {
             });
         }
     };
-});
-
-app.controller('MainCtrl', function ($scope) {
-    $scope.tags = ['cool', 'awesome', 'angular', 'directive', 'javascript', 'html'];
 });

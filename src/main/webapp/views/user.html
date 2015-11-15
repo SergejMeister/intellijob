@@ -101,28 +101,17 @@
                 </uib-accordion-group>
                 <uib-accordion-group heading="Sprachkenntnisse" is-open="panelStatus.isLanguageSkillOpen"
                                      is-disabled="panelStatus.isLanguageSkillDisabled">
-                    <div class="row"/>
-                    <div class="row">
-                        <div class="col-md-10">
-                            <div ng-repeat="language in languages">
-                                <!--<uib-rating class="rating-container rating-gly-star" ng-model="rate" max="max"-->
-                                            <!--on-hover="hoveringOver(value)" on-leave="overStar = null"-->
-                                            <!--titles="['one','two','three']"-->
-                                            <!--aria-labelledby="default-rating"></uib-rating>-->
-                                <div class="star-rating rating-md rating-active">
-                                    <label class='btn btn-info pull'>{{language}} <a class="pull-right"><span
-                                            class='glyphicon glyphicon-remove'></span></a>
-                                    </label>
-                                    <div class="clear-rating clear-rating-active" title="Clear">
-                                        <i class="glyphicon glyphicon-minus-sign"></i>
-                                    </div>
-                                    <div class="rating-container rating-gly-star" data-content="">
-                                        <div class="rating-stars" data-content="" style="width: 20%;"></div>
-                                        <input id="input-1" class="rating form-control hide" data-min="0" data-max="5"
-                                               data-step="1"></div>
-                                    <div class="caption"><span class="label label-success">Five Stars</span></div>
-                                </div>
-                            </div>
+
+                    <div ng-repeat="language in languages">
+                        <div class="input-group margin-bottom-1">
+                                    <span class="tag label label-info">
+                                        <span>{{language}}</span>
+                                        <a class=tag-addon" ng-click='deleteLanguage(index)'><i
+                                                class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
+                                    </span>
+                            <span ng-init='rating = star.rating + 1'></span>
+                            <span class='star-rating' star-rating rating-value='rating' data-max='5'
+                                  on-rating-selected='rateFunction(rating)'></span>
                         </div>
                     </div>
                     <br>
@@ -130,11 +119,11 @@
                     <div class='row'>
                         <div class='col-md-2'>
                             <input type='text' class='form-control input-group-lg reg_name'
-                                   ng-model='selectedLanguage' placeholder='Sprache' ng-readonly='readonly'>
+                                   data-ng-model='selectedLanguage' placeholder='Sprache' ng-readonly='readonly'>
                         </div>
                         <div class="col-md-2">
                             <button type="button" class='btn btn-info'
-                                    ng-click='addLanguage(selectedLanguage)'>
+                                    data-ng-click='addLanguage(selectedLanguage)'>
                                 Hinzufügen
                             </button>
                             <button type='button' class='btn btn-info pull'>
@@ -149,12 +138,10 @@
     <br>
 
     <div class="actions">
-        <div class="row">
-            <div class="col-sm-20">
-                <button class="btn btn-info pull" ng-hide="readonly" ng-click="save(user)">Speichern</button>
-                <button class="btn btn-info pull" ng-hide="readonly" ng-click="setReadOnlyMode(true)">Abbrechen</button>
-                <button class="btn btn-info pull" ng-show="readonly" ng-click="setReadOnlyMode(false)">Ändern</button>
-            </div>
+        <div class="col-sm-20 margin-bottom-1">
+            <button class="btn btn-info pull" ng-hide="readonly" ng-click="save(user)">Speichern</button>
+            <button class="btn btn-info pull" ng-hide="readonly" ng-click="setReadOnlyMode(true)">Abbrechen</button>
+            <button class="btn btn-info pull" ng-show="readonly" ng-click="setReadOnlyMode(false)">Ändern</button>
         </div>
     </div>
 </form>

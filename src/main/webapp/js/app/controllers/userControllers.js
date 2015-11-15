@@ -57,27 +57,30 @@ intelliJobControllers.controller(
                     isLanguageSkillDisabled: false
                 };
 
-                $scope.rate = 0;
-                $scope.max = 5;
-
-                $scope.hoveringOver = function (value) {
-                    $scope.overStar = value;
-                    $scope.percent = 100 * (value / $scope.max);
-                };
+                //$scope.rate = 0;
+                //$scope.max = 5;
+                //
+                //$scope.hoveringOver = function (value) {
+                //    $scope.overStar = value;
+                //    $scope.percent = 100 * (value / $scope.max);
+                //};
 
 
                 $scope.selectedLanguage = '';
                 var languages = [];
                 $scope.languages = languages;
 
-                $scope.deleteItem = function (index) {
+                $scope.deleteLanguage = function (index) {
                     $scope.languages.splice(index, 1);
                 };
                 $scope.addLanguage = function (newLanguage) {
                     if (newLanguage !== '') {
                         $scope.languages.push(newLanguage);
-                        newLanguage = '';
-                        $scope.selectedLanguage = '';
+                        $scope.selectedLanguage = "";
+                        $scope.selectedLanguage = null;
+                        newLanguage = "";
+                        newLanguage = null;
+                        var test = 0 ;
                     }
                 };
 
