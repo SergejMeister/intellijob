@@ -17,7 +17,7 @@
 package com.intellijob.domain.skills;
 
 import com.intellijob.domain.BaseDocument;
-import com.intellijob.domain.localization.LocalizableObject;
+import com.intellijob.domain.LocalizableObject;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.index.Indexed;
 
@@ -90,5 +90,14 @@ public class SkillNode extends BaseDocument {
 
     public void setLocalizableObject(LocalizableObject localizableObject) {
         this.localizableObject = localizableObject;
+    }
+
+    /**
+     * Last node doesn't have children.
+     *
+     * @return true if nodes is empty!
+     */
+    public Boolean isLeaf() {
+        return getNodes().isEmpty();
     }
 }

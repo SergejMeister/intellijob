@@ -15,7 +15,7 @@
   ~ limitations under the License.
   -->
 
-<form name="userForm" class="form-horizontal" role="form">
+<div name="userForm" class="form-horizontal" role="form">
 
     <h1>Benutzerdaten</h1>
 
@@ -102,24 +102,30 @@
                 <uib-accordion-group heading="Sprachkenntnisse" is-open="panelStatus.isLanguageSkillOpen"
                                      is-disabled="panelStatus.isLanguageSkillDisabled">
 
-                    <div ng-repeat="language in languages">
+                    <div ng-repeat="userLanguage in userLanguages">
                         <div class="input-group margin-bottom-1">
                                     <span class="tag label label-info">
-                                        <span>{{language}}</span>
-                                        <a class=tag-addon" ng-click='deleteLanguage(index)'><i
+                                        <span>{{userLanguage.skillData.name}}</span>
+                                        <a class=tag-addon" ng-click='deleteLanguage(index)' ng-hide="readonly"><i
                                                 class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
                                     </span>
-                            <span ng-init='rating = star.rating + 1'></span>
-                            <span class='star-rating' star-rating rating-value='rating' data-max='5'
+                            <span class='star-rating' star-rating rating-value='userLanguage.rating' data-max='5'
                                   on-rating-selected='rateFunction(rating)'></span>
                         </div>
                     </div>
                     <br>
 
-                    <div class='row'>
+                    <div class='row' ng-hide="readonly">
                         <div class='col-md-2'>
-                            <input type='text' class='form-control input-group-lg reg_name'
-                                   data-ng-model='selectedLanguage' placeholder='Sprache' ng-readonly='readonly'>
+                            <angucomplete id="ex1"
+                                          placeholder="Sprache"
+                                          pause="100"
+                                          selectedobject="selectedLanguage"
+                                          localdata="supportedLanguages"
+                                          searchfields="name"
+                                          titlefield="name"
+                                          minlength="1"
+                                          inputclass="form-control form-control-small"></angucomplete>
                         </div>
                         <div class="col-md-2">
                             <button type="button" class='btn btn-info'
@@ -144,4 +150,4 @@
             <button class="btn btn-info pull" ng-show="readonly" ng-click="setReadOnlyMode(false)">Ändern</button>
         </div>
     </div>
-</form>
+</div>

@@ -16,25 +16,40 @@
 
 package com.intellijob.domain.skills;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * User professional  and individual skills.
+ * Skill node with rating attribute.
  */
-public class Skills {
+public class SkillRatingNode {
 
-    private List<SkillRatingNode> languages;
+    private SkillNode skillNode;
 
-    public Skills() {
-        setLanguages(new ArrayList<>());
+    private int rating;
+
+    public SkillRatingNode() {
     }
 
-    public List<SkillRatingNode> getLanguages() {
-        return languages;
+    public SkillRatingNode(SkillNode skillNode, int rating) {
+        setSkillNode(skillNode);
+        setRating(rating);
     }
 
-    public void setLanguages(List<SkillRatingNode> languages) {
-        this.languages = languages;
+    public SkillRatingNode(int rating) {
+        setRating(rating);
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public SkillNode getSkillNode() {
+        return skillNode;
+    }
+
+    public void setSkillNode(SkillNode skillNode) {
+        this.skillNode = skillNode;
     }
 }

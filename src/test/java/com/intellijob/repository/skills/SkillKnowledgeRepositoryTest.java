@@ -17,7 +17,7 @@
 package com.intellijob.repository.skills;
 
 import com.intellijob.BaseTester;
-import com.intellijob.domain.localization.LocalizableObject;
+import com.intellijob.domain.LocalizableObject;
 import com.intellijob.domain.skills.SkillCategory;
 import com.intellijob.domain.skills.SkillKnowledge;
 import com.intellijob.domain.skills.SkillNode;

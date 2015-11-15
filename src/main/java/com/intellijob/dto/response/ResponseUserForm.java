@@ -17,10 +17,12 @@
 package com.intellijob.dto.response;
 
 import com.intellijob.domain.User;
+import com.intellijob.domain.skills.SkillNode;
+import com.intellijob.dto.SkillData;
 import com.intellijob.models.SkillViewModel;
 
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Data transfer object represents user page.
@@ -29,7 +31,7 @@ public class ResponseUserForm extends ResponseData {
 
     private ResponseUserData userData;
 
-    private Set<String> supportedLanguages;
+    private List<SkillData> supportedLanguages;
 
     public ResponseUserForm() {
     }
@@ -40,10 +42,12 @@ public class ResponseUserForm extends ResponseData {
 
     public ResponseUserForm(User user, SkillViewModel skillViewModel) {
         setUserData(new ResponseUserData(user));
-        Set<String> languages = skillViewModel.getLanguages().stream()
-                .map(languageNode -> languageNode.getLocalizableObject().getLabel()).collect(Collectors.toSet());
-
-        setSupportedLanguages(languages);
+        List<SkillData> languagesData = new ArrayList<>();
+        for (SkillNode skillNode : skillViewModel.getLanguages()) {
+            SkillData skillData = new SkillData(skillNode);
+            languagesData.add(skillData);
+        }
+        setSupportedLanguages(languagesData);
     }
 
     public ResponseUserData getUserData() {
@@ -54,11 +58,11 @@ public class ResponseUserForm extends ResponseData {
         this.userData = userData;
     }
 
-    public Set<String> getSupportedLanguages() {
+    public List<SkillData> getSupportedLanguages() {
         return supportedLanguages;
     }
 
-    public void setSupportedLanguages(Set<String> supportedLanguages) {
+    public void setSupportedLanguages(List<SkillData> supportedLanguages) {
         this.supportedLanguages = supportedLanguages;
     }
 }

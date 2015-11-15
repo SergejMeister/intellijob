@@ -20,7 +20,8 @@ var intelliJob = angular.module('intelliJob',
             'ngCookies',
             'ngAnimate',
             'intelliJobControllers',
-            'ui.bootstrap'
+            'ui.bootstrap',
+            'angucomplete'
         ]);
 var intelliJobControllers = angular.module('intelliJobControllers', []);
 

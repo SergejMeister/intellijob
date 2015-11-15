@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.intellijob.domain.localization;
+package com.intellijob.domain;
 
 /**
  * Model to represents a localizable object.

@@ -17,6 +17,9 @@
 package com.intellijob.dto.request;
 
 import com.intellijob.dto.ProfileData;
+import com.intellijob.dto.SkillRatingData;
+
+import java.util.List;
 
 /**
  * Request data transfer object to save user data.
@@ -28,6 +31,8 @@ public class RequestUserData extends RequestData {
     private ProfileData profileData;
 
     private String simpleSearchField;
+
+    private List<SkillRatingData> languages;
 
     public String getUserId() {
         return userId;
@@ -51,5 +56,13 @@ public class RequestUserData extends RequestData {
 
     public void setSimpleSearchField(String simpleSearchField) {
         this.simpleSearchField = simpleSearchField;
+    }
+
+    public List<SkillRatingData> getLanguages() {
+        return languages;
+    }
+
+    public void setLanguages(List<SkillRatingData> languages) {
+        this.languages = languages;
     }
 }

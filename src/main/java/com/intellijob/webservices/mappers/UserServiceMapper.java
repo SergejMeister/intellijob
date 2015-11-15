@@ -18,9 +18,17 @@ package com.intellijob.webservices.mappers;
 
 import com.intellijob.domain.Profile;
 import com.intellijob.domain.User;
+import com.intellijob.domain.skills.SkillNode;
+import com.intellijob.domain.skills.SkillRatingNode;
+import com.intellijob.domain.skills.Skills;
 import com.intellijob.dto.ProfileData;
+import com.intellijob.dto.SkillData;
+import com.intellijob.dto.SkillRatingData;
 import com.intellijob.dto.request.RequestUserData;
 import com.intellijob.enums.SearchEngineEnum;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -47,6 +55,40 @@ public final class UserServiceMapper {
         Profile profile = mapTo(requestUserData.getProfileData());
         user.setProfile(profile);
         user.setSimpleSearchField(requestUserData.getSimpleSearchField());
+        Skills skills = initSkills(requestUserData);
+        user.setSkills(skills);
         return user;
+    }
+
+    public static Skills initSkills(RequestUserData requestUserData) {
+        Skills skills = new Skills();
+        if (requestUserData.getLanguages() != null) {
+            List<SkillRatingNode> skillRatingNodes = new ArrayList<>();
+            for (SkillRatingData skillRatingData : requestUserData.getLanguages()) {
+                SkillRatingNode skillRatingNode = mapTo(skillRatingData);
+                skillRatingNodes.add(skillRatingNode);
+            }
+            skills.setLanguages(skillRatingNodes);
+        }
+
+        return skills;
+    }
+
+    public static SkillRatingNode mapTo(SkillRatingData skillRatingData) {
+        SkillNode skillNode = mapTo(skillRatingData.getSkillData());
+        return new SkillRatingNode(skillNode, skillRatingData.getRating());
+    }
+
+    public static SkillNode mapTo(SkillData skillData) {
+        SkillNode skillNode = new SkillNode();
+        skillNode.setName(skillData.getName());
+        if (isValidId(skillData.getId())) {
+            skillNode.setId(skillData.getId());
+        }
+        return skillNode;
+    }
+
+    public static Boolean isValidId(String id) {
+        return id != null && !id.isEmpty();
     }
 }

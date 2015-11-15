@@ -37,11 +37,17 @@ intelliJobControllers.controller(
                 // For this use case is readonly mode false, otherwise true!
                 $scope.readonly = $rootScope.isUserValid();
 
+                var userLanguages = [];
+                $scope.userLanguages = userLanguages;
+
                 UserServices.getViewUserModelById($rootScope.globalUser.userId).success(function (response) {
                     $scope.user = response.userData;
-                    //$scope.items.data = $scope.user.simpleSearchFields;
                     $scope.searchEngine = $scope.user.profileData.searchEngine;
                     $scope.switchSearchEngine($scope.searchEngine);
+                    $scope.supportedLanguages = response.supportedLanguages;
+                    if ($scope.user.languages) {
+                        $scope.userLanguages = $scope.user.languages;
+                    }
                 }).error(function (error) {
                     console.log(error);
                 });
@@ -57,37 +63,37 @@ intelliJobControllers.controller(
                     isLanguageSkillDisabled: false
                 };
 
-                //$scope.rate = 0;
-                //$scope.max = 5;
-                //
-                //$scope.hoveringOver = function (value) {
-                //    $scope.overStar = value;
-                //    $scope.percent = 100 * (value / $scope.max);
-                //};
-
-
-                $scope.selectedLanguage = '';
-                var languages = [];
-                $scope.languages = languages;
-
                 $scope.deleteLanguage = function (index) {
-                    $scope.languages.splice(index, 1);
+                    $scope.userLanguages.splice(index, 1);
                 };
-                $scope.addLanguage = function (newLanguage) {
-                    if (newLanguage !== '') {
-                        $scope.languages.push(newLanguage);
-                        $scope.selectedLanguage = "";
-                        $scope.selectedLanguage = null;
-                        newLanguage = "";
-                        newLanguage = null;
-                        var test = 0 ;
+
+                $scope.addLanguage = function (newUserLanguage) {
+                    var skillRatingData = {};
+                    skillRatingData.skillData = {};
+                    skillRatingData.rating = 1;
+
+                    var language = newUserLanguage.originalObject;
+                    if (language) {
+                        if (language.name && language.name !== '') {
+                            skillRatingData.skillData = language;
+                            $scope.userLanguages.push(skillRatingData);
+                        }
+                    } else {
+                        var language = {};
+                        language.id = '';
+                        language.name = newUserLanguage;
+                        skillRatingData.skillData = language;
+                        $scope.userLanguages.push(skillRatingData);
                     }
+
+                    $scope.selectedLanguage = null;
                 };
 
                 /**
                  * Save user data.
                  */
                 $scope.save = function (userData) {
+                    userData.languages = $scope.userLanguages;
                     UserServices.updateUser(userData).success(function (response) {
                         $rootScope.success = response.message;
                         $cookieStore.put("user", userData);

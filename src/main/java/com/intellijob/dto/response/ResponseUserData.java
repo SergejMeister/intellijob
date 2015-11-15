@@ -17,7 +17,12 @@
 package com.intellijob.dto.response;
 
 import com.intellijob.domain.User;
+import com.intellijob.domain.skills.SkillRatingNode;
 import com.intellijob.dto.ProfileData;
+import com.intellijob.dto.SkillRatingData;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Data transfer object represents domain object <code>User</code>
@@ -30,6 +35,8 @@ public class ResponseUserData extends ResponseData {
 
     private String simpleSearchField;
 
+    private List<SkillRatingData> languages;
+
     public ResponseUserData() {
     }
 
@@ -37,7 +44,14 @@ public class ResponseUserData extends ResponseData {
         setUserId(user.getId());
         setProfileData(new ProfileData(user.getProfile()));
         setSimpleSearchField(user.getSimpleSearchField());
+        this.languages = initLanguages(user.getSkills().getLanguages());
     }
+
+    private List<SkillRatingData> initLanguages(List<SkillRatingNode> userLanguages) {
+        return userLanguages.stream().map(skillRatingNode -> new SkillRatingData(skillRatingNode))
+                .collect(Collectors.toList());
+    }
+
 
     public ProfileData getProfileData() {
         return profileData;
@@ -61,5 +75,13 @@ public class ResponseUserData extends ResponseData {
 
     public void setSimpleSearchField(String simpleSearchField) {
         this.simpleSearchField = simpleSearchField;
+    }
+
+    public List<SkillRatingData> getLanguages() {
+        return languages;
+    }
+
+    public void setLanguages(List<SkillRatingData> languages) {
+        this.languages = languages;
     }
 }

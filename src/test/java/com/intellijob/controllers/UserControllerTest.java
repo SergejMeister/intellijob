@@ -125,7 +125,7 @@ public class UserControllerTest extends BaseTester {
         } catch (NotMailSyncException | UserNotFoundException multiException) {
             Assert.assertNotNull(multiException);
             Assert.assertEquals(Integer.valueOf(5000006), multiException.getError().getCode());
-            Assert.assertEquals("User is not founded!", multiException.getError().getMessage());
+            Assert.assertEquals("User can not be found!", multiException.getError().getMessage());
         }
     }
 
@@ -137,7 +137,7 @@ public class UserControllerTest extends BaseTester {
         } catch (UserNotFoundException unfe) {
             Assert.assertNotNull(unfe);
             Assert.assertEquals(Integer.valueOf(5000006), unfe.getError().getCode());
-            Assert.assertEquals("User is not founded!", unfe.getError().getMessage());
+            Assert.assertEquals("User can not be found!", unfe.getError().getMessage());
         }
     }
 
@@ -157,7 +157,7 @@ public class UserControllerTest extends BaseTester {
         } catch (UserNotFoundException unfe) {
             Assert.assertNotNull(unfe);
             Assert.assertEquals(Integer.valueOf(5000006), unfe.getError().getCode());
-            Assert.assertEquals("User is not founded!", unfe.getError().getMessage());
+            Assert.assertEquals("User can not be found!", unfe.getError().getMessage());
         } finally {
             //Rollback testUser
             userRepository.delete(testUsers);

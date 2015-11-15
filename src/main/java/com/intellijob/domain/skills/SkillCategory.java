@@ -17,7 +17,7 @@
 package com.intellijob.domain.skills;
 
 import com.intellijob.domain.BaseDocument;
-import com.intellijob.domain.localization.LocalizableObject;
+import com.intellijob.domain.LocalizableObject;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 

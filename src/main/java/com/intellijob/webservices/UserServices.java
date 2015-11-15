@@ -24,7 +24,6 @@ import com.intellijob.dto.response.ResponseUserForm;
 import com.intellijob.exceptions.UserNotFoundException;
 import com.intellijob.webservices.mappers.UserServiceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -59,17 +58,6 @@ public class UserServices extends BaseServices {
         } catch (UserNotFoundException e) {
             return new ResponseUserData();
         }
-    }
-
-    /**
-     * Returns user data for specified userId.
-     *
-     * @return response user.
-     */
-    @RequestMapping(value = Endpoints.USERS_BY_ID, method = RequestMethod.GET)
-    public @ResponseBody ResponseUserForm getUser(@PathVariable String userId) throws Exception {
-        User user = userController.getUser(userId);
-        return new ResponseUserForm(user);
     }
 
     /**
