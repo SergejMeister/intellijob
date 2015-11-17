@@ -19,8 +19,10 @@ package com.intellijob.controllers.impl;
 import com.intellijob.controllers.SkillController;
 import com.intellijob.domain.skills.SkillLanguage;
 import com.intellijob.domain.skills.SkillNode;
+import com.intellijob.domain.skills.SkillPersonalStrength;
 import com.intellijob.models.SkillViewModel;
 import com.intellijob.repository.skills.SkillLanguageRepository;
+import com.intellijob.repository.skills.SkillPersonalStrengthRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -35,6 +37,9 @@ public class SkillControllerImpl implements SkillController {
     @Autowired
     private SkillLanguageRepository skillLanguageRepository;
 
+    @Autowired
+    private SkillPersonalStrengthRepository skillPersonalStrengthRepository;
+
     /**
      * {@inheritDoc}
      */
@@ -48,10 +53,23 @@ public class SkillControllerImpl implements SkillController {
      * {@inheritDoc}
      */
     @Override
+    public List<SkillNode> getPersonalStrengths() {
+        SkillPersonalStrength skillPersonalStrength = skillPersonalStrengthRepository.findFirstByOrderByIdAsc();
+        return skillPersonalStrength.getPersonalStrength();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public SkillViewModel getSkillViewModel() {
         SkillViewModel skillViewModel = new SkillViewModel();
         List<SkillNode> languages = getAllLanguages();
         skillViewModel.setLanguages(languages);
+
+        List<SkillNode> personalStrengths = getPersonalStrengths();
+        skillViewModel.setPersonalStrengths(personalStrengths);
+
         return skillViewModel;
     }
 }

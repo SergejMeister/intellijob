@@ -17,12 +17,11 @@
 package com.intellijob.dto.response;
 
 import com.intellijob.domain.User;
-import com.intellijob.domain.skills.SkillNode;
 import com.intellijob.dto.SkillData;
 import com.intellijob.models.SkillViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Data transfer object represents user page.
@@ -33,6 +32,8 @@ public class ResponseUserForm extends ResponseData {
 
     private List<SkillData> supportedLanguages;
 
+    private List<SkillData> supportedPersonalStrengths;
+
     public ResponseUserForm() {
     }
 
@@ -42,12 +43,23 @@ public class ResponseUserForm extends ResponseData {
 
     public ResponseUserForm(User user, SkillViewModel skillViewModel) {
         setUserData(new ResponseUserData(user));
-        List<SkillData> languagesData = new ArrayList<>();
-        for (SkillNode skillNode : skillViewModel.getLanguages()) {
-            SkillData skillData = new SkillData(skillNode);
-            languagesData.add(skillData);
-        }
+        List<SkillData> languagesData =
+                skillViewModel.getLanguages().stream().map(skillNode -> new SkillData(skillNode))
+                        .collect(Collectors.toList());
         setSupportedLanguages(languagesData);
+
+        List<SkillData> personalStrengths =
+                skillViewModel.getPersonalStrengths().stream().map(skillNode -> new SkillData(skillNode))
+                        .collect(Collectors.toList());
+        setSupportedPersonalStrengths(personalStrengths);
+    }
+
+    public List<SkillData> getSupportedPersonalStrengths() {
+        return supportedPersonalStrengths;
+    }
+
+    public void setSupportedPersonalStrengths(List<SkillData> supportedPersonalStrengths) {
+        this.supportedPersonalStrengths = supportedPersonalStrengths;
     }
 
     public ResponseUserData getUserData() {

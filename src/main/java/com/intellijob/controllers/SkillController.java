@@ -36,6 +36,13 @@ public interface SkillController {
     List<SkillNode> getAllLanguages();
 
     /**
+     * Returns list with all supported skills for personal strengths.
+     *
+     * @return list of languages.
+     */
+    List<SkillNode> getPersonalStrengths();
+
+    /**
      * Returns full SkillViewModel.
      *
      * @return full SkillViewModel.

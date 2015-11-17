@@ -16,8 +16,12 @@
 
 package com.intellijob;
 
+import com.intellijob.domain.LocalizableObject;
 import com.intellijob.domain.Profile;
 import com.intellijob.domain.User;
+import com.intellijob.domain.skills.SkillNode;
+import junit.framework.Assert;
+import org.bson.types.ObjectId;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +30,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -54,5 +64,42 @@ public abstract class BaseTester {
         User defaultUser = new User();
         defaultUser.setProfile(profile);
         return defaultUser;
+    }
+
+    protected List<SkillNode> readResourceData(String resourcePath) {
+        List<SkillNode> result = new ArrayList<>();
+
+        BufferedReader br;
+        String line;
+        try (InputStream inputStream = Thread.currentThread().getContextClassLoader()
+                .getResourceAsStream(resourcePath)) {
+            br = new BufferedReader(new InputStreamReader(inputStream, DEFAULT_ENCODING));
+            while ((line = br.readLine()) != null) {
+                LocalizableObject localizableObject = new LocalizableObject(line);
+                SkillNode skillNode = new SkillNode(new ObjectId(), localizableObject);
+                skillNode.setName(line);
+                result.add(skillNode);
+            }
+        } catch (Exception e) {
+            LOG.error("Error occurred while read file (" + resourcePath + ")", e);
+            Assert.fail("Can not read file");
+        }
+
+        return result;
+    }
+
+    protected List<SkillNode> addSubSkills(String skillName, List<SkillNode> list, String resPath) {
+        List<SkillNode> result = new ArrayList<>();
+        for (SkillNode skillNode : list) {
+            if (skillNode.getName().equals(skillName)) {
+                List<SkillNode> subSkills = readResourceData(resPath);
+                skillNode.setNodes(subSkills);
+                result.add(skillNode);
+            } else {
+                result.add(skillNode);
+            }
+        }
+
+        return result;
     }
 }

@@ -28,8 +28,19 @@ public class SkillViewModel {
 
     private List<SkillNode> languages;
 
+    private List<SkillNode> personalStrengths;
+
     public SkillViewModel() {
         setLanguages(new ArrayList<>());
+        setPersonalStrengths(new ArrayList<>());
+    }
+
+    public List<SkillNode> getPersonalStrengths() {
+        return personalStrengths;
+    }
+
+    public void setPersonalStrengths(List<SkillNode> personalStrengths) {
+        this.personalStrengths = personalStrengths;
     }
 
     public List<SkillNode> getLanguages() {
