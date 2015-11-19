@@ -95,10 +95,27 @@
                                      is-disabled="panelStatus.isKnowledgeSkillDisabled">
                     Kenntnisse und Fertigkeiten
                 </uib-accordion-group>
+
+                <!--Personal strengths menu-->
                 <uib-accordion-group heading="Persönliche Stärken" is-open="panelStatus.isPersonSkillOpen"
                                      is-disabled="panelStatus.isPersonSkillDisabled">
                     Persönliche Stärken
+                    <div>
+                        <div class="span5 article-tree">
+                            <div>
+
+                                <div class="tree well">
+                                    <ul>
+                                        <node-tree ng-model="displayTree"></node-tree>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </uib-accordion-group>
+
+                <!--Languages Menu-->
                 <uib-accordion-group heading="Sprachkenntnisse" is-open="panelStatus.isLanguageSkillOpen"
                                      is-disabled="panelStatus.isLanguageSkillDisabled">
 
@@ -115,26 +132,28 @@
                     </div>
                     <br>
 
-                    <div class='row' ng-hide="readonly">
-                        <div class='col-md-2'>
-                            <angucomplete id="ex1"
-                                          placeholder="Sprache"
-                                          pause="100"
-                                          selectedobject="selectedLanguage"
-                                          localdata="supportedLanguages"
-                                          searchfields="name"
-                                          titlefield="name"
-                                          minlength="1"
-                                          inputclass="form-control form-control-small"></angucomplete>
-                        </div>
-                        <div class="col-md-2">
-                            <button type="button" class='btn btn-info'
-                                    data-ng-click='addLanguage(selectedLanguage)'>
-                                Hinzufügen
-                            </button>
-                            <button type='button' class='btn btn-info pull'>
-                                Auswählen
-                            </button>
+                    <div uib-collapse="readonly">
+                        <div class='row'>
+                            <div class='col-md-2'>
+                                <angucomplete id="ex1"
+                                              placeholder="Sprache"
+                                              pause="100"
+                                              selectedobject="selectedLanguage"
+                                              localdata="supportedLanguages"
+                                              searchfields="name"
+                                              titlefield="name"
+                                              minlength="1"
+                                              inputclass="form-control form-control-small"></angucomplete>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class='btn btn-info'
+                                        data-ng-click='addLanguage(selectedLanguage)'>
+                                    Hinzufügen
+                                </button>
+                                <button type='button' class='btn btn-info pull'>
+                                    Auswählen
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </uib-accordion-group>

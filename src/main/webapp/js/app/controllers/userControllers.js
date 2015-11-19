@@ -48,6 +48,8 @@ intelliJobControllers.controller(
                     if ($scope.user.languages) {
                         $scope.userLanguages = $scope.user.languages;
                     }
+
+                    $scope.displayTree = response.supportedPersonalStrengths;
                 }).error(function (error) {
                     console.log(error);
                 });
