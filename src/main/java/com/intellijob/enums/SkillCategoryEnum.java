@@ -42,7 +42,7 @@ public enum SkillCategoryEnum {
 
     public static SkillCategoryEnum findByTypeId(Integer typeId) {
         for (SkillCategoryEnum value : SkillCategoryEnum.values()) {
-            if (value.getTypeId() == typeId) {
+            if (value.getTypeId().equals(typeId)) {
                 return value;
             }
         }
