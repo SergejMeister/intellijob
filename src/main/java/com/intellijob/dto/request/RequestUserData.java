@@ -34,6 +34,8 @@ public class RequestUserData extends RequestData {
 
     private List<SkillRatingData> languages;
 
+    private List<SkillRatingData> personalStrengths;
+
     public String getUserId() {
         return userId;
     }
@@ -64,5 +66,13 @@ public class RequestUserData extends RequestData {
 
     public void setLanguages(List<SkillRatingData> languages) {
         this.languages = languages;
+    }
+
+    public List<SkillRatingData> getPersonalStrengths() {
+        return personalStrengths;
+    }
+
+    public void setPersonalStrengths(List<SkillRatingData> personalStrengths) {
+        this.personalStrengths = personalStrengths;
     }
 }

@@ -33,23 +33,35 @@ intelliJobControllers.controller(
                 $scope.showSimpleSearchDialog = false;
                 $scope.showComplexSearchDialog = false;
 
+                $scope.userSkillStatus = {
+                    isEducationEmpty: true,
+                    isKnowledgeEmpty: true,
+                    isPersonEmpty: true,
+                    isLanguageEmpty: true
+                };
+
                 // If user not valid, that means a new user should be created!
                 // For this use case is readonly mode false, otherwise true!
                 $scope.readonly = $rootScope.isUserValid();
 
-                var userLanguages = [];
-                $scope.userLanguages = userLanguages;
+                $scope.userLanguages = [];
+                $scope.userPersonalStrengths = [];
 
                 UserServices.getViewUserModelById($rootScope.globalUser.userId).success(function (response) {
                     $scope.user = response.userData;
                     $scope.searchEngine = $scope.user.profileData.searchEngine;
                     $scope.switchSearchEngine($scope.searchEngine);
                     $scope.supportedLanguages = response.supportedLanguages;
-                    if ($scope.user.languages) {
+                    if ($scope.user.languages && $scope.user.languages.length > 0) {
                         $scope.userLanguages = $scope.user.languages;
+                        $scope.userSkillStatus.isLanguageEmpty = false;
                     }
 
-                    $scope.displayTree = response.supportedPersonalStrengths;
+                    $scope.supportedPersonalStrengths = response.supportedPersonalStrengths;
+                    if ($scope.user.personalStrengths && $scope.user.personalStrengths.length > 0) {
+                        $scope.userPersonalStrengths = $scope.user.personalStrengths;
+                        $scope.userSkillStatus.isPersonEmpty = false;
+                    }
                 }).error(function (error) {
                     console.log(error);
                 });
@@ -67,6 +79,10 @@ intelliJobControllers.controller(
 
                 $scope.deleteLanguage = function (index) {
                     $scope.userLanguages.splice(index, 1);
+                };
+
+                $scope.deletePersonalStrength = function (index) {
+                    $scope.userPersonalStrengths.splice(index, 1);
                 };
 
                 $scope.addLanguage = function (newUserLanguage) {
@@ -92,21 +108,7 @@ intelliJobControllers.controller(
                 };
 
                 /**
-                 * Save user data.
-                 */
-                $scope.save = function (userData) {
-                    userData.languages = $scope.userLanguages;
-                    UserServices.updateUser(userData).success(function (response) {
-                        $rootScope.success = response.message;
-                        $cookieStore.put("user", userData);
-                        $scope.readonly = true;
-                    }).error(function (error) {
-                        console.log(error);
-                    });
-                };
-
-                /**
-                 * search mails in mail box.
+                 * Update search engine.
                  */
                 $scope.changeSearchEngine = function (selectedSearchEngine) {
                     $scope.user.profileData.searchEngine = selectedSearchEngine;
@@ -114,7 +116,7 @@ intelliJobControllers.controller(
                 };
 
                 /**
-                 * search mails in mail box.
+                 * Select new search engine and deactivate old engine.
                  */
                 $scope.switchSearchEngine = function (selectedSearchEngine) {
                     if (selectedSearchEngine === 'SIMPLE') {
@@ -133,5 +135,19 @@ intelliJobControllers.controller(
                     $scope.readonly = value;
                 };
 
+                /**
+                 * Save user data.
+                 */
+                $scope.save = function (userData) {
+                    userData.languages = $scope.userLanguages;
+                    userData.personalStrengths = $scope.userPersonalStrengths;
+                    UserServices.updateUser(userData).success(function (response) {
+                        $rootScope.success = response.message;
+                        $cookieStore.put("user", userData);
+                        $scope.readonly = true;
+                    }).error(function (error) {
+                        console.log(error);
+                    });
+                };
             }
         ]);

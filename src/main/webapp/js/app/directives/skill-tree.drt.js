@@ -13,69 +13,93 @@
  *  See the License for the specific language governing permissions and
  * limitations under the License.
  */
-intelliJob.directive('nodeTree', function () {
+intelliJob.directive('skillTree', function () {
     return {
-        template: '<node ng-repeat="node in tree"></node>',
+        template: '<skill-node ng-repeat="skillNode in tree"></skill-node>',
         replace: true,
         transclude: true,
         restrict: 'E',
         scope: {
-            tree: '=ngModel'
+            tree: '=ngModel',
+            selected: '=',
+            expanded: '='
         }
     };
 });
 
-intelliJob.directive('node', function ($compile) {
+intelliJob.directive('skillNode', function ($compile, $filter) {
     return {
         restrict: 'E',
         replace: true,
-        templateUrl: 'views/templates/the-tree.html',
+        templateUrl: 'views/templates/skill-tree.html',
         link: function (scope, elm, attrs) {
+            scope.expanded = scope.$parent.expanded;
 
-            //$(elm).parent('ul').find('span.leaf').on('click', function (e) {
-            $(elm).find('span.leaf').on('click', function (e) {
-
-                var children = $(elm).find('li');
-
-                if (children.is(":visible")) {
-                    children.hide('fast');
-                    $(elm).find('span.leaf i.icon-minus-sign').addClass('icon-plus-sign').removeClass('icon-minus-sign');
-                }
-                else {
-
-                    children.show('fast');
-                    $(elm).find('span.leaf i.icon-plus-sign').addClass('icon-minus-sign').removeClass('icon-plus-sign');
-                }
-                e.stopPropagation();
-            });
-
-
-            scope.nodeClicked = function (node) {
-                node.checked = !node.checked;
-                function checkChildren(c) {
-                    angular.forEach(c.children, function (c) {
-                        c.checked = node.checked;
-                        checkChildren(c);
-                    });
-                }
-
-                checkChildren(node);
+            scope.isLeaf = function (_value) {
+                return _value.skills.length === 0;
             };
+
+            scope.isRoot = function (_value) {
+                return !scope.isLeaf(_value);
+            };
+
+            /**
+             * Firstly check id, if check id undefined, than check skill name!
+             * @returns {boolean} true if found, otherwise false.
+             */
+            scope.isSkillSelected = function () {
+                var selectedSkillNode = $filter("filter")(scope.$parent.selected, {skillData: {id: scope.skillNode.id}});
+                if (selectedSkillNode.length === 1) {
+                    return true;
+                } else {
+                    selectedSkillNode = $filter("filter")(scope.$parent.selected, {skillData: {name: scope.skillNode.name}});
+                    return selectedSkillNode.length === 1;
+                }
+            };
+
+            if (scope.skillNode.skills.length > 0) {
+                var childNode = $compile('<ul ng-show="expanded"><skill-tree ng-model="skillNode.skills" expanded="expanded" selected="$parent.selected"></skill-tree></ul>')(scope);
+                elm.append(childNode);
+            } else {
+                scope.skillNode.checked = scope.isSkillSelected(scope.skillNode);
+            }
 
             scope.switcher = function (booleanExpr, trueValue, falseValue) {
                 return booleanExpr ? trueValue : falseValue;
             };
 
-            scope.isLeaf = function (_data) {
-                return _data.skills.length === 0;
-
+            scope.isRootExpanded = function (_skillNodeValue, _expandedValue) {
+                return scope.isRoot(_skillNodeValue) && _expandedValue === true;
             };
 
+            scope.isRootNotExpanded = function (_skillNodeValue, _expandedValue) {
+                return scope.isRoot(_skillNodeValue) && _expandedValue === false;
+            };
 
-            if (scope.node.skills.length > 0) {
-                var childNode = $compile('<ul ><node-tree ng-model="node.skills"></node-tree></ul>')(scope)
-                elm.append(childNode);
-            }
+            scope.addNodeToSelected = function (_skillNode) {
+                var skillRatingData = {};
+                skillRatingData.rating = 1;
+                skillRatingData.skillData = {};
+                skillRatingData.skillData = _skillNode;
+                scope.$parent.selected.push(skillRatingData);
+            };
+
+            scope.removeNodeFromSelected = function (_skillNode) {
+                var index = scope.$parent.selected.indexOf(_skillNode);
+                scope.$parent.selected.splice(index, 1);
+            };
+
+            scope.nodeClicked = function (skillNode, expandedValue) {
+                scope.expanded = !expandedValue;
+                skillNode.checked = !skillNode.checked;
+                if (scope.isLeaf(skillNode)) {
+                    if (skillNode.checked) {
+                        scope.addNodeToSelected(skillNode);
+                    } else {
+                        scope.removeNodeFromSelected(skillNode);
+                    }
+                }
+            };
         }
     };
 });

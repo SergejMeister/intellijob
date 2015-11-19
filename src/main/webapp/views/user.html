@@ -87,28 +87,42 @@
         <fieldset>
             <legend class="scheduler-border">Persönliche Fähigkeiten</legend>
             <uib-accordion close-others="false">
+                <!--Education and Expirience menu-->
                 <uib-accordion-group heading="Bildung und Erfahrung" is-open="panelStatus.isEducationSkillOpen"
                                      is-disabled="panelStatus.isEducationSkillDisabled">
-                    Bildung und Erfahrung
+                    <p>Es wurden noch keine Bildung und Erfahrung eingegeben.</p>
                 </uib-accordion-group>
+                <!--Job skills -->
                 <uib-accordion-group heading="Kenntnisse und Fertigkeiten" is-open="panelStatus.isKnowledgeSkillOpen"
                                      is-disabled="panelStatus.isKnowledgeSkillDisabled">
-                    Kenntnisse und Fertigkeiten
+                    <p>Es wurden noch keine Kenntnisse und Fertigkeiten ausgewählt.</p>
                 </uib-accordion-group>
 
                 <!--Personal strengths menu-->
                 <uib-accordion-group heading="Persönliche Stärken" is-open="panelStatus.isPersonSkillOpen"
                                      is-disabled="panelStatus.isPersonSkillDisabled">
-                    Persönliche Stärken
-                    <div>
+                    <p ng-if="userSkillStatus.isPersonEmpty">Es wurden noch keine persönlichen Stärken ausgewählt.</p>
+
+                    <div ng-repeat="personalStrength in userPersonalStrengths">
+                        <div class="input-group margin-bottom-1">
+                                    <span class="tag label label-info">
+                                        <span>{{personalStrength.skillData.name}}</span>
+                                        <a class=tag-addon" ng-click='deletePersonalStrength(index)' ng-hide="readonly"><i
+                                                class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
+                                    </span>
+                            <span class='star-rating' star-rating rating-value='personalStrength.rating' data-max='5'
+                                  on-rating-selected='rateFunction(rating)'></span>
+                        </div>
+                    </div>
+
+                    <div uib-collapse="readonly">
                         <div class="span5 article-tree">
                             <div>
-
                                 <div class="tree well">
                                     <ul>
-                                        <node-tree ng-model="displayTree"></node-tree>
+                                        <skill-tree ng-model="supportedPersonalStrengths"
+                                                    selected="userPersonalStrengths" expanded="false"></skill-tree>
                                     </ul>
-
                                 </div>
                             </div>
                         </div>
@@ -118,6 +132,7 @@
                 <!--Languages Menu-->
                 <uib-accordion-group heading="Sprachkenntnisse" is-open="panelStatus.isLanguageSkillOpen"
                                      is-disabled="panelStatus.isLanguageSkillDisabled">
+                    <p ng-if="userSkillStatus.isLanguageEmpty">Es wurden noch keine Sprachen ausgewählt.</p>
 
                     <div ng-repeat="userLanguage in userLanguages">
                         <div class="input-group margin-bottom-1">

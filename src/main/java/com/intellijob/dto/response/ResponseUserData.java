@@ -37,6 +37,8 @@ public class ResponseUserData extends ResponseData {
 
     private List<SkillRatingData> languages;
 
+    private List<SkillRatingData> personalStrengths;
+
     public ResponseUserData() {
     }
 
@@ -44,14 +46,14 @@ public class ResponseUserData extends ResponseData {
         setUserId(user.getId());
         setProfileData(new ProfileData(user.getProfile()));
         setSimpleSearchField(user.getSimpleSearchField());
-        this.languages = initLanguages(user.getSkills().getLanguages());
+        this.languages = initUserSkills(user.getSkills().getLanguages());
+        this.personalStrengths = initUserSkills(user.getSkills().getPersonalStrengths());
     }
 
-    private List<SkillRatingData> initLanguages(List<SkillRatingNode> userLanguages) {
-        return userLanguages.stream().map(skillRatingNode -> new SkillRatingData(skillRatingNode))
+    private List<SkillRatingData> initUserSkills(List<SkillRatingNode> userSkills) {
+        return userSkills.stream().map(skillRatingNode -> new SkillRatingData(skillRatingNode))
                 .collect(Collectors.toList());
     }
-
 
     public ProfileData getProfileData() {
         return profileData;
@@ -83,5 +85,13 @@ public class ResponseUserData extends ResponseData {
 
     public void setLanguages(List<SkillRatingData> languages) {
         this.languages = languages;
+    }
+
+    public List<SkillRatingData> getPersonalStrengths() {
+        return personalStrengths;
+    }
+
+    public void setPersonalStrengths(List<SkillRatingData> personalStrengths) {
+        this.personalStrengths = personalStrengths;
     }
 }

@@ -27,8 +27,9 @@ import com.intellijob.dto.SkillRatingData;
 import com.intellijob.dto.request.RequestUserData;
 import com.intellijob.enums.SearchEngineEnum;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -62,16 +63,21 @@ public final class UserServiceMapper {
 
     public static Skills initSkills(RequestUserData requestUserData) {
         Skills skills = new Skills();
-        if (requestUserData.getLanguages() != null) {
-            List<SkillRatingNode> skillRatingNodes = new ArrayList<>();
-            for (SkillRatingData skillRatingData : requestUserData.getLanguages()) {
-                SkillRatingNode skillRatingNode = mapTo(skillRatingData);
-                skillRatingNodes.add(skillRatingNode);
-            }
-            skills.setLanguages(skillRatingNodes);
-        }
+        List<SkillRatingNode> languages = mapToListSkillRatingNode(requestUserData.getLanguages());
+        skills.setLanguages(languages);
+
+        List<SkillRatingNode> personalStrengths = mapToListSkillRatingNode(requestUserData.getPersonalStrengths());
+        skills.setPersonalStrengths(personalStrengths);
 
         return skills;
+    }
+
+    public static List<SkillRatingNode> mapToListSkillRatingNode(List<SkillRatingData> skillRatingDataList) {
+        if (skillRatingDataList != null) {
+            return skillRatingDataList.stream().map(UserServiceMapper::mapTo).collect(Collectors.toList());
+        }
+
+        return Collections.emptyList();
     }
 
     public static SkillRatingNode mapTo(SkillRatingData skillRatingData) {

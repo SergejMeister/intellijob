@@ -26,8 +26,11 @@ public class Skills {
 
     private List<SkillRatingNode> languages;
 
+    private List<SkillRatingNode> personalStrengths;
+
     public Skills() {
         setLanguages(new ArrayList<>());
+        setPersonalStrengths(new ArrayList<>());
     }
 
     public List<SkillRatingNode> getLanguages() {
@@ -36,5 +39,13 @@ public class Skills {
 
     public void setLanguages(List<SkillRatingNode> languages) {
         this.languages = languages;
+    }
+
+    public List<SkillRatingNode> getPersonalStrengths() {
+        return personalStrengths;
+    }
+
+    public void setPersonalStrengths(List<SkillRatingNode> personalStrengths) {
+        this.personalStrengths = personalStrengths;
     }
 }
