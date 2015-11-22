@@ -106,6 +106,7 @@ intelliJob.config([
             controller: 'MailCtrl'
         });
     }]).run(function ($rootScope, $cookieStore, UserServices) {
+
     //Reset error and success when a new view is loaded
     $rootScope.$on('$viewContentLoaded', function () {
         delete $rootScope.error;

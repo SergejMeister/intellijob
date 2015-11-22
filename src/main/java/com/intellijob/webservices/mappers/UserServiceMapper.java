@@ -47,6 +47,10 @@ public final class UserServiceMapper {
         SearchEngineEnum searchEngineEnum = SearchEngineEnum.valueOf(profileData.getSearchEngine());
         profile.setSearchEngine(searchEngineEnum);
         profile.setLastMailSyncDate(profileData.getLastMailSyncDate());
+        profile.setSelectedEducationLevel(profileData.getSelectedEducationLevel());
+        profile.setSelectedEducationDescription(profileData.getSelectedEducationDescription());
+        profile.setSelectedPraxisLevel(profileData.getSelectedPraxisLevel());
+        profile.setSelectedPraxisExperience(profileData.getSelectedPraxisExperience());
         return profile;
     }
 

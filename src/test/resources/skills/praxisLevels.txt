@@ -1,0 +1,6 @@
+Schühler
+Auszubildender
+Student
+Junior
+Senior
+Expert

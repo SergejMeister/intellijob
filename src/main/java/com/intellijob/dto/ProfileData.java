@@ -39,6 +39,14 @@ public class ProfileData implements Serializable {
 
     private String searchEngine;
 
+    private String selectedEducationLevel;
+
+    private String selectedEducationDescription;
+
+    private String selectedPraxisLevel;
+
+    private int selectedPraxisExperience;
+
 
     public ProfileData() {
     }
@@ -54,6 +62,10 @@ public class ProfileData implements Serializable {
         this(profile.getFirstName(), profile.getSecondName(), profile.getSex());
         setLastMailSyncDate(profile.getLastMailSyncDate());
         setSearchEngine(profile.getSearchEngine().name());
+        setSelectedEducationLevel(profile.getSelectedEducationLevel());
+        setSelectedEducationDescription(profile.getSelectedEducationDescription());
+        setSelectedPraxisLevel(profile.getSelectedPraxisLevel());
+        setSelectedPraxisExperience(profile.getSelectedPraxisExperience());
     }
 
     private String createFullName(String firstName, String secondName) {
@@ -118,5 +130,37 @@ public class ProfileData implements Serializable {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public String getSelectedEducationLevel() {
+        return selectedEducationLevel;
+    }
+
+    public void setSelectedEducationLevel(String selectedEducationLevel) {
+        this.selectedEducationLevel = selectedEducationLevel;
+    }
+
+    public String getSelectedEducationDescription() {
+        return selectedEducationDescription;
+    }
+
+    public void setSelectedEducationDescription(String selectedEducationDescription) {
+        this.selectedEducationDescription = selectedEducationDescription;
+    }
+
+    public String getSelectedPraxisLevel() {
+        return selectedPraxisLevel;
+    }
+
+    public void setSelectedPraxisLevel(String selectedPraxisLevel) {
+        this.selectedPraxisLevel = selectedPraxisLevel;
+    }
+
+    public int getSelectedPraxisExperience() {
+        return selectedPraxisExperience;
+    }
+
+    public void setSelectedPraxisExperience(int selectedPraxisExperience) {
+        this.selectedPraxisExperience = selectedPraxisExperience;
     }
 }

@@ -37,6 +37,14 @@ public class Profile {
 
     private SearchEngineEnum searchEngine = SearchEngineEnum.UNKNOWN;
 
+    private String selectedEducationLevel;
+
+    private String selectedEducationDescription;
+
+    private String selectedPraxisLevel;
+
+    private int selectedPraxisExperience;
+
     /**
      * Returns search engine.
      * <p>
@@ -118,5 +126,37 @@ public class Profile {
      */
     public void setLastMailSyncDate(Date lastMailSyncDate) {
         this.lastMailSyncDate = lastMailSyncDate;
+    }
+
+    public String getSelectedEducationLevel() {
+        return selectedEducationLevel;
+    }
+
+    public void setSelectedEducationLevel(String selectedEducationLevel) {
+        this.selectedEducationLevel = selectedEducationLevel;
+    }
+
+    public String getSelectedEducationDescription() {
+        return selectedEducationDescription;
+    }
+
+    public void setSelectedEducationDescription(String selectedEducationDescription) {
+        this.selectedEducationDescription = selectedEducationDescription;
+    }
+
+    public String getSelectedPraxisLevel() {
+        return selectedPraxisLevel;
+    }
+
+    public void setSelectedPraxisLevel(String selectedPraxisLevel) {
+        this.selectedPraxisLevel = selectedPraxisLevel;
+    }
+
+    public int getSelectedPraxisExperience() {
+        return selectedPraxisExperience;
+    }
+
+    public void setSelectedPraxisExperience(int selectedPraxisExperience) {
+        this.selectedPraxisExperience = selectedPraxisExperience;
     }
 }

@@ -43,6 +43,43 @@
                            value="{{user.profileData.lastMailSyncDate |date:'dd.MM.yyyy HH:mm:ss'}}" readonly>
                 </div>
             </div>
+            <br>
+
+            <div class="input-group">
+                <div class="col-sm-5">
+                    <label for="education-level">Höchster Bildungsstand</label>
+                    <select class="form-control" id="education-level"
+                            ng-disabled="readonly"
+                            ng-model="user.profileData.selectedEducationLevel"
+                            ng-options="educationLevel for educationLevel in educationLevels">
+                    </select>
+                </div>
+                <div class="col-sm-5">
+                    <label for="education-description">Abschlussbezeichnung</label>
+                    <input id="education-description" class="form-control input-group-lg reg_name" type="text"
+                           name="lastName"
+                           ng-model="user.profileData.selectedEducationDescription" placeholder="Abschlussbezeichnung"
+                           ng-readonly="readonly">
+                </div>
+            </div>
+            <br>
+
+            <div class="input-group">
+                <div class="col-sm-6">
+                    <label for="praxis-level">Aktuellen Berufsstand</label>
+                    <select class="form-control" id="praxis-level"
+                            ng-disabled="readonly"
+                            ng-model="user.profileData.selectedPraxisLevel"
+                            ng-options="praxisLevel for praxisLevel in praxisLevels">
+                    </select>
+                </div>
+                <div class="col-sm-6">
+                    <label for="praxis-experience">Praktische Erfahrung (Jahre)</label>
+                    <input id="praxis-experience" class="form-control input-group-lg reg_name" type="number"
+                           ng-model="user.profileData.selectedPraxisExperience" placeholder="Praktische Erfahrung"
+                           ng-readonly="readonly">
+                </div>
+            </div>
         </fieldset>
     </div>
     <br>
@@ -87,15 +124,11 @@
         <fieldset>
             <legend class="scheduler-border">Persönliche Fähigkeiten</legend>
             <uib-accordion close-others="false">
-                <!--Education and Expirience menu-->
-                <uib-accordion-group heading="Bildung und Erfahrung" is-open="panelStatus.isEducationSkillOpen"
-                                     is-disabled="panelStatus.isEducationSkillDisabled">
-                    <p>Es wurden noch keine Bildung und Erfahrung eingegeben.</p>
-                </uib-accordion-group>
                 <!--Job skills -->
                 <uib-accordion-group heading="Kenntnisse und Fertigkeiten" is-open="panelStatus.isKnowledgeSkillOpen"
                                      is-disabled="panelStatus.isKnowledgeSkillDisabled">
-                    <p ng-if="userSkillStatus.isKnowledgeEmpty">Es wurden noch keine Kenntnisse und Fertigkeiten ausgewählt.</p>
+                    <p ng-if="userSkillStatus.isKnowledgeEmpty">Es wurden noch keine Kenntnisse und Fertigkeiten
+                        ausgewählt.</p>
 
                     <div ng-repeat="userKnowledge in userKnowledges">
                         <div class="input-group margin-bottom-1">

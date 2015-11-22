@@ -29,6 +29,27 @@ intelliJobControllers.controller(
             '$route',
             'UserServices',
             function ($scope, $rootScope, $location, $http, $cookieStore, $routeParams, $route, UserServices) {
+                $scope.educationLevels = [
+                    'Promotion',
+                    'Hochschulabschluss - Master',
+                    'Hochschulabschluss - Bachelor',
+                    'Ausbildung',
+                    'Handelsschule',
+                    'Abitur',
+                    'Mittlere Reife',
+                    'Hauptschule',
+                    'Ohne Schulabschluss',
+                    'Andere'
+                ];
+
+                $scope.praxisLevels = [
+                    'Schühler',
+                    'Auszubildender',
+                    'Student',
+                    'Junior',
+                    'Senior',
+                    'Expert'
+                ];
 
                 $scope.showSimpleSearchDialog = false;
                 $scope.showComplexSearchDialog = false;
@@ -76,13 +97,13 @@ intelliJobControllers.controller(
                 });
 
                 $scope.panelStatus = {
-                    isEducationSkillOpen: true,
+                    isEducationSkillOpen: open,
                     isEducationSkillDisabled: false,
-                    isKnowledgeSkillOpen: true,
+                    isKnowledgeSkillOpen: false,
                     isKnowledgeSkillDisabled: false,
-                    isPersonSkillOpen: true,
+                    isPersonSkillOpen: false,
                     isPersonSkillDisabled: false,
-                    isLanguageSkillOpen: true,
+                    isLanguageSkillOpen: false,
                     isLanguageSkillDisabled: false
                 };
 
