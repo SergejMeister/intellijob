@@ -134,7 +134,7 @@
                         <div class="input-group margin-bottom-1">
                                     <span class="tag label label-info">
                                         <span>{{userKnowledge.skillData.name}}</span>
-                                        <a class=tag-addon" ng-click='deleteKnowledge(index)' ng-hide="readonly"><i
+                                        <a class=tag-addon" ng-click='deleteKnowledge($index)' ng-hide="readonly"><i
                                                 class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
                                     </span>
                             <span class='star-rating' star-rating rating-value='userKnowledge.rating' data-max='5'
@@ -178,7 +178,7 @@
                         <div class="input-group margin-bottom-1">
                                     <span class="tag label label-info">
                                         <span>{{personalStrength.skillData.name}}</span>
-                                        <a class=tag-addon" ng-click='deletePersonalStrength(index)' ng-hide="readonly"><i
+                                        <a class=tag-addon" ng-click='deletePersonalStrength($index)' ng-hide="readonly"><i
                                                 class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
                                     </span>
                             <span class='star-rating' star-rating rating-value='personalStrength.rating' data-max='5'
@@ -209,7 +209,7 @@
                         <div class="input-group margin-bottom-1">
                                     <span class="tag label label-info">
                                         <span>{{userLanguage.skillData.name}}</span>
-                                        <a class=tag-addon" ng-click='deleteLanguage(index)' ng-hide="readonly"><i
+                                        <a class=tag-addon" ng-click='deleteLanguage($index)' ng-hide="readonly"><i
                                                 class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
                                     </span>
                             <span class='star-rating' star-rating rating-value='userLanguage.rating' data-max='5'
