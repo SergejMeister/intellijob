@@ -19,6 +19,7 @@ package com.intellijob.dto.response;
 import com.intellijob.domain.User;
 import com.intellijob.dto.SkillData;
 import com.intellijob.models.SkillViewModel;
+import com.intellijob.webservices.mappers.UserServiceMapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,6 +35,10 @@ public class ResponseUserForm extends ResponseData {
 
     private List<SkillData> supportedPersonalStrengths;
 
+    private List<SkillData> supportedKnowledges;
+
+    private List<SkillData> supportedAutocompleteKnowledges;
+
     public ResponseUserForm() {
     }
 
@@ -43,15 +48,20 @@ public class ResponseUserForm extends ResponseData {
 
     public ResponseUserForm(User user, SkillViewModel skillViewModel) {
         setUserData(new ResponseUserData(user));
-        List<SkillData> languagesData =
-                skillViewModel.getLanguages().stream().map(skillNode -> new SkillData(skillNode))
-                        .collect(Collectors.toList());
+        List<SkillData> languagesData = UserServiceMapper.mapToListSkillData(skillViewModel.getLanguages());
         setSupportedLanguages(languagesData);
 
-        List<SkillData> personalStrengths =
-                skillViewModel.getPersonalStrengths().stream().map(skillNode -> new SkillData(skillNode))
-                        .collect(Collectors.toList());
+        List<SkillData> personalStrengths = UserServiceMapper.mapToListSkillData(skillViewModel.getPersonalStrengths());
         setSupportedPersonalStrengths(personalStrengths);
+
+        List<SkillData> knowledges =
+                skillViewModel.getKnowledges().stream().map(skillNode -> new SkillData(skillNode))
+                        .collect(Collectors.toList());
+        setSupportedKnowledges(knowledges);
+
+        List<SkillData> autocompleteKnowledges =
+                UserServiceMapper.mapToListSkillData(skillViewModel.getAutocompleteKnowledges());
+        setSupportedAutocompleteKnowledges(autocompleteKnowledges);
     }
 
     public List<SkillData> getSupportedPersonalStrengths() {
@@ -76,5 +86,22 @@ public class ResponseUserForm extends ResponseData {
 
     public void setSupportedLanguages(List<SkillData> supportedLanguages) {
         this.supportedLanguages = supportedLanguages;
+    }
+
+    public List<SkillData> getSupportedKnowledges() {
+        return supportedKnowledges;
+    }
+
+    public void setSupportedKnowledges(List<SkillData> supportedKnowledges) {
+        this.supportedKnowledges = supportedKnowledges;
+    }
+
+    public List<SkillData> getSupportedAutocompleteKnowledges() {
+        return supportedAutocompleteKnowledges;
+    }
+
+    public void setSupportedAutocompleteKnowledges(
+            List<SkillData> supportedAutocompleteKnowledges) {
+        this.supportedAutocompleteKnowledges = supportedAutocompleteKnowledges;
     }
 }

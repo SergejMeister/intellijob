@@ -44,13 +44,22 @@ intelliJobControllers.controller(
                 // For this use case is readonly mode false, otherwise true!
                 $scope.readonly = $rootScope.isUserValid();
 
-                $scope.userLanguages = [];
+                $scope.userKnowledges = [];
                 $scope.userPersonalStrengths = [];
+                $scope.userLanguages = [];
 
                 UserServices.getViewUserModelById($rootScope.globalUser.userId).success(function (response) {
                     $scope.user = response.userData;
                     $scope.searchEngine = $scope.user.profileData.searchEngine;
                     $scope.switchSearchEngine($scope.searchEngine);
+
+                    $scope.supportedKnowledges = response.supportedKnowledges;
+                    $scope.supportedAutocompleteKnowledges = response.supportedAutocompleteKnowledges;
+                    if ($scope.user.knowledges && $scope.user.knowledges.length > 0) {
+                        $scope.userKnowledges = $scope.user.knowledges;
+                        $scope.userSkillStatus.isKnowledgeEmpty = false;
+                    }
+
                     $scope.supportedLanguages = response.supportedLanguages;
                     if ($scope.user.languages && $scope.user.languages.length > 0) {
                         $scope.userLanguages = $scope.user.languages;
@@ -85,26 +94,40 @@ intelliJobControllers.controller(
                     $scope.userPersonalStrengths.splice(index, 1);
                 };
 
-                $scope.addLanguage = function (newUserLanguage) {
+                $scope.deleteKnowledge = function (index) {
+                    $scope.userKnowledges.splice(index, 1);
+                };
+
+                $scope.createAutoCompleteSkillRatingData = function (selectedSkill) {
                     var skillRatingData = {};
                     skillRatingData.skillData = {};
                     skillRatingData.rating = 1;
-
-                    var language = newUserLanguage.originalObject;
-                    if (language) {
-                        if (language.name && language.name !== '') {
-                            skillRatingData.skillData = language;
-                            $scope.userLanguages.push(skillRatingData);
+                    if (selectedSkill.originalObject) {
+                        if (selectedSkill.originalObject.name && selectedSkill.originalObject.name !== '') {
+                            skillRatingData.skillData = selectedSkill.originalObject;
+                            return skillRatingData;
                         }
                     } else {
-                        var language = {};
-                        language.id = '';
-                        language.name = newUserLanguage;
-                        skillRatingData.skillData = language;
-                        $scope.userLanguages.push(skillRatingData);
+                        var skill = {};
+                        skill.id = '';
+                        skill.name = selectedSkill;
+                        skillRatingData.skillData = skill;
+                        return skillRatingData;
                     }
+                };
 
+                //$scope.selectedLanguage ;
+                $scope.addLanguage = function (newUserLanguage) {
+                    var skillRatingData = $scope.createAutoCompleteSkillRatingData(newUserLanguage);
+                    $scope.userLanguages.push(skillRatingData);
                     $scope.selectedLanguage = null;
+                };
+
+                //$scope.selectedKnowledge ;
+                $scope.addKnowledge = function (newUserKnowledge) {
+                    var skillRatingData = $scope.createAutoCompleteSkillRatingData(newUserKnowledge);
+                    $scope.userKnowledges.push(skillRatingData);
+                    $scope.selectedKnowledge = null;
                 };
 
                 /**
@@ -139,8 +162,9 @@ intelliJobControllers.controller(
                  * Save user data.
                  */
                 $scope.save = function (userData) {
-                    userData.languages = $scope.userLanguages;
                     userData.personalStrengths = $scope.userPersonalStrengths;
+                    userData.knowledges = $scope.userKnowledges;
+                    userData.languages = $scope.userLanguages;
                     UserServices.updateUser(userData).success(function (response) {
                         $rootScope.success = response.message;
                         $cookieStore.put("user", userData);

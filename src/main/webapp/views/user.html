@@ -95,7 +95,45 @@
                 <!--Job skills -->
                 <uib-accordion-group heading="Kenntnisse und Fertigkeiten" is-open="panelStatus.isKnowledgeSkillOpen"
                                      is-disabled="panelStatus.isKnowledgeSkillDisabled">
-                    <p>Es wurden noch keine Kenntnisse und Fertigkeiten ausgewählt.</p>
+                    <p ng-if="userSkillStatus.isKnowledgeEmpty">Es wurden noch keine Kenntnisse und Fertigkeiten ausgewählt.</p>
+
+                    <div ng-repeat="userKnowledge in userKnowledges">
+                        <div class="input-group margin-bottom-1">
+                                    <span class="tag label label-info">
+                                        <span>{{userKnowledge.skillData.name}}</span>
+                                        <a class=tag-addon" ng-click='deleteKnowledge(index)' ng-hide="readonly"><i
+                                                class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
+                                    </span>
+                            <span class='star-rating' star-rating rating-value='userKnowledge.rating' data-max='5'
+                                  on-rating-selected='rateFunction(rating)'></span>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div uib-collapse="readonly">
+                        <div class='row'>
+                            <div class='col-md-2'>
+                                <angucomplete id="ex1"
+                                              placeholder="Kenntnisse und Fertigkeiten"
+                                              pause="100"
+                                              selectedobject="selectedKnowledge"
+                                              localdata="supportedAutocompleteKnowledges"
+                                              searchfields="name"
+                                              titlefield="name"
+                                              minlength="1"
+                                              inputclass="form-control form-control-small"></angucomplete>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class='btn btn-info'
+                                        data-ng-click='addKnowledge(selectedKnowledge)'>
+                                    Hinzufügen
+                                </button>
+                                <button type='button' class='btn btn-info pull'>
+                                    Auswählen
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </uib-accordion-group>
 
                 <!--Personal strengths menu-->

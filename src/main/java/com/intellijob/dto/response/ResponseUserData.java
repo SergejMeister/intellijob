@@ -39,6 +39,8 @@ public class ResponseUserData extends ResponseData {
 
     private List<SkillRatingData> personalStrengths;
 
+    private List<SkillRatingData> knowledges;
+
     public ResponseUserData() {
     }
 
@@ -48,6 +50,7 @@ public class ResponseUserData extends ResponseData {
         setSimpleSearchField(user.getSimpleSearchField());
         this.languages = initUserSkills(user.getSkills().getLanguages());
         this.personalStrengths = initUserSkills(user.getSkills().getPersonalStrengths());
+        this.knowledges = initUserSkills(user.getSkills().getKnowledges());
     }
 
     private List<SkillRatingData> initUserSkills(List<SkillRatingNode> userSkills) {
@@ -93,5 +96,13 @@ public class ResponseUserData extends ResponseData {
 
     public void setPersonalStrengths(List<SkillRatingData> personalStrengths) {
         this.personalStrengths = personalStrengths;
+    }
+
+    public List<SkillRatingData> getKnowledges() {
+        return knowledges;
+    }
+
+    public void setKnowledges(List<SkillRatingData> knowledges) {
+        this.knowledges = knowledges;
     }
 }

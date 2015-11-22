@@ -30,9 +30,12 @@ public class SkillViewModel {
 
     private List<SkillNode> personalStrengths;
 
+    private List<SkillNode> knowledges;
+
     public SkillViewModel() {
         setLanguages(new ArrayList<>());
         setPersonalStrengths(new ArrayList<>());
+        setKnowledges(new ArrayList<>());
     }
 
     public List<SkillNode> getPersonalStrengths() {
@@ -49,5 +52,34 @@ public class SkillViewModel {
 
     public void setLanguages(List<SkillNode> languages) {
         this.languages = languages;
+    }
+
+    public List<SkillNode> getKnowledges() {
+        return knowledges;
+    }
+
+    public void setKnowledges(List<SkillNode> knowledges) {
+        this.knowledges = knowledges;
+    }
+
+    /**
+     * Find all last nodes(Leafs).
+     *
+     * @return list of last skill nodes in the tree.
+     */
+    public List<SkillNode> getAutocompleteKnowledges() {
+        return findAllLastNodes(knowledges);
+    }
+
+    private List<SkillNode> findAllLastNodes(List<SkillNode> nodes) {
+        List<SkillNode> result = new ArrayList<>();
+        for (SkillNode skillNode : nodes) {
+            if (skillNode.isLeaf()) {
+                result.add(skillNode);
+            } else {
+                result.addAll(findAllLastNodes(skillNode.getNodes()));
+            }
+        }
+        return result;
     }
 }

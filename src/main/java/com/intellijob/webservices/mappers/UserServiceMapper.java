@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- *
+ * Utility class to map user request and response data.
  */
 public final class UserServiceMapper {
 
@@ -63,11 +63,15 @@ public final class UserServiceMapper {
 
     public static Skills initSkills(RequestUserData requestUserData) {
         Skills skills = new Skills();
-        List<SkillRatingNode> languages = mapToListSkillRatingNode(requestUserData.getLanguages());
-        skills.setLanguages(languages);
+
+        List<SkillRatingNode> knowledges = mapToListSkillRatingNode(requestUserData.getKnowledges());
+        skills.setKnowledges(knowledges);
 
         List<SkillRatingNode> personalStrengths = mapToListSkillRatingNode(requestUserData.getPersonalStrengths());
         skills.setPersonalStrengths(personalStrengths);
+
+        List<SkillRatingNode> languages = mapToListSkillRatingNode(requestUserData.getLanguages());
+        skills.setLanguages(languages);
 
         return skills;
     }
@@ -78,6 +82,10 @@ public final class UserServiceMapper {
         }
 
         return Collections.emptyList();
+    }
+
+    public static List<SkillData> mapToListSkillData(List<SkillNode> skillNodes) {
+        return skillNodes.stream().map(skillNode -> new SkillData(skillNode)).collect(Collectors.toList());
     }
 
     public static SkillRatingNode mapTo(SkillRatingData skillRatingData) {

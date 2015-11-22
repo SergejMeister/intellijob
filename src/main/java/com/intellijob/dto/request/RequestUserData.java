@@ -32,6 +32,8 @@ public class RequestUserData extends RequestData {
 
     private String simpleSearchField;
 
+    private List<SkillRatingData> knowledges;
+
     private List<SkillRatingData> languages;
 
     private List<SkillRatingData> personalStrengths;
@@ -74,5 +76,13 @@ public class RequestUserData extends RequestData {
 
     public void setPersonalStrengths(List<SkillRatingData> personalStrengths) {
         this.personalStrengths = personalStrengths;
+    }
+
+    public List<SkillRatingData> getKnowledges() {
+        return knowledges;
+    }
+
+    public void setKnowledges(List<SkillRatingData> knowledges) {
+        this.knowledges = knowledges;
     }
 }
