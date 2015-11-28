@@ -27,6 +27,8 @@ import com.intellijob.controllers.JobDetailController;
 import com.intellijob.domain.Job;
 import com.intellijob.domain.JobDetail;
 import com.intellijob.domain.builder.JobDetailBuilder;
+import com.intellijob.elasticsearch.domain.EsJobDetail;
+import com.intellijob.elasticsearch.repository.EsJobDetailRepository;
 import com.intellijob.exceptions.BaseException;
 import com.intellijob.exceptions.DocumentNotFoundException;
 import com.intellijob.repository.JobDetailRepository;
@@ -38,6 +40,7 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
@@ -60,6 +63,12 @@ public class JobDetailControllerImpl implements JobDetailController {
 
     @Autowired
     private JobController jobController;
+
+    @Autowired
+    private ElasticsearchTemplate elasticsearchTemplate;
+
+    @Autowired
+    private EsJobDetailRepository esJobDetailRepository;
 
     /**
      * {@inheritDoc}
@@ -96,10 +105,8 @@ public class JobDetailControllerImpl implements JobDetailController {
         List<String> foundedHomepages = new HtmlParser(htmlContent, htmlParseFilter).toPlainText().parse().getUrls();
 
 
-        JobDetail jobDetail = new JobDetailBuilder(job).setApplicationMail(mails).setHomepages(
+        return new JobDetailBuilder(job).setApplicationMail(mails).setHomepages(
                 foundedHomepages).addContactPersons(contactPersonSpans).addAddresses(addressSpans).build();
-
-        return jobDetail;
     }
 
     /**
@@ -191,5 +198,21 @@ public class JobDetailControllerImpl implements JobDetailController {
         JobDetail jobDetailToDelete = findById(jobDetailId);
         jobDetailRepository.delete(jobDetailToDelete);
         return jobDetailToDelete;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void createElasticserchIndexes() {
+        List<JobDetail> jobDetails = jobDetailRepository.findAll();
+        for (JobDetail jobDetail : jobDetails) {
+            EsJobDetail esJobDetail = new EsJobDetail();
+            esJobDetail.setId(jobDetail.getId());
+            esJobDetail.setName(jobDetail.getName());
+
+            esJobDetailRepository.index(esJobDetail);
+        }
+
     }
 }

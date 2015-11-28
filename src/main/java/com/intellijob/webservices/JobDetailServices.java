@@ -23,6 +23,7 @@ import com.intellijob.dto.response.ResponseJobDetailData;
 import com.intellijob.dto.response.ResponseJobDetailTableData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -90,5 +91,11 @@ public class JobDetailServices extends BaseServices {
     public @ResponseBody ResponseJobDetailData deleteJobDetail(@PathVariable String jobDetailId) throws Exception {
         jobDetailController.deleteById(jobDetailId);
         return new ResponseJobDetailData(jobDetailId);
+    }
+
+    @RequestMapping(value = Endpoints.ES_JOBDEATAILS_INDEX, method = RequestMethod.PUT)
+    public ResponseEntity createElasticIndexes() {
+        jobDetailController.createElasticserchIndexes();
+        return ResponseEntity.ok().build();
     }
 }

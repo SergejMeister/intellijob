@@ -127,4 +127,9 @@ public interface JobDetailController {
      * @return deleted jobDetail.
      */
     JobDetail deleteById(String jobDetailId) throws BaseException;
+
+    /**
+     * Create indexes of all JobDetails.
+     */
+    void createElasticserchIndexes();
 }

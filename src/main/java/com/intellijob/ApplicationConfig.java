@@ -45,7 +45,6 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter {
 
     private static ConfigurableApplicationContext context;
 
-
     /**
      * Application Start.
      *
