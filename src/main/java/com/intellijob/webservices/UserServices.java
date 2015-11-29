@@ -54,7 +54,7 @@ public class UserServices extends BaseServices {
     public @ResponseBody ResponseUserData getUser() {
         try {
             User user = userController.getUniqueUser();
-            return new ResponseUserData(user);
+            return new ResponseUserData(user, false);
         } catch (UserNotFoundException e) {
             return new ResponseUserData();
         }

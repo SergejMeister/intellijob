@@ -36,13 +36,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.mongo.MongoProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 
 import java.io.IOException;
 import java.net.URL;
 
-@ActiveProfiles("test")
 @ContextConfiguration(classes = {ApplicationConfig.class})
 @ComponentScan
 public class TestApplicationConfig {

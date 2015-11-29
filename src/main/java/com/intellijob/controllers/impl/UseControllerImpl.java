@@ -99,13 +99,14 @@ public class UseControllerImpl implements UserController {
      */
     @Override
     public User getUniqueUser() throws UserNotFoundException {
-        List<User> allUsers = userRepository.findAll();
-        if (allUsers == null || allUsers.isEmpty() || allUsers.size() > 1) {
-            throw new UserNotFoundException();
+//        PageRequest request = new PageRequest(0, 1);
+//        List<User> users = userRepository.findAll(request).getContent();
+        List<User> users = userRepository.findAll();
+        if (users != null && users.size() == 1) {
+            return users.get(0);
         }
 
-        int firstUserIndex = 0;
-        return allUsers.get(firstUserIndex);
+        throw new UserNotFoundException();
     }
 
     /**
@@ -113,7 +114,7 @@ public class UseControllerImpl implements UserController {
      */
     @Override
     public User getUser(String userId) throws UserNotFoundException {
-        User user = userRepository.findById(userId);
+        User user = userRepository.findOne(userId);
         if (user == null) {
             LOG.error("No user for id: " + userId);
             throw new UserNotFoundException();

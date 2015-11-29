@@ -23,13 +23,4 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * Repository for user document.
  */
 public interface UserRepository extends MongoRepository<User, String> {
-
-    /**
-     * Returns full user object.
-     *
-     * @param userId affected user id.
-     *
-     * @return full user object.
-     */
-    User findById(String userId);
 }

@@ -25,11 +25,7 @@ import org.bson.types.ObjectId;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -39,10 +35,7 @@ import java.util.List;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {TestApplicationConfig.class})
-@WebAppConfiguration
-@ComponentScan
-@Configuration
+@DefaultTestAnnotations
 public abstract class BaseTester {
 
     protected static final String USER_PROFILE_DEFAULT_FIRSTNAME = "TestFirstName";

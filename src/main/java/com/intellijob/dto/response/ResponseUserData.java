@@ -45,12 +45,18 @@ public class ResponseUserData extends ResponseData {
     }
 
     public ResponseUserData(User user) {
+        this(user, true);
+    }
+
+    public ResponseUserData(User user, Boolean hasSkills) {
         setUserId(user.getId());
         setProfileData(new ProfileData(user.getProfile()));
-        setSimpleSearchField(user.getSimpleSearchField());
-        this.languages = initUserSkills(user.getSkills().getLanguages());
-        this.personalStrengths = initUserSkills(user.getSkills().getPersonalStrengths());
-        this.knowledges = initUserSkills(user.getSkills().getKnowledges());
+        if (hasSkills) {
+            setSimpleSearchField(user.getSimpleSearchField());
+            this.languages = initUserSkills(user.getSkills().getLanguages());
+            this.personalStrengths = initUserSkills(user.getSkills().getPersonalStrengths());
+            this.knowledges = initUserSkills(user.getSkills().getKnowledges());
+        }
     }
 
     private List<SkillRatingData> initUserSkills(List<SkillRatingNode> userSkills) {

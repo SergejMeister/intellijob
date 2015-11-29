@@ -210,9 +210,17 @@ public class JobDetailControllerImpl implements JobDetailController {
             EsJobDetail esJobDetail = new EsJobDetail();
             esJobDetail.setId(jobDetail.getId());
             esJobDetail.setName(jobDetail.getName());
+            esJobDetail.setJobId(jobDetail.getJobId());
+            esJobDetail.setAddresses(jobDetail.getAddresses());
+            esJobDetail.setApplicationMail(jobDetail.getApplicationMail());
+            esJobDetail.setContactPersons(jobDetail.getContactPersons());
+            String htmlContent = jobDetail.getContent();
+            String plainText = new HtmlParser(htmlContent).toPlainText().getContent();
+            esJobDetail.setContent(plainText);
+            esJobDetail.setHomepages(jobDetail.getHomepages());
+            esJobDetail.setLink(jobDetail.getLink());
 
             esJobDetailRepository.index(esJobDetail);
         }
-
     }
 }
