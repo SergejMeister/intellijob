@@ -19,7 +19,7 @@ package com.intellijob.controllers.impl;
 
 import com.civis.utils.html.parser.HtmlParseFilter;
 import com.civis.utils.html.parser.HtmlParser;
-import com.civis.utils.opennlp.models.ModelFactory;
+import com.civis.utils.opennlp.models.ModelFacade;
 import com.civis.utils.opennlp.models.address.AddressSpan;
 import com.civis.utils.opennlp.models.contactperson.ContactPersonSpan;
 import com.intellijob.controllers.JobController;
@@ -53,8 +53,8 @@ import java.util.List;
 @Controller
 public class JobDetailControllerImpl implements JobDetailController {
 
+    public static final String STEPSTONE = "stepstone";
     private static final Logger LOG = LoggerFactory.getLogger(JobDetailControllerImpl.class);
-
     @Autowired
     private JobDetailRepository jobDetailRepository;
 
@@ -88,10 +88,10 @@ public class JobDetailControllerImpl implements JobDetailController {
         String plainText = new HtmlParser(htmlContent).toPlainText().getContent();
 
         //Find contact persons in text
-        List<ContactPersonSpan> contactPersonSpans = ModelFactory.getContactPersonFinder().find(plainText);
+        List<ContactPersonSpan> contactPersonSpans = ModelFacade.getContactPersonFinder().find(plainText);
 
         //find addresses in text
-        List<AddressSpan> addressSpans = ModelFactory.getAddressFinder().find(plainText);
+        List<AddressSpan> addressSpans = ModelFacade.getAddressFinder().find(plainText);
 
         // find mails in text
         String mails = new HtmlParser(htmlContent).parse().getMail();
@@ -214,13 +214,33 @@ public class JobDetailControllerImpl implements JobDetailController {
             esJobDetail.setAddresses(jobDetail.getAddresses());
             esJobDetail.setApplicationMail(jobDetail.getApplicationMail());
             esJobDetail.setContactPersons(jobDetail.getContactPersons());
-            String htmlContent = jobDetail.getContent();
-            String plainText = new HtmlParser(htmlContent).toPlainText().getContent();
-            esJobDetail.setContent(plainText);
             esJobDetail.setHomepages(jobDetail.getHomepages());
             esJobDetail.setLink(jobDetail.getLink());
 
+            String plainText = htmlToPlaintText(jobDetail.getContent(), jobDetail.getLink());
+            esJobDetail.setContent(plainText);
+
             esJobDetailRepository.index(esJobDetail);
         }
+    }
+
+    /**
+     * Use HtmlParser to get plainText from a html content.
+     * <p>
+     * Note, that job content from stepstone is included in a frame.
+     * That means firstly find first frame and then parse to plain text.
+     *
+     * @param htmlContent html content.
+     * @param link        link to the job.
+     *
+     * @return job content as plain text.
+     */
+    private String htmlToPlaintText(String htmlContent, String link) {
+        if (link.contains(STEPSTONE)) {
+            //Job Html from stepstone is included in a frame.
+            return new HtmlParser(htmlContent).findFirstFrame().toPlainText().getContent();
+        }
+
+        return new HtmlParser(htmlContent).toPlainText().getContent();
     }
 }
