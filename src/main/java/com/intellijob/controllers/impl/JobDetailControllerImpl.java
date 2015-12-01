@@ -22,10 +22,12 @@ import com.civis.utils.html.parser.HtmlParser;
 import com.civis.utils.opennlp.models.ModelFacade;
 import com.civis.utils.opennlp.models.address.AddressSpan;
 import com.civis.utils.opennlp.models.contactperson.ContactPersonSpan;
+import com.intellijob.Constants;
 import com.intellijob.controllers.JobController;
 import com.intellijob.controllers.JobDetailController;
 import com.intellijob.domain.Job;
 import com.intellijob.domain.JobDetail;
+import com.intellijob.domain.User;
 import com.intellijob.domain.builder.JobDetailBuilder;
 import com.intellijob.elasticsearch.domain.EsJobDetail;
 import com.intellijob.elasticsearch.repository.EsJobDetailRepository;
@@ -33,6 +35,10 @@ import com.intellijob.exceptions.BaseException;
 import com.intellijob.exceptions.DocumentNotFoundException;
 import com.intellijob.repository.JobDetailRepository;
 import com.intellijob.repository.JobRepository;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.MatchQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,11 +47,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
+import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.StringTokenizer;
 
 /**
  * This is a implementation of interface <code>JobDetailController</code>.
@@ -54,7 +63,11 @@ import java.util.List;
 public class JobDetailControllerImpl implements JobDetailController {
 
     public static final String STEPSTONE = "stepstone";
+
+    private static final String OR_SEPARATOR = ",";
+
     private static final Logger LOG = LoggerFactory.getLogger(JobDetailControllerImpl.class);
+
     @Autowired
     private JobDetailRepository jobDetailRepository;
 
@@ -169,6 +182,105 @@ public class JobDetailControllerImpl implements JobDetailController {
      * {@inheritDoc}
      */
     @Override
+    public Page<EsJobDetail> findAndSort(User user, int pageIndex, int limit) {
+        switch (user.getProfile().getSearchEngine()) {
+            case SIMPLE:
+                return findUsingSimpleSearchEngine(user, pageIndex, limit);
+            case COMPLEX:
+                return findUsingPersonalSearchEngine(user, pageIndex, limit);
+            default:
+                return findEsPage(user, pageIndex, limit);
+        }
+    }
+
+    /**
+     * Use elasticsearch to find jobDetail matches to the user personal data.
+     *
+     * @param user      affected user.
+     * @param pageIndex current page.
+     * @param limit     limit
+     *
+     * @return founded JobDetails.
+     */
+    private Page<EsJobDetail> findUsingPersonalSearchEngine(User user, int pageIndex, int limit) {
+        //TODO complex search not implemented!
+        return findEsPage(user, pageIndex, limit);
+    }
+
+    /**
+     * Use elasticsearch to find jobDetail matches to user defined search data.
+     *
+     * @param user      affected user.
+     * @param pageIndex current page.
+     * @param limit     limit.
+     *
+     * @return founded jobDetail.
+     */
+    private Page<EsJobDetail> findUsingSimpleSearchEngine(User user, int pageIndex, int limit) {
+        PageRequest request = new PageRequest(pageIndex, limit, new Sort(Sort.Direction.DESC, "receivedDate"));
+
+        //TODO this is just examples, remove before release!
+//        QueryBuilder builder_test1 = QueryBuilders.matchQuery("content", user.getSimpleSearchField());
+//        SearchQuery searchQuery_test1 =
+//                new NativeSearchQueryBuilder().withQuery(builder_test1).withPageable(request).build();
+//        FacetedPage<EsJobDetail> result1 = elasticsearchTemplate.queryForPage(searchQuery_test1, EsJobDetail.class);
+//
+//        QueryBuilder builder_testPhrase1 = QueryBuilders.matchPhraseQuery("content", user.getSimpleSearchField());
+//        SearchQuery searchQuery_testPhrase1 =
+//                new NativeSearchQueryBuilder().withQuery(builder_testPhrase1).withPageable(request).build();
+//        FacetedPage<EsJobDetail> resultPhrase1 = elasticsearchTemplate.queryForPage(searchQuery_test1, EsJobDetail.class);
+//
+//
+//        QueryBuilder builder_testPhrasePrefix1 = QueryBuilders.matchPhrasePrefixQuery("content", user.getSimpleSearchField());
+//        SearchQuery searchQuery_testPhrasePrefix1 =
+//                new NativeSearchQueryBuilder().withQuery(builder_testPhrasePrefix1).withPageable(request).build();
+//        FacetedPage<EsJobDetail> resultPhrasePrefix1 = elasticsearchTemplate.queryForPage(searchQuery_test1, EsJobDetail.class);
+
+
+        String[] searchDataArray = user.getSimpleSearchField().split(OR_SEPARATOR);
+        QueryBuilder builder;
+        if (searchDataArray.length == 1) {
+            builder = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, user.getSimpleSearchField().trim())
+                    .operator(MatchQueryBuilder.Operator.AND);
+        } else {
+            BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery().minimumNumberShouldMatch(1);
+            for (String searchData : searchDataArray) {
+                StringTokenizer stringTokenizer = new StringTokenizer(searchData);
+                if (stringTokenizer.countTokens() > 1) {
+                    QueryBuilder matchQuery = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchData.trim())
+                            .operator(MatchQueryBuilder.Operator.AND);
+                    boolQueryBuilder.should(matchQuery);
+                } else {
+                    QueryBuilder matchQuery = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchData.trim());
+                    boolQueryBuilder.should(matchQuery);
+                }
+            }
+            builder = boolQueryBuilder;
+        }
+
+        SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(builder).withPageable(request).build();
+        return elasticsearchTemplate.queryForPage(searchQuery, EsJobDetail.class);
+    }
+
+    /**
+     * Use elasticsearch to find jobDetails with paging.
+     *
+     * @param user      affected user.
+     * @param pageIndex current page.
+     * @param limit     limit.
+     *
+     * @return Page of EsJobDetails
+     */
+    private Page<EsJobDetail> findEsPage(User user, int pageIndex, int limit) {
+        PageRequest request = new PageRequest(pageIndex, limit, new Sort(Sort.Direction.DESC,
+                Constants.DB_FIELD_RECEIVED_DATE));
+        return esJobDetailRepository.findAll(request);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public JobDetail findById(String jobDetailId) throws BaseException {
         JobDetail foundedJobDetail = jobDetailRepository.findOne(jobDetailId);
         if (foundedJobDetail == null) {
@@ -216,6 +328,7 @@ public class JobDetailControllerImpl implements JobDetailController {
             esJobDetail.setContactPersons(jobDetail.getContactPersons());
             esJobDetail.setHomepages(jobDetail.getHomepages());
             esJobDetail.setLink(jobDetail.getLink());
+            esJobDetail.setReceivedDate(jobDetail.getReceivedDate());
 
             String plainText = htmlToPlaintText(jobDetail.getContent(), jobDetail.getLink());
             esJobDetail.setContent(plainText);

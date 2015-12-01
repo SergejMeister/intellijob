@@ -18,9 +18,13 @@ package com.intellijob.webservices;
 
 
 import com.intellijob.controllers.JobDetailController;
+import com.intellijob.controllers.UserController;
 import com.intellijob.domain.JobDetail;
+import com.intellijob.domain.User;
 import com.intellijob.dto.response.ResponseJobDetailData;
 import com.intellijob.dto.response.ResponseJobDetailTableData;
+import com.intellijob.elasticsearch.domain.EsJobDetail;
+import com.intellijob.exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +44,8 @@ import java.util.List;
 @RestController
 public class JobDetailServices extends BaseServices {
 
+    @Autowired
+    private UserController userController;
 
     @Autowired
     private JobDetailController jobDetailController;
@@ -66,8 +72,10 @@ public class JobDetailServices extends BaseServices {
      */
     @RequestMapping(value = Endpoints.JOBDETAILS_PAGING, method = RequestMethod.GET)
     public @ResponseBody ResponseJobDetailTableData getJobDetails(@PathVariable int pageIndex,
-                                                                  @PathVariable int limit) {
-        Page<JobDetail> jobDetailsPage = jobDetailController.findPage(pageIndex, limit);
+                                                                  @PathVariable int limit)
+            throws UserNotFoundException {
+        User user = userController.getUniqueUser();
+        Page<EsJobDetail> jobDetailsPage = jobDetailController.findAndSort(user,pageIndex,limit);
         return new ResponseJobDetailTableData(jobDetailsPage, Boolean.FALSE);
     }
 

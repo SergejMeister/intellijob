@@ -17,6 +17,7 @@
 package com.intellijob.dto.response;
 
 import com.intellijob.domain.JobDetail;
+import com.intellijob.elasticsearch.domain.EsJobDetail;
 import org.springframework.data.domain.Page;
 
 import java.util.ArrayList;
@@ -34,9 +35,17 @@ public class ResponseJobDetailTableData extends ResponseTableData {
         init(listOfJobDetail, hasContent);
     }
 
-    public ResponseJobDetailTableData(Page<JobDetail> jobDetailPage, Boolean hasContent) {
-        super(jobDetailPage);
-        init(jobDetailPage.getContent(), hasContent);
+//    public ResponseJobDetailTableData(Page<JobDetail> jobDetailPage, Boolean hasContent) {
+//        super(jobDetailPage);
+//        init(jobDetailPage.getContent(), hasContent);
+//    }
+
+    public ResponseJobDetailTableData(Page<EsJobDetail> jobDetailsPage, Boolean hasContent) {
+        super(jobDetailsPage);
+        this.jobDetails = new ArrayList<>();
+        this.jobDetails.addAll(
+                jobDetailsPage.getContent().stream().map(jobDetail -> new ResponseJobDetailData(jobDetail, hasContent))
+                        .collect(Collectors.toList()));
     }
 
     private void init(List<JobDetail> listOfJobDetail, Boolean hasContent) {
@@ -45,7 +54,6 @@ public class ResponseJobDetailTableData extends ResponseTableData {
                 listOfJobDetail.stream().map(jobDetail -> new ResponseJobDetailData(jobDetail, hasContent))
                         .collect(Collectors.toList()));
     }
-
 
     /**
      * Returns jobDetails.

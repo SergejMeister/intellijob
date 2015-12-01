@@ -19,8 +19,13 @@ package com.intellijob.elasticsearch.domain;
 import com.intellijob.domain.Address;
 import com.intellijob.domain.ContactPerson;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldIndex;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,9 +38,24 @@ public class EsJobDetail {
     private String id;
 
     /**
+     * Date received job mail.
+     */
+    @Field(
+            type = FieldType.Date,
+            index = FieldIndex.not_analyzed,
+            store = true,
+            format = DateFormat.custom, pattern = "dd.MM.yyyy hh:mm"
+    )
+    private Date receivedDate;
+
+    /**
      * Job name.
      */
-    //@Field(type = string, index = analyzed, store = true)
+    @Field(
+            type = FieldType.String,
+            index = FieldIndex.analyzed,
+            store = true
+    )
     private String name;
 
     /**
@@ -46,12 +66,18 @@ public class EsJobDetail {
     /**
      * Link unique.
      */
-    //@Indexed(unique = true)
     private String jobId;
 
     /**
      * Job content.
      */
+    @Field(
+            type = FieldType.String,
+            index = FieldIndex.analyzed,
+            searchAnalyzer = "standard",
+            indexAnalyzer = "standard",
+            store = true
+    )
     private String content;
 
     /**
@@ -141,5 +167,13 @@ public class EsJobDetail {
 
     public void setHomepages(List<String> homepages) {
         this.homepages = homepages;
+    }
+
+    public Date getReceivedDate() {
+        return receivedDate;
+    }
+
+    public void setReceivedDate(Date receivedDate) {
+        this.receivedDate = receivedDate;
     }
 }

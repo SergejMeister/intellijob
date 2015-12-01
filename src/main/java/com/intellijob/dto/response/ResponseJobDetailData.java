@@ -19,6 +19,7 @@ package com.intellijob.dto.response;
 import com.intellijob.domain.Address;
 import com.intellijob.domain.ContactPerson;
 import com.intellijob.domain.JobDetail;
+import com.intellijob.elasticsearch.domain.EsJobDetail;
 import org.springframework.util.StringUtils;
 
 import java.util.Date;
@@ -125,6 +126,21 @@ public class ResponseJobDetailData extends ResponseData {
 
     public ResponseJobDetailData(JobDetail jobDetail, Boolean hasContent) {
         this(jobDetail);
+        if (hasContent) {
+            this.content = jobDetail.getContent();
+        }
+    }
+
+    public ResponseJobDetailData(EsJobDetail jobDetail, Boolean hasContent) {
+        setJobDetailId(jobDetail.getId());
+        setJobId(jobDetail.getJobId());
+        setName(jobDetail.getName());
+        setReceivedDate(jobDetail.getReceivedDate());
+        setLink(jobDetail.getLink());
+        setApplicationMail(jobDetail.getApplicationMail());
+        this.contactPerson = initContactPersons(jobDetail.getContactPersons());
+        this.address = initAddresses(jobDetail.getAddresses());
+        this.homepage = initHomePage(jobDetail.getHomepages());
         if (hasContent) {
             this.content = jobDetail.getContent();
         }
