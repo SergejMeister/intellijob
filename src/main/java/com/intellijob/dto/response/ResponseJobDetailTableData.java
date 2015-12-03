@@ -35,11 +35,6 @@ public class ResponseJobDetailTableData extends ResponseTableData {
         init(listOfJobDetail, hasContent);
     }
 
-//    public ResponseJobDetailTableData(Page<JobDetail> jobDetailPage, Boolean hasContent) {
-//        super(jobDetailPage);
-//        init(jobDetailPage.getContent(), hasContent);
-//    }
-
     public ResponseJobDetailTableData(Page<EsJobDetail> jobDetailsPage, Boolean hasContent) {
         super(jobDetailsPage);
         this.jobDetails = new ArrayList<>();

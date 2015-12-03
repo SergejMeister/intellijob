@@ -16,43 +16,41 @@
 
 package com.intellijob.webservices;
 
-import com.intellijob.controllers.SkillController;
+import com.intellijob.controllers.JobDetailController;
 import com.intellijob.controllers.UserController;
 import com.intellijob.domain.User;
-import com.intellijob.dto.response.UserViewModel;
-import com.intellijob.models.SkillViewModel;
+import com.intellijob.dto.response.JobDetailViewModel;
+import com.intellijob.elasticsearch.domain.EsJobDetail;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * View user Web-Services.
- * <p>
- * A service to generate an user web form <code>/views/users**</code>
+ * View model to represent job detail page.
  */
 @RestController
-public class ViewUserService extends BaseServices {
+public class ViewJobDetailServices extends BaseServices {
 
     @Autowired
     private UserController userController;
 
     @Autowired
-    private SkillController skillController;
+    private JobDetailController jobDetailController;
 
     /**
      * Returns user data for specified userId.
      *
      * @return response user.
      */
-    @RequestMapping(value = Endpoints.API_VIEWS_USERS_BY_ID, method = RequestMethod.GET)
-    public @ResponseBody UserViewModel getUserViewModel(@PathVariable String userId) throws Exception {
-        User user = userController.getUser(userId);
-
-        SkillViewModel skillViewModel = skillController.getSkillViewModel();
-        return new UserViewModel(user, skillViewModel);
+    @RequestMapping(value = Endpoints.API_VIEWS_JOBDETAILS, method = RequestMethod.GET)
+    public @ResponseBody JobDetailViewModel getJobDetailViewModel() throws Exception {
+        User user = userController.getUniqueUser();
+        int pageIndex = 0;
+        int limit = 50;
+        Page<EsJobDetail> jobDetailsPage = jobDetailController.findAndSort(user, pageIndex, limit);
+        return new JobDetailViewModel(user, jobDetailsPage, Boolean.FALSE);
     }
-
 }

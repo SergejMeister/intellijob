@@ -31,6 +31,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -71,11 +72,11 @@ public class JobDetailServices extends BaseServices {
      * @return data transfer object <code>ResponseJobDetailTableData.java</code>
      */
     @RequestMapping(value = Endpoints.JOBDETAILS_PAGING, method = RequestMethod.GET)
-    public @ResponseBody ResponseJobDetailTableData getJobDetails(@PathVariable int pageIndex,
-                                                                  @PathVariable int limit)
+    public @ResponseBody ResponseJobDetailTableData getJobDetails(@PathVariable int pageIndex, @PathVariable int limit,
+                                                                  @RequestParam(value = "searchFilter", required = false) String searchFilter)
             throws UserNotFoundException {
         User user = userController.getUniqueUser();
-        Page<EsJobDetail> jobDetailsPage = jobDetailController.findAndSort(user,pageIndex,limit);
+        Page<EsJobDetail> jobDetailsPage = jobDetailController.findAndSort(user, searchFilter, pageIndex, limit);
         return new ResponseJobDetailTableData(jobDetailsPage, Boolean.FALSE);
     }
 

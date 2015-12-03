@@ -32,6 +32,9 @@ intelliJobControllers.controller(
             '$route',
             'JobDetailServices',
             function ($scope, $rootScope, $location, $http, $cookieStore, $routeParams, $route, JobDetailServices) {
+                $scope.showSimpleSearchDialog = false;
+                $scope.showComplexSearchDialog = false;
+
                 $scope.jobDetailTableCurrentPage = 1;
                 $scope.jobDetailTableNumPerPage = 50;
                 $scope.jobDetailTableMaxPage = 10;
@@ -39,22 +42,26 @@ intelliJobControllers.controller(
                 $scope.jobDetails;
                 var pageIndex = $scope.jobDetailTableCurrentPage - 1;
                 //watch state should not be active by init page, to avoid 2 get request!
-                var isWatchActive = false;
-                JobDetailServices.getJobDetailPage(pageIndex, $scope.jobDetailTableNumPerPage).success(function (response) {
-                    $scope.jobDetails = response.jobDetails;
-                    $scope.jobDetailTableTotalItems = response.totalItemSize;
+                $scope.isWatchActive = false;
+                JobDetailServices.getViewModel().success(function (response) {
+                    $scope.user = response.userData;
+                    $scope.searchEngine = $scope.user.profileData.searchEngine;
+                    $scope.switchSearchEngine($scope.searchEngine);
+
+                    $scope.jobDetails = response.tableData.jobDetails;
+                    $scope.jobDetailTableTotalItems = response.tableData.totalItemSize;
                     $scope.showPagination = true;
                     //Set watch on pagination numbers
                     $scope.$watch('jobDetailTableCurrentPage + jobDetailTableNumPerPage', function () {
-                        if (isWatchActive) {
+                        if ($scope.isWatchActive) {
                             pageIndex = $scope.jobDetailTableCurrentPage - 1;
-                            JobDetailServices.getJobDetailPage(pageIndex, $scope.jobDetailTableNumPerPage).success(function (response) {
+                            JobDetailServices.getJobDetailPage($scope.searchEngine, pageIndex, $scope.jobDetailTableNumPerPage).success(function (response) {
                                 $scope.jobDetails = response.jobDetails;
                             }).error(function (error) {
                                 console.log(error);
                             });
                         }
-                        isWatchActive = true;
+                        $scope.isWatchActive = true;
                     });
                 }).error(function (error) {
                     console.log(error);
@@ -90,6 +97,43 @@ intelliJobControllers.controller(
                     }).error(function (error) {
                         console.log(error);
                     });
+                };
+
+                /**
+                 * Update search engine.
+                 */
+                $scope.changeSearchEngine = function (selectedSearchEngine) {
+                    $scope.user.profileData.searchEngine = selectedSearchEngine;
+                    $scope.switchSearchEngine(selectedSearchEngine, true);
+                };
+
+                /**
+                 * Select new search engine and deactivate old engine.
+                 */
+                $scope.switchSearchEngine = function (selectedSearchEngine, fire) {
+                    if (selectedSearchEngine === 'SIMPLE') {
+                        $scope.showSimpleSearchDialog = true;
+                        $scope.showComplexSearchDialog = false;
+                    } else if (selectedSearchEngine === 'COMPLEX') {
+                        $scope.showSimpleSearchDialog = false;
+                        $scope.showComplexSearchDialog = true;
+                    } else {
+                        $scope.showSimpleSearchDialog = false;
+                        $scope.showComplexSearchDialog = false;
+                    }
+
+                    if (fire) {
+                        $scope.isWatchActive = false;
+                        var pageIndex = 0;
+                        JobDetailServices.getJobDetailPage(selectedSearchEngine, pageIndex, $scope.jobDetailTableNumPerPage).success(function (response) {
+                            $scope.jobDetails = response.jobDetails;
+                            $scope.jobDetailTableCurrentPage = 1;
+                            $scope.jobDetailTableTotalItems = response.totalItemSize;
+                            $scope.searchEngine = selectedSearchEngine;
+                        }).error(function (error) {
+                            console.log(error);
+                        });
+                    }
                 };
             }
         ])

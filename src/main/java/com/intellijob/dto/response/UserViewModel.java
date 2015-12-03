@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 /**
  * Data transfer object represents user page.
  */
-public class ResponseUserForm extends ResponseData {
+public class UserViewModel extends ResponseData {
 
     private ResponseUserData userData;
 
@@ -39,14 +39,14 @@ public class ResponseUserForm extends ResponseData {
 
     private List<SkillData> supportedAutocompleteKnowledges;
 
-    public ResponseUserForm() {
+    public UserViewModel() {
     }
 
-    public ResponseUserForm(User user) {
+    public UserViewModel(User user) {
         this(user, null);
     }
 
-    public ResponseUserForm(User user, SkillViewModel skillViewModel) {
+    public UserViewModel(User user, SkillViewModel skillViewModel) {
         setUserData(new ResponseUserData(user));
         List<SkillData> languagesData = UserServiceMapper.mapToListSkillData(skillViewModel.getLanguages());
         setSupportedLanguages(languagesData);

@@ -31,6 +31,7 @@ import com.intellijob.domain.User;
 import com.intellijob.domain.builder.JobDetailBuilder;
 import com.intellijob.elasticsearch.domain.EsJobDetail;
 import com.intellijob.elasticsearch.repository.EsJobDetailRepository;
+import com.intellijob.enums.SearchEngineEnum;
 import com.intellijob.exceptions.BaseException;
 import com.intellijob.exceptions.DocumentNotFoundException;
 import com.intellijob.repository.JobDetailRepository;
@@ -117,7 +118,6 @@ public class JobDetailControllerImpl implements JobDetailController {
                         "www.caribbeanjobs.com", "www.nijobs.com", "www.jobs.lu", "www.pnet.co.za"));
         List<String> foundedHomepages = new HtmlParser(htmlContent, htmlParseFilter).toPlainText().parse().getUrls();
 
-
         return new JobDetailBuilder(job).setApplicationMail(mails).setHomepages(
                 foundedHomepages).addContactPersons(contactPersonSpans).addAddresses(addressSpans).build();
     }
@@ -183,7 +183,31 @@ public class JobDetailControllerImpl implements JobDetailController {
      */
     @Override
     public Page<EsJobDetail> findAndSort(User user, int pageIndex, int limit) {
-        switch (user.getProfile().getSearchEngine()) {
+        return findAndSort(user, user.getProfile().getSearchEngine(), pageIndex, limit);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Page<EsJobDetail> findAndSort(User user, String searchFilter, int pageIndex, int limit) {
+        if (searchFilter == null) {
+            return findAndSort(user, user.getProfile().getSearchEngine(), pageIndex, limit);
+        }
+        try {
+            SearchEngineEnum searchEngineEnum = SearchEngineEnum.valueOf(searchFilter.toUpperCase());
+            return findAndSort(user, searchEngineEnum, pageIndex, limit);
+        } catch (IllegalArgumentException iae) {
+            return findAndSort(user, user.getProfile().getSearchEngine(), pageIndex, limit);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Page<EsJobDetail> findAndSort(User user, SearchEngineEnum searchEngine, int pageIndex, int limit) {
+        switch (searchEngine) {
             case SIMPLE:
                 return findUsingSimpleSearchEngine(user, pageIndex, limit);
             case COMPLEX:

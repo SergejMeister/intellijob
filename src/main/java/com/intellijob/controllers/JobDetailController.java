@@ -20,6 +20,7 @@ import com.intellijob.domain.Job;
 import com.intellijob.domain.JobDetail;
 import com.intellijob.domain.User;
 import com.intellijob.elasticsearch.domain.EsJobDetail;
+import com.intellijob.enums.SearchEngineEnum;
 import com.intellijob.exceptions.BaseException;
 import org.springframework.data.domain.Page;
 
@@ -112,6 +113,26 @@ public interface JobDetailController {
      * @return page of jobDetail.
      */
     Page<EsJobDetail> findAndSort(User user, int pageIndex, int limit);
+
+    /**
+     * Returns page of jobDetail.
+     *
+     * @param pageIndex page index.
+     * @param limit     limit items per page.
+     *
+     * @return page of jobDetail.
+     */
+    Page<EsJobDetail> findAndSort(User user, String searchFilter, int pageIndex, int limit);
+
+    /**
+     * Returns page of jobDetail.
+     *
+     * @param pageIndex page index.
+     * @param limit     limit items per page.
+     *
+     * @return page of jobDetail.
+     */
+    Page<EsJobDetail> findAndSort(User user, SearchEngineEnum searchEngine, int pageIndex, int limit);
 
     /**
      * Returns jobDetail for specified id.

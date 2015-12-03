@@ -19,6 +19,9 @@ angular.module('intelliJob')
             function ($http) {
 
                 var urlBase = "/intellijob/api/jobdetails";
+
+                var urlViewsBase = '/intellijob/api/views/jobdetails';
+
                 var jobDetailServices = {};
 
                 /**
@@ -35,8 +38,8 @@ angular.module('intelliJob')
                  *
                  * @returns {HttpPromise}
                  */
-                jobDetailServices.getJobDetailPage = function (pageIndex, limit) {
-                    return $http.get(urlBase + "/" + pageIndex + "/" + limit);
+                jobDetailServices.getJobDetailPage = function (searchFilter, pageIndex, limit) {
+                    return $http.get(urlBase + "/" + pageIndex + "/" + limit, {params: {'searchFilter': searchFilter}});
                 };
 
                 /**
@@ -46,6 +49,15 @@ angular.module('intelliJob')
                  */
                 jobDetailServices.getJobDetailById = function (jobDetailId) {
                     return $http.get(urlBase + "/" + jobDetailId);
+                };
+
+                /**
+                 * Get job Detail view model.
+                 *
+                 * @returns {HttpPromise}
+                 */
+                jobDetailServices.getViewModel = function () {
+                    return $http.get(urlViewsBase);
                 };
 
                 /**

@@ -20,7 +20,7 @@ import com.intellijob.controllers.UserController;
 import com.intellijob.domain.User;
 import com.intellijob.dto.request.RequestUserData;
 import com.intellijob.dto.response.ResponseUserData;
-import com.intellijob.dto.response.ResponseUserForm;
+import com.intellijob.dto.response.UserViewModel;
 import com.intellijob.exceptions.UserNotFoundException;
 import com.intellijob.webservices.mappers.UserServiceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,10 +66,10 @@ public class UserServices extends BaseServices {
      * @return response message.
      */
     @RequestMapping(value = Endpoints.USERS, method = RequestMethod.PUT)
-    public @ResponseBody ResponseUserForm updateUser(@RequestBody RequestUserData userData) {
+    public @ResponseBody UserViewModel updateUser(@RequestBody RequestUserData userData) {
         User user = UserServiceMapper.mapTo(userData);
         userController.save(user);
-        ResponseUserForm responseUserForm = new ResponseUserForm();
+        UserViewModel responseUserForm = new UserViewModel();
         responseUserForm.setMessage("User updated successfully!");
         return responseUserForm;
     }
@@ -80,10 +80,10 @@ public class UserServices extends BaseServices {
      * @return response user data with id and message.
      */
     @RequestMapping(value = Endpoints.USERS, method = RequestMethod.POST)
-    public @ResponseBody ResponseUserForm createUser(@RequestBody RequestUserData userData) {
+    public @ResponseBody UserViewModel createUser(@RequestBody RequestUserData userData) {
         User user = UserServiceMapper.mapTo(userData);
         User createdUser = userController.save(user);
-        ResponseUserForm responseUserForm = new ResponseUserForm(createdUser);
+        UserViewModel responseUserForm = new UserViewModel(createdUser);
         responseUserForm.setMessage("New user Created successfully!");
         return responseUserForm;
     }
@@ -96,9 +96,9 @@ public class UserServices extends BaseServices {
      * @return response user data with id.
      */
     @RequestMapping(value = Endpoints.USERS, method = RequestMethod.DELETE)
-    public @ResponseBody ResponseUserForm deleteUser(@RequestParam(value = "userId") String userId) {
+    public @ResponseBody UserViewModel deleteUser(@RequestParam(value = "userId") String userId) {
         userController.deleteUser(userId);
-        ResponseUserForm responseUserForm = new ResponseUserForm();
+        UserViewModel responseUserForm = new UserViewModel();
         responseUserForm.setMessage("User is successfully deleted!");
         return responseUserForm;
     }
