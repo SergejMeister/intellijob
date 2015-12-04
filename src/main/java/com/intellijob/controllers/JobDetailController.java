@@ -18,9 +18,8 @@ package com.intellijob.controllers;
 
 import com.intellijob.domain.Job;
 import com.intellijob.domain.JobDetail;
-import com.intellijob.domain.User;
+import com.intellijob.elasticsearch.SearchModel;
 import com.intellijob.elasticsearch.domain.EsJobDetail;
-import com.intellijob.enums.SearchEngineEnum;
 import com.intellijob.exceptions.BaseException;
 import org.springframework.data.domain.Page;
 
@@ -94,45 +93,45 @@ public interface JobDetailController {
      */
     List<JobDetail> findAll();
 
-    /**
-     * Returns page of jobDetail.
-     *
-     * @param pageIndex page index.
-     * @param limit     limit items per page.
-     *
-     * @return page of jobDetail.
-     */
-    Page<JobDetail> findPage(int pageIndex, int limit);
+//    /**
+//     * Returns page of jobDetail.
+//     *
+//     * @param pageIndex page index.
+//     * @param limit     limit items per page.
+//     *
+//     * @return page of jobDetail.
+//     */
+//    Page<JobDetail> findPage(int pageIndex, int limit);
 
-    /**
-     * Returns page of jobDetail.
-     *
-     * @param pageIndex page index.
-     * @param limit     limit items per page.
-     *
-     * @return page of jobDetail.
-     */
-    Page<EsJobDetail> findAndSort(User user, int pageIndex, int limit);
+//    /**
+//     * Returns page of jobDetail.
+//     *
+//     * @param pageIndex page index.
+//     * @param limit     limit items per page.
+//     *
+//     * @return page of jobDetail.
+//     */
+//    Page<EsJobDetail> findAndSort(User user, int pageIndex, int limit);
 
-    /**
-     * Returns page of jobDetail.
-     *
-     * @param pageIndex page index.
-     * @param limit     limit items per page.
-     *
-     * @return page of jobDetail.
-     */
-    Page<EsJobDetail> findAndSort(User user, String searchFilter, int pageIndex, int limit);
+//    /**
+//     * Returns page of jobDetail.
+//     *
+//     * @param pageIndex page index.
+//     * @param limit     limit items per page.
+//     *
+//     * @return page of jobDetail.
+//     */
+//    Page<EsJobDetail> findAndSort(User user, String searchFilter, int pageIndex, int limit);
 
-    /**
-     * Returns page of jobDetail.
-     *
-     * @param pageIndex page index.
-     * @param limit     limit items per page.
-     *
-     * @return page of jobDetail.
-     */
-    Page<EsJobDetail> findAndSort(User user, SearchEngineEnum searchEngine, int pageIndex, int limit);
+//    /**
+//     * Returns page of jobDetail.
+//     *
+//     * @param pageIndex page index.
+//     * @param limit     limit items per page.
+//     *
+//     * @return page of jobDetail.
+//     */
+//    Page<EsJobDetail> findAndSort(User user, SearchEngineEnum searchEngine, int pageIndex, int limit);
 
     /**
      * Returns jobDetail for specified id.
@@ -165,4 +164,13 @@ public interface JobDetailController {
      * Create indexes of all JobDetails.
      */
     void createElasticserchIndexes();
+
+    /**
+     * Find and Sort all JobDetails for specified searchModel.
+     *
+     * @param searchModel searchModel.
+     *
+     * @return page of JobDetails.
+     */
+    Page<EsJobDetail> findAndSort(SearchModel searchModel);
 }

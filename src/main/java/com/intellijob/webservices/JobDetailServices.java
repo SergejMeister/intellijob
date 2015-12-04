@@ -23,6 +23,8 @@ import com.intellijob.domain.JobDetail;
 import com.intellijob.domain.User;
 import com.intellijob.dto.response.ResponseJobDetailData;
 import com.intellijob.dto.response.ResponseJobDetailTableData;
+import com.intellijob.elasticsearch.SearchModel;
+import com.intellijob.elasticsearch.SearchModelBuilder;
 import com.intellijob.elasticsearch.domain.EsJobDetail;
 import com.intellijob.exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,11 +74,18 @@ public class JobDetailServices extends BaseServices {
      * @return data transfer object <code>ResponseJobDetailTableData.java</code>
      */
     @RequestMapping(value = Endpoints.JOBDETAILS_PAGING, method = RequestMethod.GET)
-    public @ResponseBody ResponseJobDetailTableData getJobDetails(@PathVariable int pageIndex, @PathVariable int limit,
-                                                                  @RequestParam(value = "searchFilter", required = false) String searchFilter)
-            throws UserNotFoundException {
+    public @ResponseBody ResponseJobDetailTableData getJobDetails(@PathVariable int offset, @PathVariable int limit,
+                                                                  @RequestParam(value = "searchFilter", required = false) String searchFilter,
+                                                                  @RequestParam(value = "searchData", required = false) String searchData)
+                                                                  throws UserNotFoundException {
         User user = userController.getUniqueUser();
-        Page<EsJobDetail> jobDetailsPage = jobDetailController.findAndSort(user, searchFilter, pageIndex, limit);
+
+        SearchModelBuilder searchModelBuilder = new SearchModelBuilder(user).setOffset(offset).setLimit(limit);
+        if(searchFilter != null) searchModelBuilder.setSearchEngine(searchFilter);
+        if(searchData !=null) searchModelBuilder.setSearchData(searchData);
+        SearchModel searchModel = searchModelBuilder.build();
+
+        Page<EsJobDetail> jobDetailsPage = jobDetailController.findAndSort(searchModel);
         return new ResponseJobDetailTableData(jobDetailsPage, Boolean.FALSE);
     }
 

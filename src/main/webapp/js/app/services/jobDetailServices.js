@@ -18,7 +18,7 @@ angular.module('intelliJob')
         .factory('JobDetailServices', ['$http', '$rootScope',
             function ($http) {
 
-                var urlBase = "/intellijob/api/jobdetails";
+                var urlBase = '/intellijob/api/jobdetails';
 
                 var urlViewsBase = '/intellijob/api/views/jobdetails';
 
@@ -39,7 +39,25 @@ angular.module('intelliJob')
                  * @returns {HttpPromise}
                  */
                 jobDetailServices.getJobDetailPage = function (searchFilter, pageIndex, limit) {
-                    return $http.get(urlBase + "/" + pageIndex + "/" + limit, {params: {'searchFilter': searchFilter}});
+                    return $http.get(urlBase + '/' + pageIndex + '/' + limit, {
+                        params: {
+                            'searchFilter': searchFilter
+                        }
+                    });
+                };
+
+                /**
+                 * Get page with fixed size of jobDetails.
+                 *
+                 * @returns {HttpPromise}
+                 */
+                jobDetailServices.getJobDetailPageBySearchFilterAndSearchData = function (searchFilter, searchData, pageIndex, limit) {
+                    return $http.get(urlBase + '/' + pageIndex + '/' + limit, {
+                        params: {
+                            'searchFilter': searchFilter,
+                            'searchData': searchData
+                        }
+                    });
                 };
 
                 /**
@@ -48,7 +66,7 @@ angular.module('intelliJob')
                  * @returns {HttpPromise}
                  */
                 jobDetailServices.getJobDetailById = function (jobDetailId) {
-                    return $http.get(urlBase + "/" + jobDetailId);
+                    return $http.get(urlBase + '/' + jobDetailId);
                 };
 
                 /**
@@ -66,9 +84,8 @@ angular.module('intelliJob')
                  * @returns {HttpPromise}
                  */
                 jobDetailServices.deleteById = function (jobDetailId) {
-                    return $http.delete(urlBase + "/" + jobDetailId);
+                    return $http.delete(urlBase + '/' + jobDetailId);
                 };
-
 
                 return jobDetailServices;
             }]);

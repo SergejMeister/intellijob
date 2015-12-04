@@ -47,6 +47,7 @@ intelliJobControllers.controller(
                     $scope.user = response.userData;
                     $scope.searchEngine = $scope.user.profileData.searchEngine;
                     $scope.switchSearchEngine($scope.searchEngine);
+                    $scope.searchData = response.userData.simpleSearchField;
 
                     $scope.jobDetails = response.tableData.jobDetails;
                     $scope.jobDetailTableTotalItems = response.tableData.totalItemSize;
@@ -55,11 +56,19 @@ intelliJobControllers.controller(
                     $scope.$watch('jobDetailTableCurrentPage + jobDetailTableNumPerPage', function () {
                         if ($scope.isWatchActive) {
                             pageIndex = $scope.jobDetailTableCurrentPage - 1;
-                            JobDetailServices.getJobDetailPage($scope.searchEngine, pageIndex, $scope.jobDetailTableNumPerPage).success(function (response) {
-                                $scope.jobDetails = response.jobDetails;
-                            }).error(function (error) {
-                                console.log(error);
-                            });
+                            if ($scope.searchEngine === 'SIMPLE') {
+                                JobDetailServices.getJobDetailPageBySearchFilterAndSearchData($scope.searchEngine, $scope.searchData, pageIndex, $scope.jobDetailTableNumPerPage).success(function (response) {
+                                    $scope.jobDetails = response.jobDetails;
+                                }).error(function (error) {
+                                    console.log(error);
+                                });
+                            } else {
+                                JobDetailServices.getJobDetailPage($scope.searchEngine, pageIndex, $scope.jobDetailTableNumPerPage).success(function (response) {
+                                    $scope.jobDetails = response.jobDetails;
+                                }).error(function (error) {
+                                    console.log(error);
+                                });
+                            }
                         }
                         $scope.isWatchActive = true;
                     });
@@ -108,6 +117,21 @@ intelliJobControllers.controller(
                 };
 
                 /**
+                 * Update search engine.
+                 */
+                $scope.search = function () {
+                    $scope.isWatchActive = false;
+                    var pageIndex = 0;
+                    JobDetailServices.getJobDetailPageBySearchFilterAndSearchData($scope.searchEngine, $scope.searchData, pageIndex, $scope.jobDetailTableNumPerPage).success(function (response) {
+                        $scope.jobDetails = response.jobDetails;
+                        $scope.jobDetailTableCurrentPage = 1;
+                        $scope.jobDetailTableTotalItems = response.totalItemSize;
+                    }).error(function (error) {
+                        console.log(error);
+                    });
+                };
+
+                /**
                  * Select new search engine and deactivate old engine.
                  */
                 $scope.switchSearchEngine = function (selectedSearchEngine, fire) {
@@ -130,6 +154,7 @@ intelliJobControllers.controller(
                             $scope.jobDetailTableCurrentPage = 1;
                             $scope.jobDetailTableTotalItems = response.totalItemSize;
                             $scope.searchEngine = selectedSearchEngine;
+                            $scope.searchData = $scope.user.simpleSearchField;
                         }).error(function (error) {
                             console.log(error);
                         });

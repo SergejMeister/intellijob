@@ -42,7 +42,7 @@ public class Endpoints {
     public static final String JOBS_BY_ID = JOBS + "/{jobId}";
     public static final String API_VIEWS_JOBDETAILS = API_VIEWS + "/jobdetails";
     public static final String JOBDETAILS = API + "/jobdetails";
-    public static final String JOBDETAILS_PAGING = JOBDETAILS + "/{pageIndex}/{limit}";
+    public static final String JOBDETAILS_PAGING = JOBDETAILS + "/{offset}/{limit}";
     public static final String JOBDETAILS_BY_ID = JOBDETAILS + "/{jobDetailId}";
     public static final String AUDIT = API + "/audit";
     public static final String AUDIT_PAGING = AUDIT + "/{pageIndex}/{limit}";

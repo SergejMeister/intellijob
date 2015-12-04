@@ -27,11 +27,10 @@ import com.intellijob.controllers.JobController;
 import com.intellijob.controllers.JobDetailController;
 import com.intellijob.domain.Job;
 import com.intellijob.domain.JobDetail;
-import com.intellijob.domain.User;
 import com.intellijob.domain.builder.JobDetailBuilder;
+import com.intellijob.elasticsearch.SearchModel;
 import com.intellijob.elasticsearch.domain.EsJobDetail;
 import com.intellijob.elasticsearch.repository.EsJobDetailRepository;
-import com.intellijob.enums.SearchEngineEnum;
 import com.intellijob.exceptions.BaseException;
 import com.intellijob.exceptions.DocumentNotFoundException;
 import com.intellijob.repository.JobDetailRepository;
@@ -169,79 +168,91 @@ public class JobDetailControllerImpl implements JobDetailController {
         return jobDetailRepository.findAll();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Page<JobDetail> findPage(int pageIndex, int limit) {
-        PageRequest request = new PageRequest(pageIndex, limit, new Sort(Sort.Direction.DESC, "receivedDate"));
-        return jobDetailRepository.findAll(request);
-    }
+//    /**
+//     * {@inheritDoc}
+//     */
+//    @Override
+//    public Page<JobDetail> findPage(int pageIndex, int limit) {
+//        PageRequest request = new PageRequest(pageIndex, limit, new Sort(Sort.Direction.DESC, "receivedDate"));
+//        return jobDetailRepository.findAll(request);
+//    }
+//
+//    /**
+//     * {@inheritDoc}
+//     */
+//    @Override
+//    public Page<EsJobDetail> findAndSort(User user, int pageIndex, int limit) {
+//        return findAndSort(user, user.getProfile().getSearchEngine(), pageIndex, limit);
+//    }
+//
+//    /**
+//     * {@inheritDoc}
+//     */
+//    @Override
+//    public Page<EsJobDetail> findAndSort(User user, String searchFilter, int pageIndex, int limit) {
+//        if (searchFilter == null) {
+//            return findAndSort(user, user.getProfile().getSearchEngine(), pageIndex, limit);
+//        }
+//        try {
+//            SearchEngineEnum searchEngineEnum = SearchEngineEnum.valueOf(searchFilter.toUpperCase());
+//            return findAndSort(user, searchEngineEnum, pageIndex, limit);
+//        } catch (IllegalArgumentException iae) {
+//            return findAndSort(user, user.getProfile().getSearchEngine(), pageIndex, limit);
+//        }
+//    }
+
+//    /**
+//     * {@inheritDoc}
+//     */
+//    @Override
+//    public Page<EsJobDetail> findAndSort(User user, SearchEngineEnum searchEngine, int pageIndex, int limit) {
+//        switch (searchEngine) {
+//            case SIMPLE:
+//                return findUsingSimpleSearchEngine(user, pageIndex, limit);
+//            case COMPLEX:
+//                return findUsingPersonalSearchEngine(user, pageIndex, limit);
+//            default:
+//                return findEsPage(user, pageIndex, limit);
+//        }
+//    }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Page<EsJobDetail> findAndSort(User user, int pageIndex, int limit) {
-        return findAndSort(user, user.getProfile().getSearchEngine(), pageIndex, limit);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Page<EsJobDetail> findAndSort(User user, String searchFilter, int pageIndex, int limit) {
-        if (searchFilter == null) {
-            return findAndSort(user, user.getProfile().getSearchEngine(), pageIndex, limit);
-        }
-        try {
-            SearchEngineEnum searchEngineEnum = SearchEngineEnum.valueOf(searchFilter.toUpperCase());
-            return findAndSort(user, searchEngineEnum, pageIndex, limit);
-        } catch (IllegalArgumentException iae) {
-            return findAndSort(user, user.getProfile().getSearchEngine(), pageIndex, limit);
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Page<EsJobDetail> findAndSort(User user, SearchEngineEnum searchEngine, int pageIndex, int limit) {
-        switch (searchEngine) {
+    public Page<EsJobDetail> findAndSort(SearchModel searchModel) {
+        switch (searchModel.getSearchEngineEnum()) {
             case SIMPLE:
-                return findUsingSimpleSearchEngine(user, pageIndex, limit);
+                return findUsingSimpleSearchEngine(searchModel);
             case COMPLEX:
-                return findUsingPersonalSearchEngine(user, pageIndex, limit);
+                return findUsingPersonalSearchEngine(searchModel);
             default:
-                return findEsPage(user, pageIndex, limit);
+                return findEsPage(searchModel);
         }
     }
 
     /**
-     * Use elasticsearch to find jobDetail matches to the user personal data.
+     * Use elasticsearch to find jobDetail matches to the searchModel.
      *
-     * @param user      affected user.
-     * @param pageIndex current page.
-     * @param limit     limit
+     * @param searchModel search model.
      *
      * @return founded JobDetails.
      */
-    private Page<EsJobDetail> findUsingPersonalSearchEngine(User user, int pageIndex, int limit) {
+    private Page<EsJobDetail> findUsingPersonalSearchEngine(SearchModel searchModel) {
         //TODO complex search not implemented!
-        return findEsPage(user, pageIndex, limit);
+        return findEsPage(searchModel);
     }
 
     /**
      * Use elasticsearch to find jobDetail matches to user defined search data.
      *
-     * @param user      affected user.
-     * @param pageIndex current page.
-     * @param limit     limit.
+     * @param searchModel search model.
      *
      * @return founded jobDetail.
      */
-    private Page<EsJobDetail> findUsingSimpleSearchEngine(User user, int pageIndex, int limit) {
-        PageRequest request = new PageRequest(pageIndex, limit, new Sort(Sort.Direction.DESC, "receivedDate"));
+    private Page<EsJobDetail> findUsingSimpleSearchEngine(SearchModel searchModel) {
+        PageRequest request = new PageRequest(searchModel.getOffset(), searchModel.getLimit(),
+                new Sort(Sort.Direction.DESC, "receivedDate"));
 
         //TODO this is just examples, remove before release!
 //        QueryBuilder builder_test1 = QueryBuilders.matchQuery("content", user.getSimpleSearchField());
@@ -261,10 +272,10 @@ public class JobDetailControllerImpl implements JobDetailController {
 //        FacetedPage<EsJobDetail> resultPhrasePrefix1 = elasticsearchTemplate.queryForPage(searchQuery_test1, EsJobDetail.class);
 
 
-        String[] searchDataArray = user.getSimpleSearchField().split(OR_SEPARATOR);
+        String[] searchDataArray = searchModel.getSearchData().split(OR_SEPARATOR);
         QueryBuilder builder;
         if (searchDataArray.length == 1) {
-            builder = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, user.getSimpleSearchField().trim())
+            builder = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchModel.getSearchData().trim())
                     .operator(MatchQueryBuilder.Operator.AND);
         } else {
             BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery().minimumNumberShouldMatch(1);
@@ -289,15 +300,14 @@ public class JobDetailControllerImpl implements JobDetailController {
     /**
      * Use elasticsearch to find jobDetails with paging.
      *
-     * @param user      affected user.
-     * @param pageIndex current page.
-     * @param limit     limit.
+     * @param searchModel SearchModel Default offset = 0 , limit = 50.
      *
      * @return Page of EsJobDetails
      */
-    private Page<EsJobDetail> findEsPage(User user, int pageIndex, int limit) {
-        PageRequest request = new PageRequest(pageIndex, limit, new Sort(Sort.Direction.DESC,
-                Constants.DB_FIELD_RECEIVED_DATE));
+    private Page<EsJobDetail> findEsPage(SearchModel searchModel) {
+        PageRequest request =
+                new PageRequest(searchModel.getOffset(), searchModel.getLimit(), new Sort(Sort.Direction.DESC,
+                        Constants.DB_FIELD_RECEIVED_DATE));
         return esJobDetailRepository.findAll(request);
     }
 

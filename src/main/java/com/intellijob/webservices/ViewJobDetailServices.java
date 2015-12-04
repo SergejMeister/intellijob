@@ -20,6 +20,8 @@ import com.intellijob.controllers.JobDetailController;
 import com.intellijob.controllers.UserController;
 import com.intellijob.domain.User;
 import com.intellijob.dto.response.JobDetailViewModel;
+import com.intellijob.elasticsearch.SearchModel;
+import com.intellijob.elasticsearch.SearchModelBuilder;
 import com.intellijob.elasticsearch.domain.EsJobDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -48,9 +50,8 @@ public class ViewJobDetailServices extends BaseServices {
     @RequestMapping(value = Endpoints.API_VIEWS_JOBDETAILS, method = RequestMethod.GET)
     public @ResponseBody JobDetailViewModel getJobDetailViewModel() throws Exception {
         User user = userController.getUniqueUser();
-        int pageIndex = 0;
-        int limit = 50;
-        Page<EsJobDetail> jobDetailsPage = jobDetailController.findAndSort(user, pageIndex, limit);
+        SearchModel searchModel = new SearchModelBuilder(user).build();
+        Page<EsJobDetail> jobDetailsPage = jobDetailController.findAndSort(searchModel);
         return new JobDetailViewModel(user, jobDetailsPage, Boolean.FALSE);
     }
 }
