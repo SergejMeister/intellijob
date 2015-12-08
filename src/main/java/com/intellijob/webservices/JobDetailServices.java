@@ -113,7 +113,7 @@ public class JobDetailServices extends BaseServices {
 
     @RequestMapping(value = Endpoints.ES_JOBDEATAILS_INDEX, method = RequestMethod.PUT)
     public ResponseEntity createElasticIndexes() {
-        jobDetailController.createElasticserchIndexes();
+        jobDetailController.createElasticsearchIndexes();
         return ResponseEntity.ok().build();
     }
 }

@@ -68,6 +68,14 @@ public class EsJobDetail {
      */
     private String jobId;
 
+
+//    @Field(
+//            type = FieldType.String,
+//            index = FieldIndex.analyzed,
+//            searchAnalyzer = "german",
+//            indexAnalyzer = "german",
+//            store = true
+//    )
     /**
      * Job content.
      */

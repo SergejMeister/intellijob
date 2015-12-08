@@ -163,7 +163,7 @@ public interface JobDetailController {
     /**
      * Create indexes of all JobDetails.
      */
-    void createElasticserchIndexes();
+    void createElasticsearchIndexes();
 
     /**
      * Find and Sort all JobDetails for specified searchModel.

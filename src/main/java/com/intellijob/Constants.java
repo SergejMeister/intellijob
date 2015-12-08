@@ -25,5 +25,7 @@ public class Constants {
 
     public static final String DB_FIELD_CONTENT = "content";
 
+    public static final String DB_FIELD_RATING = "rating";
+
     public static final int DB_RESULT_LIMIT = 50;
 }
