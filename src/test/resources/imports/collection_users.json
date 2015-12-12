@@ -1,0 +1,363 @@
+[
+  {
+    "_id": {
+      "$oid": "561a43b044ae79d57ad0c30e"
+    },
+    "_class": "com.intellijob.domain.User",
+    "profile": {
+      "firstName": "Sergej",
+      "secondName": "Meister",
+      "lastMailSyncDate": {
+        "$date": "2015-10-07T20:36:26.934+0000"
+      },
+      "searchEngine": "COMPLEX",
+      "selectedEducationLevel": "Hochschulabschluss - Bachelor",
+      "selectedEducationDescription": "Bachelor Angewandte Informatik",
+      "selectedPraxisLevel": "Student",
+      "selectedPraxisExperience": 3
+    },
+    "simpleSearchField": "Werkstudent Java,Datenbanken",
+    "skills": {
+      "languages": [
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "563537b444ae353683c50777"
+            },
+            "name": "Russisch",
+            "nodes": []
+          },
+          "rating": 5
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "563537b444ae353683c5075e"
+            },
+            "name": "Deutsch",
+            "nodes": []
+          },
+          "rating": 4
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "563537b444ae353683c50753"
+            },
+            "name": "Englisch(BE)",
+            "nodes": []
+          },
+          "rating": 3
+        }
+      ],
+      "personalStrengths": [
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "564e42cc44aec530997678bf"
+            },
+            "name": "Belastbarkeit",
+            "nodes": []
+          },
+          "rating": 5
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "564e42cc44aec530997678c1"
+            },
+            "name": "Motivation",
+            "nodes": []
+          },
+          "rating": 4
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "564e42cc44aec530997678c2"
+            },
+            "name": "Leistungsbereitschaft",
+            "nodes": []
+          },
+          "rating": 4
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "564e42cc44aec530997678c3"
+            },
+            "name": "Selbständiges Arbeiten",
+            "nodes": []
+          },
+          "rating": 4
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "564e42cc44aec530997678ca"
+            },
+            "name": "Teamfähigkeit",
+            "nodes": []
+          },
+          "rating": 4
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "564e42cc44aec530997678ce"
+            },
+            "name": "Sorgfalt",
+            "nodes": []
+          },
+          "rating": 4
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "564e42cc44aec530997678cd"
+            },
+            "name": "Lernbereitschaft",
+            "nodes": []
+          },
+          "rating": 5
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "564e42cc44aec530997678d0"
+            },
+            "name": "Zuverlässigkeit",
+            "nodes": []
+          },
+          "rating": 4
+        }
+      ],
+      "knowledges": [
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "563625a144aec39e70b1791f"
+            },
+            "name": "Test-driven Development (TDD)",
+            "nodes": []
+          },
+          "rating": 3
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "563625a144aec39e70b1791a"
+            },
+            "name": "Software testen",
+            "nodes": []
+          },
+          "rating": 3
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "563625a144aec39e70b17bb0"
+            },
+            "name": "Application Server Tomcat",
+            "nodes": []
+          },
+          "rating": 3
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "563625a144aec39e70b1776e"
+            },
+            "name": "Datenbank MySQL",
+            "nodes": []
+          },
+          "rating": 4
+        },
+        {
+          "skillNode": {
+            "_id": null,
+            "name": "Jenkins",
+            "nodes": []
+          },
+          "rating": 4
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "563625a144aec39e70b1776d"
+            },
+            "name": "Datenbank MongoDB",
+            "nodes": []
+          },
+          "rating": 3
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "563625a144aec39e70b17772"
+            },
+            "name": "Datenbank PostgreSQL",
+            "nodes": []
+          },
+          "rating": 4
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "563625a144aec39e70b1776f"
+            },
+            "name": "Datenbank Oracle",
+            "nodes": []
+          },
+          "rating": 3
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "563625a144aec39e70b1778a"
+            },
+            "name": "MS-SQL Server",
+            "nodes": []
+          },
+          "rating": 3
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "563625a144aec39e70b17898"
+            },
+            "name": "Programmiersprache Java EE",
+            "nodes": []
+          },
+          "rating": 3
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "563625a144aec39e70b178d9"
+            },
+            "name": "Spring Framework",
+            "nodes": []
+          },
+          "rating": 3
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "563625a144aec39e70b17899"
+            },
+            "name": "Programmiersprache JavaScript",
+            "nodes": []
+          },
+          "rating": 2
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "563625a144aec39e70b1785c"
+            },
+            "name": "HTML",
+            "nodes": []
+          },
+          "rating": 4
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "563625a144aec39e70b17859"
+            },
+            "name": "Formatierungssprache CSS",
+            "nodes": []
+          },
+          "rating": 3
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "563625a144aec39e70b1790c"
+            },
+            "name": "Projektmanagement- und Entwicklungsmethode Scrum",
+            "nodes": []
+          },
+          "rating": 4
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "563625a144aec39e70b178f5"
+            },
+            "name": "Fehlerverwaltungsprogramm Jira",
+            "nodes": []
+          },
+          "rating": 4
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "563625a144aec39e70b1784c"
+            },
+            "name": "Entwicklungsumgebung Eclipse",
+            "nodes": []
+          },
+          "rating": 3
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "563625a144aec39e70b17897"
+            },
+            "name": "Programmiersprache Java",
+            "nodes": []
+          },
+          "rating": 4
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "563625a144aec39e70b17882"
+            },
+            "name": "Programmiersprache C#",
+            "nodes": []
+          },
+          "rating": 3
+        },
+        {
+          "skillNode": {
+            "_id": null,
+            "name": "AngularJS",
+            "nodes": []
+          },
+          "rating": 3
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "563625a144aec39e70b17881"
+            },
+            "name": "Programmiersprache C",
+            "nodes": []
+          },
+          "rating": 2
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "563625a144aec39e70b17776"
+            },
+            "name": "Datenbank SQL",
+            "nodes": []
+          },
+          "rating": 4
+        },
+        {
+          "skillNode": {
+            "_id": null,
+            "name": "Rest Service Architektur",
+            "nodes": []
+          },
+          "rating": 4
+        }
+      ]
+    }
+  }
+]

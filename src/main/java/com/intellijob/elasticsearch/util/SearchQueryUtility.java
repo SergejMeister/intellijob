@@ -39,6 +39,11 @@ public final class SearchQueryUtility {
 
     public static final String OR_SEPARATOR = ",";
 
+    /**
+     * Default 2 weeks.
+     */
+    public static final String DEFAULT_DECAY_FOR_RECEIVED_DATE = "14d";
+
     private SearchQueryUtility() {
     }
 
@@ -53,7 +58,7 @@ public final class SearchQueryUtility {
      *
      * @return build search query
      */
-    public static SearchQuery buildFullTextSearchQuery(String searchOriginData, PageRequest pageRequest) {
+    public static SearchQuery buildFullTextSearchBoolQuery(String searchOriginData, PageRequest pageRequest) {
         String[] searchDataArray = searchOriginData.split(OR_SEPARATOR);
         QueryBuilder builder;
         if (searchDataArray.length == 1) {
@@ -65,7 +70,7 @@ public final class SearchQueryUtility {
                 StringTokenizer stringTokenizer = new StringTokenizer(searchData);
                 if (stringTokenizer.countTokens() > 1) {
                     QueryBuilder matchQuery = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchData.trim())
-                            .operator(MatchQueryBuilder.Operator.AND);
+                            .operator(MatchQueryBuilder.Operator.AND).maxExpansions(30);
                     boolQueryBuilder.should(matchQuery);
                 } else {
                     QueryBuilder matchQuery = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchData.trim());
@@ -76,6 +81,110 @@ public final class SearchQueryUtility {
         }
 
         return new NativeSearchQueryBuilder().withQuery(builder).withPageable(pageRequest).build();
+    }
+
+    /**
+     * Build simple SearchQuery for full text searching.
+     * <p>
+     * The searchOriginData will be split by comma and link with OR.
+     * The search data separated with whitespace will be linked with AND.
+     *
+     * @param searchOriginData search data.
+     * @param pageRequest      paging data (offset,limit)
+     *
+     * @return build search query
+     */
+    public static SearchQuery buildFullTextSearchMatchQuery_2(String searchOriginData, PageRequest pageRequest) {
+        String[] searchDataArray = searchOriginData.split(OR_SEPARATOR);
+        QueryBuilder builder;
+
+        if (searchDataArray.length == 1) {
+            builder = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchOriginData.trim())
+                    .operator(MatchQueryBuilder.Operator.AND);
+        } else {
+            BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+            for (String searchData : searchDataArray) {
+                QueryBuilder matchQuery = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchData.trim())
+                        .operator(MatchQueryBuilder.Operator.AND).maxExpansions(30);
+                boolQueryBuilder.should(matchQuery);
+            }
+            builder = boolQueryBuilder;
+        }
+
+        return new NativeSearchQueryBuilder().withQuery(builder).withPageable(pageRequest).build();
+    }
+
+    /**
+     * Build simple SearchQuery for full text searching.
+     * <p>
+     * The searchOriginData will be split by comma and link with OR.
+     * The search data separated with whitespace will be linked with AND.
+     *
+     *
+     *
+     * @param searchOriginData search data.
+     * @param pageRequest      paging data (offset,limit)
+     *
+     * @return build search query
+     */
+    public static SearchQuery buildFullTextSearchMatchQuery_3(String searchOriginData, PageRequest pageRequest) {
+        String[] searchDataArray = searchOriginData.split(OR_SEPARATOR);
+
+        QueryBuilder builder;
+        if (searchDataArray.length == 1) {
+            builder = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchOriginData.trim())
+                    .operator(MatchQueryBuilder.Operator.AND);
+        } else {
+            BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+            for (String searchData : searchDataArray) {
+                QueryBuilder matchQuery = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchData.trim())
+                        .operator(MatchQueryBuilder.Operator.AND).maxExpansions(30);
+                boolQueryBuilder.should(matchQuery);
+            }
+
+            builder = boolQueryBuilder;
+        }
+
+        FunctionScoreQueryBuilder functionBuilder = QueryBuilders.functionScoreQuery(builder);
+        functionBuilder.add(ScoreFunctionBuilders
+                .exponentialDecayFunction(Constants.DB_FIELD_RECEIVED_DATE, DEFAULT_DECAY_FOR_RECEIVED_DATE));
+
+        return new NativeSearchQueryBuilder().withQuery(functionBuilder).withPageable(pageRequest).build();
+    }
+
+    /**
+     * TODO ! important to write in masterarbeit!
+     * Function to boost received date with field_factor is not so good as exponentialDecayFunction with
+     *
+     * @param searchOriginData search data.
+     * @param pageRequest      paging data (offset,limit)
+     *
+     * @return build search query
+     */
+    public static SearchQuery buildFullTextSearchMatchQuery_4_FieldFactor(String searchOriginData,
+                                                                          PageRequest pageRequest) {
+        String[] searchDataArray = searchOriginData.split(OR_SEPARATOR);
+
+        QueryBuilder builder;
+        if (searchDataArray.length == 1) {
+            builder = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchOriginData.trim())
+                    .operator(MatchQueryBuilder.Operator.AND);
+        } else {
+            BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+            for (String searchData : searchDataArray) {
+                QueryBuilder matchQuery = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchData.trim())
+                        .operator(MatchQueryBuilder.Operator.AND).maxExpansions(30);
+                boolQueryBuilder.should(matchQuery);
+            }
+
+            builder = boolQueryBuilder;
+        }
+
+        FunctionScoreQueryBuilder functionBuilder = QueryBuilders.functionScoreQuery(builder);
+        functionBuilder
+                .add(ScoreFunctionBuilders.fieldValueFactorFunction(Constants.DB_FIELD_RECEIVED_DATE).factor(1.5f));
+
+        return new NativeSearchQueryBuilder().withQuery(functionBuilder).withPageable(pageRequest).build();
     }
 
     /**

@@ -187,10 +187,7 @@ public class JobDetailControllerImpl implements JobDetailController {
      */
     private Page<EsJobDetail> findUsingPersonalSearchEngine(SearchModel searchModel) {
         Skills userSkills = searchModel.getUser().getSkills();
-        List<SkillRatingNode> skillRatingNodes = new ArrayList<>();
-        skillRatingNodes.addAll(userSkills.getLanguages());
-        skillRatingNodes.addAll(userSkills.getKnowledges());
-        skillRatingNodes.addAll(userSkills.getPersonalStrengths());
+        List<SkillRatingNode> skillRatingNodes = userSkills.getAllSkills();
         SearchQuery searchQuery = SearchQueryUtility
                 .buildBoolQueryAndBoostRatingField(skillRatingNodes, searchModel.getOffset(), searchModel.getLimit());
         Page<EsJobDetail> result = elasticsearchTemplate.queryForPage(searchQuery, EsJobDetail.class);
@@ -205,9 +202,11 @@ public class JobDetailControllerImpl implements JobDetailController {
      * @return founded jobDetail.
      */
     private Page<EsJobDetail> findUsingSimpleSearchEngine(SearchModel searchModel) {
-        PageRequest request = new PageRequest(searchModel.getOffset(), searchModel.getLimit(),
-                new Sort(Sort.Direction.DESC, Constants.DB_FIELD_RECEIVED_DATE));
-        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchQuery(searchModel.getSearchData(), request);
+//        PageRequest request = new PageRequest(searchModel.getOffset(), searchModel.getLimit(),
+//                new Sort(Sort.Direction.DESC, Constants.DB_FIELD_RECEIVED_DATE));
+//        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchBoolQuery(searchModel.getSearchData(), request);
+        PageRequest request = new PageRequest(searchModel.getOffset(), searchModel.getLimit());
+        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchMatchQuery_2(searchModel.getSearchData(), request);
         return elasticsearchTemplate.queryForPage(searchQuery, EsJobDetail.class);
     }
 

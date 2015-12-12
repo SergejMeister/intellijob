@@ -34,35 +34,15 @@ public class ElasticsearchConfiguration {
     private static final Logger LOG = Logger.getLogger(ElasticsearchConfiguration.class);
 
     @Value("${elasticsearch.port}")
-    int port;
+    private int port;
 
     @Value("${elasticsearch.host}")
-    String hostname;
+    private String hostname;
 
     @Value("${elasticsearch.clusterName}")
-    String clusterName;
+    private String clusterName;
 
-    Node node;
-
-
-//    @Bean
-//    public Client client() {
-//        TransportClient client = new TransportClient();
-//        TransportAddress address = new InetSocketTransportAddress(hostname, port);
-//        client.addTransportAddress(address);
-//
-//        return client;
-//    }
-
-//    /**
-//     * Init elasticsearch client and returns ElasticsearchTemplate.
-//     *
-//     * @return default ElasticsearchTemplate
-//     */
-//    @Bean
-//    public ElasticsearchOperations elasticsearchTemplate() {
-//        return new ElasticsearchTemplate(client());
-//    }
+    private Node node;
 
     /**
      * Init elasticsearch client and returns ElasticsearchTemplate for Cluster intelliJob.
@@ -85,6 +65,10 @@ public class ElasticsearchConfiguration {
                 LOG.error("Elasticsearch server can not be destroyed!", e);
             }
         }
+    }
+
+    public Node getNode() {
+        return node;
     }
 
 }

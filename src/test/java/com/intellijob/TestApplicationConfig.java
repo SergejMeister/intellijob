@@ -19,12 +19,10 @@ package com.intellijob;
 
 import com.mongodb.Mongo;
 import com.mongodb.MongoClientOptions;
-import de.flapdoodle.embed.mongo.MongoImportExecutable;
 import de.flapdoodle.embed.mongo.MongoImportStarter;
 import de.flapdoodle.embed.mongo.MongodExecutable;
 import de.flapdoodle.embed.mongo.MongodProcess;
 import de.flapdoodle.embed.mongo.MongodStarter;
-import de.flapdoodle.embed.mongo.config.IMongoImportConfig;
 import de.flapdoodle.embed.mongo.config.IMongodConfig;
 import de.flapdoodle.embed.mongo.config.MongoImportConfigBuilder;
 import de.flapdoodle.embed.mongo.config.MongodConfigBuilder;
@@ -75,7 +73,8 @@ public class TestApplicationConfig {
     public static void reloadCollectionSkillCategories() throws IOException {
         URL skillCategoriesURL = Thread.currentThread().getContextClassLoader()
                 .getResource("imports/skill_categories.json");
-        IMongoImportConfig mongoImportConfig = new MongoImportConfigBuilder()
+
+        MongoImportConfigBuilder mongoImportConfigBuilder = new MongoImportConfigBuilder()
                 .version(Version.Main.PRODUCTION)
                 .net(net)
                 .db(MONGO_DB_NAME_TEST)
@@ -83,16 +82,40 @@ public class TestApplicationConfig {
                 .upsert(true)
                 .dropCollection(true)
                 .jsonArray(true)
-                .importFile(skillCategoriesURL.getPath())
-                .build();
+                .importFile(skillCategoriesURL.getPath());
 
-        MongoImportExecutable mongoImportExecutable =
-                MongoImportStarter.getDefaultInstance().prepare(mongoImportConfig);
-        mongoImportExecutable.start();
+        MongoImportStarter.getDefaultInstance().prepare(mongoImportConfigBuilder.build()).start();
     }
+
+    /**
+     * Reload collection users.
+     * <p>
+     * Drop collection if exist, create a new collection and load data.
+     * Read data from collection_users.json
+     *
+     * @throws IOException exception.
+     */
+    public static void reloadCollectionUsers() throws IOException {
+        URL collectionUserURL = Thread.currentThread().getContextClassLoader()
+                .getResource("imports/collection_users.json");
+
+        MongoImportConfigBuilder mongoImportConfigBuilder = new MongoImportConfigBuilder()
+                .version(Version.Main.PRODUCTION)
+                .net(net)
+                .db(MONGO_DB_NAME_TEST)
+                .collection("users")
+                .upsert(true)
+                .dropCollection(true)
+                .jsonArray(true)
+                .importFile(collectionUserURL.getPath());
+
+        MongoImportStarter.getDefaultInstance().prepare(mongoImportConfigBuilder.build()).start();
+    }
+
 
     private static void loadCollections() throws IOException {
         reloadCollectionSkillCategories();
+        reloadCollectionUsers();
     }
 
     /**
@@ -111,12 +134,11 @@ public class TestApplicationConfig {
             LOG.info("Mongo client is running on host {} port {}", net.getServerAddress().getHostName(), net.getPort());
         }
 
-        Mongo client = properties.createMongoClient(this.options);
         if (!LIVE_MONGODB) {
             loadCollections();
         }
 
-        return client;
+        return properties.createMongoClient(this.options);
     }
 
     /**
@@ -128,5 +150,4 @@ public class TestApplicationConfig {
         MongodExecutable mongodExecutable = MongodStarter.getDefaultInstance().prepare(mongoConfig);
         return mongodExecutable.start();
     }
-
 }

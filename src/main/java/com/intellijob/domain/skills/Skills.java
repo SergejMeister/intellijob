@@ -59,4 +59,18 @@ public class Skills {
     public void setKnowledges(List<SkillRatingNode> knowledges) {
         this.knowledges = knowledges;
     }
+
+    /**
+     * This is a help methods to get all user skills in one list.
+     *
+     * @return list with all user skills.
+     */
+    public List<SkillRatingNode> getAllSkills() {
+        List<SkillRatingNode> skillRatingNodes = new ArrayList<>();
+        skillRatingNodes.addAll(getLanguages());
+        skillRatingNodes.addAll(getKnowledges());
+        skillRatingNodes.addAll(getPersonalStrengths());
+
+        return skillRatingNodes;
+    }
 }

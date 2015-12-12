@@ -31,6 +31,7 @@ import java.util.List;
 /**
  * This document represents domain object <code>JobDetail</code>.
  */
+//TODO create new index jobdetails of type jobdetail
 @Document(indexName = "intellijob", type = "jobDetail", shards = 1, replicas = 0)
 public class EsJobDetail {
 
@@ -69,6 +70,7 @@ public class EsJobDetail {
     private String jobId;
 
 
+    //TODO replace analyzer with german
 //    @Field(
 //            type = FieldType.String,
 //            index = FieldIndex.analyzed,
