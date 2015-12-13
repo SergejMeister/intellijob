@@ -92,6 +92,13 @@ public class SkillNode extends BaseDocument {
         this.localizableObject = localizableObject;
     }
 
+    @Override
+    public String toString() {
+        return "SkillNode{" +
+                "name='" + name + '\'' +
+                '}';
+    }
+
     /**
      * Last node doesn't have children.
      *

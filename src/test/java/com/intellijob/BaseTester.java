@@ -52,49 +52,8 @@ public abstract class BaseTester {
     protected final static Boolean RUNNING_LIVE = TestApplicationConfig.LIVE_MONGODB;
     protected final static Logger LOG = LoggerFactory.getLogger(BaseTester.class);
 
-//    protected static List<SkillRatingData> generateUserSkill() {
-//        List<SkillRatingData> result = new ArrayList<>();
-//        result.add(createSkillRatingData("Programmiersprache Java", 4));
-//        result.add(createSkillRatingData("Test-driven Development (TDD)", 3));
-//        result.add(createSkillRatingData("Software testen", 3));
-//        result.add(createSkillRatingData("Application Server Tomcat", 3));
-//        result.add(createSkillRatingData("Datenbank MySQL", 4));
-//        result.add(createSkillRatingData("Datenbank MongoDB", 3));
-//        result.add(createSkillRatingData("Datenbank PostgreSQL", 4));
-//        result.add(createSkillRatingData("Datenbank Oracle", 3));
-//        result.add(createSkillRatingData("MS-SQL Server", 3));
-//        result.add(createSkillRatingData("Jenkins", 4));
-//        result.add(createSkillRatingData("Spring Framework", 3));
-//        result.add(createSkillRatingData("Programmiersprache JavaScript", 2));
-//        result.add(createSkillRatingData("HTML", 4));
-//        result.add(createSkillRatingData("Formatierungssprache CSS", 3));
-//        result.add(createSkillRatingData("Projektmanagement- und Entwicklungsmethode Scrum", 4));
-//        result.add(createSkillRatingData("Fehlerverwaltungsprogramm Jira", 4));
-//        result.add(createSkillRatingData("Entwicklungsumgebung Eclipse", 3));
-//        result.add(createSkillRatingData("Programmiersprache Java EE", 3));
-//        result.add(createSkillRatingData("Programmiersprache C#", 3));
-//        result.add(createSkillRatingData("Programmiersprache C", 2));
-//        result.add(createSkillRatingData("AngularJS", 3));
-//        result.add(createSkillRatingData("Datenbank SQL", 4));
-//        result.add(createSkillRatingData("Rest Service Architektur", 4));
-//        result.add(createSkillRatingData("Belastbarkeit", 5));
-//        result.add(createSkillRatingData("Motivation", 4));
-//        result.add(createSkillRatingData("Leistungsbereitschaft", 4));
-//        result.add(createSkillRatingData("Selbständiges Arbeiten", 4));
-//        result.add(createSkillRatingData("Teamfähigkeit", 4));
-//        result.add(createSkillRatingData("Sorgfalt", 4));
-//        result.add(createSkillRatingData("Lernbereitschaft", 5));
-//        result.add(createSkillRatingData("Zuverlässigkeit", 4));
-//        result.add(createSkillRatingData("Russisch", 5));
-//        result.add(createSkillRatingData("Deutsch", 4));
-//        result.add(createSkillRatingData("Englisch(BE)", 3));
-//
-//        return result;
-//    }
-
     protected static SkillData createSkillData(String name) {
         String id = RandomStringUtils.random(5);
-
         return new SkillData(id, name);
     }
 

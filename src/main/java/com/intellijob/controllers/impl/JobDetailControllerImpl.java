@@ -189,7 +189,7 @@ public class JobDetailControllerImpl implements JobDetailController {
         Skills userSkills = searchModel.getUser().getSkills();
         List<SkillRatingNode> skillRatingNodes = userSkills.getAllSkills();
         SearchQuery searchQuery = SearchQueryUtility
-                .buildBoolQueryAndBoostRatingField(skillRatingNodes, searchModel.getOffset(), searchModel.getLimit());
+                .buildBoolQueryAndBoostRatingField_6(skillRatingNodes, searchModel.getOffset(), searchModel.getLimit());
         Page<EsJobDetail> result = elasticsearchTemplate.queryForPage(searchQuery, EsJobDetail.class);
         return result;
     }

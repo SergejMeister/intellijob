@@ -52,4 +52,12 @@ public class SkillRatingNode {
     public void setSkillNode(SkillNode skillNode) {
         this.skillNode = skillNode;
     }
+
+    @Override
+    public String toString() {
+        return "SkillRatingNode{" +
+                "skillNode=" + skillNode +
+                ", rating=" + rating +
+                '}';
+    }
 }
