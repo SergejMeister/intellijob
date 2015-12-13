@@ -17,15 +17,19 @@
 package com.intellijob.controllers;
 
 import com.intellijob.BaseTester;
+import com.intellijob.TestApplicationConfig;
 import com.intellijob.domain.Profile;
 import com.intellijob.domain.User;
 import com.intellijob.exceptions.NotMailSyncException;
 import com.intellijob.exceptions.UserNotFoundException;
 import com.intellijob.repository.user.UserRepository;
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -38,6 +42,20 @@ public class UserControllerTest extends BaseTester {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Before
+    public void before() {
+        userRepository.deleteAll();
+    }
+
+    @After
+    public void after() {
+        try {
+            TestApplicationConfig.reloadCollectionUsers();
+        } catch (IOException e) {
+            Assert.fail("Should be no exception!");
+        }
+    }
 
     @Test
     public void testUpdateMailSyncDateIfLastDateNull() {
@@ -131,6 +149,7 @@ public class UserControllerTest extends BaseTester {
 
     @Test
     public void testGetUniqueUserForEmptyUserCollection() {
+
         try {
             userController.getUniqueUser();
             Assert.fail("Should be an exception!");

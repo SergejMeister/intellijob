@@ -23,21 +23,20 @@ import com.intellijob.domain.skills.SkillRatingNode;
 import com.intellijob.elasticsearch.repository.EsJobDetailRepository;
 import com.intellijob.exceptions.UserNotFoundException;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.sort.SortOrder;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -59,13 +58,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
     private long countAllJobDetails;
 
 
-//    @BeforeClass
-//    public static void beforeClass() {
-//        userSkills = generateUserSkill();
-//    }
-
     public static long countNumberOfOccurrencesOfWordInString(String content, String searchWord) {
-//        return Arrays.stream(content.split("[ ,\\.]")).filter(s -> s.equals(searchWord)).count();
         return Arrays.stream(content.split("[ ,\\.]")).filter(s -> s.equals(searchWord)).count();
     }
 
@@ -77,35 +70,110 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
     }
 
     @Test
-    public void testBuildFullTextSearchQuery() throws Exception {
-        printStartTest("ORIGIN FULL TEXT");
+    public void testBuildFullTextSearchQuery_2() throws Exception {
+        final String testName = "ORIGIN FULL TEXT TEST 2";
+        printStartTest(testName);
+
         String testSearchData = "Werkstudent Java,Datenbanken,Jenkins";
-//        String testSearchData = user.getSimpleSearchField();
 
-        PageRequest pageRequest = new PageRequest(DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT,
-                new Sort(Sort.Direction.DESC, Constants.DB_FIELD_RECEIVED_DATE));
+        PageRequest pageRequest = new PageRequest(DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
 
-//        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchBoolQuery(testSearchData, pageRequest);
-//        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchMatchQuery_2(testSearchData, pageRequest);
-        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchMatchQuery_3(testSearchData, pageRequest);
-
-
-
+        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchMatchQuery_2(testSearchData, pageRequest);
         Assert.assertNotNull(searchQuery);
+        printQuery(searchQuery.getQuery());
 
-//        SearchResponse searchResponse =
-//                getEsClient().prepareSearch("intellijob").setQuery(searchQuery.getQuery())
-//                        .setSize(Constants.DB_RESULT_LIMIT).addSort(Constants.DB_FIELD_RECEIVED_DATE, SortOrder.DESC).get();
-        SearchResponse searchResponse = getEsClient().prepareSearch("intellijob").setQuery(searchQuery.getQuery()).setExplain(true)
-                .setSize(Constants.DB_RESULT_LIMIT).get();
+        SearchResponse searchResponse =
+                getEsClient().prepareSearch("intellijob").setQuery(searchQuery.getQuery()).setExplain(true)
+                        .setSize(Constants.DB_RESULT_LIMIT).get();
+        Assert.assertNotNull(searchResponse);
+        Assert.assertTrue("Hits should not be empty!", searchResponse.getHits().getTotalHits() > 0);
+
+        printFullTextExplain(testSearchData, searchResponse);
+
+        printEndTest(testName);
+    }
+
+    @Test
+    public void testBuildFullTextSearchQuery_3() throws Exception {
+        final String testName = "ORIGIN FULL TEXT TEST 3";
+        printStartTest(testName);
+
+        String testSearchData = "Werkstudent Java,Datenbanken,Jenkins";
+
+        PageRequest pageRequest = new PageRequest(DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
+        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchMatchQuery_3(testSearchData, pageRequest);
+        Assert.assertNotNull(searchQuery);
+        printQuery(searchQuery.getQuery());
+
+        SearchResponse searchResponse =
+                getEsClient().prepareSearch("intellijob").setQuery(searchQuery.getQuery()).setExplain(true)
+                        .setSize(Constants.DB_RESULT_LIMIT).get();
         Assert.assertNotNull(searchResponse);
 
+        printFullTextExplain(testSearchData, searchResponse);
+
+        printEndTest(testName);
+    }
+
+    private void printQuery(QueryBuilder query) {
+        System.out.println("----------------------------- QUERY  ----------------------------------------");
+        System.out.println(query.toString());
+        System.out.println("-----------------------------------------------------------------------------");
+    }
+
+    @Test
+    public void testBuildFullTextSearchQuery_4() throws Exception {
+        final String testName = "ORIGIN FULL TEXT TEST 4";
+        printStartTest(testName);
+
+        String testSearchData = "Werkstudent Java,Datenbanken,Jenkins";
+
+        PageRequest pageRequest = new PageRequest(DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
+        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchMatchQuery_4(testSearchData, pageRequest);
+        Assert.assertNotNull(searchQuery);
+        printQuery(searchQuery.getQuery());
+
+        SearchResponse searchResponse =
+                getEsClient().prepareSearch("intellijob").setQuery(searchQuery.getQuery()).setExplain(true)
+                        .setSize(Constants.DB_RESULT_LIMIT).get();
+        Assert.assertNotNull(searchResponse);
+
+        printFullTextExplain(testSearchData, searchResponse);
+
+        printEndTest(testName);
+    }
+
+    @Test
+    public void testBuildFullTextSearchQuery_4_And_Sort() throws Exception {
+        final String testName = "ORIGIN FULL TEXT TEST 4";
+        printStartTest(testName);
+
+        String testSearchData = "Werkstudent Java,Datenbanken,Jenkins";
+
+        PageRequest pageRequest = new PageRequest(DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
+        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchMatchQuery_4(testSearchData, pageRequest);
+        Assert.assertNotNull(searchQuery);
+        printQuery(searchQuery.getQuery());
+
+        SearchResponse searchResponse =
+                getEsClient().prepareSearch("intellijob").setQuery(searchQuery.getQuery()).setExplain(true)
+                        .setSize(Constants.DB_RESULT_LIMIT).addSort(Constants.DB_FIELD_RECEIVED_DATE, SortOrder.DESC)
+                        .get();
+        Assert.assertNotNull(searchResponse);
+
+        printFullTextExplain(testSearchData, searchResponse);
+
+        printEndTest(testName);
+    }
+
+    private void printFullTextExplain(final String testSearchData, final SearchResponse searchResponse) {
+        System.out.println("------------------------------ RESPONSE -------------------------------------");
         System.out.println("Job size: " + countAllJobDetails);
         System.out.println("Search term: " + testSearchData);
         System.out.println("Hits: " + searchResponse.getHits().totalHits());
         System.out.println("MaxScore: " + searchResponse.getHits().getMaxScore());
         for (int i = 0; i < Constants.DB_RESULT_LIMIT; i++) {
-            System.out.println("----------------------------------------------------------------------------------");
+            System.out.println("-----------------------------------------------------------------------------");
             SearchHit searchHit = searchResponse.getHits().getAt(i);
             int index = i + 1;
             final String receivedDate = formatDate((Long) searchHit.getSource().get(Constants.DB_FIELD_RECEIVED_DATE));
@@ -122,20 +190,6 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
             secondLine.append(index + " Explain(: ").append(searchHit.getExplanation().toString()).append(" )");
             System.out.println(secondLine);
         }
-
-        printEndTest("ORIGIN FULL TEXT");
-    }
-
-    private List<String> splitSearchData(String searchData) {
-        List<String> result = new ArrayList<>();
-        String[] splitedArray = searchData.split(",");
-        for (String splitedStr : splitedArray) {
-            String[] words = splitedStr.split(" ");
-            Collections.addAll(result, words);
-        }
-
-        return result;
-
     }
 
     private String formatDate(Long dateInMilliseconds) {
