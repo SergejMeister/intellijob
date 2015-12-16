@@ -279,6 +279,46 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         printEndTest(testName);
     }
 
+    @Test
+    public void testBuildBoolQueryAndBoostRatingField_7() throws Exception {
+        final String testName = "SKILL RATING SEARCH TEST 7";
+        printStartTest(testName);
+
+        List<SkillRatingNode> skillRatingNodes = user.getSkills().getAllSkills();
+        SearchQuery searchQuery = SearchQueryUtility
+                .buildBoolQueryAndBoostRatingField_7(skillRatingNodes, DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
+        Assert.assertNotNull(searchQuery);
+        printQuery(searchQuery.getQuery());
+
+        SearchResponse searchResponse = getEsClient().prepareSearch("intellijob")
+                .setQuery(searchQuery.getQuery()).setExplain(true).setSize(Constants.DB_RESULT_LIMIT).get();
+        Assert.assertNotNull(searchResponse);
+        Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
+
+        printFullTextExplain(skillRatingNodes, searchResponse);
+        printEndTest(testName);
+    }
+
+    @Test
+    public void testBuildBoolQueryAndBoostRatingField_8() throws Exception {
+        final String testName = "SKILL RATING SEARCH TEST 8";
+        printStartTest(testName);
+
+        List<SkillRatingNode> skillRatingNodes = user.getSkills().getAllSkills();
+        SearchQuery searchQuery = SearchQueryUtility
+                .buildBoolQueryAndBoostRatingField_8(skillRatingNodes, DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
+        Assert.assertNotNull(searchQuery);
+        printQuery(searchQuery.getQuery());
+
+        SearchResponse searchResponse = getEsClient().prepareSearch("intellijob")
+                .setQuery(searchQuery.getQuery()).setExplain(true).setSize(Constants.DB_RESULT_LIMIT).get();
+        Assert.assertNotNull(searchResponse);
+        Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
+
+        printFullTextExplain(skillRatingNodes, searchResponse);
+        printEndTest(testName);
+    }
+
 
     private void printQuery(QueryBuilder query) {
         System.out.println("----------------------------- QUERY  ----------------------------------------");

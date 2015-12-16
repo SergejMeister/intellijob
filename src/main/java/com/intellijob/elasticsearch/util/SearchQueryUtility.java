@@ -295,6 +295,84 @@ public final class SearchQueryUtility {
     }
 
     /**
+     * @param skillRatingNodes list of user skills with rating.
+     * @param offset           list offset.
+     * @param limit            list limit.
+     *
+     * @return searchQuery
+     */
+    public static SearchQuery buildBoolQueryAndBoostRatingField_7(Collection<SkillRatingNode> skillRatingNodes,
+                                                                  int offset,
+                                                                  int limit) {
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        for (SkillRatingNode skillRatingNode : skillRatingNodes) {
+            float weightValue = (float) skillRatingNode.getRating() * 100;
+            String searchTerm = skillRatingNode.getSkillNode().getName();
+
+            QueryBuilder matchQueryBuilder100 =
+                    QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchTerm).operator(
+                            MatchQueryBuilder.Operator.AND)
+                            .fuzziness(1).minimumShouldMatch("100%");
+            FunctionScoreQueryBuilder functionScoreQuery100 = QueryBuilders.functionScoreQuery(matchQueryBuilder100)
+                    .add(ScoreFunctionBuilders.weightFactorFunction(weightValue));
+            boolQueryBuilder.should(functionScoreQuery100);
+
+            QueryBuilder matchQueryBuilder50 =
+                    QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchTerm).operator(
+                            MatchQueryBuilder.Operator.OR).minimumShouldMatch("80%");
+            FunctionScoreQueryBuilder functionScoreQuery50 = QueryBuilders.functionScoreQuery(matchQueryBuilder50)
+                    .add(ScoreFunctionBuilders.weightFactorFunction(weightValue / 2));
+            boolQueryBuilder.should(functionScoreQuery50);
+        }
+
+        FunctionScoreQueryBuilder functionBuilder = QueryBuilders.functionScoreQuery(boolQueryBuilder);
+        functionBuilder.add(ScoreFunctionBuilders
+                .exponentialDecayFunction(Constants.DB_FIELD_RECEIVED_DATE, DEFAULT_DECAY_FOR_RECEIVED_DATE));
+
+        SearchQuery searchQuery = buildNativeQuery(functionBuilder, offset, limit);
+        return searchQuery;
+    }
+
+    /**
+     * @param skillRatingNodes list of user skills with rating.
+     * @param offset           list offset.
+     * @param limit            list limit.
+     *
+     * @return searchQuery
+     */
+    public static SearchQuery buildBoolQueryAndBoostRatingField_8(Collection<SkillRatingNode> skillRatingNodes,
+                                                                  int offset,
+                                                                  int limit) {
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        for (SkillRatingNode skillRatingNode : skillRatingNodes) {
+            float boostValue = (float) skillRatingNode.getRating() * 10;
+            String searchTerm = skillRatingNode.getSkillNode().getName();
+            QueryBuilder matchQueryBuilder100 = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchTerm)
+                    .operator(MatchQueryBuilder.Operator.AND)
+                    .minimumShouldMatch("100%")
+                    .boost(boostValue);
+            boolQueryBuilder.should(matchQueryBuilder100);
+
+            QueryBuilder matchQueryBuilder50 = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchTerm)
+                    .operator(MatchQueryBuilder.Operator.OR)
+                    .minimumShouldMatch("70%")
+                    .boost(boostValue / 2);
+            boolQueryBuilder.should(matchQueryBuilder50);
+
+//            String script = "_score + 12;";
+//            FunctionScoreQueryBuilder functionScoreQuery = QueryBuilders.functionScoreQuery(matchQueryBuilder)
+//                    .add(ScoreFunctionBuilders.scriptFunction(script).param("rating", boostValue));
+        }
+
+        FunctionScoreQueryBuilder functionBuilder = QueryBuilders.functionScoreQuery(boolQueryBuilder);
+        functionBuilder.add(ScoreFunctionBuilders
+                .exponentialDecayFunction(Constants.DB_FIELD_RECEIVED_DATE, DEFAULT_DECAY_FOR_RECEIVED_DATE));
+
+        SearchQuery searchQuery = buildNativeQuery(functionBuilder, offset, limit);
+        return searchQuery;
+    }
+
+    /**
      * Build boosting query to boost all founded term for specified userSkills.
      * TODO this is not working because a positiveBoostingQuery requires a negativeBoostingQuery(why???)
      * <p>
@@ -308,7 +386,7 @@ public final class SearchQueryUtility {
      *
      * @return searchQuery
      */
-    public static SearchQuery buildBoolQueryAndBoostRatingField_7(Collection<SkillRatingNode> skillRatingNodes,
+    public static SearchQuery buildBoolQueryAndBoostRatingField_9(Collection<SkillRatingNode> skillRatingNodes,
                                                                   int offset, int limit) {
         BoostingQueryBuilder boostingQueryBuilder = QueryBuilders.boostingQuery();
         for (SkillRatingNode skillRatingNode : skillRatingNodes) {
