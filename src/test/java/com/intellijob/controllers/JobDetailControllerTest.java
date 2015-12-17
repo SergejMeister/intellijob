@@ -17,11 +17,14 @@
 package com.intellijob.controllers;
 
 import com.intellijob.BaseTester;
+import com.intellijob.Constants;
 import com.intellijob.domain.JobDetail;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -45,5 +48,16 @@ public class JobDetailControllerTest extends BaseTester {
         List<JobDetail> jobDetails = jobDetailController.extractJobs();
         Assert.assertFalse(jobDetails.isEmpty());
         Assert.assertTrue(jobDetails.size() > 1);
+    }
+
+    @Test
+    public void testDate() {
+        Date newDate = new Date();
+        Date oldDate = new Date();
+
+        LocalDate oldDatePlusOneMonth = LocalDate.from(oldDate.toInstant().atZone(Constants.ZONE_ID_UTC).plusMonths(1));
+        boolean status =
+                oldDatePlusOneMonth.isBefore(LocalDate.from(newDate.toInstant().atZone(Constants.ZONE_ID_UTC)));
+        Assert.assertFalse(status);
     }
 }

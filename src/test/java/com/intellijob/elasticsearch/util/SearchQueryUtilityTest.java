@@ -301,7 +301,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
 
     @Test
     public void testBuildBoolQueryAndBoostRatingField_8() throws Exception {
-        final String testName = "SKILL RATING SEARCH TEST 8";
+        final String testName = "SKILL RATING SEARCH TEST ";
         printStartTest(testName);
 
         List<SkillRatingNode> skillRatingNodes = user.getSkills().getAllSkills();

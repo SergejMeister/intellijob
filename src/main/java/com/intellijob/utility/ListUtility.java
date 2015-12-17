@@ -14,26 +14,26 @@
  * limitations under the License.
  */
 
-package com.intellijob;
+package com.intellijob.utility;
 
-import java.time.ZoneId;
+import java.util.Collection;
 
 /**
- * Constants value.
+ * ListUtility
  */
-public class Constants {
+public final class ListUtility {
 
-    public static final String DB_FIELD_RECEIVED_DATE = "receivedDate";
+    private ListUtility() {
+    }
 
-    public static final String DB_FIELD_CONTENT = "content";
-
-    public static final String DB_FIELD_RATING = "rating";
-
-    public static final String UTC = "UTC";
-
-    public static final String DEFAULT_DATE_PATTERN = "dd.MM.yyyy hh:mm";
-
-    public static final ZoneId ZONE_ID_UTC = ZoneId.of(UTC);
-
-    public static final int DB_RESULT_LIMIT = 50;
+    /**
+     * Check collection if null or empty.
+     *
+     * @param value collection to check.
+     *
+     * @return true if null or empty.
+     */
+    public static boolean isBlank(Collection value) {
+        return value == null || value.size() == 0;
+    }
 }

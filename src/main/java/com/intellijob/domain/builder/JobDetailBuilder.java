@@ -84,6 +84,11 @@ public class JobDetailBuilder {
     private List<Address> addresses;
 
     /**
+     * Content hash.
+     */
+    private String contentHash;
+
+    /**
      * Constructor with job param.
      * <p>
      * set job id.
@@ -181,6 +186,11 @@ public class JobDetailBuilder {
         return this;
     }
 
+    public JobDetailBuilder setContentHash(String contentHash) {
+        this.contentHash = contentHash;
+        return this;
+    }
+
     public JobDetailBuilder addAddresses(List<AddressSpan> addressSpans) {
         if (addresses == null) {
             addresses = new ArrayList<>();
@@ -206,6 +216,7 @@ public class JobDetailBuilder {
         jobDetail.setName(name);
         jobDetail.setContactPersons(contactPersons);
         jobDetail.setAddresses(addresses);
+        jobDetail.setContentHash(contentHash);
         return jobDetail;
     }
 }

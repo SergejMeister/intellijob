@@ -58,9 +58,30 @@ public class JobDetail extends BaseDocument {
     private String content;
 
     /**
+     * Hash of plain text from content.
+     */
+    @Indexed(unique = true)
+    private String contentHash;
+
+    /**
+     * Flag is read.
+     */
+    @Indexed
+    private Boolean read;
+
+
+    /**
+     * Flag is favorite.
+     */
+    @Indexed
+    private Boolean favorite;
+
+
+    /**
      * List of contact persons.
      */
     private List<ContactPerson> contactPersons;
+
 
     private List<Address> addresses;
 
@@ -81,6 +102,8 @@ public class JobDetail extends BaseDocument {
     public JobDetail() {
         setContactPersons(Collections.emptyList());
         setAddresses(Collections.emptyList());
+        setRead(Boolean.FALSE);
+        setFavorite(Boolean.FALSE);
     }
 
     /**
@@ -228,6 +251,60 @@ public class JobDetail extends BaseDocument {
      */
     public void setJobId(String jobId) {
         this.jobId = jobId;
+    }
+
+    /**
+     * Return hash value of content.
+     *
+     * @return content hash.
+     */
+    public String getContentHash() {
+        return contentHash;
+    }
+
+    /**
+     * Sets hash value of content.
+     *
+     * @param contentHash hash.
+     */
+    public void setContentHash(String contentHash) {
+        this.contentHash = contentHash;
+    }
+
+    /**
+     * Return read flag.
+     *
+     * @return true, if mark as read, otherwise false.
+     */
+    public Boolean isRead() {
+        return read;
+    }
+
+    /**
+     * Sets read flag.
+     *
+     * @param read favorite.
+     */
+    public void setRead(Boolean read) {
+        this.read = read;
+    }
+
+    /**
+     * Return favorite flag.
+     *
+     * @return true, if mark as favorite, otherwise false.
+     */
+    public Boolean isFavorite() {
+        return favorite;
+    }
+
+    /**
+     * Sets favorite flag.
+     *
+     * @param favorite favorite.
+     */
+    public void setFavorite(Boolean favorite) {
+        this.favorite = favorite;
     }
 
     public List<Address> getAddresses() {

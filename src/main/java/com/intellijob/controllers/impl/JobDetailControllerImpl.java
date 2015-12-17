@@ -38,6 +38,8 @@ import com.intellijob.exceptions.BaseException;
 import com.intellijob.exceptions.DocumentNotFoundException;
 import com.intellijob.repository.JobDetailRepository;
 import com.intellijob.repository.JobRepository;
+import com.intellijob.utility.HashUtility;
+import com.intellijob.utility.ListUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,8 +51,10 @@ import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -84,6 +88,10 @@ public class JobDetailControllerImpl implements JobDetailController {
     @Override
     public JobDetail save(JobDetail jobDetail) {
         jobDetailRepository.save(jobDetail);
+
+        //always if you save the job create an index.
+        createIndex(jobDetail);
+
         return jobDetail;
     }
 
@@ -93,7 +101,11 @@ public class JobDetailControllerImpl implements JobDetailController {
     @Override
     public JobDetail extractJobDetail(Job job) {
         String htmlContent = job.getContent();
-        String plainText = new HtmlParser(htmlContent).toPlainText().getContent();
+
+        String plainText = htmlToPlaintText(htmlContent, job.getJobLink().getHref());
+
+        //build hash of plain text from content
+        String contentHash = HashUtility.hashAsString(plainText);
 
         //Find contact persons in text
         List<ContactPersonSpan> contactPersonSpans = ModelFacade.getContactPersonFinder().find(plainText);
@@ -112,8 +124,8 @@ public class JobDetailControllerImpl implements JobDetailController {
                         "www.caribbeanjobs.com", "www.nijobs.com", "www.jobs.lu", "www.pnet.co.za"));
         List<String> foundedHomepages = new HtmlParser(htmlContent, htmlParseFilter).toPlainText().parse().getUrls();
 
-        return new JobDetailBuilder(job).setApplicationMail(mails).setHomepages(
-                foundedHomepages).addContactPersons(contactPersonSpans).addAddresses(addressSpans).build();
+        return new JobDetailBuilder(job).setApplicationMail(mails).setHomepages(foundedHomepages)
+                .addContactPersons(contactPersonSpans).addAddresses(addressSpans).setContentHash(contentHash).build();
     }
 
     /**
@@ -122,9 +134,62 @@ public class JobDetailControllerImpl implements JobDetailController {
     @Override
     public JobDetail extractJobDetailAndSave(Job job) {
         JobDetail jobDetail = extractJobDetail(job);
-        JobDetail persistedJobDetail = save(jobDetail);
-        jobController.setExtractedFlag(job, Boolean.TRUE);
-        return persistedJobDetail;
+
+        JobDetail similarityJob = jobDetailRepository.findByContentHash(jobDetail.getContentHash());
+        if (similarityJob == null) {
+            JobDetail persistedJobDetail = save(jobDetail);
+            jobController.setExtractedFlag(job, Boolean.TRUE);
+            return persistedJobDetail;
+        } else {
+            JobDetail mergedJobDetail = mergeJobDetails(jobDetail, similarityJob);
+            jobDetailRepository.save(mergedJobDetail);
+            jobController.setExtractedFlag(job, Boolean.TRUE);
+            return mergedJobDetail;
+        }
+    }
+
+    private JobDetail mergeJobDetails(JobDetail newJobDetail, JobDetail oldJobDetail) {
+        //set old id
+        newJobDetail.setId(oldJobDetail.getId());
+        newJobDetail.setFavorite(oldJobDetail.isFavorite());
+
+        if (ListUtility.isBlank(newJobDetail.getAddresses())) {
+            newJobDetail.setAddresses(oldJobDetail.getAddresses());
+        }
+
+        if (ListUtility.isBlank(newJobDetail.getContactPersons())) {
+            newJobDetail.setContactPersons(oldJobDetail.getContactPersons());
+        }
+
+        if (ListUtility.isBlank(newJobDetail.getHomepages())) {
+            newJobDetail.setHomepages(oldJobDetail.getHomepages());
+        }
+
+        if (newJobDetail.getApplicationMail() == null) {
+            newJobDetail.setApplicationMail(oldJobDetail.getApplicationMail());
+        }
+
+        if (!isTimeToOverwrite(newJobDetail.getReceivedDate(), oldJobDetail.getReceivedDate())) {
+            //don't overwrite, overwrite means marking as not read
+            // if read is false, this jobDetail will be included into search engine.
+            newJobDetail.setRead(oldJobDetail.isRead());
+        }
+
+        return newJobDetail;
+    }
+
+    /**
+     * Check old date + 1 month is before new date.
+     *
+     * @param newReceivedDate new date.
+     * @param oldReceivedDate old date.
+     *
+     * @return true if date interval more than one month.
+     */
+    private boolean isTimeToOverwrite(Date newReceivedDate, Date oldReceivedDate) {
+        LocalDate oldDatePlusOneMonth =
+                LocalDate.from(oldReceivedDate.toInstant().atZone(Constants.ZONE_ID_UTC).plusMonths(1));
+        return oldDatePlusOneMonth.isBefore(LocalDate.from(newReceivedDate.toInstant().atZone(Constants.ZONE_ID_UTC)));
     }
 
     /**
@@ -135,11 +200,18 @@ public class JobDetailControllerImpl implements JobDetailController {
         List<JobDetail> result = new ArrayList<>();
         for (Job job : jobs) {
             JobDetail jobDetail = extractJobDetail(job);
-            try {
-                jobDetailRepository.save(jobDetail);
-                result.add(jobDetail);
-            } catch (DuplicateKeyException dke) {
-                LOG.debug("Duplicated Link Exception. Should not be happen! Link: {}", dke.getMessage());
+            JobDetail similarityJob = jobDetailRepository.findByContentHash(jobDetail.getContentHash());
+            if (similarityJob == null) {
+                try {
+                    jobDetailRepository.save(jobDetail);
+                    result.add(jobDetail);
+                } catch (DuplicateKeyException dke) {
+                    LOG.debug("Duplicated Key Exception. Should not be happen! Link: {}", dke.getMessage());
+                }
+            } else {
+                JobDetail mergedJobDetail = mergeJobDetails(jobDetail, similarityJob);
+                jobDetailRepository.save(mergedJobDetail);
+                result.add(mergedJobDetail);
             }
         }
         jobController.setExtractedFlag(jobs, Boolean.TRUE);
@@ -263,23 +335,36 @@ public class JobDetailControllerImpl implements JobDetailController {
     @Override
     public void createElasticsearchIndexes() {
         List<JobDetail> jobDetails = jobDetailRepository.findAll();
-        for (JobDetail jobDetail : jobDetails) {
-            EsJobDetail esJobDetail = new EsJobDetail();
-            esJobDetail.setId(jobDetail.getId());
-            esJobDetail.setName(jobDetail.getName());
-            esJobDetail.setJobId(jobDetail.getJobId());
-            esJobDetail.setAddresses(jobDetail.getAddresses());
-            esJobDetail.setApplicationMail(jobDetail.getApplicationMail());
-            esJobDetail.setContactPersons(jobDetail.getContactPersons());
-            esJobDetail.setHomepages(jobDetail.getHomepages());
-            esJobDetail.setLink(jobDetail.getLink());
-            esJobDetail.setReceivedDate(jobDetail.getReceivedDate());
+        jobDetails.forEach(this::createIndex);
+    }
 
-            String plainText = htmlToPlaintText(jobDetail.getContent(), jobDetail.getLink());
-            esJobDetail.setContent(plainText);
-
-            esJobDetailRepository.index(esJobDetail);
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public EsJobDetail createIndex(JobDetail jobDetail) {
+        if (esJobDetailRepository.exists(jobDetail.getId())) {
+            esJobDetailRepository.delete(jobDetail.getId());
         }
+
+        EsJobDetail esJobDetail = new EsJobDetail();
+        esJobDetail.setId(jobDetail.getId());
+        esJobDetail.setName(jobDetail.getName());
+        esJobDetail.setJobId(jobDetail.getJobId());
+        esJobDetail.setAddresses(jobDetail.getAddresses());
+        esJobDetail.setApplicationMail(jobDetail.getApplicationMail());
+        esJobDetail.setContactPersons(jobDetail.getContactPersons());
+        esJobDetail.setHomepages(jobDetail.getHomepages());
+        esJobDetail.setLink(jobDetail.getLink());
+        esJobDetail.setReceivedDate(jobDetail.getReceivedDate());
+        esJobDetail.setContentHash(jobDetail.getContentHash());
+        esJobDetail.setRead(jobDetail.isRead());
+        esJobDetail.setFavorite(jobDetail.isFavorite());
+
+        String plainText = htmlToPlaintText(jobDetail.getContent(), jobDetail.getLink());
+        esJobDetail.setContent(plainText);
+
+        return esJobDetailRepository.index(esJobDetail);
     }
 
     /**

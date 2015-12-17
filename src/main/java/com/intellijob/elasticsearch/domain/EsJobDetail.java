@@ -16,8 +16,10 @@
 
 package com.intellijob.elasticsearch.domain;
 
+import com.intellijob.Constants;
 import com.intellijob.domain.Address;
 import com.intellijob.domain.ContactPerson;
+import com.intellijob.elasticsearch.EsConstants;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -29,12 +31,14 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * This document represents domain object <code>JobDetail</code>.
+ * This document represents domain object <code>JobDetail</code> in elasticsearch.
  */
-//TODO create new index jobdetails of type jobdetail
-@Document(indexName = "intellijob", type = "jobDetail", shards = 1, replicas = 0)
+@Document(indexName = EsConstants.INDEX_INTELLIJOB, type = EsConstants.TYPE_JOB_DETAILS, shards = 1, replicas = 0)
 public class EsJobDetail {
 
+    /**
+     * This id represents the id of jobDetails.
+     */
     @Id
     private String id;
 
@@ -44,8 +48,9 @@ public class EsJobDetail {
     @Field(
             type = FieldType.Date,
             index = FieldIndex.not_analyzed,
-            store = true,
-            format = DateFormat.custom, pattern = "dd.MM.yyyy hh:mm"
+            format = DateFormat.custom,
+            pattern = Constants.DEFAULT_DATE_PATTERN,
+            store = true
     )
     private Date receivedDate;
 
@@ -62,6 +67,10 @@ public class EsJobDetail {
     /**
      * Link to the job page.
      */
+    @Field(
+            type = FieldType.String,
+            index = FieldIndex.not_analyzed
+    )
     private String link;
 
     /**
@@ -69,26 +78,41 @@ public class EsJobDetail {
      */
     private String jobId;
 
-
-    //TODO replace analyzer with german
-//    @Field(
-//            type = FieldType.String,
-//            index = FieldIndex.analyzed,
-//            searchAnalyzer = "german",
-//            indexAnalyzer = "german",
-//            store = true
-//    )
     /**
      * Job content.
      */
     @Field(
             type = FieldType.String,
             index = FieldIndex.analyzed,
-            searchAnalyzer = "standard",
-            indexAnalyzer = "standard",
+            searchAnalyzer = "german",
+            indexAnalyzer = "german",
             store = true
     )
     private String content;
+
+    @Field(
+            type = FieldType.String,
+            index = FieldIndex.not_analyzed
+    )
+    private String contentHash;
+
+    /**
+     * Flag is read.
+     */
+    @Field(
+            type = FieldType.Boolean,
+            index = FieldIndex.not_analyzed
+    )
+    private Boolean read;
+
+    /**
+     * Flag is favorite.
+     */
+    @Field(
+            type = FieldType.Boolean,
+            index = FieldIndex.not_analyzed
+    )
+    private Boolean favorite;
 
     /**
      * List of contact persons.
@@ -185,5 +209,29 @@ public class EsJobDetail {
 
     public void setReceivedDate(Date receivedDate) {
         this.receivedDate = receivedDate;
+    }
+
+    public String getContentHash() {
+        return contentHash;
+    }
+
+    public void setContentHash(String contentHash) {
+        this.contentHash = contentHash;
+    }
+
+    public Boolean getRead() {
+        return read;
+    }
+
+    public void setRead(Boolean read) {
+        this.read = read;
+    }
+
+    public Boolean getFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(Boolean favorite) {
+        this.favorite = favorite;
     }
 }

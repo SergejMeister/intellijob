@@ -93,46 +93,6 @@ public interface JobDetailController {
      */
     List<JobDetail> findAll();
 
-//    /**
-//     * Returns page of jobDetail.
-//     *
-//     * @param pageIndex page index.
-//     * @param limit     limit items per page.
-//     *
-//     * @return page of jobDetail.
-//     */
-//    Page<JobDetail> findPage(int pageIndex, int limit);
-
-//    /**
-//     * Returns page of jobDetail.
-//     *
-//     * @param pageIndex page index.
-//     * @param limit     limit items per page.
-//     *
-//     * @return page of jobDetail.
-//     */
-//    Page<EsJobDetail> findAndSort(User user, int pageIndex, int limit);
-
-//    /**
-//     * Returns page of jobDetail.
-//     *
-//     * @param pageIndex page index.
-//     * @param limit     limit items per page.
-//     *
-//     * @return page of jobDetail.
-//     */
-//    Page<EsJobDetail> findAndSort(User user, String searchFilter, int pageIndex, int limit);
-
-//    /**
-//     * Returns page of jobDetail.
-//     *
-//     * @param pageIndex page index.
-//     * @param limit     limit items per page.
-//     *
-//     * @return page of jobDetail.
-//     */
-//    Page<EsJobDetail> findAndSort(User user, SearchEngineEnum searchEngine, int pageIndex, int limit);
-
     /**
      * Returns jobDetail for specified id.
      *
@@ -164,6 +124,18 @@ public interface JobDetailController {
      * Create indexes of all JobDetails.
      */
     void createElasticsearchIndexes();
+
+    /**
+     * Create an index of jobDetail.
+     * <p>
+     * If index exist, that remove index and crete new index.
+     * If index doesn't exist, than create a new index.
+     *
+     * @param jobDetail jobDetail.
+     *
+     * @return created index.
+     */
+    EsJobDetail createIndex(JobDetail jobDetail);
 
     /**
      * Find and Sort all JobDetails for specified searchModel.

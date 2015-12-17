@@ -14,26 +14,25 @@
  * limitations under the License.
  */
 
-package com.intellijob;
-
-import java.time.ZoneId;
+package com.intellijob.elasticsearch;
 
 /**
- * Constants value.
+ * Constants for elastic search.
  */
-public class Constants {
+public final class EsConstants {
 
-    public static final String DB_FIELD_RECEIVED_DATE = "receivedDate";
 
-    public static final String DB_FIELD_CONTENT = "content";
+    /**
+     * Index represents a database name in elasticsearch.
+     */
+    public static final String INDEX_INTELLIJOB = "intellijob";
 
-    public static final String DB_FIELD_RATING = "rating";
+    /**
+     * Type represents a collection name in elasticsearch.
+     */
+    public static final String TYPE_JOB_DETAILS = "jobDetails";
 
-    public static final String UTC = "UTC";
+    private EsConstants() {
+    }
 
-    public static final String DEFAULT_DATE_PATTERN = "dd.MM.yyyy hh:mm";
-
-    public static final ZoneId ZONE_ID_UTC = ZoneId.of(UTC);
-
-    public static final int DB_RESULT_LIMIT = 50;
 }
