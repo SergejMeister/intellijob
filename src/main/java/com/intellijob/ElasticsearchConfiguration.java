@@ -33,26 +33,35 @@ public class ElasticsearchConfiguration {
 
     private static final Logger LOG = Logger.getLogger(ElasticsearchConfiguration.class);
 
-    @Value("${elasticsearch.port}")
-    private int port;
-
     @Value("${elasticsearch.host}")
-    private String hostname;
+    private String host;
 
     @Value("${elasticsearch.clusterName}")
     private String clusterName;
 
+    @Value("${elasticsearch.http.enabled}")
+    private boolean httpEnabled;
+
+    @Value("${elasticsearch.http.cors.enabled}")
+    private boolean httpCorsEnabled;
+
     private Node node;
 
     /**
-     * Init elasticsearch client and returns ElasticsearchTemplate for Cluster intelliJob.
+     * Init elasticsearch client and returns ElasticsearchTemplate for Cluster civs.
      *
      * @return default ElasticsearchTemplate for Cluster intelliJob.
      */
     @Bean
     public ElasticsearchTemplate elasticsearchTemplate() {
         LOG.info("Start elasticsearch server");
-        node = NodeBuilder.nodeBuilder().clusterName(clusterName).local(true).node();
+        NodeBuilder nodeBuilder = new NodeBuilder();
+        nodeBuilder.clusterName(clusterName).local(false);
+        nodeBuilder.settings().put("http.enabled", httpEnabled);
+        nodeBuilder.settings().put("http.cors.enabled", httpCorsEnabled);
+        nodeBuilder.settings().put("network.host", host);
+
+        node = nodeBuilder.node();
         return new ElasticsearchTemplate(node.client());
     }
 
