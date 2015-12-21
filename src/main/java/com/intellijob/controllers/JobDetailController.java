@@ -145,4 +145,24 @@ public interface JobDetailController {
      * @return page of JobDetails.
      */
     Page<EsJobDetail> findAndSort(SearchModel searchModel);
+
+    /**
+     * Update all jobDetails which ids are specified in list with read state.
+     *
+     * Update jobDetail read state in mongo and indexes in elasticsearch.
+     *
+     * @param ids  list of jobDetail id.
+     * @param read read state.
+     */
+    void updateReadState(List<String> ids, Boolean read);
+
+    /**
+     * Update jobDetail state with specified state.
+     *
+     * Update jobDetail read state in mongo and indexes in elasticsearch.
+     *
+     * @param id jobDetail id.
+     * @param read read state.
+     */
+    void updateReadState(String id, Boolean read);
 }

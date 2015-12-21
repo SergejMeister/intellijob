@@ -53,7 +53,8 @@ public interface JobDetailRepository extends MongoRepository<JobDetail, String> 
      *
      * @return count.
      */
-    @Query(value = "{'contactPersons': {$size: 0}}", count = true) Long countEmptyContactPersons();
+    @Query(value = "{'contactPersons': {$size: 0}}", count = true)
+    Long countEmptyContactPersons();
 
     /**
      * Returns jobDetail for specified contentHash.
@@ -74,7 +75,8 @@ public interface JobDetailRepository extends MongoRepository<JobDetail, String> 
      *
      * @return count.
      */
-    @Query(value = "{'contactPersons': {$exists:true}, $where:'this.contactPersons.length>0'}}", count = true) Long countNotEmptyContactPersons();
+    @Query(value = "{'contactPersons': {$exists:true}, $where:'this.contactPersons.length>0'}}", count = true)
+    Long countNotEmptyContactPersons();
 
     /**
      * Get count of jobDetail with empty list of addresses.
@@ -86,5 +88,6 @@ public interface JobDetailRepository extends MongoRepository<JobDetail, String> 
      *
      * @return count.
      */
-    @Query(value = "{'addresses': {$size: 0}}", count = true) Long countEmptyAddress();
+    @Query(value = "{'addresses': {$size: 0}}", count = true)
+    Long countEmptyAddress();
 }

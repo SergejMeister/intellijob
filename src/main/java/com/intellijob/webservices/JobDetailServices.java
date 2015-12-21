@@ -77,12 +77,16 @@ public class JobDetailServices extends BaseServices {
     public @ResponseBody ResponseJobDetailTableData getJobDetails(@PathVariable int offset, @PathVariable int limit,
                                                                   @RequestParam(value = "searchFilter", required = false) String searchFilter,
                                                                   @RequestParam(value = "searchData", required = false) String searchData)
-                                                                  throws UserNotFoundException {
+            throws UserNotFoundException {
         User user = userController.getUniqueUser();
 
         SearchModelBuilder searchModelBuilder = new SearchModelBuilder(user).setOffset(offset).setLimit(limit);
-        if(searchFilter != null) searchModelBuilder.setSearchEngine(searchFilter);
-        if(searchData !=null) searchModelBuilder.setSearchData(searchData);
+        if (searchFilter != null) {
+            searchModelBuilder.setSearchEngine(searchFilter);
+        }
+        if (searchData != null) {
+            searchModelBuilder.setSearchData(searchData);
+        }
         SearchModel searchModel = searchModelBuilder.build();
 
         Page<EsJobDetail> jobDetailsPage = jobDetailController.findAndSort(searchModel);
@@ -109,6 +113,20 @@ public class JobDetailServices extends BaseServices {
     public @ResponseBody ResponseJobDetailData deleteJobDetail(@PathVariable String jobDetailId) throws Exception {
         jobDetailController.deleteById(jobDetailId);
         return new ResponseJobDetailData(jobDetailId);
+    }
+
+    @RequestMapping(value = Endpoints.JOBDETAILS_BY_ID, method = RequestMethod.PUT)
+    public ResponseEntity updateReadState(@PathVariable String jobDetailId,
+                                          @RequestParam(value = "read") Boolean read) {
+        jobDetailController.updateReadState(jobDetailId, read);
+        return ResponseEntity.accepted().build();
+    }
+
+    @RequestMapping(value = Endpoints.JOBDETAILS, method = RequestMethod.PUT)
+    public ResponseEntity updateReadState(@RequestParam(value = "ids") List<String> ids,
+                                          @RequestParam(value = "read") Boolean read) {
+        jobDetailController.updateReadState(ids, read);
+        return ResponseEntity.accepted().build();
     }
 
     @RequestMapping(value = Endpoints.ES_JOBDEATAILS_INDEX, method = RequestMethod.PUT)

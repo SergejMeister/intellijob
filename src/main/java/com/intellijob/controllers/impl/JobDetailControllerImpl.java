@@ -251,6 +251,32 @@ public class JobDetailControllerImpl implements JobDetailController {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void updateReadState(List<String> ids, Boolean read) {
+        Iterable<JobDetail> jobDetails = jobDetailRepository.findAll(ids);
+        for (JobDetail jobDetail : jobDetails) {
+            jobDetail.setRead(read);
+        }
+        jobDetailRepository.save(jobDetails);
+
+        Iterable<EsJobDetail> indexes = esJobDetailRepository.findAll(ids);
+        for (EsJobDetail index : indexes) {
+            index.setRead(read);
+        }
+        esJobDetailRepository.save(indexes);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void updateReadState(String id, Boolean read) {
+        updateReadState(Arrays.asList(id), read);
+    }
+
+    /**
      * Use elasticsearch to find jobDetail matches to the searchModel.
      *
      * @param searchModel search model.
