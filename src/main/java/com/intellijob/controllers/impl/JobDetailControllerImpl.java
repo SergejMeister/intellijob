@@ -313,8 +313,8 @@ public class JobDetailControllerImpl implements JobDetailController {
     @Override
     public JobDetail findAndConvertContentToText(String jobDetailId) throws BaseException {
         JobDetail foundedJobDetail = findById(jobDetailId);
-        String htmlContent = foundedJobDetail.getContent();
-        String plainText = new HtmlParser(htmlContent).toPlainText().getContent();
+        String plainText = htmlToPlaintText(foundedJobDetail.getContent(), foundedJobDetail.getLink());
+        //overwrite html content with plain text
         foundedJobDetail.setContent(plainText);
         return foundedJobDetail;
     }
