@@ -47,7 +47,7 @@ angular.module('intelliJob')
                  */
                 jobLinkServices.downloadById = function (jobLinkId) {
                     var downloadUrl = apiJobDownload + "/" + jobLinkId + "/download";
-                    var emptyPayLoad = {}
+                    var emptyPayLoad = {};
                     return $http.post(downloadUrl, emptyPayLoad);
                 };
 
@@ -58,7 +58,7 @@ angular.module('intelliJob')
                  */
                 jobLinkServices.downloadAll = function () {
                     var downloadUrl = apiJobDownload + "/download";
-                    var emptyPayLoad = {}
+                    var emptyPayLoad = {};
                     return $http.post(downloadUrl, emptyPayLoad);
                 };
 

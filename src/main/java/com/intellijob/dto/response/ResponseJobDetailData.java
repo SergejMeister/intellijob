@@ -108,6 +108,16 @@ public class ResponseJobDetailData extends ResponseData {
      */
     private String jobId;
 
+    /**
+     * Read flag.
+     */
+    private boolean read;
+
+    /**
+     * Favorite flag.
+     */
+    private boolean favorite;
+
     public ResponseJobDetailData(String jobDetailId) {
         setJobDetailId(jobDetailId);
     }
@@ -119,6 +129,8 @@ public class ResponseJobDetailData extends ResponseData {
         setReceivedDate(jobDetail.getReceivedDate());
         setLink(jobDetail.getLink());
         setApplicationMail(jobDetail.getApplicationMail());
+        setRead(jobDetail.isRead());
+        setFavorite(jobDetail.isFavorite());
         this.contactPerson = initContactPersons(jobDetail.getContactPersons());
         this.address = initAddresses(jobDetail.getAddresses());
         this.homepage = initHomePage(jobDetail.getHomepages());
@@ -138,6 +150,8 @@ public class ResponseJobDetailData extends ResponseData {
         setReceivedDate(jobDetail.getReceivedDate());
         setLink(jobDetail.getLink());
         setApplicationMail(jobDetail.getApplicationMail());
+        setRead(jobDetail.getRead());
+        setFavorite(jobDetail.getFavorite());
         this.contactPerson = initContactPersons(jobDetail.getContactPersons());
         this.address = initAddresses(jobDetail.getAddresses());
         this.homepage = initHomePage(jobDetail.getHomepages());
@@ -352,5 +366,21 @@ public class ResponseJobDetailData extends ResponseData {
      */
     public void setJobId(String jobId) {
         this.jobId = jobId;
+    }
+
+    public boolean isRead() {
+        return read;
+    }
+
+    public void setRead(boolean read) {
+        this.read = read;
+    }
+
+    public boolean isFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
     }
 }

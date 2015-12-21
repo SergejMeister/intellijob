@@ -70,6 +70,24 @@ angular.module('intelliJob')
                 };
 
                 /**
+                 * Update one read state by id.
+                 *
+                 * @returns {HttpPromise}
+                 */
+                jobDetailServices.updateOneReadState = function (jobDetailId, read) {
+                    return $http.put(urlBase + '/' + jobDetailId, {}, {params: {read: read}});
+                };
+
+                /**
+                 * Update all read state by ids.
+                 *
+                 * @returns {HttpPromise}
+                 */
+                jobDetailServices.updateAllReadState = function (jobDetailIds, read) {
+                    return $http.put(urlBase, {}, {params: {ids: jobDetailIds, read: read}});
+                };
+
+                /**
                  * Get job Detail view model.
                  *
                  * @returns {HttpPromise}

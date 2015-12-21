@@ -85,6 +85,51 @@ intelliJobControllers.controller(
                 };
 
                 /**
+                 * Update read state.
+                 */
+                $scope.updateOneReadState = function (jobDetailId, newReadState) {
+                    JobDetailServices.updateOneReadState(jobDetailId, newReadState).success(function (response) {
+                        //var jobDetailArr = eval($scope.jobDetails);
+                        for (var i = 0; i < $scope.jobDetails.length; i++) {
+                            if ($scope.jobDetails[i].jobDetailId === jobDetailId) {
+                                $scope.jobDetails[i].read = newReadState;
+                            }
+                        }
+                        if (newReadState) {
+                            $rootScope.success = 'Mark as read!';
+                        } else {
+                            $rootScope.success = $rootScope.success = 'Mark as unread!';
+                        }
+                    }).error(function (error) {
+                        console.log(error);
+                    });
+                };
+
+                /**
+                 * Update read state.
+                 */
+                $scope.updateAllReadState = function (newReadState) {
+                    var ids = [];
+                    for (var i = 0; i < $scope.jobDetails.length; i++) {
+                        ids.push($scope.jobDetails[i].jobDetailId);
+                    }
+                    JobDetailServices.updateAllReadState(ids, newReadState).success(function (response) {
+                        //var jobDetailArr = eval($scope.jobDetails);
+                        for (var i = 0; i < $scope.jobDetails.length; i++) {
+                                $scope.jobDetails[i].read = newReadState;
+                        }
+                        if (newReadState) {
+                            $rootScope.success = 'All mark as read!';
+                        } else {
+                            $rootScope.success = $rootScope.success = 'All mark as unread!';
+                        }
+                    }).error(function (error) {
+                        console.log(error);
+                    });
+                };
+
+
+                /**
                  * Delete job detail.
                  */
                 $scope.deleteJobDetail = function (jobDetailId) {
