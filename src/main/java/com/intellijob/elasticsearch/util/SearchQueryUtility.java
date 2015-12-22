@@ -275,6 +275,7 @@ public final class SearchQueryUtility {
                                                                   int offset,
                                                                   int limit) {
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        boolQueryBuilder.must(QueryBuilders.termQuery(Constants.DB_FIELD_READ, Boolean.FALSE));
         for (SkillRatingNode skillRatingNode : skillRatingNodes) {
             float boostValue = (float) skillRatingNode.getRating() * 10;
             String searchTerm = skillRatingNode.getSkillNode().getName();
@@ -408,20 +409,19 @@ public final class SearchQueryUtility {
 
     private static QueryBuilder generateDefaultQueryBuilderForFullTextSearch(String searchOriginData) {
         String[] searchDataArray = searchOriginData.split(OR_SEPARATOR);
-        QueryBuilder builder;
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        boolQueryBuilder.must(QueryBuilders.termQuery(Constants.DB_FIELD_READ, Boolean.FALSE));
         if (searchDataArray.length == 1) {
-            builder = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchOriginData.trim())
-                    .operator(MatchQueryBuilder.Operator.AND);
+            boolQueryBuilder.should(QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchOriginData.trim())
+                    .operator(MatchQueryBuilder.Operator.AND));
         } else {
-            BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
             for (String searchData : searchDataArray) {
                 QueryBuilder matchQuery = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchData.trim())
                         .operator(MatchQueryBuilder.Operator.AND).maxExpansions(DEFAULT_EXPANSION_VALUE);
                 boolQueryBuilder.should(matchQuery);
             }
-            builder = boolQueryBuilder;
         }
 
-        return builder;
+        return boolQueryBuilder;
     }
 }

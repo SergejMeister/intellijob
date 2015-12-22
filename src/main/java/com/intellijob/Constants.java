@@ -27,6 +27,8 @@ public class Constants {
 
     public static final String DB_FIELD_CONTENT = "content";
 
+    public static final String DB_FIELD_READ = "read";
+
     public static final String DB_FIELD_RATING = "rating";
 
     public static final String UTC = "UTC";

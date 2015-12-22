@@ -24,6 +24,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -48,6 +49,22 @@ public class JobDetailControllerTest extends BaseTester {
         List<JobDetail> jobDetails = jobDetailController.extractJobs();
         Assert.assertFalse(jobDetails.isEmpty());
         Assert.assertTrue(jobDetails.size() > 1);
+    }
+
+    @Test
+    public void testUpdateRead() {
+        if (!RUNNING_LIVE) {
+            Assert.assertTrue("Don't run this test.", Boolean.TRUE);
+            return;
+        }
+
+        List<JobDetail> jobDetails = jobDetailController.findAll();
+        List<String> ids = new ArrayList<>();
+        for(JobDetail jobDetail : jobDetails){
+            ids.add(jobDetail.getId());
+        }
+
+        jobDetailController.updateReadState(ids,Boolean.FALSE);
     }
 
     @Test
