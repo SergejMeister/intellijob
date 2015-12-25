@@ -21,6 +21,8 @@ import com.intellijob.domain.skills.SkillKnowledge;
 import com.intellijob.domain.skills.SkillLanguage;
 import com.intellijob.domain.skills.SkillNode;
 import com.intellijob.domain.skills.SkillPersonalStrength;
+import com.intellijob.elasticsearch.domain.EsAutocompleteLanguage;
+import com.intellijob.elasticsearch.repository.EsAutocompleteLanguageRepository;
 import com.intellijob.models.SkillViewModel;
 import com.intellijob.repository.skills.SkillKnowledgeRepository;
 import com.intellijob.repository.skills.SkillLanguageRepository;
@@ -35,6 +37,9 @@ import java.util.List;
  */
 @Controller
 public class SkillControllerImpl implements SkillController {
+
+    @Autowired
+    private EsAutocompleteLanguageRepository esAutocompleteLanguageRepository;
 
     @Autowired
     private SkillLanguageRepository skillLanguageRepository;
@@ -88,5 +93,27 @@ public class SkillControllerImpl implements SkillController {
         skillViewModel.setKnowledges(knowledges);
 
         return skillViewModel;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void createAutocompleteLanguageIndexes() {
+        List<SkillNode> supportedLanguages = getAllLanguages();
+        supportedLanguages.forEach(this::createAutocompleteLanguageIndex);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public EsAutocompleteLanguage createAutocompleteLanguageIndex(SkillNode skillNode) {
+        if (esAutocompleteLanguageRepository.exists(skillNode.getId())) {
+            esAutocompleteLanguageRepository.delete(skillNode.getId());
+        }
+        EsAutocompleteLanguage autocompleteLanguage =
+                new EsAutocompleteLanguage(skillNode.getId(), skillNode.getLocalizableObject().getLabel());
+        return esAutocompleteLanguageRepository.index(autocompleteLanguage);
     }
 }

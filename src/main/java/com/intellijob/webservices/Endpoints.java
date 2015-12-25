@@ -48,5 +48,6 @@ public class Endpoints {
     public static final String AUDIT_PAGING = AUDIT + "/{pageIndex}/{limit}";
     public static final String AUDIT_BY_ID = AUDIT + "/{auditId}";
     public static final String ES_JOBDEATAILS_INDEX = API + "/elastic/jobdetails/indexes";
+    public static final String ES_AUTOCOMPLETE_LANGUAGE_INDEX = API + "/elastic/autocomplete/language/indexes";
 
 }

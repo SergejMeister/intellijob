@@ -17,6 +17,7 @@
 package com.intellijob.controllers;
 
 import com.intellijob.domain.skills.SkillNode;
+import com.intellijob.elasticsearch.domain.EsAutocompleteLanguage;
 import com.intellijob.models.SkillViewModel;
 
 import java.util.List;
@@ -55,4 +56,20 @@ public interface SkillController {
      * @return full SkillViewModel.
      */
     SkillViewModel getSkillViewModel();
+
+    /**
+     * Create elasticsearch indexes for autocomplete field language.
+     * <p>
+     * Read all supported languages in database and create for their a elasticsearch index.
+     */
+    void createAutocompleteLanguageIndexes();
+
+    /**
+     * Create a autocomplete language index for specified skillNode.
+     *
+     * @param skillNode skill node.
+     *
+     * @return create autocomplete language index.
+     */
+    EsAutocompleteLanguage createAutocompleteLanguageIndex(SkillNode skillNode);
 }

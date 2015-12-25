@@ -128,10 +128,4 @@ public class JobDetailServices extends BaseServices {
         jobDetailController.updateReadState(ids, read);
         return ResponseEntity.accepted().build();
     }
-
-    @RequestMapping(value = Endpoints.ES_JOBDEATAILS_INDEX, method = RequestMethod.PUT)
-    public ResponseEntity createElasticIndexes() {
-        jobDetailController.createElasticsearchIndexes();
-        return ResponseEntity.ok().build();
-    }
 }

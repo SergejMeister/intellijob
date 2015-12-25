@@ -28,9 +28,21 @@ public final class EsConstants {
     public static final String INDEX_INTELLIJOB = "intellijob";
 
     /**
+     * Index represents a database name in elasticsearch.
+     * <p>
+     * This index include data only for  autocomplete fields.
+     */
+    public static final String INDEX_AUTOCOMPLETE = "autocomplete";
+
+    /**
      * Type represents a collection name in elasticsearch.
      */
     public static final String TYPE_JOB_DETAILS = "jobDetails";
+
+    /**
+     * Type represents a collection name in elasticsearch.
+     */
+    public static final String TYPE_LANGUAGES = "languages";
 
     private EsConstants() {
     }
