@@ -21,7 +21,7 @@ import java.time.ZoneId;
 /**
  * Constants value.
  */
-public class Constants {
+public final class Constants {
 
     public static final String DB_FIELD_RECEIVED_DATE = "receivedDate";
 
@@ -31,6 +31,10 @@ public class Constants {
 
     public static final String DB_FIELD_RATING = "rating";
 
+    public static final String DB_FIELD_NAME = "name";
+
+    public static final String DB_FIELD_ID = "id";
+
     public static final String UTC = "UTC";
 
     public static final String DEFAULT_DATE_PATTERN = "dd.MM.yyyy hh:mm";
@@ -38,4 +42,7 @@ public class Constants {
     public static final ZoneId ZONE_ID_UTC = ZoneId.of(UTC);
 
     public static final int DB_RESULT_LIMIT = 50;
+
+    private Constants() {
+    }
 }

@@ -18,10 +18,9 @@ package com.intellijob.elasticsearch.domain;
 
 import com.intellijob.elasticsearch.EsConstants;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.CompletionField;
 import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldIndex;
-import org.springframework.data.elasticsearch.annotations.FieldType;
+import org.springframework.data.elasticsearch.core.completion.Completion;
 
 /**
  * This document represents the language index of domain object <code>SkillNode</code> in elasticsearch.
@@ -29,30 +28,40 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @Document(indexName = EsConstants.INDEX_AUTOCOMPLETE, type = EsConstants.TYPE_LANGUAGES, shards = 1, replicas = 0)
 public class EsAutocompleteLanguage {
 
+    public static final String SEPARATOR = " ";
+
     /**
      * The id of SkillNode id.
      */
     @Id
     private String id;
 
-    /**
-     * Language name.
-     */
-    @Field(
-            type = FieldType.String,
-            index = FieldIndex.analyzed,
-            searchAnalyzer = "german",
-            indexAnalyzer = "german",
-            store = true
-    )
+    //    /**
+//     * Language name.
+//     */
+//    @Field(
+//            type = FieldType.String,
+//            index = FieldIndex.not_analyzed
+//    )
     private String name;
+
+    @CompletionField(payloads = true)
+    private Completion suggest;
 
     public EsAutocompleteLanguage() {
     }
 
     public EsAutocompleteLanguage(String id, String name) {
-        this.id = id;
-        this.name = name;
+        this(id, name, Boolean.FALSE);
+    }
+
+    public EsAutocompleteLanguage(String id, String name, Boolean withSuggest) {
+        setId(id);
+        setName(name);
+        if (withSuggest) {
+            this.suggest = new Completion(name.split(SEPARATOR));
+            this.suggest.setPayload(id);
+        }
     }
 
     public String getId() {
@@ -69,5 +78,13 @@ public class EsAutocompleteLanguage {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Completion getSuggest() {
+        return suggest;
+    }
+
+    public void setSuggest(Completion suggest) {
+        this.suggest = suggest;
     }
 }

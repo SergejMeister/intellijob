@@ -72,4 +72,20 @@ public interface SkillController {
      * @return create autocomplete language index.
      */
     EsAutocompleteLanguage createAutocompleteLanguageIndex(SkillNode skillNode);
+
+    /**
+     * Returns all supported language indexes.
+     *
+     * @return list of supported languages.
+     */
+    List<EsAutocompleteLanguage> getLanguagesForAutocomplete();
+
+    /**
+     * Returns language matches to searchWord.
+     *
+     * @param searchWord search word.
+     *
+     * @return affected list of supported languages.
+     */
+    List<EsAutocompleteLanguage> suggestLanguage(String searchWord);
 }

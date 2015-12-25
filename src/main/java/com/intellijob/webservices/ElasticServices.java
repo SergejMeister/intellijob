@@ -18,11 +18,16 @@ package com.intellijob.webservices;
 
 import com.intellijob.controllers.JobDetailController;
 import com.intellijob.controllers.SkillController;
+import com.intellijob.dto.SkillData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Services for elasticsearch to create, update or delete indexes.
@@ -46,5 +51,17 @@ public class ElasticServices extends BaseServices {
     public ResponseEntity createAutocompleteLanguageIndexes() {
         skillController.createAutocompleteLanguageIndexes();
         return ResponseEntity.accepted().build();
+    }
+
+    @RequestMapping(value = Endpoints.ES_AUTOCOMPLETE_LANGUAGE_INDEX, method = RequestMethod.GET)
+    public List<SkillData> getSupportedLanguages(
+            @RequestParam(value = "searchWord", required = false) String searchWord) {
+        if (searchWord != null) {
+            return skillController.suggestLanguage(searchWord).stream()
+                    .map(skillNode -> new SkillData(skillNode.getId(), skillNode.getName()))
+                    .collect(Collectors.toList());
+        }
+        return skillController.getLanguagesForAutocomplete().stream()
+                .map(skillNode -> new SkillData(skillNode.getId(), skillNode.getName())).collect(Collectors.toList());
     }
 }

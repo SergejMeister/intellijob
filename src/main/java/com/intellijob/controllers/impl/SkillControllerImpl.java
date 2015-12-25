@@ -21,15 +21,21 @@ import com.intellijob.domain.skills.SkillKnowledge;
 import com.intellijob.domain.skills.SkillLanguage;
 import com.intellijob.domain.skills.SkillNode;
 import com.intellijob.domain.skills.SkillPersonalStrength;
+import com.intellijob.elasticsearch.EsConstants;
 import com.intellijob.elasticsearch.domain.EsAutocompleteLanguage;
 import com.intellijob.elasticsearch.repository.EsAutocompleteLanguageRepository;
 import com.intellijob.models.SkillViewModel;
 import com.intellijob.repository.skills.SkillKnowledgeRepository;
 import com.intellijob.repository.skills.SkillLanguageRepository;
 import com.intellijob.repository.skills.SkillPersonalStrengthRepository;
+import org.elasticsearch.action.suggest.SuggestResponse;
+import org.elasticsearch.search.suggest.completion.CompletionSuggestion;
+import org.elasticsearch.search.suggest.completion.CompletionSuggestionFuzzyBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.stereotype.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,6 +55,9 @@ public class SkillControllerImpl implements SkillController {
 
     @Autowired
     private SkillKnowledgeRepository skillKnowledgeRepository;
+
+    @Autowired
+    private ElasticsearchTemplate elasticsearchTemplate;
 
     /**
      * {@inheritDoc}
@@ -113,7 +122,43 @@ public class SkillControllerImpl implements SkillController {
             esAutocompleteLanguageRepository.delete(skillNode.getId());
         }
         EsAutocompleteLanguage autocompleteLanguage =
-                new EsAutocompleteLanguage(skillNode.getId(), skillNode.getLocalizableObject().getLabel());
+                new EsAutocompleteLanguage(skillNode.getId(), skillNode.getLocalizableObject().getLabel(),
+                        Boolean.TRUE);
         return esAutocompleteLanguageRepository.index(autocompleteLanguage);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<EsAutocompleteLanguage> getLanguagesForAutocomplete() {
+        List<EsAutocompleteLanguage> result = new ArrayList<>();
+        esAutocompleteLanguageRepository.findAll().forEach(result::add);
+        return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<EsAutocompleteLanguage> suggestLanguage(String searchWord) {
+        CompletionSuggestionFuzzyBuilder completionSuggestionFuzzyBuilder =
+                new CompletionSuggestionFuzzyBuilder(EsConstants.FIELD_SUGGEST).text(searchWord).field(
+                        EsConstants.FIELD_SUGGEST);
+
+        SuggestResponse suggestResponse =
+                elasticsearchTemplate.suggest(completionSuggestionFuzzyBuilder, EsAutocompleteLanguage.class);
+        CompletionSuggestion completionSuggestion =
+                suggestResponse.getSuggest().getSuggestion(EsConstants.FIELD_SUGGEST);
+        List<CompletionSuggestion.Entry.Option> options = completionSuggestion.getEntries().get(0).getOptions();
+
+        List<EsAutocompleteLanguage> result = new ArrayList<>();
+        for (CompletionSuggestion.Entry.Option option : options) {
+            EsAutocompleteLanguage esAutocompleteLanguage =
+                    new EsAutocompleteLanguage(option.getPayloadAsString(), option.getText().toString());
+            result.add(esAutocompleteLanguage);
+        }
+
+        return result;
     }
 }
