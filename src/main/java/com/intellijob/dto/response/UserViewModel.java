@@ -31,8 +31,6 @@ public class UserViewModel extends ResponseData {
 
     private ResponseUserData userData;
 
-    private List<SkillData> supportedLanguages;
-
     private List<SkillData> supportedPersonalStrengths;
 
     private List<SkillData> supportedKnowledges;
@@ -48,15 +46,12 @@ public class UserViewModel extends ResponseData {
 
     public UserViewModel(User user, SkillViewModel skillViewModel) {
         setUserData(new ResponseUserData(user));
-        List<SkillData> languagesData = UserServiceMapper.mapToListSkillData(skillViewModel.getLanguages());
-        setSupportedLanguages(languagesData);
 
         List<SkillData> personalStrengths = UserServiceMapper.mapToListSkillData(skillViewModel.getPersonalStrengths());
         setSupportedPersonalStrengths(personalStrengths);
 
-        List<SkillData> knowledges =
-                skillViewModel.getKnowledges().stream().map(skillNode -> new SkillData(skillNode))
-                        .collect(Collectors.toList());
+        List<SkillData> knowledges = skillViewModel.getKnowledges().stream().map(SkillData::new)
+                .collect(Collectors.toList());
         setSupportedKnowledges(knowledges);
 
         List<SkillData> autocompleteKnowledges =
@@ -78,14 +73,6 @@ public class UserViewModel extends ResponseData {
 
     public void setUserData(ResponseUserData userData) {
         this.userData = userData;
-    }
-
-    public List<SkillData> getSupportedLanguages() {
-        return supportedLanguages;
-    }
-
-    public void setSupportedLanguages(List<SkillData> supportedLanguages) {
-        this.supportedLanguages = supportedLanguages;
     }
 
     public List<SkillData> getSupportedKnowledges() {

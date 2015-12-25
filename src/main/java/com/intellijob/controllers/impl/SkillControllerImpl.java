@@ -37,6 +37,7 @@ import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Represents skill controllers.
@@ -92,8 +93,6 @@ public class SkillControllerImpl implements SkillController {
     @Override
     public SkillViewModel getSkillViewModel() {
         SkillViewModel skillViewModel = new SkillViewModel();
-        List<SkillNode> languages = getAllLanguages();
-        skillViewModel.setLanguages(languages);
 
         List<SkillNode> personalStrengths = getPersonalStrengths();
         skillViewModel.setPersonalStrengths(personalStrengths);
@@ -152,13 +151,8 @@ public class SkillControllerImpl implements SkillController {
                 suggestResponse.getSuggest().getSuggestion(EsConstants.FIELD_SUGGEST);
         List<CompletionSuggestion.Entry.Option> options = completionSuggestion.getEntries().get(0).getOptions();
 
-        List<EsAutocompleteLanguage> result = new ArrayList<>();
-        for (CompletionSuggestion.Entry.Option option : options) {
-            EsAutocompleteLanguage esAutocompleteLanguage =
-                    new EsAutocompleteLanguage(option.getPayloadAsString(), option.getText().toString());
-            result.add(esAutocompleteLanguage);
-        }
-
-        return result;
+        return options.stream()
+                .map(option -> new EsAutocompleteLanguage(option.getPayloadAsString(), option.getText().toString()))
+                .collect(Collectors.toList());
     }
 }

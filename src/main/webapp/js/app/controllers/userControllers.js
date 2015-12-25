@@ -81,7 +81,6 @@ intelliJobControllers.controller(
                         $scope.userSkillStatus.isKnowledgeEmpty = false;
                     }
 
-                    $scope.supportedLanguages = response.supportedLanguages;
                     if ($scope.user.languages && $scope.user.languages.length > 0) {
                         $scope.userLanguages = $scope.user.languages;
                         $scope.userSkillStatus.isLanguageEmpty = false;
@@ -137,14 +136,12 @@ intelliJobControllers.controller(
                     }
                 };
 
-                //$scope.selectedLanguage ;
                 $scope.addLanguage = function (newUserLanguage) {
                     var skillRatingData = $scope.createAutoCompleteSkillRatingData(newUserLanguage);
                     $scope.userLanguages.push(skillRatingData);
                     $scope.selectedLanguage = null;
                 };
 
-                //$scope.selectedKnowledge ;
                 $scope.addKnowledge = function (newUserKnowledge) {
                     var skillRatingData = $scope.createAutoCompleteSkillRatingData(newUserKnowledge);
                     $scope.userKnowledges.push(skillRatingData);
@@ -188,7 +185,7 @@ intelliJobControllers.controller(
                     userData.languages = $scope.userLanguages;
                     UserServices.updateUser(userData).success(function (response) {
                         $rootScope.success = response.message;
-                        $cookieStore.put("user", userData);
+                        $cookieStore.put('user', userData);
                         $scope.readonly = true;
                     }).error(function (error) {
                         console.log(error);

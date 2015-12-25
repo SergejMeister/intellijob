@@ -26,14 +26,11 @@ import java.util.List;
  */
 public class SkillViewModel {
 
-    private List<SkillNode> languages;
-
     private List<SkillNode> personalStrengths;
 
     private List<SkillNode> knowledges;
 
     public SkillViewModel() {
-        setLanguages(new ArrayList<>());
         setPersonalStrengths(new ArrayList<>());
         setKnowledges(new ArrayList<>());
     }
@@ -44,14 +41,6 @@ public class SkillViewModel {
 
     public void setPersonalStrengths(List<SkillNode> personalStrengths) {
         this.personalStrengths = personalStrengths;
-    }
-
-    public List<SkillNode> getLanguages() {
-        return languages;
-    }
-
-    public void setLanguages(List<SkillNode> languages) {
-        this.languages = languages;
     }
 
     public List<SkillNode> getKnowledges() {

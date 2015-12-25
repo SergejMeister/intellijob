@@ -21,9 +21,9 @@ import com.intellijob.controllers.SkillController;
 import com.intellijob.dto.SkillData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -54,14 +54,23 @@ public class ElasticServices extends BaseServices {
     }
 
     @RequestMapping(value = Endpoints.ES_AUTOCOMPLETE_LANGUAGE_INDEX, method = RequestMethod.GET)
-    public List<SkillData> getSupportedLanguages(
-            @RequestParam(value = "searchWord", required = false) String searchWord) {
-        if (searchWord != null) {
-            return skillController.suggestLanguage(searchWord).stream()
-                    .map(skillNode -> new SkillData(skillNode.getId(), skillNode.getName()))
-                    .collect(Collectors.toList());
-        }
+    public List<SkillData> getSupportedLanguages() {
         return skillController.getLanguagesForAutocomplete().stream()
                 .map(skillNode -> new SkillData(skillNode.getId(), skillNode.getName())).collect(Collectors.toList());
     }
+
+    /**
+     * This Service is for language auto complete.
+     *
+     * @param value search value.
+     *
+     * @return suggested list of languages.
+     */
+    @RequestMapping(value = Endpoints.ES_AUTOCOMPLETE_LANGUAGE_NAME_VALUE, method = RequestMethod.GET)
+    public List<SkillData> getSupportedLanguages(@PathVariable String value) {
+        return skillController.suggestLanguage(value).stream()
+                .map(skillNode -> new SkillData(skillNode.getId(), skillNode.getName())).collect(Collectors.toList());
+    }
+
+
 }
