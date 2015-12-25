@@ -36,15 +36,11 @@ public class EsAutocompleteLanguage {
     @Id
     private String id;
 
-    //    /**
-//     * Language name.
-//     */
-//    @Field(
-//            type = FieldType.String,
-//            index = FieldIndex.not_analyzed
-//    )
     private String name;
 
+    /**
+     * Thi field is required to create an index for autocomplete service.
+     */
     @CompletionField(payloads = true)
     private Completion suggest;
 
