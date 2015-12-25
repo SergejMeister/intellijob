@@ -20,6 +20,8 @@ import com.intellijob.Constants;
 import com.intellijob.domain.skills.SkillRatingNode;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.BoostingQueryBuilder;
+import org.elasticsearch.index.query.FilterBuilders;
+import org.elasticsearch.index.query.FilteredQueryBuilder;
 import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -275,7 +277,6 @@ public final class SearchQueryUtility {
                                                                   int offset,
                                                                   int limit) {
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-        boolQueryBuilder.must(QueryBuilders.termQuery(Constants.DB_FIELD_READ, Boolean.FALSE));
         for (SkillRatingNode skillRatingNode : skillRatingNodes) {
             float boostValue = (float) skillRatingNode.getRating() * 10;
             String searchTerm = skillRatingNode.getSkillNode().getName();
@@ -287,7 +288,9 @@ public final class SearchQueryUtility {
             boolQueryBuilder.should(matchQueryBuilder);
         }
 
-        FunctionScoreQueryBuilder functionBuilder = QueryBuilders.functionScoreQuery(boolQueryBuilder);
+        FilteredQueryBuilder filteredQuery = QueryBuilders
+                .filteredQuery(boolQueryBuilder, FilterBuilders.termFilter(Constants.DB_FIELD_READ, Boolean.FALSE));
+        FunctionScoreQueryBuilder functionBuilder = QueryBuilders.functionScoreQuery(filteredQuery);
         functionBuilder.add(ScoreFunctionBuilders
                 .exponentialDecayFunction(Constants.DB_FIELD_RECEIVED_DATE, DEFAULT_DECAY_FOR_RECEIVED_DATE));
 
@@ -410,7 +413,6 @@ public final class SearchQueryUtility {
     private static QueryBuilder generateDefaultQueryBuilderForFullTextSearch(String searchOriginData) {
         String[] searchDataArray = searchOriginData.split(OR_SEPARATOR);
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-        boolQueryBuilder.must(QueryBuilders.termQuery(Constants.DB_FIELD_READ, Boolean.FALSE));
         if (searchDataArray.length == 1) {
             boolQueryBuilder.should(QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchOriginData.trim())
                     .operator(MatchQueryBuilder.Operator.AND));
@@ -422,6 +424,7 @@ public final class SearchQueryUtility {
             }
         }
 
-        return boolQueryBuilder;
+        return QueryBuilders
+                .filteredQuery(boolQueryBuilder, FilterBuilders.termFilter(Constants.DB_FIELD_READ, Boolean.FALSE));
     }
 }
