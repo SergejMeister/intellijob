@@ -17,6 +17,7 @@
 package com.intellijob.controllers;
 
 import com.intellijob.domain.skills.SkillNode;
+import com.intellijob.elasticsearch.domain.EsAutocompleteKnowledge;
 import com.intellijob.elasticsearch.domain.EsAutocompleteLanguage;
 import com.intellijob.models.SkillViewModel;
 
@@ -58,14 +59,21 @@ public interface SkillController {
     SkillViewModel getSkillViewModel();
 
     /**
-     * Create elasticsearch indexes for autocomplete field language.
+     * Create elasticsearch indexes for autocomplete language data.
      * <p>
      * Read all supported languages in database and create for their a elasticsearch index.
      */
     void createAutocompleteLanguageIndexes();
 
     /**
-     * Create a autocomplete language index for specified skillNode.
+     * Create elasticsearch indexes for autocomplete knowledge data.
+     * <p>
+     * Read all supported knowledge's in database and create for their a elasticsearch index.
+     */
+    void createAutocompleteKnowledgeIndexes();
+
+    /**
+     * Create an autocomplete language index for specified skillNode.
      *
      * @param skillNode skill node.
      *
@@ -74,11 +82,27 @@ public interface SkillController {
     EsAutocompleteLanguage createAutocompleteLanguageIndex(SkillNode skillNode);
 
     /**
+     * Create an autocomplete knowledge index for specified skillNode.
+     *
+     * @param skillNode skill node.
+     *
+     * @return create autocomplete knowledge index.
+     */
+    EsAutocompleteKnowledge createAutocompleteKnowledgeIndex(SkillNode skillNode);
+
+    /**
      * Returns all supported language indexes.
      *
      * @return list of supported languages.
      */
-    List<EsAutocompleteLanguage> getLanguagesForAutocomplete();
+    List<EsAutocompleteLanguage> getSupportedLanguages();
+
+    /**
+     * Returns all supported knowledge indexes.
+     *
+     * @return list of supported knowledges.
+     */
+    List<EsAutocompleteKnowledge> getSupportedKnowledges();
 
     /**
      * Returns language matches to searchWord.
@@ -88,4 +112,22 @@ public interface SkillController {
      * @return affected list of supported languages.
      */
     List<EsAutocompleteLanguage> suggestLanguage(String searchWord);
+
+    /**
+     * Returns knowledge matches to searchWord.
+     *
+     * @param searchWord search word.
+     *
+     * @return affected list of supported knowledges.
+     */
+    List<EsAutocompleteKnowledge> suggestKnowledge(String searchWord);
+
+    /**
+     * Returns all last nodes.
+     *
+     * @param skillNodes list of skills.
+     *
+     * @return only last nodes.
+     */
+    List<SkillNode> findAllLastNodes(List<SkillNode> skillNodes);
 }

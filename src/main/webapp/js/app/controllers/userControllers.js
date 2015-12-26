@@ -75,7 +75,6 @@ intelliJobControllers.controller(
                     $scope.switchSearchEngine($scope.searchEngine);
 
                     $scope.supportedKnowledges = response.supportedKnowledges;
-                    $scope.supportedAutocompleteKnowledges = response.supportedAutocompleteKnowledges;
                     if ($scope.user.knowledges && $scope.user.knowledges.length > 0) {
                         $scope.userKnowledges = $scope.user.knowledges;
                         $scope.userSkillStatus.isKnowledgeEmpty = false;

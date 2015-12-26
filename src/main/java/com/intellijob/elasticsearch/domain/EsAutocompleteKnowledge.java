@@ -24,46 +24,47 @@ import org.springframework.data.elasticsearch.core.completion.Completion;
 import java.util.Map;
 
 /**
- * This document represents the language index of domain object <code>SkillNode</code> in elasticsearch.
+ * This document represents the knowledge index of domain object <code>SkillNode</code> in elasticsearch.
  */
-@Document(indexName = EsConstants.INDEX_AUTOCOMPLETE, type = EsConstants.TYPE_LANGUAGES, shards = 1, replicas = 0)
-public class EsAutocompleteLanguage extends EsBaseAutocomplete {
+@Document(indexName = EsConstants.INDEX_AUTOCOMPLETE, type = EsConstants.TYPE_KNOWLEDGES, shards = 1, replicas = 0)
+public class EsAutocompleteKnowledge extends EsBaseAutocomplete {
 
     /**
      * Thi field is required to create an index for autocomplete service.
      */
     @CompletionField(payloads = true)
-    protected Completion suggestLanguage;
+    protected Completion suggestKnowledge;
 
-    public EsAutocompleteLanguage() {
+    public EsAutocompleteKnowledge() {
+        super();
     }
 
-    public EsAutocompleteLanguage(String id, String name) {
+    public EsAutocompleteKnowledge(String id, String name) {
         super(id, name);
     }
 
-    public EsAutocompleteLanguage(String id, String name, Boolean withSuggest) {
+    public EsAutocompleteKnowledge(Map<String, Object> objectMap) {
+        super(objectMap);
+    }
+
+    public EsAutocompleteKnowledge(String id, String name, Boolean withSuggest) {
         super(id, name);
         if (withSuggest) {
-            this.suggestLanguage = new Completion(name.split(SEPARATOR));
+            this.suggestKnowledge = new Completion(name.split(SEPARATOR));
             Map<String, Object> payload = createPayload();
-            this.suggestLanguage.setPayload(payload);
+            this.suggestKnowledge.setPayload(payload);
         }
-    }
-
-    public EsAutocompleteLanguage(Map<String, Object> objectMap) {
-        super(objectMap);
     }
 
     protected Map<String, Object> createPayload() {
         return createBasePayload();
     }
 
-    public Completion getSuggestLanguage() {
-        return suggestLanguage;
+    public Completion getSuggestKnowledge() {
+        return suggestKnowledge;
     }
 
-    public void setSuggestLanguage(Completion suggestLanguage) {
-        this.suggestLanguage = suggestLanguage;
+    public void setSuggestKnowledge(Completion suggestKnowledge) {
+        this.suggestKnowledge = suggestKnowledge;
     }
 }

@@ -55,7 +55,7 @@ public class ElasticServices extends BaseServices {
 
     @RequestMapping(value = Endpoints.ES_AUTOCOMPLETE_LANGUAGE_INDEX, method = RequestMethod.GET)
     public List<SkillData> getSupportedLanguages() {
-        return skillController.getLanguagesForAutocomplete().stream()
+        return skillController.getSupportedLanguages().stream()
                 .map(skillNode -> new SkillData(skillNode.getId(), skillNode.getName())).collect(Collectors.toList());
     }
 
@@ -67,10 +67,33 @@ public class ElasticServices extends BaseServices {
      * @return suggested list of languages.
      */
     @RequestMapping(value = Endpoints.ES_AUTOCOMPLETE_LANGUAGE_NAME_VALUE, method = RequestMethod.GET)
-    public List<SkillData> getSupportedLanguages(@PathVariable String value) {
+    public List<SkillData> getSuggestedLanguagesBy(@PathVariable String value) {
         return skillController.suggestLanguage(value).stream()
                 .map(skillNode -> new SkillData(skillNode.getId(), skillNode.getName())).collect(Collectors.toList());
     }
 
+    @RequestMapping(value = Endpoints.ES_AUTOCOMPLETE_KNOWLEDGE_INDEX, method = RequestMethod.PUT)
+    public ResponseEntity createAutocompleteKnowledgeIndexes() {
+        skillController.createAutocompleteKnowledgeIndexes();
+        return ResponseEntity.accepted().build();
+    }
 
+    @RequestMapping(value = Endpoints.ES_AUTOCOMPLETE_KNOWLEDGE_INDEX, method = RequestMethod.GET)
+    public List<SkillData> getSupportedKnowledges() {
+        return skillController.getSupportedKnowledges().stream()
+                .map(skillNode -> new SkillData(skillNode.getId(), skillNode.getName())).collect(Collectors.toList());
+    }
+
+    /**
+     * This Service is for knowledge auto complete.
+     *
+     * @param value search value.
+     *
+     * @return suggested list of knowledges.
+     */
+    @RequestMapping(value = Endpoints.ES_AUTOCOMPLETE_KNOWLEDGE_NAME_VALUE, method = RequestMethod.GET)
+    public List<SkillData> getSuggestedKnowledgesBy(@PathVariable String value) {
+        return skillController.suggestKnowledge(value).stream()
+                .map(skillNode -> new SkillData(skillNode.getId(), skillNode.getName())).collect(Collectors.toList());
+    }
 }

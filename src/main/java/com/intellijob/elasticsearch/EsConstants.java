@@ -43,7 +43,15 @@ public final class EsConstants {
      * Type represents a collection name in elasticsearch.
      */
     public static final String TYPE_LANGUAGES = "languages";
-    public static final String FIELD_SUGGEST = "suggest";
+
+    /**
+     * Type represents a collection name in elasticsearch.
+     */
+    public static final String TYPE_KNOWLEDGES = "knowledges";
+
+    public static final String FIELD_SUGGEST_KNOWLEDGE = "suggestKnowledge";
+
+    public static final String FIELD_SUGGEST_LANGUAGE = "suggestLanguage";
 
     private EsConstants() {
     }

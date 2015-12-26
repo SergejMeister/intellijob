@@ -35,8 +35,6 @@ public class UserViewModel extends ResponseData {
 
     private List<SkillData> supportedKnowledges;
 
-    private List<SkillData> supportedAutocompleteKnowledges;
-
     public UserViewModel() {
     }
 
@@ -53,10 +51,6 @@ public class UserViewModel extends ResponseData {
         List<SkillData> knowledges = skillViewModel.getKnowledges().stream().map(SkillData::new)
                 .collect(Collectors.toList());
         setSupportedKnowledges(knowledges);
-
-        List<SkillData> autocompleteKnowledges =
-                UserServiceMapper.mapToListSkillData(skillViewModel.getAutocompleteKnowledges());
-        setSupportedAutocompleteKnowledges(autocompleteKnowledges);
     }
 
     public List<SkillData> getSupportedPersonalStrengths() {
@@ -81,14 +75,5 @@ public class UserViewModel extends ResponseData {
 
     public void setSupportedKnowledges(List<SkillData> supportedKnowledges) {
         this.supportedKnowledges = supportedKnowledges;
-    }
-
-    public List<SkillData> getSupportedAutocompleteKnowledges() {
-        return supportedAutocompleteKnowledges;
-    }
-
-    public void setSupportedAutocompleteKnowledges(
-            List<SkillData> supportedAutocompleteKnowledges) {
-        this.supportedAutocompleteKnowledges = supportedAutocompleteKnowledges;
     }
 }
