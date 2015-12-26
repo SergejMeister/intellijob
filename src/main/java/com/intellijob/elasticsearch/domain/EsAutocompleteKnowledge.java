@@ -21,7 +21,9 @@ import org.springframework.data.elasticsearch.annotations.CompletionField;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.core.completion.Completion;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * This document represents the knowledge index of domain object <code>SkillNode</code> in elasticsearch.
@@ -50,7 +52,19 @@ public class EsAutocompleteKnowledge extends EsBaseAutocomplete {
     public EsAutocompleteKnowledge(String id, String name, Boolean withSuggest) {
         super(id, name);
         if (withSuggest) {
-            this.suggestKnowledge = new Completion(name.split(SEPARATOR));
+            Set<String> inputs = new HashSet<>();
+            inputs.add(name);
+
+            String plainName = name.replaceAll("[-()/.]", WHITESPACE_SEPARATOR);
+            for (String value : plainName.split(COMMA_SEPARATOR)) {
+                for (String input : value.split(WHITESPACE_SEPARATOR)) {
+                    if (!input.isEmpty()) {
+                        inputs.add(input);
+                    }
+                }
+            }
+
+            this.suggestKnowledge = new Completion(inputs.toArray(new String[inputs.size()]));
             Map<String, Object> payload = createPayload();
             this.suggestKnowledge.setPayload(payload);
         }

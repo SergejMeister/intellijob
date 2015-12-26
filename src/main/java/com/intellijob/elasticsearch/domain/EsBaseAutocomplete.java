@@ -17,6 +17,9 @@
 package com.intellijob.elasticsearch.domain;
 
 import com.intellijob.Constants;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldIndex;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,8 +29,16 @@ import java.util.Map;
  */
 public abstract class EsBaseAutocomplete extends EsBaseDocument {
 
-    public static final String SEPARATOR = " ";
+    public static final String WHITESPACE_SEPARATOR = " ";
+    public static final String COMMA_SEPARATOR = ",";
 
+    @Field(
+            type = FieldType.String,
+            index = FieldIndex.analyzed,
+            searchAnalyzer = "simple",
+            indexAnalyzer = "simple",
+            store = true
+    )
     protected String name;
 
     public EsBaseAutocomplete() {

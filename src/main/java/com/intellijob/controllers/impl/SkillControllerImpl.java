@@ -38,7 +38,9 @@ import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -198,7 +200,7 @@ public class SkillControllerImpl implements SkillController {
     public List<EsAutocompleteKnowledge> suggestKnowledge(String searchWord) {
         CompletionSuggestionFuzzyBuilder completionSuggestionFuzzyBuilder =
                 new CompletionSuggestionFuzzyBuilder(EsConstants.FIELD_SUGGEST_KNOWLEDGE).text(searchWord).field(
-                        EsConstants.FIELD_SUGGEST_KNOWLEDGE).setFuzzyMinLength(1);
+                        EsConstants.FIELD_SUGGEST_KNOWLEDGE).size(50);
 
         SuggestResponse suggestResponse =
                 elasticsearchTemplate.suggest(completionSuggestionFuzzyBuilder, EsAutocompleteKnowledge.class);
@@ -206,8 +208,17 @@ public class SkillControllerImpl implements SkillController {
                 suggestResponse.getSuggest().getSuggestion(EsConstants.FIELD_SUGGEST_KNOWLEDGE);
         List<CompletionSuggestion.Entry.Option> options = completionSuggestion.getEntries().get(0).getOptions();
 
-        return options.stream().map(option -> new EsAutocompleteKnowledge(option.getPayloadAsMap()))
-                .collect(Collectors.toList());
+        Set<String> ids = new HashSet<>();
+        List<EsAutocompleteKnowledge> result = new ArrayList<>();
+        for (CompletionSuggestion.Entry.Option option : options) {
+            EsAutocompleteKnowledge esAutocompleteKnowledge = new EsAutocompleteKnowledge(option.getPayloadAsMap());
+            if (!ids.contains(esAutocompleteKnowledge.getId())) {
+                result.add(esAutocompleteKnowledge);
+                ids.add(esAutocompleteKnowledge.getId());
+            }
+        }
+
+        return result;
     }
 
     /**

@@ -45,7 +45,7 @@ public class EsAutocompleteLanguage extends EsBaseAutocomplete {
     public EsAutocompleteLanguage(String id, String name, Boolean withSuggest) {
         super(id, name);
         if (withSuggest) {
-            this.suggestLanguage = new Completion(name.split(SEPARATOR));
+            this.suggestLanguage = new Completion(name.split(WHITESPACE_SEPARATOR));
             Map<String, Object> payload = createPayload();
             this.suggestLanguage.setPayload(payload);
         }
