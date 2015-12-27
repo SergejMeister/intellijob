@@ -175,6 +175,11 @@ intelliJobControllers.controller(
                     $scope.readonly = value;
                 };
 
+                $scope.showKnowledgeTree = false;
+                $scope.setKnowledgeTreeState = function (newKnowledgeTreeState) {
+                    $scope.showKnowledgeTree = newKnowledgeTreeState;
+                };
+
                 /**
                  * Save user data.
                  */

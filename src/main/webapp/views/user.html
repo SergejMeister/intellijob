@@ -161,9 +161,30 @@
                                         data-ng-click='addKnowledge(selectedKnowledge)'>
                                     Hinzufügen
                                 </button>
-                                <button type='button' class='btn btn-info pull'>
+                                <button type='button' class='btn btn-info pull' ng-hide="showKnowledgeTree"
+                                        ng-click="setKnowledgeTreeState(true)">
                                     Auswählen
                                 </button>
+                                <button type='button' class='btn btn-info pull' ng-show="showKnowledgeTree"
+                                        ng-click="setKnowledgeTreeState(false)">
+                                    Abbrechen
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class='row'>
+                        <div uib-collapse="!showKnowledgeTree">
+                            <div class="span5 article-tree">
+                                <div>
+                                    <div class="tree well">
+                                        <ul>
+                                            <skill-tree ng-model="supportedKnowledges"
+                                                        selected="userKnowledges" expanded="false"></skill-tree>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
