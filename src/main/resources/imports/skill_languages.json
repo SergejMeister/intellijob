@@ -1,0 +1,704 @@
+{
+  "_id": {
+    "$oid": "563537b444ae353683c50786"
+  },
+  "_class": "com.intellijob.domain.skills.SkillLanguage",
+  "languages": [
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50741"
+      },
+      "name": "Afrikaans",
+      "localizableObject": {
+        "label": "Afrikaans"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50742"
+      },
+      "name": "Albanian",
+      "localizableObject": {
+        "label": "Albanisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50743"
+      },
+      "name": "Amharic",
+      "localizableObject": {
+        "label": "Amharisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50744"
+      },
+      "name": "Arabic",
+      "localizableObject": {
+        "label": "Arabisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50745"
+      },
+      "name": "Aramaic",
+      "localizableObject": {
+        "label": "Aramäisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50746"
+      },
+      "name": "Armenian",
+      "localizableObject": {
+        "label": "Armenisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50747"
+      },
+      "name": "Azerbaijanian",
+      "localizableObject": {
+        "label": "Azerbaijanian"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50748"
+      },
+      "name": "Bengali",
+      "localizableObject": {
+        "label": "Bengali"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50749"
+      },
+      "name": "Burmese",
+      "localizableObject": {
+        "label": "Birmanisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c5074a"
+      },
+      "name": "Bosnian",
+      "localizableObject": {
+        "label": "Bosnisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c5074b"
+      },
+      "name": "Bulgarian",
+      "localizableObject": {
+        "label": "Bulgarisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c5074c"
+      },
+      "name": "Byelorussian",
+      "localizableObject": {
+        "label": "Weißrussisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c5074d"
+      },
+      "name": "Cambodian",
+      "localizableObject": {
+        "label": "Kambodschanisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c5074e"
+      },
+      "name": "Chechen",
+      "localizableObject": {
+        "label": "Tschetschenisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c5074f"
+      },
+      "name": "Chinese",
+      "localizableObject": {
+        "label": "Chinesisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50750"
+      },
+      "name": "Croatian",
+      "localizableObject": {
+        "label": "Kroatisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50751"
+      },
+      "name": "Czech",
+      "localizableObject": {
+        "label": "Tschechisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50752"
+      },
+      "name": "Danish",
+      "localizableObject": {
+        "label": "Dänisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50753"
+      },
+      "name": "English(BE)",
+      "localizableObject": {
+        "label": "Englisch(BE)"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50754"
+      },
+      "name": "English(USA)",
+      "localizableObject": {
+        "label": "Englisch(USA)"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50755"
+      },
+      "name": "Esperanto",
+      "localizableObject": {
+        "label": "Esperanto"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50756"
+      },
+      "name": "Estonian",
+      "localizableObject": {
+        "label": "Estnisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50757"
+      },
+      "name": "Faroese",
+      "localizableObject": {
+        "label": "Färöisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50758"
+      },
+      "name": "Filipino",
+      "localizableObject": {
+        "label": "Filipino"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50759"
+      },
+      "name": "Finnish",
+      "localizableObject": {
+        "label": "Finisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c5075a"
+      },
+      "name": "French",
+      "localizableObject": {
+        "label": "Franzusisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c5075b"
+      },
+      "name": "Frisian",
+      "localizableObject": {
+        "label": "Friesisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c5075c"
+      },
+      "name": "Gaelic",
+      "localizableObject": {
+        "label": "Gälisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c5075d"
+      },
+      "name": "Georgian",
+      "localizableObject": {
+        "label": "Georgisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c5075e"
+      },
+      "name": "Germany",
+      "localizableObject": {
+        "label": "Deutsch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c5075f"
+      },
+      "name": "Greek",
+      "localizableObject": {
+        "label": "Griechisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50760"
+      },
+      "name": "Hebrew",
+      "localizableObject": {
+        "label": "Hebräisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50761"
+      },
+      "name": "Hindi",
+      "localizableObject": {
+        "label": "Hindi"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50762"
+      },
+      "name": "Hungarian",
+      "localizableObject": {
+        "label": "Ungarisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50763"
+      },
+      "name": "Indonesian",
+      "localizableObject": {
+        "label": "Indonesisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50764"
+      },
+      "name": "Italian",
+      "localizableObject": {
+        "label": "Italienisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50765"
+      },
+      "name": "Japanese",
+      "localizableObject": {
+        "label": "Japanisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50766"
+      },
+      "name": "Kirghiz",
+      "localizableObject": {
+        "label": "Kirgisisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50767"
+      },
+      "name": "Korean",
+      "localizableObject": {
+        "label": "Koreanisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50768"
+      },
+      "name": "Kurdish",
+      "localizableObject": {
+        "label": "Kurdisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50769"
+      },
+      "name": "Laotian",
+      "localizableObject": {
+        "label": "Laotisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c5076a"
+      },
+      "name": "Latin",
+      "localizableObject": {
+        "label": "Latein"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c5076b"
+      },
+      "name": "Lettish",
+      "localizableObject": {
+        "label": "Lettisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c5076c"
+      },
+      "name": "Macedonian",
+      "localizableObject": {
+        "label": "Mazedonisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c5076d"
+      },
+      "name": "Malayalam",
+      "localizableObject": {
+        "label": "Malayalam"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c5076e"
+      },
+      "name": "Marathi",
+      "localizableObject": {
+        "label": "Marathi"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c5076f"
+      },
+      "name": "Mongolian",
+      "localizableObject": {
+        "label": "Mongolisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50770"
+      },
+      "name": "Norwegian",
+      "localizableObject": {
+        "label": "Norwegisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50771"
+      },
+      "name": "Pakistani",
+      "localizableObject": {
+        "label": "Pakistanisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50772"
+      },
+      "name": "Persian",
+      "localizableObject": {
+        "label": "Persisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50773"
+      },
+      "name": "Polish",
+      "localizableObject": {
+        "label": "Polnisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50774"
+      },
+      "name": "Portuguese",
+      "localizableObject": {
+        "label": "Portugiesisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50775"
+      },
+      "name": "Punjabi",
+      "localizableObject": {
+        "label": "Punjabi"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50776"
+      },
+      "name": "Romanian",
+      "localizableObject": {
+        "label": "Romani"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50777"
+      },
+      "name": "Russian",
+      "localizableObject": {
+        "label": "Russisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50778"
+      },
+      "name": "Serbian",
+      "localizableObject": {
+        "label": "Serbisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50779"
+      },
+      "name": "Slovakian",
+      "localizableObject": {
+        "label": "Slowakisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c5077a"
+      },
+      "name": "Slovenian",
+      "localizableObject": {
+        "label": "Slowenisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c5077b"
+      },
+      "name": "Spanish",
+      "localizableObject": {
+        "label": "Spanisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c5077c"
+      },
+      "name": "Swedish",
+      "localizableObject": {
+        "label": "Schwedisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c5077d"
+      },
+      "name": "Taiwanese",
+      "localizableObject": {
+        "label": "Taiwanisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c5077e"
+      },
+      "name": "Tamil",
+      "localizableObject": {
+        "label": "Tamil"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c5077f"
+      },
+      "name": "Tibetan",
+      "localizableObject": {
+        "label": "Tibetisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50780"
+      },
+      "name": "Turkish",
+      "localizableObject": {
+        "label": "Turkisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50781"
+      },
+      "name": "Uigur",
+      "localizableObject": {
+        "label": "Uigurisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50782"
+      },
+      "name": "Ukrainian",
+      "localizableObject": {
+        "label": "Ukrainisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50783"
+      },
+      "name": "Uzbek",
+      "localizableObject": {
+        "label": "Usbekisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50784"
+      },
+      "name": "Vietnamese",
+      "localizableObject": {
+        "label": "Vietnamesisch"
+      },
+      "nodes": []
+    },
+    {
+      "_id": {
+        "$oid": "563537b444ae353683c50785"
+      },
+      "name": "Yiddish",
+      "localizableObject": {
+        "label": "Jiddisch"
+      },
+      "nodes": []
+    }
+  ],
+  "category": {
+    "$ref": "skill_categories",
+    "$id": {
+      "$oid": "5633fe8544aefd11a76eac44"
+    }
+  }
+}

@@ -1,0 +1,288 @@
+{
+  "_id": {
+    "$oid": "564e42cd44aec530997678d1"
+  },
+  "_class": "com.intellijob.domain.skills.SkillPersonalStrength",
+  "personalStrength": [
+    {
+      "_id": {
+        "$oid": "564e42cc44aec530997678b6"
+      },
+      "name": "Methodenkompetenz",
+      "localizableObject": {
+        "label": "Methodenkompetenz"
+      },
+      "nodes": [
+        {
+          "_id": {
+            "$oid": "564e42cc44aec530997678ba"
+          },
+          "name": "Analyse- und Problemlösefähigkeit",
+          "localizableObject": {
+            "label": "Analyse- und Problemlösefähigkeit"
+          },
+          "nodes": []
+        },
+        {
+          "_id": {
+            "$oid": "564e42cc44aec530997678bb"
+          },
+          "name": "Auffassungsfähigkeitsgabe",
+          "localizableObject": {
+            "label": "Auffassungsfähigkeitsgabe"
+          },
+          "nodes": []
+        },
+        {
+          "_id": {
+            "$oid": "564e42cc44aec530997678bc"
+          },
+          "name": "Entscheidungsfähigkeit",
+          "localizableObject": {
+            "label": "Entscheidungsfähigkeit"
+          },
+          "nodes": []
+        },
+        {
+          "_id": {
+            "$oid": "564e42cc44aec530997678bd"
+          },
+          "name": "Ganzheitliches Denken",
+          "localizableObject": {
+            "label": "Ganzheitliches Denken"
+          },
+          "nodes": []
+        },
+        {
+          "_id": {
+            "$oid": "564e42cc44aec530997678be"
+          },
+          "name": "Organisationsfähigkeit",
+          "localizableObject": {
+            "label": "Organisationsfähigkeit"
+          },
+          "nodes": []
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "564e42cc44aec530997678b7"
+      },
+      "name": "Aktivitäts- und Umsetzungskompetenz",
+      "localizableObject": {
+        "label": "Aktivitäts- und Umsetzungskompetenz"
+      },
+      "nodes": [
+        {
+          "_id": {
+            "$oid": "564e42cc44aec530997678bf"
+          },
+          "name": "Belastbarkeit",
+          "localizableObject": {
+            "label": "Belastbarkeit"
+          },
+          "nodes": []
+        },
+        {
+          "_id": {
+            "$oid": "564e42cc44aec530997678c0"
+          },
+          "name": "Eigeninitiative",
+          "localizableObject": {
+            "label": "Eigeninitiative"
+          },
+          "nodes": []
+        },
+        {
+          "_id": {
+            "$oid": "564e42cc44aec530997678c1"
+          },
+          "name": "Motivation",
+          "localizableObject": {
+            "label": "Motivation"
+          },
+          "nodes": []
+        },
+        {
+          "_id": {
+            "$oid": "564e42cc44aec530997678c2"
+          },
+          "name": "Leistungsbereitschaft",
+          "localizableObject": {
+            "label": "Leistungsbereitschaft"
+          },
+          "nodes": []
+        },
+        {
+          "_id": {
+            "$oid": "564e42cc44aec530997678c3"
+          },
+          "name": "Selbständiges Arbeiten",
+          "localizableObject": {
+            "label": "Selbständiges Arbeiten"
+          },
+          "nodes": []
+        },
+        {
+          "_id": {
+            "$oid": "564e42cc44aec530997678c4"
+          },
+          "name": "Zielstrebigkeit",
+          "localizableObject": {
+            "label": "Zielstrebigkeit"
+          },
+          "nodes": []
+        },
+        {
+          "_id": {
+            "$oid": "564e42cc44aec530997678c5"
+          },
+          "name": "Ergebnisorientierung",
+          "localizableObject": {
+            "label": "Ergebnisorientierung"
+          },
+          "nodes": []
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "564e42cc44aec530997678b8"
+      },
+      "name": "Sozial-kommunikative Kompetenz",
+      "localizableObject": {
+        "label": "Sozial-kommunikative Kompetenz"
+      },
+      "nodes": [
+        {
+          "_id": {
+            "$oid": "564e42cc44aec530997678c6"
+          },
+          "name": "Einfühlungsvermögen",
+          "localizableObject": {
+            "label": "Einfühlungsvermögen"
+          },
+          "nodes": []
+        },
+        {
+          "_id": {
+            "$oid": "564e42cc44aec530997678c7"
+          },
+          "name": "Führungsfähigkeit",
+          "localizableObject": {
+            "label": "Führungsfähigkeit"
+          },
+          "nodes": []
+        },
+        {
+          "_id": {
+            "$oid": "564e42cc44aec530997678c8"
+          },
+          "name": "Kommunikationsfähigkeit",
+          "localizableObject": {
+            "label": "Kommunikationsfähigkeit"
+          },
+          "nodes": []
+        },
+        {
+          "_id": {
+            "$oid": "564e42cc44aec530997678c9"
+          },
+          "name": "Kundenorientierung",
+          "localizableObject": {
+            "label": "Kundenorientierung"
+          },
+          "nodes": []
+        },
+        {
+          "_id": {
+            "$oid": "564e42cc44aec530997678ca"
+          },
+          "name": "Teamfähigkeit",
+          "localizableObject": {
+            "label": "Teamfähigkeit"
+          },
+          "nodes": []
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "564e42cc44aec530997678b9"
+      },
+      "name": "Personale Kompetenz",
+      "localizableObject": {
+        "label": "Personale Kompetenz"
+      },
+      "nodes": [
+        {
+          "_id": {
+            "$oid": "564e42cc44aec530997678cb"
+          },
+          "name": "Flexibilität",
+          "localizableObject": {
+            "label": "Flexibilität"
+          },
+          "nodes": []
+        },
+        {
+          "_id": {
+            "$oid": "564e42cc44aec530997678cc"
+          },
+          "name": "Kreativität",
+          "localizableObject": {
+            "label": "Kreativität"
+          },
+          "nodes": []
+        },
+        {
+          "_id": {
+            "$oid": "564e42cc44aec530997678cd"
+          },
+          "name": "Lernbereitschaft",
+          "localizableObject": {
+            "label": "Lernbereitschaft"
+          },
+          "nodes": []
+        },
+        {
+          "_id": {
+            "$oid": "564e42cc44aec530997678ce"
+          },
+          "name": "Sorgfalt",
+          "localizableObject": {
+            "label": "Sorgfalt"
+          },
+          "nodes": []
+        },
+        {
+          "_id": {
+            "$oid": "564e42cc44aec530997678cf"
+          },
+          "name": "Genauigkeit",
+          "localizableObject": {
+            "label": "Genauigkeit"
+          },
+          "nodes": []
+        },
+        {
+          "_id": {
+            "$oid": "564e42cc44aec530997678d0"
+          },
+          "name": "Zuverlässigkeit",
+          "localizableObject": {
+            "label": "Zuverlässigkeit"
+          },
+          "nodes": []
+        }
+      ]
+    }
+  ],
+  "category": {
+    "$ref": "skill_categories",
+    "$id": {
+      "$oid": "5633fe8544aefd11a76eac45"
+    }
+  }
+}
