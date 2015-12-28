@@ -33,6 +33,7 @@ public class Endpoints {
     public static final String API_VIEWS = API + "/views";
     public static final String API_VIEWS_USERS = API_VIEWS + "/users";
     public static final String API_VIEWS_USERS_BY_ID = API_VIEWS_USERS + "/{userId}";
+    public static final String API_VIEWS_SKILLS_KNOWLEDGES = API + "/skills/knowledges";
     public static final String USERS = API + "/users";
     public static final String USERS_BY_ID = USERS + "/{userId}";
     public static final String JOBS_PAGING = JOBS + "/{pageIndex}/{limit}";

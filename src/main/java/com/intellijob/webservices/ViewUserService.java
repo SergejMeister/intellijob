@@ -19,6 +19,7 @@ package com.intellijob.webservices;
 import com.intellijob.controllers.SkillController;
 import com.intellijob.controllers.UserController;
 import com.intellijob.domain.User;
+import com.intellijob.dto.SkillData;
 import com.intellijob.dto.response.UserViewModel;
 import com.intellijob.models.SkillViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * View user Web-Services.
@@ -48,11 +52,22 @@ public class ViewUserService extends BaseServices {
      * @return response user.
      */
     @RequestMapping(value = Endpoints.API_VIEWS_USERS_BY_ID, method = RequestMethod.GET)
-    public @ResponseBody UserViewModel getUserViewModel(@PathVariable String userId) throws Exception {
+    public
+    @ResponseBody
+    UserViewModel getUserViewModel(@PathVariable String userId) throws Exception {
         User user = userController.getUser(userId);
 
         SkillViewModel skillViewModel = skillController.getSkillViewModel();
         return new UserViewModel(user, skillViewModel);
     }
 
+    /**
+     * Returns user data for specified userId.
+     *
+     * @return response user.
+     */
+    @RequestMapping(value = Endpoints.API_VIEWS_SKILLS_KNOWLEDGES, method = RequestMethod.GET)
+    public List<SkillData> getUserViewModel() throws Exception {
+        return skillController.getKnowledges().stream().map(SkillData::new).collect(Collectors.toList());
+    }
 }

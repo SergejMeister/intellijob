@@ -74,7 +74,7 @@ intelliJobControllers.controller(
                     $scope.searchEngine = $scope.user.profileData.searchEngine;
                     $scope.switchSearchEngine($scope.searchEngine);
 
-                    $scope.supportedKnowledges = response.supportedKnowledges;
+                    $scope.supportedKnowledges = [];
                     if ($scope.user.knowledges && $scope.user.knowledges.length > 0) {
                         $scope.userKnowledges = $scope.user.knowledges;
                         $scope.userSkillStatus.isKnowledgeEmpty = false;
@@ -177,6 +177,13 @@ intelliJobControllers.controller(
 
                 $scope.showKnowledgeTree = false;
                 $scope.setKnowledgeTreeState = function (newKnowledgeTreeState) {
+                    if ( $scope.supportedKnowledges.length == 0) {
+                        UserServices.getSupportedKnowledges().success(function (response) {
+                            $scope.supportedKnowledges = response;
+                        }).error(function (error) {
+                            console.log(error);
+                        });
+                    }
                     $scope.showKnowledgeTree = newKnowledgeTreeState;
                 };
 

@@ -22,6 +22,8 @@ angular.module('intelliJob')
 
                 var urlViewsBase = '/intellijob/api/views/users';
 
+                var urlKnowledges = '/intellijob/api/skills/knowledges';
+
                 var userServices = {};
 
                 /**
@@ -49,6 +51,15 @@ angular.module('intelliJob')
                  */
                 userServices.getViewUserModelById = function (userId) {
                     return $http.get(urlViewsBase + '/' + userId);
+                };
+
+                /**
+                 * Get supported knowledges.
+                 *
+                 * @returns {HttpPromise}
+                 */
+                userServices.getSupportedKnowledges = function () {
+                    return $http.get(urlKnowledges);
                 };
 
                 /**
