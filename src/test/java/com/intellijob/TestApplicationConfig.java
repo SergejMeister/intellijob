@@ -91,7 +91,7 @@ public class TestApplicationConfig {
      * Reload collection users.
      * <p>
      * Drop collection if exist, create a new collection and load data.
-     * Read data from collection_users.json
+     * Read data from collection_users_old.json
      *
      * @throws IOException exception.
      */

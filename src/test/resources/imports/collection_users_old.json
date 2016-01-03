@@ -155,6 +155,26 @@
         },
         {
           "skillNode": {
+            "_id": {
+              "$oid": "563625a144aec39e70b17bb0"
+            },
+            "name": "Application Server Tomcat",
+            "nodes": []
+          },
+          "rating": 3
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "563625a144aec39e70b1776e"
+            },
+            "name": "Datenbank MySQL",
+            "nodes": []
+          },
+          "rating": 4
+        },
+        {
+          "skillNode": {
             "_id": null,
             "name": "Jenkins",
             "nodes": []
@@ -164,9 +184,49 @@
         {
           "skillNode": {
             "_id": {
+              "$oid": "563625a144aec39e70b1776d"
+            },
+            "name": "Datenbank MongoDB",
+            "nodes": []
+          },
+          "rating": 3
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "563625a144aec39e70b17772"
+            },
+            "name": "Datenbank PostgreSQL",
+            "nodes": []
+          },
+          "rating": 4
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "563625a144aec39e70b1776f"
+            },
+            "name": "Datenbank Oracle",
+            "nodes": []
+          },
+          "rating": 3
+        },
+        {
+          "skillNode": {
+            "_id": {
               "$oid": "563625a144aec39e70b1778a"
             },
             "name": "MS-SQL Server",
+            "nodes": []
+          },
+          "rating": 3
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "563625a144aec39e70b17898"
+            },
+            "name": "Programmiersprache Java EE",
             "nodes": []
           },
           "rating": 3
@@ -184,12 +244,32 @@
         {
           "skillNode": {
             "_id": {
+              "$oid": "563625a144aec39e70b17899"
+            },
+            "name": "Programmiersprache JavaScript",
+            "nodes": []
+          },
+          "rating": 2
+        },
+        {
+          "skillNode": {
+            "_id": {
               "$oid": "563625a144aec39e70b1785c"
             },
             "name": "HTML",
             "nodes": []
           },
           "rating": 4
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "563625a144aec39e70b17859"
+            },
+            "name": "Formatierungssprache CSS",
+            "nodes": []
+          },
+          "rating": 3
         },
         {
           "skillNode": {
@@ -213,8 +293,30 @@
         },
         {
           "skillNode": {
-            "_id": null,
-            "name": "AngularJS",
+            "_id": {
+              "$oid": "563625a144aec39e70b1784c"
+            },
+            "name": "Entwicklungsumgebung Eclipse",
+            "nodes": []
+          },
+          "rating": 3
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "563625a144aec39e70b17897"
+            },
+            "name": "Programmiersprache Java",
+            "nodes": []
+          },
+          "rating": 4
+        },
+        {
+          "skillNode": {
+            "_id": {
+              "$oid": "563625a144aec39e70b17882"
+            },
+            "name": "Programmiersprache C#",
             "nodes": []
           },
           "rating": 3
@@ -222,47 +324,7 @@
         {
           "skillNode": {
             "_id": null,
-            "name": "Rest Service Architektur",
-            "nodes": []
-          },
-          "rating": 4
-        },
-        {
-          "skillNode": {
-            "_id": {
-              "$oid": "563625a144aec39e70b17796"
-            },
-            "name": "Git",
-            "nodes": []
-          },
-          "rating": 4
-        },
-        {
-          "skillNode": {
-            "_id": {
-              "$oid": "563625a144aec39e70b17775"
-            },
-            "name": "SQL",
-            "nodes": []
-          },
-          "rating": 5
-        },
-        {
-          "skillNode": {
-            "_id": {
-              "$oid": "563625a144aec39e70b17897"
-            },
-            "name": "Java",
-            "nodes": []
-          },
-          "rating": 5
-        },
-        {
-          "skillNode": {
-            "_id": {
-              "$oid": "563625a144aec39e70b17882"
-            },
-            "name": "C#",
+            "name": "AngularJS",
             "nodes": []
           },
           "rating": 3
@@ -272,7 +334,7 @@
             "_id": {
               "$oid": "563625a144aec39e70b17881"
             },
-            "name": "C",
+            "name": "Programmiersprache C",
             "nodes": []
           },
           "rating": 2
@@ -280,89 +342,17 @@
         {
           "skillNode": {
             "_id": {
-              "$oid": "563625a144aec39e70b1784c"
+              "$oid": "563625a144aec39e70b17776"
             },
-            "name": "Eclipse",
+            "name": "Datenbank SQL",
             "nodes": []
           },
           "rating": 4
         },
         {
           "skillNode": {
-            "_id": {
-              "$oid": "563625a144aec39e70b17899"
-            },
-            "name": "JavaScript",
-            "nodes": []
-          },
-          "rating": 3
-        },
-        {
-          "skillNode": {
-            "_id": {
-              "$oid": "563625a144aec39e70b17859"
-            },
-            "name": "CSS",
-            "nodes": []
-          },
-          "rating": 3
-        },
-        {
-          "skillNode": {
-            "_id": {
-              "$oid": "563625a144aec39e70b17898"
-            },
-            "name": "Java Enterprice Java EE",
-            "nodes": []
-          },
-          "rating": 3
-        },
-        {
-          "skillNode": {
-            "_id": {
-              "$oid": "563625a144aec39e70b17772"
-            },
-            "name": "PostgreSQL",
-            "nodes": []
-          },
-          "rating": 4
-        },
-        {
-          "skillNode": {
-            "_id": {
-              "$oid": "563625a144aec39e70b1776e"
-            },
-            "name": "MySQL",
-            "nodes": []
-          },
-          "rating": 4
-        },
-        {
-          "skillNode": {
-            "_id": {
-              "$oid": "563625a144aec39e70b1776f"
-            },
-            "name": "Oracle",
-            "nodes": []
-          },
-          "rating": 3
-        },
-        {
-          "skillNode": {
-            "_id": {
-              "$oid": "563625a144aec39e70b17bb0"
-            },
-            "name": "Application Server Tomcat",
-            "nodes": []
-          },
-          "rating": 3
-        },
-        {
-          "skillNode": {
-            "_id": {
-              "$oid": "563625a144aec39e70b1776d"
-            },
-            "name": "MongoDB",
+            "_id": null,
+            "name": "Rest Service Architektur",
             "nodes": []
           },
           "rating": 4
