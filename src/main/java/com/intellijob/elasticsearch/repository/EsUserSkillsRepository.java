@@ -14,32 +14,17 @@
  * limitations under the License.
  */
 
-package com.intellijob.domain.skills;
+package com.intellijob.elasticsearch.repository;
 
-import org.springframework.data.mongodb.core.mapping.Document;
+import com.intellijob.elasticsearch.domain.EsUserSkills;
+import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
 import java.util.List;
 
 /**
- * Model to represents all skill knowledge.
+ * Created by Sergej Meister on 1/4/16.
  */
-@Document(collection = "skill_knowledges")
-public class SkillKnowledge extends SkillRoot {
+public interface EsUserSkillsRepository extends ElasticsearchRepository<EsUserSkills, String> {
 
-    private List<SkillNode> knowledges;
-
-    public SkillKnowledge() {
-    }
-
-    public SkillKnowledge(SkillCategory skillCategory) {
-        super(skillCategory);
-    }
-
-    public List<SkillNode> getKnowledges() {
-        return knowledges;
-    }
-
-    public void setKnowledges(List<SkillNode> knowledges) {
-        this.knowledges = knowledges;
-    }
+    List<EsUserSkills> findByUserId(String userId);
 }

@@ -42,6 +42,11 @@ public final class EsConstants {
     /**
      * Type represents a collection name in elasticsearch.
      */
+    public static final String TYPE_USER_SKILLS = "userSkills";
+
+    /**
+     * Type represents a collection name in elasticsearch.
+     */
     public static final String TYPE_LANGUAGES = "languages";
 
     /**
