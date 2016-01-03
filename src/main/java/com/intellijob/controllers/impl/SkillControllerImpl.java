@@ -26,6 +26,7 @@ import com.intellijob.elasticsearch.domain.EsAutocompleteKnowledge;
 import com.intellijob.elasticsearch.domain.EsAutocompleteLanguage;
 import com.intellijob.elasticsearch.repository.EsAutocompleteKnowledgeRepository;
 import com.intellijob.elasticsearch.repository.EsAutocompleteLanguageRepository;
+import com.intellijob.elasticsearch.util.SearchQueryUtility;
 import com.intellijob.models.SkillViewModel;
 import com.intellijob.repository.skills.SkillKnowledgeRepository;
 import com.intellijob.repository.skills.SkillLanguageRepository;
@@ -35,12 +36,11 @@ import org.elasticsearch.search.suggest.completion.CompletionSuggestion;
 import org.elasticsearch.search.suggest.completion.CompletionSuggestionFuzzyBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -193,32 +193,43 @@ public class SkillControllerImpl implements SkillController {
                 .collect(Collectors.toList());
     }
 
+    public List<EsAutocompleteKnowledge> searchKnowledge(String searchWord) {
+        SearchQuery searchQuery = SearchQueryUtility.buildAutocompleteKnowledgeQuery(searchWord);
+        Iterable<EsAutocompleteKnowledge> matches =
+                elasticsearchTemplate.queryForList(searchQuery, EsAutocompleteKnowledge.class);
+        List<EsAutocompleteKnowledge> result = new ArrayList<>();
+        matches.forEach(result::add);
+
+        return result;
+    }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public List<EsAutocompleteKnowledge> suggestKnowledge(String searchWord) {
-        CompletionSuggestionFuzzyBuilder completionSuggestionFuzzyBuilder =
-                new CompletionSuggestionFuzzyBuilder(EsConstants.FIELD_SUGGEST_KNOWLEDGE).text(searchWord).field(
-                        EsConstants.FIELD_SUGGEST_KNOWLEDGE).size(50);
-
-        SuggestResponse suggestResponse =
-                elasticsearchTemplate.suggest(completionSuggestionFuzzyBuilder, EsAutocompleteKnowledge.class);
-        CompletionSuggestion completionSuggestion =
-                suggestResponse.getSuggest().getSuggestion(EsConstants.FIELD_SUGGEST_KNOWLEDGE);
-        List<CompletionSuggestion.Entry.Option> options = completionSuggestion.getEntries().get(0).getOptions();
-
-        Set<String> ids = new HashSet<>();
-        List<EsAutocompleteKnowledge> result = new ArrayList<>();
-        for (CompletionSuggestion.Entry.Option option : options) {
-            EsAutocompleteKnowledge esAutocompleteKnowledge = new EsAutocompleteKnowledge(option.getPayloadAsMap());
-            if (!ids.contains(esAutocompleteKnowledge.getId())) {
-                result.add(esAutocompleteKnowledge);
-                ids.add(esAutocompleteKnowledge.getId());
-            }
-        }
-
-        return result;
+        return searchKnowledge(searchWord);
+//        CompletionSuggestionFuzzyBuilder completionSuggestionFuzzyBuilder =
+//                new CompletionSuggestionFuzzyBuilder(EsConstants.FIELD_SUGGEST_KNOWLEDGE).text(searchWord).field(
+//                        EsConstants.FIELD_SUGGEST_KNOWLEDGE).size(50);
+//
+//        SuggestResponse suggestResponse =
+//                elasticsearchTemplate.suggest(completionSuggestionFuzzyBuilder, EsAutocompleteKnowledge.class);
+//        CompletionSuggestion completionSuggestion =
+//                suggestResponse.getSuggest().getSuggestion(EsConstants.FIELD_SUGGEST_KNOWLEDGE);
+//        List<CompletionSuggestion.Entry.Option> options = completionSuggestion.getEntries().get(0).getOptions();
+//
+//        Set<String> ids = new HashSet<>();
+//        List<EsAutocompleteKnowledge> result = new ArrayList<>();
+//        for (CompletionSuggestion.Entry.Option option : options) {
+//            EsAutocompleteKnowledge esAutocompleteKnowledge = new EsAutocompleteKnowledge(option.getPayloadAsMap());
+//            if (!ids.contains(esAutocompleteKnowledge.getId())) {
+//                result.add(esAutocompleteKnowledge);
+//                ids.add(esAutocompleteKnowledge.getId());
+//            }
+//        }
+//
+//        return result;
     }
 
     /**

@@ -16,9 +16,13 @@
 
 package com.intellijob.elasticsearch.domain;
 
+import com.intellijob.Constants;
 import com.intellijob.elasticsearch.EsConstants;
 import org.springframework.data.elasticsearch.annotations.CompletionField;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldIndex;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 import org.springframework.data.elasticsearch.core.completion.Completion;
 
 import java.util.HashSet;
@@ -31,6 +35,36 @@ import java.util.Set;
 @Document(indexName = EsConstants.INDEX_AUTOCOMPLETE, type = EsConstants.TYPE_KNOWLEDGES, shards = 1, replicas = 0)
 public class EsAutocompleteKnowledge extends EsBaseAutocomplete {
 
+    @Field(
+            type = FieldType.String,
+            index = FieldIndex.not_analyzed
+    )
+    protected String name;
+
+    /**
+     * Use simple index analyze for suggestion query.
+     */
+    @Field(
+            type = FieldType.String,
+            index = FieldIndex.analyzed,
+            searchAnalyzer = "simple",
+            indexAnalyzer = "simple",
+            store = true
+    )
+    protected String nameSimple;
+
+    /**
+     * Use simple index analyze for suggestion query.
+     */
+    @Field(
+            type = FieldType.String,
+            index = FieldIndex.analyzed,
+            searchAnalyzer = "ngram_analyzer",
+            indexAnalyzer = "ngram_analyzer",
+            store = true
+    )
+    protected String nameNgram;
+
     /**
      * Thi field is required to create an index for autocomplete service.
      */
@@ -38,20 +72,21 @@ public class EsAutocompleteKnowledge extends EsBaseAutocomplete {
     protected Completion suggestKnowledge;
 
     public EsAutocompleteKnowledge() {
-        super();
-    }
-
-    public EsAutocompleteKnowledge(String id, String name) {
-        super(id, name);
     }
 
     public EsAutocompleteKnowledge(Map<String, Object> objectMap) {
         super(objectMap);
+        if (objectMap.containsKey(Constants.DB_FIELD_NAME)) {
+            setName((String) objectMap.get(Constants.DB_FIELD_NAME));
+        }
     }
 
     public EsAutocompleteKnowledge(String id, String name, Boolean withSuggest) {
-        super(id, name);
+        super(id);
+        setName(name);
         if (withSuggest) {
+            setNameSimple(name);
+            setNameNgram(name);
             Set<String> inputs = new HashSet<>();
             inputs.add(name);
 
@@ -71,7 +106,9 @@ public class EsAutocompleteKnowledge extends EsBaseAutocomplete {
     }
 
     protected Map<String, Object> createPayload() {
-        return createBasePayload();
+        Map<String, Object> payload = createBasePayload();
+        payload.put(Constants.DB_FIELD_NAME, name);
+        return payload;
     }
 
     public Completion getSuggestKnowledge() {
@@ -80,5 +117,29 @@ public class EsAutocompleteKnowledge extends EsBaseAutocomplete {
 
     public void setSuggestKnowledge(Completion suggestKnowledge) {
         this.suggestKnowledge = suggestKnowledge;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getNameSimple() {
+        return nameSimple;
+    }
+
+    public void setNameSimple(String nameSimple) {
+        this.nameSimple = nameSimple;
+    }
+
+    public String getNameNgram() {
+        return nameNgram;
+    }
+
+    public void setNameNgram(String nameNgram) {
+        this.nameNgram = nameNgram;
     }
 }

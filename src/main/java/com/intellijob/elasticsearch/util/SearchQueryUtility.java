@@ -427,4 +427,17 @@ public final class SearchQueryUtility {
         return QueryBuilders
                 .filteredQuery(boolQueryBuilder, FilterBuilders.termFilter(Constants.DB_FIELD_READ, Boolean.FALSE));
     }
+
+    public static SearchQuery buildAutocompleteKnowledgeQuery(String searchWord) {
+//        CompletionSuggestionFuzzyBuilder completionSuggestionFuzzyBuilder =
+//                new CompletionSuggestionFuzzyBuilder(EsConstants.FIELD_SUGGEST_KNOWLEDGE).text(searchWord).field(
+//                        EsConstants.FIELD_SUGGEST_KNOWLEDGE).size(50);
+
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+       boolQueryBuilder.should(QueryBuilders.matchQuery("nameNgram", searchWord)).must(QueryBuilders.matchQuery("nameSimple", searchWord));
+//        boolQueryBuilder.must(QueryBuilders.matchQuery("nameNgram", searchWord)).must(QueryBuilders.matchQuery("nameSimple", searchWord));
+//        boolQueryBuilder.should(QueryBuilders.matchQuery("nameNgram", searchWord));
+
+        return buildNativeQuery(boolQueryBuilder, 0, 20);
+    }
 }

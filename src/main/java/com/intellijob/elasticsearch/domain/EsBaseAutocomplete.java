@@ -17,9 +17,6 @@
 package com.intellijob.elasticsearch.domain;
 
 import com.intellijob.Constants;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldIndex;
-import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,22 +29,12 @@ public abstract class EsBaseAutocomplete extends EsBaseDocument {
     public static final String WHITESPACE_SEPARATOR = " ";
     public static final String COMMA_SEPARATOR = ",";
 
-    @Field(
-            type = FieldType.String,
-            index = FieldIndex.analyzed,
-            searchAnalyzer = "simple",
-            indexAnalyzer = "simple",
-            store = true
-    )
-    protected String name;
-
     public EsBaseAutocomplete() {
         super();
     }
 
-    public EsBaseAutocomplete(String id, String name) {
+    public EsBaseAutocomplete(String id) {
         super(id);
-        setName(name);
     }
 
     public EsBaseAutocomplete(Map<String, Object> objectMap) {
@@ -55,26 +42,13 @@ public abstract class EsBaseAutocomplete extends EsBaseDocument {
             if (objectMap.containsKey(Constants.DB_FIELD_ID)) {
                 setId((String) objectMap.get(Constants.DB_FIELD_ID));
             }
-
-            if (objectMap.containsKey(Constants.DB_FIELD_NAME)) {
-                setName((String) objectMap.get(Constants.DB_FIELD_NAME));
-            }
         }
     }
 
     protected Map<String, Object> createBasePayload() {
         Map<String, Object> objectMap = new HashMap<>();
         objectMap.put(Constants.DB_FIELD_ID, id);
-        objectMap.put(Constants.DB_FIELD_NAME, name);
 
         return objectMap;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }

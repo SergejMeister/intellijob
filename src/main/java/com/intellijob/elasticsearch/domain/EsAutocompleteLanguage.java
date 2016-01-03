@@ -16,9 +16,13 @@
 
 package com.intellijob.elasticsearch.domain;
 
+import com.intellijob.Constants;
 import com.intellijob.elasticsearch.EsConstants;
 import org.springframework.data.elasticsearch.annotations.CompletionField;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldIndex;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 import org.springframework.data.elasticsearch.core.completion.Completion;
 
 import java.util.Map;
@@ -29,21 +33,24 @@ import java.util.Map;
 @Document(indexName = EsConstants.INDEX_AUTOCOMPLETE, type = EsConstants.TYPE_LANGUAGES, shards = 1, replicas = 0)
 public class EsAutocompleteLanguage extends EsBaseAutocomplete {
 
+    @Field(
+            type = FieldType.String,
+            index = FieldIndex.analyzed,
+            searchAnalyzer = "simple",
+            indexAnalyzer = "simple",
+            store = true
+    )
+    protected String name;
+
     /**
      * Thi field is required to create an index for autocomplete service.
      */
     @CompletionField(payloads = true)
     protected Completion suggestLanguage;
 
-    public EsAutocompleteLanguage() {
-    }
-
-    public EsAutocompleteLanguage(String id, String name) {
-        super(id, name);
-    }
-
     public EsAutocompleteLanguage(String id, String name, Boolean withSuggest) {
-        super(id, name);
+        super(id);
+        setName(name);
         if (withSuggest) {
             this.suggestLanguage = new Completion(name.split(WHITESPACE_SEPARATOR));
             Map<String, Object> payload = createPayload();
@@ -53,10 +60,15 @@ public class EsAutocompleteLanguage extends EsBaseAutocomplete {
 
     public EsAutocompleteLanguage(Map<String, Object> objectMap) {
         super(objectMap);
+        if (objectMap.containsKey(Constants.DB_FIELD_NAME)) {
+            setName((String) objectMap.get(Constants.DB_FIELD_NAME));
+        }
     }
 
     protected Map<String, Object> createPayload() {
-        return createBasePayload();
+        Map<String, Object> payload = createBasePayload();
+        payload.put(Constants.DB_FIELD_NAME, name);
+        return payload;
     }
 
     public Completion getSuggestLanguage() {
@@ -65,5 +77,13 @@ public class EsAutocompleteLanguage extends EsBaseAutocomplete {
 
     public void setSuggestLanguage(Completion suggestLanguage) {
         this.suggestLanguage = suggestLanguage;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

@@ -20,6 +20,7 @@ import com.intellijob.Constants;
 import com.intellijob.controllers.UserController;
 import com.intellijob.domain.User;
 import com.intellijob.domain.skills.SkillRatingNode;
+import com.intellijob.elasticsearch.repository.EsAutocompleteKnowledgeRepository;
 import com.intellijob.elasticsearch.repository.EsJobDetailRepository;
 import com.intellijob.exceptions.UserNotFoundException;
 import org.elasticsearch.action.search.SearchResponse;
@@ -28,6 +29,7 @@ import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.sort.SortOrder;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -49,6 +51,9 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
 
     @Autowired
     private EsJobDetailRepository esJobDetailRepository;
+
+    @Autowired
+    private EsAutocompleteKnowledgeRepository esAutocompleteKnowledgeRepository;
 
     @Autowired
     private UserController userController;
@@ -301,7 +306,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
 
     @Test
     public void testBuildBoolQueryAndBoostRatingField_8() throws Exception {
-        final String testName = "SKILL RATING SEARCH TEST ";
+        final String testName = "SKILL RATING SEARCH TEST 8";
         printStartTest(testName);
 
         List<SkillRatingNode> skillRatingNodes = user.getSkills().getAllSkills();
@@ -316,6 +321,26 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
 
         printFullTextExplain(skillRatingNodes, searchResponse);
+        printEndTest(testName);
+    }
+
+    @Test
+    @Ignore("This test is broken, Please fix it.")
+    public void testBuildAutocompleteKnowledgeQuery() throws Exception {
+        final String testName = "AUTOCOMPLETE KNOWLEDGE QUERY ";
+        printStartTest(testName);
+
+        String searchData = "Java";
+        SearchQuery searchQuery = SearchQueryUtility.buildAutocompleteKnowledgeQuery(searchData);
+        Assert.assertNotNull(searchQuery);
+        printQuery(searchQuery.getQuery());
+
+        SearchResponse searchResponse = getEsClient().prepareSearch("intellijob").setTypes("autocomplete")
+                .setQuery(searchQuery.getQuery()).setExplain(true).setSize(20).get();
+        Assert.assertNotNull(searchResponse);
+        Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
+
+        printFullTextExplain(searchData, searchResponse);
         printEndTest(testName);
     }
 
