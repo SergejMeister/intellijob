@@ -28,11 +28,11 @@ import com.intellijob.controllers.JobDetailController;
 import com.intellijob.domain.Job;
 import com.intellijob.domain.JobDetail;
 import com.intellijob.domain.builder.JobDetailBuilder;
-import com.intellijob.domain.skills.SkillRatingNode;
-import com.intellijob.domain.skills.Skills;
 import com.intellijob.elasticsearch.SearchModel;
 import com.intellijob.elasticsearch.domain.EsJobDetail;
+import com.intellijob.elasticsearch.domain.EsUserSkills;
 import com.intellijob.elasticsearch.repository.EsJobDetailRepository;
+import com.intellijob.elasticsearch.repository.EsUserSkillsRepository;
 import com.intellijob.elasticsearch.util.SearchQueryUtility;
 import com.intellijob.exceptions.BaseException;
 import com.intellijob.exceptions.DocumentNotFoundException;
@@ -81,6 +81,10 @@ public class JobDetailControllerImpl implements JobDetailController {
 
     @Autowired
     private EsJobDetailRepository esJobDetailRepository;
+
+
+    @Autowired
+    private EsUserSkillsRepository esUserSkillsRepository;
 
     /**
      * {@inheritDoc}
@@ -284,10 +288,10 @@ public class JobDetailControllerImpl implements JobDetailController {
      * @return founded JobDetails.
      */
     private Page<EsJobDetail> findUsingPersonalSearchEngine(SearchModel searchModel) {
-        Skills userSkills = searchModel.getUser().getSkills();
-        List<SkillRatingNode> skillRatingNodes = userSkills.getAllSkills();
+        List<EsUserSkills> esUserSkills = esUserSkillsRepository.findByUserId(searchModel.getUser().getId());
         SearchQuery searchQuery = SearchQueryUtility
-                .buildBoolQueryAndBoostRatingField_6(skillRatingNodes, searchModel.getOffset(), searchModel.getLimit());
+                .buildBoolQueryAndBoostRatingFieldUsingEsUserSkills(esUserSkills, searchModel.getOffset(),
+                        searchModel.getLimit());
         Page<EsJobDetail> result = elasticsearchTemplate.queryForPage(searchQuery, EsJobDetail.class);
         return result;
     }

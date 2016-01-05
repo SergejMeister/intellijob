@@ -23,12 +23,16 @@ import com.intellijob.dto.response.JobDetailViewModel;
 import com.intellijob.elasticsearch.SearchModel;
 import com.intellijob.elasticsearch.SearchModelBuilder;
 import com.intellijob.elasticsearch.domain.EsJobDetail;
+import com.intellijob.elasticsearch.domain.EsUserSkills;
+import com.intellijob.elasticsearch.repository.EsUserSkillsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * View model to represent job detail page.
@@ -42,16 +46,22 @@ public class ViewJobDetailServices extends BaseServices {
     @Autowired
     private JobDetailController jobDetailController;
 
+    @Autowired
+    private EsUserSkillsRepository esUserSkillsRepository;
+
     /**
      * Returns user data for specified userId.
      *
      * @return response user.
      */
     @RequestMapping(value = Endpoints.API_VIEWS_JOBDETAILS, method = RequestMethod.GET)
-    public @ResponseBody JobDetailViewModel getJobDetailViewModel() throws Exception {
+    public
+    @ResponseBody
+    JobDetailViewModel getJobDetailViewModel() throws Exception {
         User user = userController.getUniqueUser();
+        List<EsUserSkills> esUserSkills = esUserSkillsRepository.findByUserId(user.getId());
         SearchModel searchModel = new SearchModelBuilder(user).build();
         Page<EsJobDetail> jobDetailsPage = jobDetailController.findAndSort(searchModel);
-        return new JobDetailViewModel(user, jobDetailsPage, Boolean.FALSE);
+        return new JobDetailViewModel(user, esUserSkills, jobDetailsPage, Boolean.FALSE);
     }
 }

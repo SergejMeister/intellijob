@@ -18,7 +18,10 @@ package com.intellijob.dto.response;
 
 import com.intellijob.domain.User;
 import com.intellijob.elasticsearch.domain.EsJobDetail;
+import com.intellijob.elasticsearch.domain.EsUserSkills;
 import org.springframework.data.domain.Page;
+
+import java.util.List;
 
 /**
  * Represents JobDetail view.
@@ -29,9 +32,21 @@ public class JobDetailViewModel {
 
     private ResponseUserData userData;
 
-    public JobDetailViewModel(User user, Page<EsJobDetail> jobDetailsPage, Boolean hasContent) {
+    private List<EsUserSkills> userSkills;
+
+    public JobDetailViewModel(User user, List<EsUserSkills> userSkills, Page<EsJobDetail> jobDetailsPage,
+                              Boolean hasContent) {
         userData = new ResponseUserData(user);
+        setUserSkills(userSkills);
         tableData = new ResponseJobDetailTableData(jobDetailsPage, hasContent);
+    }
+
+    public List<EsUserSkills> getUserSkills() {
+        return userSkills;
+    }
+
+    public void setUserSkills(List<EsUserSkills> userSkills) {
+        this.userSkills = userSkills;
     }
 
     public ResponseUserData getUserData() {

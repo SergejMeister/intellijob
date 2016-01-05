@@ -49,9 +49,12 @@ public class Endpoints {
     public static final String AUDIT_PAGING = AUDIT + "/{pageIndex}/{limit}";
     public static final String AUDIT_BY_ID = AUDIT + "/{auditId}";
     public static final String ES_JOBDEATAILS_INDEX = API + "/elastic/jobdetails/indexes";
+    public static final String ES_USERS_ID_SKILLS = API + "/elastic/users/{userId}/skills";
     public static final String ES_AUTOCOMPLETE_LANGUAGE_INDEX = API + "/elastic/autocomplete/language/indexes";
-    public static final String ES_AUTOCOMPLETE_LANGUAGE_NAME_VALUE = API + "/elastic/autocomplete/language/name/{value}";
+    public static final String ES_AUTOCOMPLETE_LANGUAGE_NAME_VALUE =
+            API + "/elastic/autocomplete/language/name/{value}";
     public static final String ES_AUTOCOMPLETE_KNOWLEDGE_INDEX = API + "/elastic/autocomplete/knowledge/indexes";
-    public static final String ES_AUTOCOMPLETE_KNOWLEDGE_NAME_VALUE = API + "/elastic/autocomplete/knowledge/name/{value}";
+    public static final String ES_AUTOCOMPLETE_KNOWLEDGE_NAME_VALUE =
+            API + "/elastic/autocomplete/knowledge/name/{value}";
 
 }

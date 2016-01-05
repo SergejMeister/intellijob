@@ -44,6 +44,7 @@ intelliJobControllers.controller(
                 //watch state should not be active by init page, to avoid 2 get request!
                 $scope.isWatchActive = false;
                 JobDetailServices.getViewModel().success(function (response) {
+                    $scope.words = $scope.createTagClouds(response.userSkills);
                     $scope.user = response.userData;
                     $scope.searchEngine = $scope.user.profileData.searchEngine;
                     $scope.switchSearchEngine($scope.searchEngine);
@@ -89,7 +90,6 @@ intelliJobControllers.controller(
                  */
                 $scope.updateOneReadState = function (jobDetailId, newReadState) {
                     JobDetailServices.updateOneReadState(jobDetailId, newReadState).success(function (response) {
-                        //var jobDetailArr = eval($scope.jobDetails);
                         for (var i = 0; i < $scope.jobDetails.length; i++) {
                             if ($scope.jobDetails[i].jobDetailId === jobDetailId) {
                                 $scope.jobDetails[i].read = newReadState;
@@ -116,7 +116,7 @@ intelliJobControllers.controller(
                     JobDetailServices.updateAllReadState(ids, newReadState).success(function (response) {
                         //var jobDetailArr = eval($scope.jobDetails);
                         for (var i = 0; i < $scope.jobDetails.length; i++) {
-                                $scope.jobDetails[i].read = newReadState;
+                            $scope.jobDetails[i].read = newReadState;
                         }
                         if (newReadState) {
                             $rootScope.success = 'All mark as read!';
@@ -151,6 +151,25 @@ intelliJobControllers.controller(
                     }).error(function (error) {
                         console.log(error);
                     });
+                };
+
+                /**
+                 * Update search engine.
+                 */
+                $scope.createTagClouds = function (userSkills) {
+                    var result = [];
+                    if (userSkills) {
+                        for (var i = 0; i < userSkills.length; i++) {
+                            var tagCloud = {};
+                            tagCloud.text = userSkills[i].name;
+                            tagCloud.weight = userSkills[i].rating * 10;
+                            if (userSkills[i].parent) {
+                                tagCloud.weight = userSkills[i].rating
+                            }
+                            result.push(tagCloud);
+                        }
+                    }
+                    return result;
                 };
 
                 /**

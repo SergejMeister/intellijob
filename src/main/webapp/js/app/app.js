@@ -21,7 +21,8 @@ var intelliJob = angular.module('intelliJob',
             'ngAnimate',
             'intelliJobControllers',
             'ui.bootstrap',
-            'angucomplete'
+            'angucomplete',
+            'angular-jqcloud'
         ]);
 var intelliJobControllers = angular.module('intelliJobControllers', []);
 

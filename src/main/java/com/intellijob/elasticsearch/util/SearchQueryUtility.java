@@ -18,6 +18,7 @@ package com.intellijob.elasticsearch.util;
 
 import com.intellijob.Constants;
 import com.intellijob.domain.skills.SkillRatingNode;
+import com.intellijob.elasticsearch.domain.EsUserSkills;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.BoostingQueryBuilder;
 import org.elasticsearch.index.query.FilterBuilders;
@@ -405,6 +406,44 @@ public final class SearchQueryUtility {
         return searchQuery;
     }
 
+    /**
+     * @param skillRatingNodes list of user skills with rating.
+     * @param offset           list offset.
+     * @param limit            list limit.
+     *
+     * @return searchQuery
+     */
+    public static SearchQuery buildBoolQueryAndBoostRatingFieldUsingEsUserSkills(
+            Collection<EsUserSkills> skillRatingNodes,
+            int offset,
+            int limit) {
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        for (EsUserSkills esUserSkill : skillRatingNodes) {
+            float boostValue = esUserSkill.getRating() * 10;
+            if (esUserSkill.isParent()) {
+                // for parent override.
+                boostValue = esUserSkill.getRating();
+            }
+            String searchTerm = esUserSkill.getName();
+            QueryBuilder matchQueryBuilder = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchTerm)
+                    .operator(MatchQueryBuilder.Operator.OR).fuzziness(5)
+                    .maxExpansions(DEFAULT_EXPANSION_VALUE)
+                    .prefixLength(searchTerm.length() - 1)
+                    .boost(boostValue);
+            boolQueryBuilder.should(matchQueryBuilder);
+        }
+
+        FilteredQueryBuilder filteredQuery = QueryBuilders
+                .filteredQuery(boolQueryBuilder, FilterBuilders.termFilter(Constants.DB_FIELD_READ, Boolean.FALSE));
+        FunctionScoreQueryBuilder functionBuilder = QueryBuilders.functionScoreQuery(filteredQuery);
+        functionBuilder.add(ScoreFunctionBuilders
+                .exponentialDecayFunction(Constants.DB_FIELD_RECEIVED_DATE, DEFAULT_DECAY_FOR_RECEIVED_DATE));
+
+        SearchQuery searchQuery = buildNativeQuery(functionBuilder, offset, limit);
+        return searchQuery;
+    }
+
+
     private static SearchQuery buildNativeQuery(QueryBuilder queryBuilder, int offset, int limit) {
         PageRequest request = new PageRequest(offset, limit);
         return new NativeSearchQueryBuilder().withQuery(queryBuilder).withPageable(request).build();
@@ -434,7 +473,8 @@ public final class SearchQueryUtility {
 //                        EsConstants.FIELD_SUGGEST_KNOWLEDGE).size(50);
 
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-       boolQueryBuilder.should(QueryBuilders.matchQuery("nameNgram", searchWord)).must(QueryBuilders.matchQuery("nameSimple", searchWord));
+        boolQueryBuilder.should(QueryBuilders.matchQuery("nameNgram", searchWord))
+                .must(QueryBuilders.matchQuery("nameSimple", searchWord));
 //        boolQueryBuilder.must(QueryBuilders.matchQuery("nameNgram", searchWord)).must(QueryBuilders.matchQuery("nameSimple", searchWord));
 //        boolQueryBuilder.should(QueryBuilders.matchQuery("nameNgram", searchWord));
 

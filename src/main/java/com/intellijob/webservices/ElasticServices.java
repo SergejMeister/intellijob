@@ -18,7 +18,9 @@ package com.intellijob.webservices;
 
 import com.intellijob.controllers.JobDetailController;
 import com.intellijob.controllers.SkillController;
+import com.intellijob.controllers.UserController;
 import com.intellijob.dto.SkillData;
+import com.intellijob.elasticsearch.domain.EsUserSkills;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,10 +43,19 @@ public class ElasticServices extends BaseServices {
     @Autowired
     private SkillController skillController;
 
+
+    @Autowired
+    private UserController userController;
+
     @RequestMapping(value = Endpoints.ES_JOBDEATAILS_INDEX, method = RequestMethod.PUT)
     public ResponseEntity createJobDetailsIndexes() {
         jobDetailController.createElasticsearchIndexes();
         return ResponseEntity.accepted().build();
+    }
+
+    @RequestMapping(value = Endpoints.ES_USERS_ID_SKILLS, method = RequestMethod.GET)
+    public List<EsUserSkills> getUserSkills(@PathVariable String userId) {
+        return userController.getUserSkills(userId);
     }
 
     @RequestMapping(value = Endpoints.ES_AUTOCOMPLETE_LANGUAGE_INDEX, method = RequestMethod.PUT)

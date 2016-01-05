@@ -18,10 +18,12 @@ package com.intellijob.controllers;
 
 import com.intellijob.domain.Profile;
 import com.intellijob.domain.User;
+import com.intellijob.elasticsearch.domain.EsUserSkills;
 import com.intellijob.exceptions.NotMailSyncException;
 import com.intellijob.exceptions.UserNotFoundException;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Interface profile controller.
@@ -107,4 +109,13 @@ public interface UserController {
      * @param userId user id.
      */
     void deleteUser(String userId);
+
+    /**
+     * Returns all user skills from Elasticsearch.
+     *
+     * @param userId user id.
+     *
+     * @return list of user skills.
+     */
+    List<EsUserSkills> getUserSkills(String userId);
 }

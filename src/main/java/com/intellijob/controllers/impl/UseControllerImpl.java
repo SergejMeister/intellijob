@@ -249,4 +249,9 @@ public class UseControllerImpl implements UserController {
         userRepository.delete(userId);
     }
 
+    @Override
+    public List<EsUserSkills> getUserSkills(String userId) {
+        return esUserSkillsRepository.findByUserId(userId);
+    }
+
 }
