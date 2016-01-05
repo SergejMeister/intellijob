@@ -20,8 +20,10 @@ import com.intellijob.Constants;
 import com.intellijob.controllers.UserController;
 import com.intellijob.domain.User;
 import com.intellijob.domain.skills.SkillRatingNode;
-import com.intellijob.elasticsearch.repository.EsAutocompleteKnowledgeRepository;
+import com.intellijob.elasticsearch.EsConstants;
+import com.intellijob.elasticsearch.domain.EsUserSkills;
 import com.intellijob.elasticsearch.repository.EsJobDetailRepository;
+import com.intellijob.elasticsearch.repository.EsUserSkillsRepository;
 import com.intellijob.exceptions.UserNotFoundException;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.index.query.QueryBuilder;
@@ -53,7 +55,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
     private EsJobDetailRepository esJobDetailRepository;
 
     @Autowired
-    private EsAutocompleteKnowledgeRepository esAutocompleteKnowledgeRepository;
+    private EsUserSkillsRepository esUserSkillsRepository;
 
     @Autowired
     private UserController userController;
@@ -88,7 +90,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         printQuery(searchQuery.getQuery());
 
         SearchResponse searchResponse =
-                getEsClient().prepareSearch("intellijob").setQuery(searchQuery.getQuery()).setExplain(true)
+                getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB).setQuery(searchQuery.getQuery()).setExplain(true)
                         .setSize(Constants.DB_RESULT_LIMIT).get();
         Assert.assertNotNull(searchResponse);
         Assert.assertTrue("Hits should not be empty!", searchResponse.getHits().getTotalHits() > 0);
@@ -110,7 +112,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         printQuery(searchQuery.getQuery());
 
         SearchResponse searchResponse =
-                getEsClient().prepareSearch("intellijob").setQuery(searchQuery.getQuery()).setExplain(true)
+                getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB).setQuery(searchQuery.getQuery()).setExplain(true)
                         .setSize(Constants.DB_RESULT_LIMIT).get();
         Assert.assertNotNull(searchResponse);
         Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
@@ -132,7 +134,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         printQuery(searchQuery.getQuery());
 
         SearchResponse searchResponse =
-                getEsClient().prepareSearch("intellijob").setQuery(searchQuery.getQuery()).setExplain(true)
+                getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB).setQuery(searchQuery.getQuery()).setExplain(true)
                         .setSize(Constants.DB_RESULT_LIMIT).get();
         Assert.assertNotNull(searchResponse);
         Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
@@ -154,7 +156,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         printQuery(searchQuery.getQuery());
 
         SearchResponse searchResponse =
-                getEsClient().prepareSearch("intellijob").setQuery(searchQuery.getQuery()).setExplain(true)
+                getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB).setQuery(searchQuery.getQuery()).setExplain(true)
                         .setSize(Constants.DB_RESULT_LIMIT).addSort(Constants.DB_FIELD_RECEIVED_DATE, SortOrder.DESC)
                         .get();
         Assert.assertNotNull(searchResponse);
@@ -175,7 +177,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         Assert.assertNotNull(searchQuery);
         printQuery(searchQuery.getQuery());
 
-        SearchResponse searchResponse = getEsClient().prepareSearch("intellijob")
+        SearchResponse searchResponse = getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB)
                 .setQuery(searchQuery.getQuery()).setExplain(true).setSize(Constants.DB_RESULT_LIMIT).get();
         Assert.assertNotNull(searchResponse);
         Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
@@ -195,7 +197,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         Assert.assertNotNull(searchQuery);
         printQuery(searchQuery.getQuery());
 
-        SearchResponse searchResponse = getEsClient().prepareSearch("intellijob")
+        SearchResponse searchResponse = getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB)
                 .setQuery(searchQuery.getQuery()).setExplain(true).setSize(Constants.DB_RESULT_LIMIT).get();
         Assert.assertNotNull(searchResponse);
         Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
@@ -215,7 +217,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         Assert.assertNotNull(searchQuery);
         printQuery(searchQuery.getQuery());
 
-        SearchResponse searchResponse = getEsClient().prepareSearch("intellijob")
+        SearchResponse searchResponse = getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB)
                 .setQuery(searchQuery.getQuery()).setExplain(true).setSize(Constants.DB_RESULT_LIMIT).get();
         Assert.assertNotNull(searchResponse);
         Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
@@ -235,7 +237,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         Assert.assertNotNull(searchQuery);
         printQuery(searchQuery.getQuery());
 
-        SearchResponse searchResponse = getEsClient().prepareSearch("intellijob")
+        SearchResponse searchResponse = getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB)
                 .setQuery(searchQuery.getQuery()).setExplain(true).setSize(Constants.DB_RESULT_LIMIT).get();
         Assert.assertNotNull(searchResponse);
         Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
@@ -255,7 +257,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         Assert.assertNotNull(searchQuery);
         printQuery(searchQuery.getQuery());
 
-        SearchResponse searchResponse = getEsClient().prepareSearch("intellijob")
+        SearchResponse searchResponse = getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB)
                 .setQuery(searchQuery.getQuery()).setExplain(true).setSize(Constants.DB_RESULT_LIMIT).get();
         Assert.assertNotNull(searchResponse);
         Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
@@ -275,7 +277,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         Assert.assertNotNull(searchQuery);
         printQuery(searchQuery.getQuery());
 
-        SearchResponse searchResponse = getEsClient().prepareSearch("intellijob")
+        SearchResponse searchResponse = getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB)
                 .setQuery(searchQuery.getQuery()).setExplain(true).setSize(Constants.DB_RESULT_LIMIT).get();
         Assert.assertNotNull(searchResponse);
         Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
@@ -295,7 +297,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         Assert.assertNotNull(searchQuery);
         printQuery(searchQuery.getQuery());
 
-        SearchResponse searchResponse = getEsClient().prepareSearch("intellijob")
+        SearchResponse searchResponse = getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB)
                 .setQuery(searchQuery.getQuery()).setExplain(true).setSize(Constants.DB_RESULT_LIMIT).get();
         Assert.assertNotNull(searchResponse);
         Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
@@ -315,12 +317,32 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         Assert.assertNotNull(searchQuery);
         printQuery(searchQuery.getQuery());
 
-        SearchResponse searchResponse = getEsClient().prepareSearch("intellijob")
+        SearchResponse searchResponse = getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB)
                 .setQuery(searchQuery.getQuery()).setExplain(true).setSize(Constants.DB_RESULT_LIMIT).get();
         Assert.assertNotNull(searchResponse);
         Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
 
         printFullTextExplain(skillRatingNodes, searchResponse);
+        printEndTest(testName);
+    }
+
+    @Test
+    public void testBuildBoolQueryAndBoostRatingFieldUsingEsUserSkills(){
+        final String testName = "SKILL RATING SEARCH WITH ELASTIC USER SKILLS TEST";
+        printStartTest(testName);
+
+        List<EsUserSkills> userSkills = esUserSkillsRepository.findByUserId(user.getId());
+
+        SearchQuery searchQuery = SearchQueryUtility.buildBoolQueryAndBoostRatingFieldUsingEsUserSkills(userSkills, DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
+        Assert.assertNotNull(searchQuery);
+        printQuery(searchQuery.getQuery());
+
+        SearchResponse searchResponse = getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB)
+                .setQuery(searchQuery.getQuery()).setExplain(true).setSize(Constants.DB_RESULT_LIMIT).get();
+        Assert.assertNotNull(searchResponse);
+        Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
+
+        printFullTextExplainUsingElastic(userSkills, searchResponse);
         printEndTest(testName);
     }
 
@@ -335,7 +357,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         Assert.assertNotNull(searchQuery);
         printQuery(searchQuery.getQuery());
 
-        SearchResponse searchResponse = getEsClient().prepareSearch("intellijob").setTypes("autocomplete")
+        SearchResponse searchResponse = getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB).setTypes("autocomplete")
                 .setQuery(searchQuery.getQuery()).setExplain(true).setSize(20).get();
         Assert.assertNotNull(searchResponse);
         Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
@@ -349,6 +371,19 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         System.out.println("----------------------------- QUERY  ----------------------------------------");
         System.out.println(query.toString());
         System.out.println("-----------------------------------------------------------------------------");
+    }
+
+    private void printFullTextExplainUsingElastic(final Collection<EsUserSkills> skillRatingNodes,
+                                      final SearchResponse searchResponse) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for (EsUserSkills skillRatingNode : skillRatingNodes) {
+            sb.append("{name: ").append(skillRatingNode.getName()).append(",");
+            sb.append("rating: ").append(skillRatingNode.getRating()).append("}");
+        }
+        sb.append("]");
+
+        printFullTextExplain(sb.toString(), searchResponse);
     }
 
     private void printFullTextExplain(final Collection<SkillRatingNode> skillRatingNodes,
