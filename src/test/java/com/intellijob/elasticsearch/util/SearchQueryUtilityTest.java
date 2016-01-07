@@ -28,6 +28,7 @@ import com.intellijob.exceptions.UserNotFoundException;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.sort.SortOrder;
 import org.junit.Assert;
 import org.junit.Before;
@@ -39,6 +40,7 @@ import org.springframework.data.elasticsearch.core.query.SearchQuery;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
@@ -90,7 +92,8 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         printQuery(searchQuery.getQuery());
 
         SearchResponse searchResponse =
-                getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB).setQuery(searchQuery.getQuery()).setExplain(true)
+                getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB).setQuery(searchQuery.getQuery())
+                        .setExplain(true)
                         .setSize(Constants.DB_RESULT_LIMIT).get();
         Assert.assertNotNull(searchResponse);
         Assert.assertTrue("Hits should not be empty!", searchResponse.getHits().getTotalHits() > 0);
@@ -112,7 +115,8 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         printQuery(searchQuery.getQuery());
 
         SearchResponse searchResponse =
-                getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB).setQuery(searchQuery.getQuery()).setExplain(true)
+                getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB).setQuery(searchQuery.getQuery())
+                        .setExplain(true)
                         .setSize(Constants.DB_RESULT_LIMIT).get();
         Assert.assertNotNull(searchResponse);
         Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
@@ -134,7 +138,8 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         printQuery(searchQuery.getQuery());
 
         SearchResponse searchResponse =
-                getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB).setQuery(searchQuery.getQuery()).setExplain(true)
+                getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB).setQuery(searchQuery.getQuery())
+                        .setExplain(true)
                         .setSize(Constants.DB_RESULT_LIMIT).get();
         Assert.assertNotNull(searchResponse);
         Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
@@ -156,7 +161,8 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         printQuery(searchQuery.getQuery());
 
         SearchResponse searchResponse =
-                getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB).setQuery(searchQuery.getQuery()).setExplain(true)
+                getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB).setQuery(searchQuery.getQuery())
+                        .setExplain(true)
                         .setSize(Constants.DB_RESULT_LIMIT).addSort(Constants.DB_FIELD_RECEIVED_DATE, SortOrder.DESC)
                         .get();
         Assert.assertNotNull(searchResponse);
@@ -327,13 +333,15 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
     }
 
     @Test
-    public void testBuildBoolQueryAndBoostRatingFieldUsingEsUserSkills(){
+    public void testBuildBoolQueryAndBoostRatingFieldUsingEsUserSkills() {
         final String testName = "SKILL RATING SEARCH WITH ELASTIC USER SKILLS TEST";
         printStartTest(testName);
 
         List<EsUserSkills> userSkills = esUserSkillsRepository.findByUserId(user.getId());
 
-        SearchQuery searchQuery = SearchQueryUtility.buildBoolQueryAndBoostRatingFieldUsingEsUserSkills(userSkills, DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
+        SearchQuery searchQuery = SearchQueryUtility
+                .buildBoolQueryAndBoostRatingFieldUsingEsUserSkills(userSkills, DEFAULT_OFFSET,
+                        Constants.DB_RESULT_LIMIT);
         Assert.assertNotNull(searchQuery);
         printQuery(searchQuery.getQuery());
 
@@ -343,6 +351,93 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
 
         printFullTextExplainUsingElastic(userSkills, searchResponse);
+        printEndTest(testName);
+    }
+
+    @Test
+    public void testSimpleCompareSearchEngine() {
+        final String testName = "SIMPLE COMPARE SEARCH ENGINE";
+        printStartTest(testName);
+
+        int limit = 10;
+        String testSearchData = "Werkstudent Java,Datenbanken,Jenkins";
+
+        PageRequest pageRequest = new PageRequest(DEFAULT_OFFSET, limit);
+
+        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchMatchQuery_4(testSearchData, pageRequest);
+        Assert.assertNotNull(searchQuery);
+        printQuery(searchQuery.getQuery());
+
+        SearchResponse simpleSearchResponse =
+                getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB).setQuery(searchQuery.getQuery())
+                        .setExplain(true).setSize(limit).get();
+        Assert.assertNotNull(simpleSearchResponse);
+        Assert.assertTrue("Hits should not be empty!", simpleSearchResponse.getHits().getTotalHits() > 0);
+
+        printFullTextExplain(testSearchData, simpleSearchResponse, limit);
+        printEndTest(testName);
+
+        System.out.println("-----------------------------------------------------------------------------");
+        System.out.println("-----------------------------------------------------------------------------");
+        List<EsUserSkills> userSkills = new ArrayList<>();
+        userSkills.add(createEsUserSkills("1", user.getId(), "Werkstudent Java", 5.0f));
+        userSkills.add(createEsUserSkills("2", user.getId(), "Datenbanken", 3.0f));
+        userSkills.add(createEsUserSkills("3", user.getId(), "Jenkins", 3.0f));
+
+        searchQuery = SearchQueryUtility.buildBoolQueryAndBoostRatingFieldUsingEsUserSkills(userSkills, DEFAULT_OFFSET,
+                limit);
+        Assert.assertNotNull(searchQuery);
+        printQuery(searchQuery.getQuery());
+
+        SearchResponse complexSearchResponse = getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB)
+                .setQuery(searchQuery.getQuery()).setExplain(true).setSize(limit).get();
+        Assert.assertNotNull(complexSearchResponse);
+        Assert.assertTrue("Hits should not be empty.", complexSearchResponse.getHits().getTotalHits() > 0);
+
+        printFullTextExplainUsingElastic(userSkills, complexSearchResponse, limit);
+        printSearchComparing(simpleSearchResponse.getHits(),complexSearchResponse.getHits(),limit);
+        printEndTest(testName);
+    }
+
+    @Test
+    public void testComplexCompareSearchEngine() {
+        final String testName = "COMPLEX COMPARE SEARCH ENGINE";
+        printStartTest(testName);
+
+        int limit = 10;
+        List<EsUserSkills> userSkills = esUserSkillsRepository.findByUserId(user.getId());
+        String testSearchData = createSimpleSearchText(userSkills);
+
+        PageRequest pageRequest = new PageRequest(DEFAULT_OFFSET, limit);
+
+        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchMatchQuery_4(testSearchData, pageRequest);
+        Assert.assertNotNull(searchQuery);
+        printQuery(searchQuery.getQuery());
+
+        SearchResponse simpleSearchResponse =
+                getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB).setQuery(searchQuery.getQuery())
+                        .setExplain(true).setSize(limit).get();
+        Assert.assertNotNull(simpleSearchResponse);
+        Assert.assertTrue("Hits should not be empty!", simpleSearchResponse.getHits().getTotalHits() > 0);
+
+        printFullTextExplain(testSearchData, simpleSearchResponse, limit);
+        printEndTest(testName);
+
+        System.out.println("-----------------------------------------------------------------------------");
+        System.out.println("-----------------------------------------------------------------------------");
+
+        searchQuery = SearchQueryUtility.buildBoolQueryAndBoostRatingFieldUsingEsUserSkills(userSkills, DEFAULT_OFFSET,
+                limit);
+        Assert.assertNotNull(searchQuery);
+        printQuery(searchQuery.getQuery());
+
+        SearchResponse complexSearchResponse = getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB)
+                .setQuery(searchQuery.getQuery()).setExplain(true).setSize(limit).get();
+        Assert.assertNotNull(complexSearchResponse);
+        Assert.assertTrue("Hits should not be empty.", complexSearchResponse.getHits().getTotalHits() > 0);
+
+        printFullTextExplainUsingElastic(userSkills, complexSearchResponse, limit);
+        printSearchComparing(simpleSearchResponse.getHits(),complexSearchResponse.getHits(),limit);
         printEndTest(testName);
     }
 
@@ -357,13 +452,31 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         Assert.assertNotNull(searchQuery);
         printQuery(searchQuery.getQuery());
 
-        SearchResponse searchResponse = getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB).setTypes("autocomplete")
-                .setQuery(searchQuery.getQuery()).setExplain(true).setSize(20).get();
+        SearchResponse searchResponse =
+                getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB).setTypes("autocomplete")
+                        .setQuery(searchQuery.getQuery()).setExplain(true).setSize(20).get();
         Assert.assertNotNull(searchResponse);
         Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
 
         printFullTextExplain(searchData, searchResponse);
         printEndTest(testName);
+    }
+
+    private String createSimpleSearchText(List<EsUserSkills> userSkills) {
+        StringBuilder sb = new StringBuilder();
+        for(EsUserSkills esUserSkill : userSkills){
+            sb.append(esUserSkill.getName()).append(",");
+        }
+
+        return sb.toString();
+    }
+
+    private EsUserSkills createEsUserSkills(String id, String userId, String name, float rating) {
+        EsUserSkills esUserSkills = new EsUserSkills(id, userId);
+        esUserSkills.setName(name);
+        esUserSkills.setRating(rating);
+
+        return esUserSkills;
     }
 
 
@@ -373,8 +486,43 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         System.out.println("-----------------------------------------------------------------------------");
     }
 
+    private void printSearchComparing(final SearchHits simpleSearchHit, final SearchHits complexSearchHit, int limit) {
+        System.out.println("------------------------------ COMPARING HITS -----------------------------------");
+        for (int i = 0; i < limit; i++) {
+            System.out.println("---------------------------  SIMPLE -------------------------------------------");
+            int index = i + 1;
+            SearchHit seample = simpleSearchHit.getAt(i);
+            String receivedDate = formatDate((Long) seample.getSource().get(Constants.DB_FIELD_RECEIVED_DATE));
+
+            StringBuilder firstLine = new StringBuilder();
+            firstLine.append(index + " Hit: ");
+            firstLine.append("score(").append(seample.getScore()).append(") | ");
+            firstLine.append("receivedDate(").append(receivedDate).append(") | ");
+            firstLine.append("name(").append(seample.getSource().get("name")).append(") | ");
+            firstLine.append("id(").append(seample.getSource().get("id")).append(") ");
+            System.out.println(firstLine);
+
+            System.out.println("---------------------------  COMPLEX -------------------------------------------");
+            SearchHit complex = complexSearchHit.getAt(i);
+            receivedDate = formatDate((Long) complex.getSource().get(Constants.DB_FIELD_RECEIVED_DATE));
+            StringBuilder secondLine = new StringBuilder();
+            secondLine.append(index + " Hit: ");
+            secondLine.append("score(").append(complex.getScore()).append(") | ");
+            secondLine.append("receivedDate(").append(receivedDate).append(") | ");
+            secondLine.append("name(").append(complex.getSource().get("name")).append(") | ");
+            secondLine.append("id(").append(complex.getSource().get("id")).append(") ");
+            System.out.println(secondLine);
+            System.out.println("-----------------------------------------------------------------------------");
+        }
+    }
+
     private void printFullTextExplainUsingElastic(final Collection<EsUserSkills> skillRatingNodes,
-                                      final SearchResponse searchResponse) {
+                                                  final SearchResponse searchResponse) {
+        printFullTextExplainUsingElastic(skillRatingNodes, searchResponse, Constants.DB_RESULT_LIMIT);
+    }
+
+    private void printFullTextExplainUsingElastic(final Collection<EsUserSkills> skillRatingNodes,
+                                                  final SearchResponse searchResponse, int limit) {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
         for (EsUserSkills skillRatingNode : skillRatingNodes) {
@@ -383,7 +531,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         }
         sb.append("]");
 
-        printFullTextExplain(sb.toString(), searchResponse);
+        printFullTextExplain(sb.toString(), searchResponse, limit);
     }
 
     private void printFullTextExplain(final Collection<SkillRatingNode> skillRatingNodes,
@@ -400,12 +548,16 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
     }
 
     private void printFullTextExplain(final String testSearchData, final SearchResponse searchResponse) {
+        printFullTextExplain(testSearchData, searchResponse, Constants.DB_RESULT_LIMIT);
+    }
+
+    private void printFullTextExplain(final String testSearchData, final SearchResponse searchResponse, int limit) {
         System.out.println("------------------------------ RESPONSE -------------------------------------");
         System.out.println("Job size: " + countAllJobDetails);
         System.out.println("Search term: " + testSearchData);
         System.out.println("Hits: " + searchResponse.getHits().totalHits());
         System.out.println("MaxScore: " + searchResponse.getHits().getMaxScore());
-        for (int i = 0; i < Constants.DB_RESULT_LIMIT; i++) {
+        for (int i = 0; i < limit; i++) {
             System.out.println("-----------------------------------------------------------------------------");
             SearchHit searchHit = searchResponse.getHits().getAt(i);
             int index = i + 1;

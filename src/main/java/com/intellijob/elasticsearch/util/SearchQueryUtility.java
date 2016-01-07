@@ -426,11 +426,12 @@ public final class SearchQueryUtility {
             }
             String searchTerm = esUserSkill.getName();
             QueryBuilder matchQueryBuilder = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchTerm)
-                    .operator(MatchQueryBuilder.Operator.OR).fuzziness(5)
-                    .maxExpansions(DEFAULT_EXPANSION_VALUE)
-                    .prefixLength(searchTerm.length() - 1)
-                    .boost(boostValue);
-            boolQueryBuilder.should(matchQueryBuilder);
+                    .operator(MatchQueryBuilder.Operator.OR).fuzziness(5).maxExpansions(DEFAULT_EXPANSION_VALUE)
+                    .prefixLength(searchTerm.length() - 1).boost(boostValue);
+
+            FunctionScoreQueryBuilder weightScoreQuery = QueryBuilders.functionScoreQuery(matchQueryBuilder)
+                    .add(ScoreFunctionBuilders.weightFactorFunction(boostValue));
+            boolQueryBuilder.should(weightScoreQuery);
         }
 
         FilteredQueryBuilder filteredQuery = QueryBuilders
@@ -458,7 +459,7 @@ public final class SearchQueryUtility {
         } else {
             for (String searchData : searchDataArray) {
                 QueryBuilder matchQuery = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchData.trim())
-                        .operator(MatchQueryBuilder.Operator.AND).maxExpansions(DEFAULT_EXPANSION_VALUE);
+                        .operator(MatchQueryBuilder.Operator.OR).maxExpansions(DEFAULT_EXPANSION_VALUE);
                 boolQueryBuilder.should(matchQuery);
             }
         }
