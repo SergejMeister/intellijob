@@ -19,7 +19,7 @@ package com.intellijob.controllers.impl;
 
 import com.civis.utils.html.parser.HtmlParseFilter;
 import com.civis.utils.html.parser.HtmlParser;
-import com.civis.utils.opennlp.models.ModelFacade;
+import com.civis.utils.opennlp.models.ModelFactory;
 import com.civis.utils.opennlp.models.address.AddressSpan;
 import com.civis.utils.opennlp.models.contactperson.ContactPersonSpan;
 import com.intellijob.Constants;
@@ -112,10 +112,10 @@ public class JobDetailControllerImpl implements JobDetailController {
         String contentHash = HashUtility.hashAsString(plainText);
 
         //Find contact persons in text
-        List<ContactPersonSpan> contactPersonSpans = ModelFacade.getContactPersonFinder().find(plainText);
+        List<ContactPersonSpan> contactPersonSpans = ModelFactory.getContactPersonFinder().find(plainText);
 
         //find addresses in text
-        List<AddressSpan> addressSpans = ModelFacade.getAddressFinder().find(plainText);
+        List<AddressSpan> addressSpans = ModelFactory.getAddressFinder().find(plainText);
 
         // find mails in text
         String mails = new HtmlParser(htmlContent).parse().getMail();
