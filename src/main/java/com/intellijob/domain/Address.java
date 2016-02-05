@@ -16,7 +16,8 @@
 
 package com.intellijob.domain;
 
-import org.apache.commons.lang3.StringUtils;
+
+import org.apache.commons.lang.StringUtils;
 
 /**
  * Document to represent address of organisation.
