@@ -69,7 +69,7 @@ public final class SearchQueryUtility {
      * @return build search query
      */
     @Deprecated
-    public static SearchQuery buildFullTextSearchBoolQuery(String searchOriginData, PageRequest pageRequest) {
+    public static SearchQuery buildFullTextSearchBoolQuery_1(String searchOriginData, PageRequest pageRequest) {
         String[] searchDataArray = searchOriginData.split(OR_SEPARATOR);
         QueryBuilder builder;
         if (searchDataArray.length == 1) {

@@ -24,6 +24,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.PreDestroy;
 
@@ -45,6 +46,9 @@ public class ElasticsearchConfiguration {
     @Value("${elasticsearch.http.cors.enabled}")
     private boolean httpCorsEnabled;
 
+    @Value("${elasticsearch.path.data}")
+    private String pathData;
+
     private Node node;
 
     /**
@@ -57,6 +61,9 @@ public class ElasticsearchConfiguration {
         LOG.info("Start elasticsearch server");
         NodeBuilder nodeBuilder = new NodeBuilder();
         nodeBuilder.clusterName(clusterName).local(false);
+        if (StringUtils.hasLength(pathData)) {
+            nodeBuilder.settings().put("path.data", pathData);
+        }
         nodeBuilder.settings().put("http.enabled", httpEnabled);
         nodeBuilder.settings().put("http.cors.enabled", httpCorsEnabled);
         nodeBuilder.settings().put("network.host", host);
@@ -65,7 +72,8 @@ public class ElasticsearchConfiguration {
         return new ElasticsearchTemplate(node.client());
     }
 
-    @PreDestroy void destroy() {
+    @PreDestroy
+    void destroy() {
         if (node != null) {
             LOG.info("Destroy elasticsearch server.");
             try {

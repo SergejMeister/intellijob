@@ -79,6 +79,30 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
     }
 
     @Test
+    public void testBuildFullTextSearchQuery_1() throws Exception {
+        final String testName = "ORIGIN FULL TEXT TEST 1";
+        printStartTest(testName);
+
+        String testSearchData = "Werkstudent Java,Datenbanken";
+
+        PageRequest pageRequest = new PageRequest(DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
+
+        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchBoolQuery_1(testSearchData, pageRequest);
+        Assert.assertNotNull(searchQuery);
+        printQuery(searchQuery.getQuery());
+
+        SearchResponse searchResponse =
+                getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB).setQuery(searchQuery.getQuery())
+                        .setExplain(true)
+                        .setSize(Constants.DB_RESULT_LIMIT).get();
+        Assert.assertNotNull(searchResponse);
+        Assert.assertTrue("Hits should not be empty!", searchResponse.getHits().getTotalHits() > 0);
+
+        printFullTextExplain(testSearchData, searchResponse);
+        printEndTest(testName);
+    }
+
+    @Test
     public void testBuildFullTextSearchQuery_2() throws Exception {
         final String testName = "ORIGIN FULL TEXT TEST 2";
         printStartTest(testName);
