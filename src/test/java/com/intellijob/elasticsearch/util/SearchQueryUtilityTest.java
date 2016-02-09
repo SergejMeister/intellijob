@@ -104,14 +104,39 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
 
     @Test
     public void testBuildFullTextSearchQuery_2() throws Exception {
-        final String testName = "ORIGIN FULL TEXT TEST 2";
+        final String testName = "ORIGIN FULL TEXT TEST 2 - SIMPLE SORT BY RECEIVED_DATE";
         printStartTest(testName);
 
-        String testSearchData = "Werkstudent Java,Datenbanken,Jenkins";
+        String testSearchData = "Werkstudent Java,Datenbanken";
 
         PageRequest pageRequest = new PageRequest(DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
 
-        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchMatchQuery_2(testSearchData, pageRequest);
+        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchBoolQuery_1(testSearchData, pageRequest);
+        Assert.assertNotNull(searchQuery);
+        printQuery(searchQuery.getQuery());
+
+        SearchResponse searchResponse =
+                getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB).setQuery(searchQuery.getQuery())
+                        .setExplain(true)
+                        .addSort(Constants.DB_FIELD_RECEIVED_DATE,SortOrder.DESC)
+                        .setSize(Constants.DB_RESULT_LIMIT).get();
+        Assert.assertNotNull(searchResponse);
+        Assert.assertTrue("Hits should not be empty!", searchResponse.getHits().getTotalHits() > 0);
+
+        printFullTextExplain(testSearchData, searchResponse);
+        printEndTest(testName);
+    }
+
+    @Test
+    public void testBuildFullTextSearchQuery_3() throws Exception {
+        final String testName = "ORIGIN FULL TEXT TEST 3 - DECAY FUNCTION FOR RECEIVED_DATE";
+        printStartTest(testName);
+
+        String testSearchData = "Werkstudent Java,Datenbanken";
+
+        PageRequest pageRequest = new PageRequest(DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
+
+        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchMatchQuery_3(testSearchData, pageRequest);
         Assert.assertNotNull(searchQuery);
         printQuery(searchQuery.getQuery());
 
@@ -127,14 +152,86 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
     }
 
     @Test
-    public void testBuildFullTextSearchQuery_3() throws Exception {
-        final String testName = "ORIGIN FULL TEXT TEST 3";
+    public void testBuildFullTextSearchQuery_4() throws Exception {
+        final String testName = "ORIGIN FULL TEXT TEST 4 - Bool Query for read field";
         printStartTest(testName);
 
-        String testSearchData = "Werkstudent Java,Datenbanken,Jenkins";
+        String testSearchData = "Werkstudent Java,Datenbanken";
 
         PageRequest pageRequest = new PageRequest(DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
-        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchMatchQuery_3(testSearchData, pageRequest);
+
+        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchMatchQuery_4(testSearchData, pageRequest);
+        Assert.assertNotNull(searchQuery);
+        printQuery(searchQuery.getQuery());
+
+        SearchResponse searchResponse =
+                getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB).setTypes(EsConstants.TYPE_JOB_DETAILS).setQuery(searchQuery.getQuery())
+                        .setExplain(true)
+                        .setSize(Constants.DB_RESULT_LIMIT).get();
+        Assert.assertNotNull(searchResponse);
+        Assert.assertTrue("Hits should not be empty!", searchResponse.getHits().getTotalHits() > 0);
+
+        printFullTextExplain(testSearchData, searchResponse);
+        printEndTest(testName);
+    }
+
+    @Test
+    public void testBuildFullTextSearchQuery_5() throws Exception {
+        final String testName = "ORIGIN FULL TEXT TEST 5 - OR-CONJUCTION";
+        printStartTest(testName);
+
+        String testSearchData = "Werkstudent Java,Datenbanken";
+
+        PageRequest pageRequest = new PageRequest(DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
+
+        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchMatchQuery_5(testSearchData, pageRequest);
+        Assert.assertNotNull(searchQuery);
+        printQuery(searchQuery.getQuery());
+
+        SearchResponse searchResponse =
+                getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB).setTypes(EsConstants.TYPE_JOB_DETAILS).setQuery(searchQuery.getQuery())
+                        .setExplain(true)
+                        .setSize(Constants.DB_RESULT_LIMIT).get();
+        Assert.assertNotNull(searchResponse);
+        Assert.assertTrue("Hits should not be empty!", searchResponse.getHits().getTotalHits() > 0);
+
+        printFullTextExplain(testSearchData, searchResponse);
+        printEndTest(testName);
+    }
+
+    @Test
+    public void testBuildFullTextSearchQuery_Final() throws Exception {
+        final String testName = "ORIGIN FULL TEXT TEST - FINAL";
+        printStartTest(testName);
+
+        String testSearchData = "Werkstudent Java,Datenbanken";
+
+        PageRequest pageRequest = new PageRequest(DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
+
+        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchMatchQuery(testSearchData, pageRequest);
+        Assert.assertNotNull(searchQuery);
+        printQuery(searchQuery.getQuery());
+
+        SearchResponse searchResponse =
+                getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB).setQuery(searchQuery.getQuery())
+                        .setExplain(true)
+                        .setSize(Constants.DB_RESULT_LIMIT).get();
+        Assert.assertNotNull(searchResponse);
+        Assert.assertTrue("Hits should not be empty!", searchResponse.getHits().getTotalHits() > 0);
+
+        printFullTextExplain(testSearchData, searchResponse);
+        printEndTest(testName);
+    }
+
+    @Test
+    public void testBuildFullTextSearchQuery_Bosting_FieldReceivedDate() throws Exception {
+        final String testName = "ORIGIN FULL TEXT TEST 3 - BOOST FIELD RECEIVED_DATE mit 1.5 FACTOR";
+        printStartTest(testName);
+
+        String testSearchData = "Werkstudent Java,Datenbanken";
+
+        PageRequest pageRequest = new PageRequest(DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
+        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchMatchQuery_Bosting_FieldReceivedDate(testSearchData, pageRequest);
         Assert.assertNotNull(searchQuery);
         printQuery(searchQuery.getQuery());
 
@@ -150,14 +247,14 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
     }
 
     @Test
-    public void testBuildFullTextSearchQuery_4() throws Exception {
-        final String testName = "ORIGIN FULL TEXT TEST 4";
+    public void testBuildFullTextSearchQuery_6() throws Exception {
+        final String testName = "ORIGIN FULL TEXT TEST 6";
         printStartTest(testName);
 
         String testSearchData = "Werkstudent Java,Datenbanken,Jenkins";
 
         PageRequest pageRequest = new PageRequest(DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
-        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchMatchQuery_4(testSearchData, pageRequest);
+        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchMatchQuery_3(testSearchData, pageRequest);
         Assert.assertNotNull(searchQuery);
         printQuery(searchQuery.getQuery());
 
@@ -180,7 +277,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         String testSearchData = "Werkstudent Java,Datenbanken,Jenkins";
 
         PageRequest pageRequest = new PageRequest(DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
-        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchMatchQuery_4(testSearchData, pageRequest);
+        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchMatchQuery_3(testSearchData, pageRequest);
         Assert.assertNotNull(searchQuery);
         printQuery(searchQuery.getQuery());
 
@@ -388,7 +485,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
 
         PageRequest pageRequest = new PageRequest(DEFAULT_OFFSET, limit);
 
-        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchMatchQuery_4(testSearchData, pageRequest);
+        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchMatchQuery_3(testSearchData, pageRequest);
         Assert.assertNotNull(searchQuery);
         printQuery(searchQuery.getQuery());
 
@@ -434,7 +531,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
 
         PageRequest pageRequest = new PageRequest(DEFAULT_OFFSET, limit);
 
-        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchMatchQuery_4(testSearchData, pageRequest);
+        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchMatchQuery_3(testSearchData, pageRequest);
         Assert.assertNotNull(searchQuery);
         printQuery(searchQuery.getQuery());
 

@@ -81,7 +81,7 @@ public final class SearchQueryUtility {
                 StringTokenizer stringTokenizer = new StringTokenizer(searchData);
                 if (stringTokenizer.countTokens() > 1) {
                     QueryBuilder matchQuery = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchData.trim())
-                            .operator(MatchQueryBuilder.Operator.AND).maxExpansions(30);
+                            .operator(MatchQueryBuilder.Operator.AND);
                     boolQueryBuilder.should(matchQuery);
                 } else {
                     QueryBuilder matchQuery = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchData.trim());
@@ -99,18 +99,164 @@ public final class SearchQueryUtility {
      * <p>
      * The searchOriginData will be split by comma and link with OR.
      * The search data separated with whitespace will be linked with AND.
-     * <p>
-     * Deprecated because ths search query ignore the receivedDate and should be extra sort.
+     * This query use  <code>ScoreFunctionBuilders.exponentialDecayFunction</code> to calculate receivedDate of last 14 days.
      *
      * @param searchOriginData search data.
      * @param pageRequest      paging data (offset,limit)
      *
      * @return build search query
      */
-    @Deprecated
-    public static SearchQuery buildFullTextSearchMatchQuery_2(String searchOriginData, PageRequest pageRequest) {
+    public static SearchQuery buildFullTextSearchMatchQuery_3(String searchOriginData, PageRequest pageRequest) {
+        String[] searchDataArray = searchOriginData.split(OR_SEPARATOR);
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        if (searchDataArray.length == 1) {
+            boolQueryBuilder.should(QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchOriginData.trim())
+                    .operator(MatchQueryBuilder.Operator.AND));
+        } else {
+            for (String searchData : searchDataArray) {
+                QueryBuilder matchQuery = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchData.trim())
+                        .operator(MatchQueryBuilder.Operator.AND);
+                boolQueryBuilder.should(matchQuery);
+            }
+        }
+
+        FunctionScoreQueryBuilder functionBuilder = QueryBuilders.functionScoreQuery(boolQueryBuilder);
+        functionBuilder.add(ScoreFunctionBuilders
+                .exponentialDecayFunction(Constants.DB_FIELD_RECEIVED_DATE, DEFAULT_DECAY_FOR_RECEIVED_DATE)
+                .setDecay(0.5));
+
+        return new NativeSearchQueryBuilder().withQuery(functionBuilder).withPageable(pageRequest).build();
+    }
+
+    /**
+     * Build simple SearchQuery for full text searching.
+     * <p>
+     * The searchOriginData will be split by comma and link with OR.
+     * The search data separated with whitespace will be linked with AND.
+     * This query use  <code>ScoreFunctionBuilders.exponentialDecayFunction</code> to calculate receivedDate of last 14 days.
+     *
+     * @param searchOriginData search data.
+     * @param pageRequest      paging data (offset,limit)
+     *
+     * @return build search query
+     */
+    public static SearchQuery buildFullTextSearchMatchQuery_4(String searchOriginData, PageRequest pageRequest) {
+        String[] searchDataArray = searchOriginData.split(OR_SEPARATOR);
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        boolQueryBuilder.must(QueryBuilders.termQuery(Constants.DB_FIELD_READ,false));
+        if (searchDataArray.length == 1) {
+            boolQueryBuilder.should(QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchOriginData.trim())
+                    .operator(MatchQueryBuilder.Operator.AND));
+        } else {
+            for (String searchData : searchDataArray) {
+                QueryBuilder matchQuery = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchData.trim())
+                        .operator(MatchQueryBuilder.Operator.AND);
+                boolQueryBuilder.should(matchQuery);
+            }
+        }
+
+        FunctionScoreQueryBuilder functionBuilder = QueryBuilders.functionScoreQuery(boolQueryBuilder);
+        functionBuilder.add(ScoreFunctionBuilders
+                .exponentialDecayFunction(Constants.DB_FIELD_RECEIVED_DATE, DEFAULT_DECAY_FOR_RECEIVED_DATE)
+                .setDecay(0.5));
+
+        return new NativeSearchQueryBuilder().withQuery(functionBuilder).withPageable(pageRequest).build();
+    }
+
+    /**
+     * Build simple SearchQuery for full text searching.
+     * <p>
+     * The searchOriginData will be split by comma and link with OR.
+     * The search data separated with whitespace will be linked with AND.
+     * This query use  <code>ScoreFunctionBuilders.exponentialDecayFunction</code> to calculate receivedDate of last 14 days.
+     *
+     * @param searchOriginData search data.
+     * @param pageRequest      paging data (offset,limit)
+     *
+     * @return build search query
+     */
+    public static SearchQuery buildFullTextSearchMatchQueryWithName(String searchOriginData, PageRequest pageRequest) {
+        String[] searchDataArray = searchOriginData.split(OR_SEPARATOR);
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        if (searchDataArray.length == 1) {
+            BoolQueryBuilder contentNameBoolBuilder = QueryBuilders.boolQuery();
+            contentNameBoolBuilder.should(QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchOriginData.trim())
+                    .operator(MatchQueryBuilder.Operator.AND));
+            contentNameBoolBuilder.should(QueryBuilders.matchQuery(Constants.DB_FIELD_NAME, searchOriginData.trim())
+                    .operator(MatchQueryBuilder.Operator.AND).boost(10));
+            boolQueryBuilder.should(contentNameBoolBuilder);
+        } else {
+            for (String searchData : searchDataArray) {
+                BoolQueryBuilder contentNameBoolBuilder = QueryBuilders.boolQuery();
+                contentNameBoolBuilder.should(QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchData.trim())
+                        .operator(MatchQueryBuilder.Operator.AND));
+                contentNameBoolBuilder.should(QueryBuilders.matchQuery(Constants.DB_FIELD_NAME, searchData.trim())
+                        .operator(MatchQueryBuilder.Operator.AND).boost(10));
+                boolQueryBuilder.should(contentNameBoolBuilder);
+            }
+        }
+
+        FunctionScoreQueryBuilder functionBuilder = QueryBuilders.functionScoreQuery(boolQueryBuilder);
+        functionBuilder.add(ScoreFunctionBuilders
+                .exponentialDecayFunction(Constants.DB_FIELD_RECEIVED_DATE, DEFAULT_DECAY_FOR_RECEIVED_DATE)
+                .setDecay(0.5));
+
+        return new NativeSearchQueryBuilder().withQuery(functionBuilder).withPageable(pageRequest).build();
+    }
+
+    /**
+     * Build simple SearchQuery for full text searching.
+     * <p>
+     * The searchOriginData will be split by comma and link with OR.
+     * The search data separated with whitespace will be linked with AND.
+     * This query use  <code>ScoreFunctionBuilders.exponentialDecayFunction</code> to calculate receivedDate of last 14 days.
+     *
+     * @param searchOriginData search data.
+     * @param pageRequest      paging data (offset,limit)
+     *
+     * @return build search query
+     */
+    public static SearchQuery buildFullTextSearchMatchQuery_5(String searchOriginData, PageRequest pageRequest) {
+        String[] searchDataArray = searchOriginData.split(OR_SEPARATOR);
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        if (searchDataArray.length == 1) {
+            boolQueryBuilder.should(QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchOriginData.trim())
+                    .operator(MatchQueryBuilder.Operator.OR));
+        } else {
+            for (String searchData : searchDataArray) {
+                QueryBuilder matchQuery = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchData.trim())
+                        .operator(MatchQueryBuilder.Operator.OR);
+                boolQueryBuilder.should(matchQuery);
+            }
+        }
+
+        FunctionScoreQueryBuilder functionBuilder = QueryBuilders.functionScoreQuery(boolQueryBuilder);
+        functionBuilder.add(ScoreFunctionBuilders
+                .exponentialDecayFunction(Constants.DB_FIELD_RECEIVED_DATE, DEFAULT_DECAY_FOR_RECEIVED_DATE)
+                .setDecay(0.5));
+
+        return new NativeSearchQueryBuilder().withQuery(functionBuilder).withPageable(pageRequest).build();
+    }
+
+    /**
+     * Build simple SearchQuery for full text searching.
+     * <p>
+     * The searchOriginData will be split by comma and link with OR.
+     * The search data separated with whitespace will be linked with AND.
+     * This query use  <code>ScoreFunctionBuilders.exponentialDecayFunction</code> to calculate receivedDate of last 14 days.
+     *
+     * @param searchOriginData search data.
+     * @param pageRequest      paging data (offset,limit)
+     *
+     * @return build search query
+     */
+    public static SearchQuery buildFullTextSearchMatchQuery(String searchOriginData, PageRequest pageRequest) {
         QueryBuilder builder = generateDefaultQueryBuilderForFullTextSearch(searchOriginData);
-        return new NativeSearchQueryBuilder().withQuery(builder).withPageable(pageRequest).build();
+        FunctionScoreQueryBuilder functionBuilder = QueryBuilders.functionScoreQuery(builder);
+        functionBuilder.add(ScoreFunctionBuilders
+                .exponentialDecayFunction(Constants.DB_FIELD_RECEIVED_DATE, DEFAULT_DECAY_FOR_RECEIVED_DATE));
+
+        return new NativeSearchQueryBuilder().withQuery(functionBuilder).withPageable(pageRequest).build();
     }
 
 
@@ -131,33 +277,12 @@ public final class SearchQueryUtility {
      * @return build search query
      */
     @Deprecated
-    public static SearchQuery buildFullTextSearchMatchQuery_3(String searchOriginData,
-                                                              PageRequest pageRequest) {
+    public static SearchQuery buildFullTextSearchMatchQuery_Bosting_FieldReceivedDate(String searchOriginData,
+                                                                                      PageRequest pageRequest) {
         QueryBuilder builder = generateDefaultQueryBuilderForFullTextSearch(searchOriginData);
         FunctionScoreQueryBuilder functionBuilder = QueryBuilders.functionScoreQuery(builder);
         functionBuilder.add(ScoreFunctionBuilders.fieldValueFactorFunction(Constants.DB_FIELD_RECEIVED_DATE)
                 .factor(1.5f));
-        return new NativeSearchQueryBuilder().withQuery(functionBuilder).withPageable(pageRequest).build();
-    }
-
-    /**
-     * Build simple SearchQuery for full text searching.
-     * <p>
-     * The searchOriginData will be split by comma and link with OR.
-     * The search data separated with whitespace will be linked with AND.
-     * This query use  <code>ScoreFunctionBuilders.exponentialDecayFunction</code> to calculate receivedDate of last 14 days.
-     *
-     * @param searchOriginData search data.
-     * @param pageRequest      paging data (offset,limit)
-     *
-     * @return build search query
-     */
-    public static SearchQuery buildFullTextSearchMatchQuery_4(String searchOriginData, PageRequest pageRequest) {
-        QueryBuilder builder = generateDefaultQueryBuilderForFullTextSearch(searchOriginData);
-        FunctionScoreQueryBuilder functionBuilder = QueryBuilders.functionScoreQuery(builder);
-        functionBuilder.add(ScoreFunctionBuilders
-                .exponentialDecayFunction(Constants.DB_FIELD_RECEIVED_DATE, DEFAULT_DECAY_FOR_RECEIVED_DATE));
-
         return new NativeSearchQueryBuilder().withQuery(functionBuilder).withPageable(pageRequest).build();
     }
 
@@ -459,7 +584,7 @@ public final class SearchQueryUtility {
         } else {
             for (String searchData : searchDataArray) {
                 QueryBuilder matchQuery = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchData.trim())
-                        .operator(MatchQueryBuilder.Operator.OR).maxExpansions(DEFAULT_EXPANSION_VALUE);
+                        .operator(MatchQueryBuilder.Operator.AND);
                 boolQueryBuilder.should(matchQuery);
             }
         }

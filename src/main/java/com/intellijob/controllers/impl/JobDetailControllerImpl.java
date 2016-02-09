@@ -305,8 +305,7 @@ public class JobDetailControllerImpl implements JobDetailController {
      */
     private Page<EsJobDetail> findUsingSimpleSearchEngine(SearchModel searchModel) {
         PageRequest request = new PageRequest(searchModel.getOffset(), searchModel.getLimit());
-        SearchQuery searchQuery =
-                SearchQueryUtility.buildFullTextSearchMatchQuery_4(searchModel.getSearchData(), request);
+        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchMatchQuery(searchModel.getSearchData(), request);
         return elasticsearchTemplate.queryForPage(searchQuery, EsJobDetail.class);
     }
 

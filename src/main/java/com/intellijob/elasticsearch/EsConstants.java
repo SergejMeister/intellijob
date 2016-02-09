@@ -56,6 +56,8 @@ public final class EsConstants {
 
     public static final String FIELD_SUGGEST_KNOWLEDGE = "suggestKnowledge";
 
+    //public static final String FIELD_RECEIVED_DATE = "receivedDate";
+
     public static final String FIELD_SUGGEST_LANGUAGE = "suggestLanguage";
 
     private EsConstants() {
