@@ -290,7 +290,7 @@ public class JobDetailControllerImpl implements JobDetailController {
     private Page<EsJobDetail> findUsingPersonalSearchEngine(SearchModel searchModel) {
         List<EsUserSkills> esUserSkills = esUserSkillsRepository.findByUserId(searchModel.getUser().getId());
         SearchQuery searchQuery = SearchQueryUtility
-                .buildBoolQueryAndBoostRatingFieldUsingEsUserSkills(esUserSkills, searchModel.getOffset(),
+                .buildBoolQueryAndBoostRatingFieldUsingEsUserSkills_Final(esUserSkills, searchModel.getOffset(),
                         searchModel.getLimit());
         Page<EsJobDetail> result = elasticsearchTemplate.queryForPage(searchQuery, EsJobDetail.class);
         return result;

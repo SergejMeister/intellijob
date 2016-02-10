@@ -177,30 +177,6 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
 
     @Test
     public void testBuildFullTextSearchQuery_5() throws Exception {
-        final String testName = "ORIGIN FULL TEXT TEST 5 - OR-CONJUCTION";
-        printStartTest(testName);
-
-        String testSearchData = "Werkstudent Java,Datenbanken";
-
-        PageRequest pageRequest = new PageRequest(DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
-
-        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchMatchQuery_5(testSearchData, pageRequest);
-        Assert.assertNotNull(searchQuery);
-        printQuery(searchQuery.getQuery());
-
-        SearchResponse searchResponse =
-                getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB).setTypes(EsConstants.TYPE_JOB_DETAILS).setQuery(searchQuery.getQuery())
-                        .setExplain(true)
-                        .setSize(Constants.DB_RESULT_LIMIT).get();
-        Assert.assertNotNull(searchResponse);
-        Assert.assertTrue("Hits should not be empty!", searchResponse.getHits().getTotalHits() > 0);
-
-        printFullTextExplain(testSearchData, searchResponse);
-        printEndTest(testName);
-    }
-
-    @Test
-    public void testBuildFullTextSearchQuery_Final() throws Exception {
         final String testName = "ORIGIN FULL TEXT TEST - FINAL";
         printStartTest(testName);
 
@@ -224,6 +200,31 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
     }
 
     @Test
+    public void testBuildFullTextSearchQueryUsingOrConjunction() throws Exception {
+        final String testName = "ORIGIN FULL TEXT TEST 5 - OR-CONJUCTION";
+        printStartTest(testName);
+
+        String testSearchData = "Werkstudent Java,Datenbanken";
+
+        PageRequest pageRequest = new PageRequest(DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
+
+        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchMatchQueryUsingOrConjunction(testSearchData, pageRequest);
+        Assert.assertNotNull(searchQuery);
+        printQuery(searchQuery.getQuery());
+
+        SearchResponse searchResponse =
+                getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB).setTypes(EsConstants.TYPE_JOB_DETAILS).setQuery(searchQuery.getQuery())
+                        .setExplain(true)
+                        .setSize(Constants.DB_RESULT_LIMIT).get();
+        Assert.assertNotNull(searchResponse);
+        Assert.assertTrue("Hits should not be empty!", searchResponse.getHits().getTotalHits() > 0);
+
+        printFullTextExplain(testSearchData, searchResponse);
+        printEndTest(testName);
+    }
+
+    @Test
+    @Ignore
     public void testBuildFullTextSearchQuery_Bosting_FieldReceivedDate() throws Exception {
         final String testName = "ORIGIN FULL TEXT TEST 3 - BOOST FIELD RECEIVED_DATE mit 1.5 FACTOR";
         printStartTest(testName);
@@ -231,7 +232,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         String testSearchData = "Werkstudent Java,Datenbanken";
 
         PageRequest pageRequest = new PageRequest(DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
-        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchMatchQuery_Bosting_FieldReceivedDate(testSearchData, pageRequest);
+        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchMatchQuery_Boosting_FieldReceivedDate(testSearchData, pageRequest);
         Assert.assertNotNull(searchQuery);
         printQuery(searchQuery.getQuery());
 
@@ -246,223 +247,101 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         printEndTest(testName);
     }
 
-    @Test
-    public void testBuildFullTextSearchQuery_6() throws Exception {
-        final String testName = "ORIGIN FULL TEXT TEST 6";
-        printStartTest(testName);
-
-        String testSearchData = "Werkstudent Java,Datenbanken,Jenkins";
-
-        PageRequest pageRequest = new PageRequest(DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
-        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchMatchQuery_3(testSearchData, pageRequest);
-        Assert.assertNotNull(searchQuery);
-        printQuery(searchQuery.getQuery());
-
-        SearchResponse searchResponse =
-                getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB).setQuery(searchQuery.getQuery())
-                        .setExplain(true)
-                        .setSize(Constants.DB_RESULT_LIMIT).get();
-        Assert.assertNotNull(searchResponse);
-        Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
-
-        printFullTextExplain(testSearchData, searchResponse);
-        printEndTest(testName);
-    }
-
-    @Test
-    public void testBuildFullTextSearchQuery_4_And_Sort() throws Exception {
-        final String testName = "ORIGIN FULL TEXT TEST 4 with Extra Sort";
-        printStartTest(testName);
-
-        String testSearchData = "Werkstudent Java,Datenbanken,Jenkins";
-
-        PageRequest pageRequest = new PageRequest(DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
-        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchMatchQuery_3(testSearchData, pageRequest);
-        Assert.assertNotNull(searchQuery);
-        printQuery(searchQuery.getQuery());
-
-        SearchResponse searchResponse =
-                getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB).setQuery(searchQuery.getQuery())
-                        .setExplain(true)
-                        .setSize(Constants.DB_RESULT_LIMIT).addSort(Constants.DB_FIELD_RECEIVED_DATE, SortOrder.DESC)
-                        .get();
-        Assert.assertNotNull(searchResponse);
-        Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
-
-        printFullTextExplain(testSearchData, searchResponse);
-        printEndTest(testName);
-    }
+    // -------------------------------------------------------------------------------------------------
+    // Boosting Query
+    // -------------------------------------------------------------------------------------------------
 
     @Test
     public void testBuildBoolQueryAndBoostRatingField_1() throws Exception {
         final String testName = "SKILL RATING SEARCH TEST 1";
         printStartTest(testName);
 
-        List<SkillRatingNode> skillRatingNodes = user.getSkills().getAllSkills();
+        List<EsUserSkills> userSkills = createSkillRatingNodesForBoostingTest();
         SearchQuery searchQuery = SearchQueryUtility
-                .buildBoolQueryAndBoostRatingField_1(skillRatingNodes, DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
+                .buildBoolQueryAndBoostRatingField_1(userSkills, DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
         Assert.assertNotNull(searchQuery);
         printQuery(searchQuery.getQuery());
 
-        SearchResponse searchResponse = getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB)
+        SearchResponse searchResponse = getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB).setTypes(EsConstants.TYPE_JOB_DETAILS)
                 .setQuery(searchQuery.getQuery()).setExplain(true).setSize(Constants.DB_RESULT_LIMIT).get();
         Assert.assertNotNull(searchResponse);
         Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
 
-        printFullTextExplain(skillRatingNodes, searchResponse);
+        printFullTextExplainUsingElastic(userSkills, searchResponse);
         printEndTest(testName);
     }
 
     @Test
     public void testBuildBoolQueryAndBoostRatingField_2() throws Exception {
-        final String testName = "SKILL RATING SEARCH TEST 2";
+        final String testName = "SKILL RATING SEARCH TEST 2 - USE OR AND WEIGHT_SCORE_FUNCTION";
         printStartTest(testName);
 
-        List<SkillRatingNode> skillRatingNodes = user.getSkills().getAllSkills();
+        List<EsUserSkills> userSkills = createSkillRatingNodesForBoostingTest();
         SearchQuery searchQuery = SearchQueryUtility
-                .buildBoolQueryAndBoostRatingField_2(skillRatingNodes, DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
+                .buildBoolQueryAndBoostRatingField_2(userSkills, DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
         Assert.assertNotNull(searchQuery);
         printQuery(searchQuery.getQuery());
 
-        SearchResponse searchResponse = getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB)
+        SearchResponse searchResponse = getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB).setTypes(EsConstants.TYPE_JOB_DETAILS)
                 .setQuery(searchQuery.getQuery()).setExplain(true).setSize(Constants.DB_RESULT_LIMIT).get();
         Assert.assertNotNull(searchResponse);
         Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
 
-        printFullTextExplain(skillRatingNodes, searchResponse);
+        printFullTextExplainUsingElastic(userSkills, searchResponse);
         printEndTest(testName);
     }
 
     @Test
-    public void testBuildBoolQueryAndBoostRatingField_3() throws Exception {
-        final String testName = "SKILL RATING SEARCH TEST 3";
+    public void testBuildBoolQueryAndBoostRatingField_Final() {
+        final String testName = "SKILL RATING SEARCH TEST - FINAL";
         printStartTest(testName);
 
-        List<SkillRatingNode> skillRatingNodes = user.getSkills().getAllSkills();
+        List<EsUserSkills> userSkills = createSkillRatingNodesForBoostingTest();
         SearchQuery searchQuery = SearchQueryUtility
-                .buildBoolQueryAndBoostRatingField_3(skillRatingNodes, DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
+                .buildBoolQueryAndBoostRatingFieldUsingEsUserSkills_Final(userSkills, DEFAULT_OFFSET,
+                        Constants.DB_RESULT_LIMIT);
         Assert.assertNotNull(searchQuery);
         printQuery(searchQuery.getQuery());
 
-        SearchResponse searchResponse = getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB)
+        SearchResponse searchResponse = getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB).setTypes(EsConstants.TYPE_JOB_DETAILS)
                 .setQuery(searchQuery.getQuery()).setExplain(true).setSize(Constants.DB_RESULT_LIMIT).get();
         Assert.assertNotNull(searchResponse);
         Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
 
-        printFullTextExplain(skillRatingNodes, searchResponse);
+        printFullTextExplainUsingElastic(userSkills, searchResponse);
         printEndTest(testName);
     }
 
     @Test
-    public void testBuildBoolQueryAndBoostRatingField_4() throws Exception {
-        final String testName = "SKILL RATING SEARCH TEST 4";
-        printStartTest(testName);
-
-        List<SkillRatingNode> skillRatingNodes = user.getSkills().getAllSkills();
-        SearchQuery searchQuery = SearchQueryUtility
-                .buildBoolQueryAndBoostRatingField_4(skillRatingNodes, DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
-        Assert.assertNotNull(searchQuery);
-        printQuery(searchQuery.getQuery());
-
-        SearchResponse searchResponse = getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB)
-                .setQuery(searchQuery.getQuery()).setExplain(true).setSize(Constants.DB_RESULT_LIMIT).get();
-        Assert.assertNotNull(searchResponse);
-        Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
-
-        printFullTextExplain(skillRatingNodes, searchResponse);
-        printEndTest(testName);
-    }
-
-    @Test
-    public void testBuildBoolQueryAndBoostRatingField_5() throws Exception {
-        final String testName = "SKILL RATING SEARCH TEST 5";
-        printStartTest(testName);
-
-        List<SkillRatingNode> skillRatingNodes = user.getSkills().getAllSkills();
-        SearchQuery searchQuery = SearchQueryUtility
-                .buildBoolQueryAndBoostRatingField_5(skillRatingNodes, DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
-        Assert.assertNotNull(searchQuery);
-        printQuery(searchQuery.getQuery());
-
-        SearchResponse searchResponse = getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB)
-                .setQuery(searchQuery.getQuery()).setExplain(true).setSize(Constants.DB_RESULT_LIMIT).get();
-        Assert.assertNotNull(searchResponse);
-        Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
-
-        printFullTextExplain(skillRatingNodes, searchResponse);
-        printEndTest(testName);
-    }
-
-    @Test
-    public void testBuildBoolQueryAndBoostRatingField_6() throws Exception {
-        final String testName = "SKILL RATING SEARCH TEST 6";
-        printStartTest(testName);
-
-        List<SkillRatingNode> skillRatingNodes = user.getSkills().getAllSkills();
-        SearchQuery searchQuery = SearchQueryUtility
-                .buildBoolQueryAndBoostRatingField_6(skillRatingNodes, DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
-        Assert.assertNotNull(searchQuery);
-        printQuery(searchQuery.getQuery());
-
-        SearchResponse searchResponse = getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB)
-                .setQuery(searchQuery.getQuery()).setExplain(true).setSize(Constants.DB_RESULT_LIMIT).get();
-        Assert.assertNotNull(searchResponse);
-        Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
-
-        printFullTextExplain(skillRatingNodes, searchResponse);
-        printEndTest(testName);
-    }
-
-    @Test
-    public void testBuildBoolQueryAndBoostRatingField_7() throws Exception {
-        final String testName = "SKILL RATING SEARCH TEST 7";
-        printStartTest(testName);
-
-        List<SkillRatingNode> skillRatingNodes = user.getSkills().getAllSkills();
-        SearchQuery searchQuery = SearchQueryUtility
-                .buildBoolQueryAndBoostRatingField_7(skillRatingNodes, DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
-        Assert.assertNotNull(searchQuery);
-        printQuery(searchQuery.getQuery());
-
-        SearchResponse searchResponse = getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB)
-                .setQuery(searchQuery.getQuery()).setExplain(true).setSize(Constants.DB_RESULT_LIMIT).get();
-        Assert.assertNotNull(searchResponse);
-        Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
-
-        printFullTextExplain(skillRatingNodes, searchResponse);
-        printEndTest(testName);
-    }
-
-    @Test
-    public void testBuildBoolQueryAndBoostRatingField_8() throws Exception {
-        final String testName = "SKILL RATING SEARCH TEST 8";
-        printStartTest(testName);
-
-        List<SkillRatingNode> skillRatingNodes = user.getSkills().getAllSkills();
-        SearchQuery searchQuery = SearchQueryUtility
-                .buildBoolQueryAndBoostRatingField_8(skillRatingNodes, DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
-        Assert.assertNotNull(searchQuery);
-        printQuery(searchQuery.getQuery());
-
-        SearchResponse searchResponse = getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB)
-                .setQuery(searchQuery.getQuery()).setExplain(true).setSize(Constants.DB_RESULT_LIMIT).get();
-        Assert.assertNotNull(searchResponse);
-        Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
-
-        printFullTextExplain(skillRatingNodes, searchResponse);
-        printEndTest(testName);
-    }
-
-    @Test
-    public void testBuildBoolQueryAndBoostRatingFieldUsingEsUserSkills() {
+    public void testBuildBoolQueryAndBoostRatingField_Final_UsingEsUserSkills() {
         final String testName = "SKILL RATING SEARCH WITH ELASTIC USER SKILLS TEST";
         printStartTest(testName);
 
         List<EsUserSkills> userSkills = esUserSkillsRepository.findByUserId(user.getId());
 
         SearchQuery searchQuery = SearchQueryUtility
-                .buildBoolQueryAndBoostRatingFieldUsingEsUserSkills(userSkills, DEFAULT_OFFSET,
+                .buildBoolQueryAndBoostRatingFieldUsingEsUserSkills_Final(userSkills, DEFAULT_OFFSET,
                         Constants.DB_RESULT_LIMIT);
+        Assert.assertNotNull(searchQuery);
+        printQuery(searchQuery.getQuery());
+
+        SearchResponse searchResponse = getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB).setTypes(EsConstants.TYPE_JOB_DETAILS)
+                .setQuery(searchQuery.getQuery()).setExplain(true).setSize(Constants.DB_RESULT_LIMIT).get();
+        Assert.assertNotNull(searchResponse);
+        Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
+
+        printFullTextExplainUsingElastic(userSkills, searchResponse);
+        printEndTest(testName);
+    }
+
+    @Test
+    public void testBuildBoolQueryAndBoostRatingFieldUsingExpansion() throws Exception {
+        final String testName = "SKILL RATING SEARCH TEST - USING EXPANSION";
+        printStartTest(testName);
+
+        List<EsUserSkills> userSkills = createSkillRatingNodesForBoostingTest();
+        SearchQuery searchQuery = SearchQueryUtility
+                .buildBoolQueryAndBoostRatingFieldUsingExpansion(userSkills, DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
         Assert.assertNotNull(searchQuery);
         printQuery(searchQuery.getQuery());
 
@@ -474,6 +353,158 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         printFullTextExplainUsingElastic(userSkills, searchResponse);
         printEndTest(testName);
     }
+
+    private List<EsUserSkills> createSkillRatingNodesForBoostingTest(){
+        List<EsUserSkills> userSkills = new ArrayList<>();
+        userSkills.add(createEsUserSkills("1", user.getId(), "Spring Framework", 5.0f));
+        //userSkills.add(createEsUserSkills("1", user.getId(), "Spring", 5.0f));
+        userSkills.add(createEsUserSkills("2", user.getId(), "Java", 3.0f));
+        userSkills.add(createEsUserSkills("3", user.getId(), "PostgreSQL", 2.0f));
+        userSkills.add(createEsUserSkills("4", user.getId(), "Datenbanken", 2.0f));
+
+        return userSkills;
+    }
+
+    private EsUserSkills createEsUserSkills(String id, String userId, String name, float rating) {
+        EsUserSkills esUserSkills = new EsUserSkills(id, userId);
+        esUserSkills.setName(name);
+        esUserSkills.setRating(rating);
+
+        return esUserSkills;
+    }
+
+
+
+
+
+    //-------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//    @Test
+//    @Ignore
+//    public void testBuildBoolQueryAndBoostRatingField_old_1() throws Exception {
+//        final String testName = "SKILL RATING SEARCH TEST 1";
+//        printStartTest(testName);
+//
+//        List<SkillRatingNode> skillRatingNodes = user.getSkills().getAllSkills();
+//        SearchQuery searchQuery = SearchQueryUtility
+//                .buildBoolQueryAndBoostRatingFieldRatingDivideBy(skillRatingNodes, DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
+//        Assert.assertNotNull(searchQuery);
+//        printQuery(searchQuery.getQuery());
+//
+//        SearchResponse searchResponse = getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB)
+//                .setQuery(searchQuery.getQuery()).setExplain(true).setSize(Constants.DB_RESULT_LIMIT).get();
+//        Assert.assertNotNull(searchResponse);
+//        Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
+//
+//        printFullTextExplain(skillRatingNodes, searchResponse);
+//        printEndTest(testName);
+//    }
+
+//    @Test
+//    @Ignore
+//    public void testBuildBoolQueryAndBoostRatingFieldSimpleRating() throws Exception {
+//        final String testName = "SKILL RATING SEARCH TEST 2";
+//        printStartTest(testName);
+//
+//        List<SkillRatingNode> skillRatingNodes = user.getSkills().getAllSkills();
+//        SearchQuery searchQuery = SearchQueryUtility
+//                .buildBoolQueryAndBoostRatingFieldSimpleRating(skillRatingNodes, DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
+//        Assert.assertNotNull(searchQuery);
+//        printQuery(searchQuery.getQuery());
+//
+//        SearchResponse searchResponse = getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB)
+//                .setQuery(searchQuery.getQuery()).setExplain(true).setSize(Constants.DB_RESULT_LIMIT).get();
+//        Assert.assertNotNull(searchResponse);
+//        Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
+//
+//        printFullTextExplain(skillRatingNodes, searchResponse);
+//        printEndTest(testName);
+//    }
+
+//    @Test
+//    @Deprecated
+//    public void testBuildBoolQueryAndBoostRatingFieldUsingExpansion() throws Exception {
+//        final String testName = "SKILL RATING SEARCH TEST 4";
+//        printStartTest(testName);
+//
+//        List<SkillRatingNode> skillRatingNodes = user.getSkills().getAllSkills();
+//        SearchQuery searchQuery = SearchQueryUtility
+//                .buildBoolQueryAndBoostRatingField_4(skillRatingNodes, DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
+//        Assert.assertNotNull(searchQuery);
+//        printQuery(searchQuery.getQuery());
+//
+//        SearchResponse searchResponse = getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB)
+//                .setQuery(searchQuery.getQuery()).setExplain(true).setSize(Constants.DB_RESULT_LIMIT).get();
+//        Assert.assertNotNull(searchResponse);
+//        Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
+//
+//        printFullTextExplain(skillRatingNodes, searchResponse);
+//        printEndTest(testName);
+//    }
+
+//    @Test
+//    public void testBuildBoolQueryAndBoostRatingField_6() throws Exception {
+//        final String testName = "SKILL RATING SEARCH TEST 6";
+//        printStartTest(testName);
+//
+//        List<SkillRatingNode> skillRatingNodes = user.getSkills().getAllSkills();
+//        SearchQuery searchQuery = SearchQueryUtility
+//                .buildBoolQueryAndBoostRatingField_6(skillRatingNodes, DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
+//        Assert.assertNotNull(searchQuery);
+//        printQuery(searchQuery.getQuery());
+//
+//        SearchResponse searchResponse = getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB)
+//                .setQuery(searchQuery.getQuery()).setExplain(true).setSize(Constants.DB_RESULT_LIMIT).get();
+//        Assert.assertNotNull(searchResponse);
+//        Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
+//
+//        printFullTextExplain(skillRatingNodes, searchResponse);
+//        printEndTest(testName);
+//    }
+
+//    @Test
+//    public void testBuildBoolQueryAndBoostRatingField_7() throws Exception {
+//        final String testName = "SKILL RATING SEARCH TEST 7";
+//        printStartTest(testName);
+//
+//        List<SkillRatingNode> skillRatingNodes = user.getSkills().getAllSkills();
+//        SearchQuery searchQuery = SearchQueryUtility
+//                .buildBoolQueryAndBoostRatingField_7(skillRatingNodes, DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
+//        Assert.assertNotNull(searchQuery);
+//        printQuery(searchQuery.getQuery());
+//
+//        SearchResponse searchResponse = getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB)
+//                .setQuery(searchQuery.getQuery()).setExplain(true).setSize(Constants.DB_RESULT_LIMIT).get();
+//        Assert.assertNotNull(searchResponse);
+//        Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
+//
+//        printFullTextExplain(skillRatingNodes, searchResponse);
+//        printEndTest(testName);
+//    }
+
+//    @Test
+//    public void testBuildBoolQueryAndBoostRatingField_8() throws Exception {
+//        final String testName = "SKILL RATING SEARCH TEST 8";
+//        printStartTest(testName);
+//
+//        List<SkillRatingNode> skillRatingNodes = user.getSkills().getAllSkills();
+//        SearchQuery searchQuery = SearchQueryUtility
+//                .buildBoolQueryAndBoostRatingField_8(skillRatingNodes, DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
+//        Assert.assertNotNull(searchQuery);
+//        printQuery(searchQuery.getQuery());
+//
+//        SearchResponse searchResponse = getEsClient().prepareSearch(EsConstants.INDEX_INTELLIJOB)
+//                .setQuery(searchQuery.getQuery()).setExplain(true).setSize(Constants.DB_RESULT_LIMIT).get();
+//        Assert.assertNotNull(searchResponse);
+//        Assert.assertTrue("Hits should not be empty.", searchResponse.getHits().getTotalHits() > 0);
+//
+//        printFullTextExplain(skillRatingNodes, searchResponse);
+//        printEndTest(testName);
+//    }
 
     @Test
     public void testSimpleCompareSearchEngine() {
@@ -505,7 +536,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         userSkills.add(createEsUserSkills("2", user.getId(), "Datenbanken", 3.0f));
         userSkills.add(createEsUserSkills("3", user.getId(), "Jenkins", 3.0f));
 
-        searchQuery = SearchQueryUtility.buildBoolQueryAndBoostRatingFieldUsingEsUserSkills(userSkills, DEFAULT_OFFSET,
+        searchQuery = SearchQueryUtility.buildBoolQueryAndBoostRatingFieldUsingEsUserSkills_Final(userSkills, DEFAULT_OFFSET,
                 limit);
         Assert.assertNotNull(searchQuery);
         printQuery(searchQuery.getQuery());
@@ -547,7 +578,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         System.out.println("-----------------------------------------------------------------------------");
         System.out.println("-----------------------------------------------------------------------------");
 
-        searchQuery = SearchQueryUtility.buildBoolQueryAndBoostRatingFieldUsingEsUserSkills(userSkills, DEFAULT_OFFSET,
+        searchQuery = SearchQueryUtility.buildBoolQueryAndBoostRatingFieldUsingEsUserSkills_Final(userSkills, DEFAULT_OFFSET,
                 limit);
         Assert.assertNotNull(searchQuery);
         printQuery(searchQuery.getQuery());
@@ -590,14 +621,6 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         }
 
         return sb.toString();
-    }
-
-    private EsUserSkills createEsUserSkills(String id, String userId, String name, float rating) {
-        EsUserSkills esUserSkills = new EsUserSkills(id, userId);
-        esUserSkills.setName(name);
-        esUserSkills.setRating(rating);
-
-        return esUserSkills;
     }
 
 
@@ -653,19 +676,6 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         sb.append("]");
 
         printFullTextExplain(sb.toString(), searchResponse, limit);
-    }
-
-    private void printFullTextExplain(final Collection<SkillRatingNode> skillRatingNodes,
-                                      final SearchResponse searchResponse) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
-        for (SkillRatingNode skillRatingNode : skillRatingNodes) {
-            sb.append("{name: ").append(skillRatingNode.getSkillNode().getName()).append(",");
-            sb.append("rating: ").append(skillRatingNode.getRating()).append("}");
-        }
-        sb.append("]");
-
-        printFullTextExplain(sb.toString(), searchResponse);
     }
 
     private void printFullTextExplain(final String testSearchData, final SearchResponse searchResponse) {

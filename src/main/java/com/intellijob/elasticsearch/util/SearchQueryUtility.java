@@ -20,7 +20,6 @@ import com.intellijob.Constants;
 import com.intellijob.domain.skills.SkillRatingNode;
 import com.intellijob.elasticsearch.domain.EsUserSkills;
 import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.BoostingQueryBuilder;
 import org.elasticsearch.index.query.FilterBuilders;
 import org.elasticsearch.index.query.FilteredQueryBuilder;
 import org.elasticsearch.index.query.MatchQueryBuilder;
@@ -143,7 +142,7 @@ public final class SearchQueryUtility {
     public static SearchQuery buildFullTextSearchMatchQuery_4(String searchOriginData, PageRequest pageRequest) {
         String[] searchDataArray = searchOriginData.split(OR_SEPARATOR);
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-        boolQueryBuilder.must(QueryBuilders.termQuery(Constants.DB_FIELD_READ,false));
+        boolQueryBuilder.must(QueryBuilders.termQuery(Constants.DB_FIELD_READ, false));
         if (searchDataArray.length == 1) {
             boolQueryBuilder.should(QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchOriginData.trim())
                     .operator(MatchQueryBuilder.Operator.AND));
@@ -216,7 +215,7 @@ public final class SearchQueryUtility {
      *
      * @return build search query
      */
-    public static SearchQuery buildFullTextSearchMatchQuery_5(String searchOriginData, PageRequest pageRequest) {
+    public static SearchQuery buildFullTextSearchMatchQueryUsingOrConjunction(String searchOriginData, PageRequest pageRequest) {
         String[] searchDataArray = searchOriginData.split(OR_SEPARATOR);
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
         if (searchDataArray.length == 1) {
@@ -277,8 +276,8 @@ public final class SearchQueryUtility {
      * @return build search query
      */
     @Deprecated
-    public static SearchQuery buildFullTextSearchMatchQuery_Bosting_FieldReceivedDate(String searchOriginData,
-                                                                                      PageRequest pageRequest) {
+    public static SearchQuery buildFullTextSearchMatchQuery_Boosting_FieldReceivedDate(String searchOriginData,
+                                                                                       PageRequest pageRequest) {
         QueryBuilder builder = generateDefaultQueryBuilderForFullTextSearch(searchOriginData);
         FunctionScoreQueryBuilder functionBuilder = QueryBuilders.functionScoreQuery(builder);
         functionBuilder.add(ScoreFunctionBuilders.fieldValueFactorFunction(Constants.DB_FIELD_RECEIVED_DATE)
@@ -293,9 +292,11 @@ public final class SearchQueryUtility {
      *
      * @return searchQuery
      */
-    public static SearchQuery buildBoolQueryAndBoostRatingField_1(Collection<SkillRatingNode> skillRatingNodes,
-                                                                  int offset,
-                                                                  int limit) {
+    @Deprecated
+    public static SearchQuery buildBoolQueryAndBoostRatingFieldRatingDivideBy(
+            Collection<SkillRatingNode> skillRatingNodes,
+            int offset,
+            int limit) {
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
         for (SkillRatingNode skillRatingNode : skillRatingNodes) {
 
@@ -310,9 +311,11 @@ public final class SearchQueryUtility {
         return searchQuery;
     }
 
-    public static SearchQuery buildBoolQueryAndBoostRatingField_2(Collection<SkillRatingNode> skillRatingNodes,
-                                                                  int offset,
-                                                                  int limit) {
+    @Deprecated
+    public static SearchQuery buildBoolQueryAndBoostRatingFieldSimpleRating(
+            Collection<SkillRatingNode> skillRatingNodes,
+            int offset,
+            int limit) {
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
         for (SkillRatingNode skillRatingNode : skillRatingNodes) {
             float boostValue = (float) skillRatingNode.getRating();
@@ -322,94 +325,47 @@ public final class SearchQueryUtility {
             boolQueryBuilder.should(matchQueryBuilder);
         }
 
-        SearchQuery searchQuery = buildNativeQuery(boolQueryBuilder, offset, limit);
-        return searchQuery;
-    }
-
-    public static SearchQuery buildBoolQueryAndBoostRatingField_3(Collection<SkillRatingNode> skillRatingNodes,
-                                                                  int offset,
-                                                                  int limit) {
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-        for (SkillRatingNode skillRatingNode : skillRatingNodes) {
-            float boostValue = (float) skillRatingNode.getRating() * 10;
-            QueryBuilder matchQueryBuilder = QueryBuilders
-                    .matchQuery(Constants.DB_FIELD_CONTENT, skillRatingNode.getSkillNode().getName())
-                    .boost(boostValue);
-            boolQueryBuilder.should(matchQueryBuilder);
-        }
-
-        SearchQuery searchQuery = buildNativeQuery(boolQueryBuilder, offset, limit);
-        return searchQuery;
+        return buildNativeQuery(boolQueryBuilder, offset, limit);
     }
 
     /**
-     * @param skillRatingNodes list of user skills with rating.
+     * @param userSkills list of user skills with rating.
+     * @param offset     list offset.
+     * @param limit      list limit.
+     *
+     * @return searchQuery
+     */
+    @Deprecated
+    public static SearchQuery buildBoolQueryAndBoostRatingFieldUsingExpansion(Collection<EsUserSkills> userSkills,
+                                                                  int offset,
+                                                                  int limit) {
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        for (EsUserSkills userSkill : userSkills) {
+            float boostValue = userSkill.getRating() * 10;
+            QueryBuilder matchQueryBuilder = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, userSkill.getName())
+                    .operator(MatchQueryBuilder.Operator.AND).fuzziness(5).maxExpansions(DEFAULT_EXPANSION_VALUE).boost(boostValue);
+            boolQueryBuilder.should(matchQueryBuilder);
+        }
+
+        return buildNativeQuery(boolQueryBuilder, offset, limit);
+    }
+
+    /**
+     * @param userSkills list of user skills with rating.
      * @param offset           list offset.
      * @param limit            list limit.
      *
      * @return searchQuery
      */
-    public static SearchQuery buildBoolQueryAndBoostRatingField_4(Collection<SkillRatingNode> skillRatingNodes,
+    public static SearchQuery buildBoolQueryAndBoostRatingField_1(Collection<EsUserSkills> userSkills,
                                                                   int offset,
                                                                   int limit) {
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-        for (SkillRatingNode skillRatingNode : skillRatingNodes) {
-            float boostValue = (float) skillRatingNode.getRating() * 10;
-            QueryBuilder matchQueryBuilder = QueryBuilders
-                    .matchQuery(Constants.DB_FIELD_CONTENT, skillRatingNode.getSkillNode().getName()).
-                            operator(MatchQueryBuilder.Operator.AND).maxExpansions(DEFAULT_EXPANSION_VALUE)
-                    .boost(boostValue);
-            boolQueryBuilder.should(matchQueryBuilder);
-        }
-
-        SearchQuery searchQuery = buildNativeQuery(boolQueryBuilder, offset, limit);
-        return searchQuery;
-    }
-
-    /**
-     * @param skillRatingNodes list of user skills with rating.
-     * @param offset           list offset.
-     * @param limit            list limit.
-     *
-     * @return searchQuery
-     */
-    public static SearchQuery buildBoolQueryAndBoostRatingField_5(Collection<SkillRatingNode> skillRatingNodes,
-                                                                  int offset,
-                                                                  int limit) {
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-        for (SkillRatingNode skillRatingNode : skillRatingNodes) {
-            float boostValue = (float) skillRatingNode.getRating() * 10;
-            String searchTerm = skillRatingNode.getSkillNode().getName();
+        for (EsUserSkills userSkill : userSkills) {
+            float boostValue = userSkill.getRating() * 10;
+            String searchTerm = userSkill.getName();
             QueryBuilder matchQueryBuilder = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchTerm)
-                    .operator(MatchQueryBuilder.Operator.OR).fuzziness(5)
-                    .maxExpansions(DEFAULT_EXPANSION_VALUE)
-                    .prefixLength(searchTerm.length() - 1)
-                    .boost(boostValue);
-            boolQueryBuilder.should(matchQueryBuilder);
-        }
-
-        SearchQuery searchQuery = buildNativeQuery(boolQueryBuilder, offset, limit);
-        return searchQuery;
-    }
-
-    /**
-     * @param skillRatingNodes list of user skills with rating.
-     * @param offset           list offset.
-     * @param limit            list limit.
-     *
-     * @return searchQuery
-     */
-    public static SearchQuery buildBoolQueryAndBoostRatingField_6(Collection<SkillRatingNode> skillRatingNodes,
-                                                                  int offset,
-                                                                  int limit) {
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-        for (SkillRatingNode skillRatingNode : skillRatingNodes) {
-            float boostValue = (float) skillRatingNode.getRating() * 10;
-            String searchTerm = skillRatingNode.getSkillNode().getName();
-            QueryBuilder matchQueryBuilder = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchTerm)
-                    .operator(MatchQueryBuilder.Operator.OR).fuzziness(5)
-                    .maxExpansions(DEFAULT_EXPANSION_VALUE)
-                    .prefixLength(searchTerm.length() - 1)
+                    .operator(MatchQueryBuilder.Operator.AND)
                     .boost(boostValue);
             boolQueryBuilder.should(matchQueryBuilder);
         }
@@ -417,118 +373,40 @@ public final class SearchQueryUtility {
         FilteredQueryBuilder filteredQuery = QueryBuilders
                 .filteredQuery(boolQueryBuilder, FilterBuilders.termFilter(Constants.DB_FIELD_READ, Boolean.FALSE));
         FunctionScoreQueryBuilder functionBuilder = QueryBuilders.functionScoreQuery(filteredQuery);
-        functionBuilder.add(ScoreFunctionBuilders
-                .exponentialDecayFunction(Constants.DB_FIELD_RECEIVED_DATE, DEFAULT_DECAY_FOR_RECEIVED_DATE));
+        functionBuilder.add(ScoreFunctionBuilders.exponentialDecayFunction(Constants.DB_FIELD_RECEIVED_DATE, DEFAULT_DECAY_FOR_RECEIVED_DATE));
 
-        SearchQuery searchQuery = buildNativeQuery(functionBuilder, offset, limit);
-        return searchQuery;
+        return buildNativeQuery(functionBuilder, offset, limit);
     }
 
     /**
-     * @param skillRatingNodes list of user skills with rating.
+     * @param userSkills list of user skills with rating.
      * @param offset           list offset.
      * @param limit            list limit.
      *
      * @return searchQuery
      */
-    public static SearchQuery buildBoolQueryAndBoostRatingField_7(Collection<SkillRatingNode> skillRatingNodes,
+    public static SearchQuery buildBoolQueryAndBoostRatingField_2(Collection<EsUserSkills> userSkills,
                                                                   int offset,
                                                                   int limit) {
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-        for (SkillRatingNode skillRatingNode : skillRatingNodes) {
-            float weightValue = (float) skillRatingNode.getRating() * 100;
-            String searchTerm = skillRatingNode.getSkillNode().getName();
-
-            QueryBuilder matchQueryBuilder100 =
-                    QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchTerm).operator(
-                            MatchQueryBuilder.Operator.AND)
-                            .fuzziness(1).minimumShouldMatch("100%");
-            FunctionScoreQueryBuilder functionScoreQuery100 = QueryBuilders.functionScoreQuery(matchQueryBuilder100)
-                    .add(ScoreFunctionBuilders.weightFactorFunction(weightValue));
-            boolQueryBuilder.should(functionScoreQuery100);
-
-            QueryBuilder matchQueryBuilder50 =
-                    QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchTerm).operator(
-                            MatchQueryBuilder.Operator.OR).minimumShouldMatch("80%");
-            FunctionScoreQueryBuilder functionScoreQuery50 = QueryBuilders.functionScoreQuery(matchQueryBuilder50)
-                    .add(ScoreFunctionBuilders.weightFactorFunction(weightValue / 2));
-            boolQueryBuilder.should(functionScoreQuery50);
-        }
-
-        FunctionScoreQueryBuilder functionBuilder = QueryBuilders.functionScoreQuery(boolQueryBuilder);
-        functionBuilder.add(ScoreFunctionBuilders
-                .exponentialDecayFunction(Constants.DB_FIELD_RECEIVED_DATE, DEFAULT_DECAY_FOR_RECEIVED_DATE));
-
-        SearchQuery searchQuery = buildNativeQuery(functionBuilder, offset, limit);
-        return searchQuery;
-    }
-
-    /**
-     * @param skillRatingNodes list of user skills with rating.
-     * @param offset           list offset.
-     * @param limit            list limit.
-     *
-     * @return searchQuery
-     */
-    public static SearchQuery buildBoolQueryAndBoostRatingField_8(Collection<SkillRatingNode> skillRatingNodes,
-                                                                  int offset,
-                                                                  int limit) {
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-        for (SkillRatingNode skillRatingNode : skillRatingNodes) {
-            float boostValue = (float) skillRatingNode.getRating() * 10;
-            String searchTerm = skillRatingNode.getSkillNode().getName();
-            QueryBuilder matchQueryBuilder100 = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchTerm)
-                    .operator(MatchQueryBuilder.Operator.AND)
-                    .minimumShouldMatch("100%")
-                    .boost(boostValue);
-            boolQueryBuilder.should(matchQueryBuilder100);
-
-            QueryBuilder matchQueryBuilder50 = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchTerm)
+        for (EsUserSkills userSkill : userSkills) {
+            float boostValue = userSkill.getRating() * 10;
+            String searchTerm = userSkill.getName();
+            QueryBuilder matchQueryBuilder = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchTerm)
                     .operator(MatchQueryBuilder.Operator.OR)
-                    .minimumShouldMatch("70%")
-                    .boost(boostValue / 2);
-            boolQueryBuilder.should(matchQueryBuilder50);
+                    .boost(boostValue);
 
-//            String script = "_score + 12;";
-//            FunctionScoreQueryBuilder functionScoreQuery = QueryBuilders.functionScoreQuery(matchQueryBuilder)
-//                    .add(ScoreFunctionBuilders.scriptFunction(script).param("rating", boostValue));
+            FunctionScoreQueryBuilder weightScoreQuery = QueryBuilders.functionScoreQuery(matchQueryBuilder)
+                    .add(ScoreFunctionBuilders.weightFactorFunction(boostValue));
+            boolQueryBuilder.should(weightScoreQuery);
         }
 
-        FunctionScoreQueryBuilder functionBuilder = QueryBuilders.functionScoreQuery(boolQueryBuilder);
-        functionBuilder.add(ScoreFunctionBuilders
-                .exponentialDecayFunction(Constants.DB_FIELD_RECEIVED_DATE, DEFAULT_DECAY_FOR_RECEIVED_DATE));
+        FilteredQueryBuilder filteredQuery = QueryBuilders
+                .filteredQuery(boolQueryBuilder, FilterBuilders.termFilter(Constants.DB_FIELD_READ, Boolean.FALSE));
+        FunctionScoreQueryBuilder functionBuilder = QueryBuilders.functionScoreQuery(filteredQuery);
+        functionBuilder.add(ScoreFunctionBuilders.exponentialDecayFunction(Constants.DB_FIELD_RECEIVED_DATE, DEFAULT_DECAY_FOR_RECEIVED_DATE));
 
-        SearchQuery searchQuery = buildNativeQuery(functionBuilder, offset, limit);
-        return searchQuery;
-    }
-
-    /**
-     * Build boosting query to boost all founded term for specified userSkills.
-     * TODO this is not working because a positiveBoostingQuery requires a negativeBoostingQuery(why???)
-     * <p>
-     * BoostValue = {userSkillRating} / 10.
-     * <p>
-     * {userSkillRating} = <code>SkillRatingNode.getRating()</code>
-     *
-     * @param skillRatingNodes list of user skills with rating.
-     * @param offset           list offset.
-     * @param limit            list limit.
-     *
-     * @return searchQuery
-     */
-    public static SearchQuery buildBoolQueryAndBoostRatingField_9(Collection<SkillRatingNode> skillRatingNodes,
-                                                                  int offset, int limit) {
-        BoostingQueryBuilder boostingQueryBuilder = QueryBuilders.boostingQuery();
-        for (SkillRatingNode skillRatingNode : skillRatingNodes) {
-            float myBoostValue = ((float) skillRatingNode.getRating()) / 10;
-            QueryBuilder positiveQueryBuilder =
-                    QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, skillRatingNode.getSkillNode().getName())
-                            .operator(MatchQueryBuilder.Operator.AND);
-            boostingQueryBuilder.positive(positiveQueryBuilder).boost(myBoostValue);
-        }
-
-        SearchQuery searchQuery = buildNativeQuery(boostingQueryBuilder, offset, limit);
-        return searchQuery;
+        return buildNativeQuery(functionBuilder, offset, limit);
     }
 
     /**
@@ -538,10 +416,8 @@ public final class SearchQueryUtility {
      *
      * @return searchQuery
      */
-    public static SearchQuery buildBoolQueryAndBoostRatingFieldUsingEsUserSkills(
-            Collection<EsUserSkills> skillRatingNodes,
-            int offset,
-            int limit) {
+    public static SearchQuery buildBoolQueryAndBoostRatingFieldUsingEsUserSkills_Final(
+            Collection<EsUserSkills> skillRatingNodes, int offset, int limit) {
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
         for (EsUserSkills esUserSkill : skillRatingNodes) {
             float boostValue = esUserSkill.getRating() * 10;
@@ -551,8 +427,7 @@ public final class SearchQueryUtility {
             }
             String searchTerm = esUserSkill.getName();
             QueryBuilder matchQueryBuilder = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchTerm)
-                    .operator(MatchQueryBuilder.Operator.OR).fuzziness(5).maxExpansions(DEFAULT_EXPANSION_VALUE)
-                    .prefixLength(searchTerm.length() - 1).boost(boostValue);
+                    .operator(MatchQueryBuilder.Operator.OR).boost(boostValue);
 
             FunctionScoreQueryBuilder weightScoreQuery = QueryBuilders.functionScoreQuery(matchQueryBuilder)
                     .add(ScoreFunctionBuilders.weightFactorFunction(boostValue));
@@ -568,6 +443,142 @@ public final class SearchQueryUtility {
         SearchQuery searchQuery = buildNativeQuery(functionBuilder, offset, limit);
         return searchQuery;
     }
+
+    /**
+     * @param userSkills list of user skills with rating.
+     * @param offset           list offset.
+     * @param limit            list limit.
+     *
+     * @return searchQuery
+     */
+    public static SearchQuery buildBoolQueryAndBoostRatingFieldUsingOrConjunction(Collection<EsUserSkills> userSkills,
+                                                                  int offset,
+                                                                  int limit) {
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        for (EsUserSkills userSkill : userSkills) {
+            float boostValue = userSkill.getRating() * 10;
+            String searchTerm = userSkill.getName();
+            QueryBuilder matchQueryBuilder = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchTerm)
+                    .operator(MatchQueryBuilder.Operator.OR)
+                    .boost(boostValue);
+            boolQueryBuilder.should(matchQueryBuilder);
+        }
+
+        FilteredQueryBuilder filteredQuery = QueryBuilders
+                .filteredQuery(boolQueryBuilder, FilterBuilders.termFilter(Constants.DB_FIELD_READ, Boolean.FALSE));
+        FunctionScoreQueryBuilder functionBuilder = QueryBuilders.functionScoreQuery(filteredQuery);
+        functionBuilder.add(ScoreFunctionBuilders.exponentialDecayFunction(Constants.DB_FIELD_RECEIVED_DATE, DEFAULT_DECAY_FOR_RECEIVED_DATE));
+
+        return buildNativeQuery(functionBuilder, offset, limit);
+    }
+
+//    /**
+//     * @param skillRatingNodes list of user skills with rating.
+//     * @param offset           list offset.
+//     * @param limit            list limit.
+//     *
+//     * @return searchQuery
+//     */
+//    public static SearchQuery buildBoolQueryAndBoostRatingField_6(Collection<SkillRatingNode> skillRatingNodes,
+//                                                                  int offset,
+//                                                                  int limit) {
+//        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+//        for (SkillRatingNode skillRatingNode : skillRatingNodes) {
+//            float boostValue = (float) skillRatingNode.getRating() * 10;
+//            String searchTerm = skillRatingNode.getSkillNode().getName();
+//            QueryBuilder matchQueryBuilder = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchTerm)
+//                    .operator(MatchQueryBuilder.Operator.OR).fuzziness(5)
+//                    .maxExpansions(DEFAULT_EXPANSION_VALUE)
+//                    .prefixLength(searchTerm.length() - 1)
+//                    .boost(boostValue);
+//            boolQueryBuilder.should(matchQueryBuilder);
+//        }
+//
+//        FilteredQueryBuilder filteredQuery = QueryBuilders
+//                .filteredQuery(boolQueryBuilder, FilterBuilders.termFilter(Constants.DB_FIELD_READ, Boolean.FALSE));
+//        FunctionScoreQueryBuilder functionBuilder = QueryBuilders.functionScoreQuery(filteredQuery);
+//        functionBuilder.add(ScoreFunctionBuilders.exponentialDecayFunction(Constants.DB_FIELD_RECEIVED_DATE, DEFAULT_DECAY_FOR_RECEIVED_DATE));
+//
+//        return buildNativeQuery(functionBuilder, offset, limit);
+//    }
+
+//    /**
+//     * @param skillRatingNodes list of user skills with rating.
+//     * @param offset           list offset.
+//     * @param limit            list limit.
+//     *
+//     * @return searchQuery
+//     */
+//    public static SearchQuery buildBoolQueryAndBoostRatingField_7(Collection<SkillRatingNode> skillRatingNodes,
+//                                                                  int offset,
+//                                                                  int limit) {
+//        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+//        for (SkillRatingNode skillRatingNode : skillRatingNodes) {
+//            float weightValue = (float) skillRatingNode.getRating() * 100;
+//            String searchTerm = skillRatingNode.getSkillNode().getName();
+//
+//            QueryBuilder matchQueryBuilder100 =
+//                    QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchTerm).operator(
+//                            MatchQueryBuilder.Operator.AND)
+//                            .fuzziness(1).minimumShouldMatch("100%");
+//            FunctionScoreQueryBuilder functionScoreQuery100 = QueryBuilders.functionScoreQuery(matchQueryBuilder100)
+//                    .add(ScoreFunctionBuilders.weightFactorFunction(weightValue));
+//            boolQueryBuilder.should(functionScoreQuery100);
+//
+//            QueryBuilder matchQueryBuilder50 =
+//                    QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchTerm).operator(
+//                            MatchQueryBuilder.Operator.OR).minimumShouldMatch("80%");
+//            FunctionScoreQueryBuilder functionScoreQuery50 = QueryBuilders.functionScoreQuery(matchQueryBuilder50)
+//                    .add(ScoreFunctionBuilders.weightFactorFunction(weightValue / 2));
+//            boolQueryBuilder.should(functionScoreQuery50);
+//        }
+//
+//        FunctionScoreQueryBuilder functionBuilder = QueryBuilders.functionScoreQuery(boolQueryBuilder);
+//        functionBuilder.add(ScoreFunctionBuilders
+//                .exponentialDecayFunction(Constants.DB_FIELD_RECEIVED_DATE, DEFAULT_DECAY_FOR_RECEIVED_DATE));
+//
+//        SearchQuery searchQuery = buildNativeQuery(functionBuilder, offset, limit);
+//        return searchQuery;
+//    }
+
+//    /**
+//     * @param skillRatingNodes list of user skills with rating.
+//     * @param offset           list offset.
+//     * @param limit            list limit.
+//     *
+//     * @return searchQuery
+//     */
+//    public static SearchQuery buildBoolQueryAndBoostRatingField_8(Collection<SkillRatingNode> skillRatingNodes,
+//                                                                  int offset,
+//                                                                  int limit) {
+//        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+//        for (SkillRatingNode skillRatingNode : skillRatingNodes) {
+//            float boostValue = (float) skillRatingNode.getRating() * 10;
+//            String searchTerm = skillRatingNode.getSkillNode().getName();
+//            QueryBuilder matchQueryBuilder100 = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchTerm)
+//                    .operator(MatchQueryBuilder.Operator.AND)
+//                    .minimumShouldMatch("100%")
+//                    .boost(boostValue);
+//            boolQueryBuilder.should(matchQueryBuilder100);
+//
+//            QueryBuilder matchQueryBuilder50 = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchTerm)
+//                    .operator(MatchQueryBuilder.Operator.OR)
+//                    .minimumShouldMatch("70%")
+//                    .boost(boostValue / 2);
+//            boolQueryBuilder.should(matchQueryBuilder50);
+//
+////            String script = "_score + 12;";
+////            FunctionScoreQueryBuilder functionScoreQuery = QueryBuilders.functionScoreQuery(matchQueryBuilder)
+////                    .add(ScoreFunctionBuilders.scriptFunction(script).param("rating", boostValue));
+//        }
+//
+//        FunctionScoreQueryBuilder functionBuilder = QueryBuilders.functionScoreQuery(boolQueryBuilder);
+//        functionBuilder.add(ScoreFunctionBuilders
+//                .exponentialDecayFunction(Constants.DB_FIELD_RECEIVED_DATE, DEFAULT_DECAY_FOR_RECEIVED_DATE));
+//
+//        SearchQuery searchQuery = buildNativeQuery(functionBuilder, offset, limit);
+//        return searchQuery;
+//    }
 
 
     private static SearchQuery buildNativeQuery(QueryBuilder queryBuilder, int offset, int limit) {
