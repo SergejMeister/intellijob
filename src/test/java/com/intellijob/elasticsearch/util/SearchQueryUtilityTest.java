@@ -83,7 +83,8 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         final String testName = "ORIGIN FULL TEXT TEST 1";
         printStartTest(testName);
 
-        String testSearchData = "Werkstudent Java,Datenbanken";
+        String testSearchData = "Softwareentwickler Java, Testautomatisierung";
+        //String testSearchData = "Softwareentwickler Java Testautomatisierung";
 
         PageRequest pageRequest = new PageRequest(DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
 
@@ -107,7 +108,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         final String testName = "ORIGIN FULL TEXT TEST 2 - SIMPLE SORT BY RECEIVED_DATE";
         printStartTest(testName);
 
-        String testSearchData = "Werkstudent Java,Datenbanken";
+        String testSearchData = "Softwareentwickler Java, Testautomatisierung";
 
         PageRequest pageRequest = new PageRequest(DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
 
@@ -132,7 +133,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         final String testName = "ORIGIN FULL TEXT TEST 3 - DECAY FUNCTION FOR RECEIVED_DATE";
         printStartTest(testName);
 
-        String testSearchData = "Werkstudent Java,Datenbanken";
+        String testSearchData = "Softwareentwickler Java, Testautomatisierung";
 
         PageRequest pageRequest = new PageRequest(DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
 
@@ -156,7 +157,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         final String testName = "ORIGIN FULL TEXT TEST 4 - Bool Query for read field";
         printStartTest(testName);
 
-        String testSearchData = "Werkstudent Java,Datenbanken";
+        String testSearchData = "Softwareentwickler Java, Testautomatisierung";
 
         PageRequest pageRequest = new PageRequest(DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
 
@@ -181,7 +182,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         final String testName = "ORIGIN FULL TEXT TEST - FINAL";
         printStartTest(testName);
 
-        String testSearchData = "Werkstudent Java,Datenbanken";
+        String testSearchData = "Softwareentwickler Java, Testautomatisierung";
 
         PageRequest pageRequest = new PageRequest(DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
 
@@ -205,7 +206,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         final String testName = "ORIGIN FULL TEXT TEST 5 - OR-CONJUCTION";
         printStartTest(testName);
 
-        String testSearchData = "Werkstudent Java,Datenbanken";
+        String testSearchData = "Softwareentwickler Java, Testautomatisierung";
 
         PageRequest pageRequest = new PageRequest(DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
 
@@ -232,7 +233,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         final String testName = "ORIGIN FULL TEXT TEST 3 - BOOST FIELD RECEIVED_DATE mit 1.5 FACTOR";
         printStartTest(testName);
 
-        String testSearchData = "Werkstudent Java,Datenbanken";
+        String testSearchData = "Softwareentwickler Java, Testautomatisierung";
 
         PageRequest pageRequest = new PageRequest(DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
         SearchQuery searchQuery = SearchQueryUtility
@@ -414,7 +415,8 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         System.out.println("-----------------------------------------------------------------------------");
         System.out.println("-----------------------------------------------------------------------------");
         List<EsUserSkills> userSkills = createSkillRatingNodesForBoostingTest();
-        searchQuery = SearchQueryUtility.buildBoolQueryAndBoostRatingFieldUsingEsUserSkills_Final(userSkills, DEFAULT_OFFSET,
+        searchQuery =
+                SearchQueryUtility.buildBoolQueryAndBoostRatingFieldUsingEsUserSkills_Final(userSkills, DEFAULT_OFFSET,
                         limit);
         Assert.assertNotNull(searchQuery);
         printQuery(searchQuery.getQuery());
@@ -572,7 +574,8 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         System.out.println("Search term: " + testSearchData);
         System.out.println("Hits: " + searchResponse.getHits().totalHits());
         System.out.println("MaxScore: " + searchResponse.getHits().getMaxScore());
-        for (int i = 0; i < limit; i++) {
+        long loopEndIndex = searchResponse.getHits().totalHits() < limit ? searchResponse.getHits().totalHits() : limit;
+        for (int i = 0; i < loopEndIndex; i++) {
             System.out.println("-----------------------------------------------------------------------------");
             SearchHit searchHit = searchResponse.getHits().getAt(i);
             int index = i + 1;
