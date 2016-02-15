@@ -5,5 +5,5 @@ target
 src/test/resources/developerMailAccount.properties
 /.project
 /data/*
-/data-test/*
+#/data-test/*
 src/test/resources/validateJson.json
