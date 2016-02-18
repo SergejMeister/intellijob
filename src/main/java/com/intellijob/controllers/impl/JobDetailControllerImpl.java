@@ -143,11 +143,14 @@ public class JobDetailControllerImpl implements JobDetailController {
         if (similarityJob == null) {
             JobDetail persistedJobDetail = save(jobDetail);
             jobController.setExtractedFlag(job, Boolean.TRUE);
+            createIndex(persistedJobDetail);
             return persistedJobDetail;
         } else {
             JobDetail mergedJobDetail = mergeJobDetails(jobDetail, similarityJob);
             jobDetailRepository.save(mergedJobDetail);
             jobController.setExtractedFlag(job, Boolean.TRUE);
+            esJobDetailRepository.delete(jobDetail.getId());
+            createIndex(mergedJobDetail);
             return mergedJobDetail;
         }
     }
@@ -212,10 +215,14 @@ public class JobDetailControllerImpl implements JobDetailController {
                 } catch (DuplicateKeyException dke) {
                     LOG.debug("Duplicated Key Exception. Should not be happen! Link: {}", dke.getMessage());
                 }
+                createIndex(jobDetail);
             } else {
                 JobDetail mergedJobDetail = mergeJobDetails(jobDetail, similarityJob);
                 jobDetailRepository.save(mergedJobDetail);
                 result.add(mergedJobDetail);
+                //Delete old index.
+                esJobDetailRepository.delete(jobDetail.getId());
+                createIndex(mergedJobDetail);
             }
         }
         jobController.setExtractedFlag(jobs, Boolean.TRUE);
