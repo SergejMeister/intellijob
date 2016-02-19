@@ -19,17 +19,8 @@ package com.intellijob.repository;
 import com.intellijob.domain.AuditData;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import java.util.List;
-
 /**
  * Repository interface for domain object <code>AuditData</code>.
  */
 public interface AuditDataRepository extends MongoRepository<AuditData, String> {
-
-    /**
-     * Returns all saved audit data.
-     *
-     * @return list of audit data.
-     */
-    List<AuditData> findAll();
 }

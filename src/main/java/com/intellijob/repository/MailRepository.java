@@ -19,19 +19,10 @@ package com.intellijob.repository;
 import com.intellijob.domain.Mail;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import java.util.List;
-
 /**
  * Repository interface for domain object mail.
  */
 public interface MailRepository extends MongoRepository<Mail, String> {
-
-    /**
-     * Returns all mails.
-     *
-     * @return list of mails.
-     */
-    List<Mail> findAll();
 
     /**
      * Find mail by given id.

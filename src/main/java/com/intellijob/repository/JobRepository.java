@@ -27,13 +27,6 @@ import java.util.List;
 public interface JobRepository extends MongoRepository<Job, String> {
 
     /**
-     * Returns all jobs.
-     *
-     * @return list of jobs.
-     */
-    List<Job> findAll();
-
-    /**
      * Find job by specified id.
      *
      * @param id job id.

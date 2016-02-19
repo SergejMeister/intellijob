@@ -28,13 +28,6 @@ import java.util.Set;
 public interface JobLinkRepository extends MongoRepository<JobLink, String> {
 
     /**
-     * Returns all job links.
-     *
-     * @return list of job links.
-     */
-    List<JobLink> findAll();
-
-    /**
      * Find jobLink by specified id.
      *
      * @param id job link id.
