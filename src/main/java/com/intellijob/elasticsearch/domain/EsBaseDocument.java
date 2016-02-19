@@ -16,11 +16,14 @@
 
 package com.intellijob.elasticsearch.domain;
 
+import org.springframework.data.annotation.Id;
+
 /**
  * The abstract base class for all elasticsearch documents.
  */
 public abstract class EsBaseDocument {
 
+    @Id
     protected String id;
 
     public EsBaseDocument() {

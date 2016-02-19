@@ -24,7 +24,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
  * <p>
  * SkillLanguage,SkillKnowledge etc.
  */
-public class SkillRoot extends BaseDocument {
+public abstract class SkillRoot extends BaseDocument {
 
     /**
      * Reference to SkillCategory.

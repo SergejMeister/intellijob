@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User professional  and individual skills.
+ * User professional and individual skills.
  */
 public class Skills {
 

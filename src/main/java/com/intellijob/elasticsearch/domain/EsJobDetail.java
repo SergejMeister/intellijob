@@ -20,7 +20,6 @@ import com.intellijob.Constants;
 import com.intellijob.domain.Address;
 import com.intellijob.domain.ContactPerson;
 import com.intellijob.elasticsearch.EsConstants;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
@@ -34,13 +33,7 @@ import java.util.List;
  * This document represents domain object <code>JobDetail</code> in elasticsearch.
  */
 @Document(indexName = EsConstants.INDEX_INTELLIJOB, type = EsConstants.TYPE_JOB_DETAILS, shards = 1, replicas = 0)
-public class EsJobDetail {
-
-    /**
-     * This id represents the id of jobDetails.
-     */
-    @Id
-    private String id;
+public class EsJobDetail extends EsBaseDocument{
 
     /**
      * Date received job mail.
@@ -130,14 +123,6 @@ public class EsJobDetail {
      * Homepages of organisation.
      */
     private List<String> homepages;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
