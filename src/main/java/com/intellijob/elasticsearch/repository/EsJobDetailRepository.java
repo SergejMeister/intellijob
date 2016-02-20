@@ -25,16 +25,6 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
 public interface EsJobDetailRepository extends ElasticsearchRepository<EsJobDetail, String> {
 
     /**
-     * Find jodDetail data in elasticsearch indexes by id.
-     *
-     * @param id jobDetail id.
-     *
-     * @return elasticsearch job detail data.
-     */
-    EsJobDetail findById(String id);
-
-
-    /**
      * Find jodDetail data in elasticsearch indexes by name.
      *
      * @param name job detail name.

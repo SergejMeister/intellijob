@@ -25,22 +25,6 @@ import org.springframework.data.mongodb.repository.Query;
  */
 public interface JobDetailRepository extends MongoRepository<JobDetail, String> {
 
-//    /**
-//     * Returns all jobs details.
-//     *
-//     * @return list of jobs details.
-//     */
-//    List<JobDetail> findAll();
-//
-//    /**
-//     * Find jobDetail by specified id.
-//     *
-//     * @param id job detail id.
-//     *
-//     * @return job detail object.
-//     */
-//    JobDetail findOne(String id);
-
     /**
      * Get count of jobDetail with empty list of contactPersons.
      * <p>
