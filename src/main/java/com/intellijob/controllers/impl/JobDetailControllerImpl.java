@@ -143,14 +143,11 @@ public class JobDetailControllerImpl implements JobDetailController {
         if (similarityJob == null) {
             JobDetail persistedJobDetail = save(jobDetail);
             jobController.setExtractedFlag(job, Boolean.TRUE);
-            createIndex(persistedJobDetail);
             return persistedJobDetail;
         } else {
             JobDetail mergedJobDetail = mergeJobDetails(jobDetail, similarityJob);
-            jobDetailRepository.save(mergedJobDetail);
+            save(mergedJobDetail);
             jobController.setExtractedFlag(job, Boolean.TRUE);
-            esJobDetailRepository.delete(jobDetail.getId());
-            createIndex(mergedJobDetail);
             return mergedJobDetail;
         }
     }
