@@ -186,7 +186,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
 
         PageRequest pageRequest = new PageRequest(DEFAULT_OFFSET, Constants.DB_RESULT_LIMIT);
 
-        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchMatchQuery(testSearchData, pageRequest);
+        SearchQuery searchQuery = SearchQueryUtility.buildFullTextQuery(testSearchData, pageRequest);
         Assert.assertNotNull(searchQuery);
         printQuery(searchQuery.getQuery());
 
@@ -305,7 +305,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
 
         List<EsUserSkills> userSkills = createSkillRatingNodesForBoostingTest();
         SearchQuery searchQuery = SearchQueryUtility
-                .buildBoolQueryAndBoostRatingFieldUsingEsUserSkills_Final(userSkills, DEFAULT_OFFSET,
+                .buildRatingQuery(userSkills, DEFAULT_OFFSET,
                         Constants.DB_RESULT_LIMIT);
         Assert.assertNotNull(searchQuery);
         printQuery(searchQuery.getQuery());
@@ -328,7 +328,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         List<EsUserSkills> userSkills = esUserSkillsRepository.findByUserId(user.getId());
 
         SearchQuery searchQuery = SearchQueryUtility
-                .buildBoolQueryAndBoostRatingFieldUsingEsUserSkills_Final(userSkills, DEFAULT_OFFSET,
+                .buildRatingQuery(userSkills, DEFAULT_OFFSET,
                         Constants.DB_RESULT_LIMIT);
         Assert.assertNotNull(searchQuery);
         printQuery(searchQuery.getQuery());
@@ -416,7 +416,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         System.out.println("-----------------------------------------------------------------------------");
         List<EsUserSkills> userSkills = createSkillRatingNodesForBoostingTest();
         searchQuery =
-                SearchQueryUtility.buildBoolQueryAndBoostRatingFieldUsingEsUserSkills_Final(userSkills, DEFAULT_OFFSET,
+                SearchQueryUtility.buildRatingQuery(userSkills, DEFAULT_OFFSET,
                         limit);
         Assert.assertNotNull(searchQuery);
         printQuery(searchQuery.getQuery());
@@ -459,7 +459,7 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
         System.out.println("-----------------------------------------------------------------------------");
 
         searchQuery =
-                SearchQueryUtility.buildBoolQueryAndBoostRatingFieldUsingEsUserSkills_Final(userSkills, DEFAULT_OFFSET,
+                SearchQueryUtility.buildRatingQuery(userSkills, DEFAULT_OFFSET,
                         limit);
         Assert.assertNotNull(searchQuery);
         printQuery(searchQuery.getQuery());

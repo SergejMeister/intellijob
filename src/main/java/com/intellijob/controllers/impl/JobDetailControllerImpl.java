@@ -294,7 +294,7 @@ public class JobDetailControllerImpl implements JobDetailController {
     private Page<EsJobDetail> findUsingPersonalSearchEngine(SearchModel searchModel) {
         List<EsUserSkills> esUserSkills = esUserSkillsRepository.findByUserId(searchModel.getUser().getId());
         SearchQuery searchQuery = SearchQueryUtility
-                .buildBoolQueryAndBoostRatingFieldUsingEsUserSkills_Final(esUserSkills, searchModel.getOffset(),
+                .buildRatingQuery(esUserSkills, searchModel.getOffset(),
                         searchModel.getLimit());
         Page<EsJobDetail> result = elasticsearchTemplate.queryForPage(searchQuery, EsJobDetail.class);
         return result;
@@ -310,7 +310,7 @@ public class JobDetailControllerImpl implements JobDetailController {
     private Page<EsJobDetail> findUsingSimpleSearchEngine(SearchModel searchModel) {
         PageRequest request = new PageRequest(searchModel.getOffset(), searchModel.getLimit());
         //PageRequest request = new PageRequest(searchModel.getOffset(), searchModel.getLimit(), new Sort(new Sort.Order(Sort.Direction.DESC,Constants.DB_FIELD_RECEIVED_DATE)));
-        SearchQuery searchQuery = SearchQueryUtility.buildFullTextSearchMatchQuery(searchModel.getSearchData(), request);
+        SearchQuery searchQuery = SearchQueryUtility.buildFullTextQuery(searchModel.getSearchData(), request);
         return elasticsearchTemplate.queryForPage(searchQuery, EsJobDetail.class);
     }
 
@@ -332,7 +332,7 @@ public class JobDetailControllerImpl implements JobDetailController {
      * {@inheritDoc}
      */
     @Override
-    public JobDetail findById(String jobDetailId) throws BaseException {
+    public JobDetail findOne(String jobDetailId) throws BaseException {
         JobDetail foundedJobDetail = jobDetailRepository.findOne(jobDetailId);
         if (foundedJobDetail == null) {
             throw new DocumentNotFoundException();
@@ -346,7 +346,7 @@ public class JobDetailControllerImpl implements JobDetailController {
      */
     @Override
     public JobDetail findAndConvertContentToText(String jobDetailId) throws BaseException {
-        JobDetail foundedJobDetail = findById(jobDetailId);
+        JobDetail foundedJobDetail = findOne(jobDetailId);
         String plainText = htmlToPlaintText(foundedJobDetail.getContent(), foundedJobDetail.getLink());
         //overwrite html content with plain text
         foundedJobDetail.setContent(plainText);
@@ -358,7 +358,7 @@ public class JobDetailControllerImpl implements JobDetailController {
      */
     @Override
     public JobDetail deleteById(String jobDetailId) throws BaseException {
-        JobDetail jobDetailToDelete = findById(jobDetailId);
+        JobDetail jobDetailToDelete = findOne(jobDetailId);
         jobDetailRepository.delete(jobDetailToDelete);
         return jobDetailToDelete;
     }

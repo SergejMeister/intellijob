@@ -100,7 +100,7 @@ public interface JobDetailController {
      *
      * @return founded jobDetail.
      */
-    JobDetail findById(String jobDetailId) throws BaseException;
+    JobDetail findOne(String jobDetailId) throws BaseException;
 
     /**
      * Find jobDetail for specified id and convert html content to plain text.

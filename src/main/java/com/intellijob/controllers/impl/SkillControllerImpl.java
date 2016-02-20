@@ -71,7 +71,7 @@ public class SkillControllerImpl implements SkillController {
      * {@inheritDoc}
      */
     @Override
-    public List<SkillNode> getAllLanguages() {
+    public List<SkillNode> getLanguages() {
         SkillLanguage skillLanguage = skillLanguageRepository.findFirstByOrderByIdAsc();
         return skillLanguage.getLanguages();
     }
@@ -115,7 +115,7 @@ public class SkillControllerImpl implements SkillController {
      */
     @Override
     public void createAutocompleteLanguageIndexes() {
-        List<SkillNode> supportedLanguages = getAllLanguages();
+        List<SkillNode> supportedLanguages = getLanguages();
         supportedLanguages.forEach(this::createAutocompleteLanguageIndex);
     }
 
@@ -178,9 +178,9 @@ public class SkillControllerImpl implements SkillController {
      * {@inheritDoc}
      */
     @Override
-    public List<EsAutocompleteLanguage> suggestLanguage(String searchWord) {
+    public List<EsAutocompleteLanguage> suggestLanguage(String wordPrefix) {
         CompletionSuggestionFuzzyBuilder completionSuggestionFuzzyBuilder =
-                new CompletionSuggestionFuzzyBuilder(EsConstants.FIELD_SUGGEST_LANGUAGE).text(searchWord).field(
+                new CompletionSuggestionFuzzyBuilder(EsConstants.FIELD_SUGGEST_LANGUAGE).text(wordPrefix).field(
                         EsConstants.FIELD_SUGGEST_LANGUAGE);
 
         SuggestResponse suggestResponse =

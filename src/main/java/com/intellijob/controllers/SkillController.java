@@ -35,7 +35,7 @@ public interface SkillController {
      *
      * @return list of languages.
      */
-    List<SkillNode> getAllLanguages();
+    List<SkillNode> getLanguages();
 
     /**
      * Returns list with all supported skills for personal strengths.
@@ -107,11 +107,11 @@ public interface SkillController {
     /**
      * Returns language matches to searchWord.
      *
-     * @param searchWord search word.
+     * @param wordPrefix search word.
      *
      * @return affected list of supported languages.
      */
-    List<EsAutocompleteLanguage> suggestLanguage(String searchWord);
+    List<EsAutocompleteLanguage> suggestLanguage(String wordPrefix);
 
     /**
      * Returns knowledge matches to searchWord.

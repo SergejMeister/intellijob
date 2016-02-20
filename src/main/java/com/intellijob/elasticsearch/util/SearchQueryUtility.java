@@ -243,13 +243,13 @@ public final class SearchQueryUtility {
      * The search data separated with whitespace will be linked with AND.
      * This query use  <code>ScoreFunctionBuilders.exponentialDecayFunction</code> to calculate receivedDate of last 14 days.
      *
-     * @param searchOriginData search data.
+     * @param searchData search data.
      * @param pageRequest      paging data (offset,limit)
      *
      * @return build search query
      */
-    public static SearchQuery buildFullTextSearchMatchQuery(String searchOriginData, PageRequest pageRequest) {
-        QueryBuilder builder = generateDefaultQueryBuilderForFullTextSearch(searchOriginData);
+    public static SearchQuery buildFullTextQuery(String searchData, PageRequest pageRequest) {
+        QueryBuilder builder = generateDefaultQueryBuilderForFullTextSearch(searchData);
         FunctionScoreQueryBuilder functionBuilder = QueryBuilders.functionScoreQuery(builder);
         functionBuilder.add(ScoreFunctionBuilders
                 .exponentialDecayFunction(Constants.DB_FIELD_RECEIVED_DATE, DEFAULT_DECAY_FOR_RECEIVED_DATE));
@@ -366,16 +366,15 @@ public final class SearchQueryUtility {
     }
 
     /**
-     * @param skillRatingNodes list of user skills with rating.
+     * @param skills list of user skills with rating.
      * @param offset           list offset.
      * @param limit            list limit.
      *
      * @return searchQuery
      */
-    public static SearchQuery buildBoolQueryAndBoostRatingFieldUsingEsUserSkills_Final(
-            Collection<EsUserSkills> skillRatingNodes, int offset, int limit) {
+    public static SearchQuery buildRatingQuery(Collection<EsUserSkills> skills, int offset, int limit) {
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-        for (EsUserSkills esUserSkill : skillRatingNodes) {
+        for (EsUserSkills esUserSkill : skills) {
             float boostValue = esUserSkill.getRating() * 10;
             if (esUserSkill.isParent()) {
                 // for parent override.
