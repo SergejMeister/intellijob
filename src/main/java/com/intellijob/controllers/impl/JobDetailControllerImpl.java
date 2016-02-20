@@ -367,7 +367,7 @@ public class JobDetailControllerImpl implements JobDetailController {
      * {@inheritDoc}
      */
     @Override
-    public void createElasticsearchIndexes() {
+    public void createIndexes() {
         List<JobDetail> jobDetails = jobDetailRepository.findAll();
         jobDetails.forEach(this::createIndex);
     }

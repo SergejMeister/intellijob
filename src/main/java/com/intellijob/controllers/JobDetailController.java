@@ -123,7 +123,7 @@ public interface JobDetailController {
     /**
      * Create indexes of all JobDetails.
      */
-    void createElasticsearchIndexes();
+    void createIndexes();
 
     /**
      * Create an index of jobDetail.

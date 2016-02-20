@@ -49,7 +49,7 @@ public class ElasticServices extends BaseServices {
 
     @RequestMapping(value = Endpoints.ES_JOBDEATAILS_INDEX, method = RequestMethod.PUT)
     public ResponseEntity createJobDetailsIndexes() {
-        jobDetailController.createElasticsearchIndexes();
+        jobDetailController.createIndexes();
         return ResponseEntity.accepted().build();
     }
 
