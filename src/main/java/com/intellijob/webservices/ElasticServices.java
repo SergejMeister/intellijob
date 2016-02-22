@@ -53,15 +53,21 @@ public class ElasticServices extends BaseServices {
         return ResponseEntity.accepted().build();
     }
 
-    @RequestMapping(value = Endpoints.ES_USERS_ID_SKILLS, method = RequestMethod.GET)
-    public List<EsUserSkills> getUserSkills(@PathVariable String userId) {
-        return userController.getUserSkills(userId);
-    }
-
     @RequestMapping(value = Endpoints.ES_AUTOCOMPLETE_LANGUAGE_INDEX, method = RequestMethod.PUT)
     public ResponseEntity createAutocompleteLanguageIndexes() {
         skillController.createAutocompleteLanguageIndexes();
         return ResponseEntity.accepted().build();
+    }
+
+    @RequestMapping(value = Endpoints.ES_AUTOCOMPLETE_KNOWLEDGE_INDEX, method = RequestMethod.PUT)
+    public ResponseEntity createAutocompleteKnowledgeIndexes() {
+        skillController.createAutocompleteKnowledgeIndexes();
+        return ResponseEntity.accepted().build();
+    }
+
+    @RequestMapping(value = Endpoints.ES_USERS_ID_SKILLS, method = RequestMethod.GET)
+    public List<EsUserSkills> getUserSkills(@PathVariable String userId) {
+        return userController.getUserSkills(userId);
     }
 
     @RequestMapping(value = Endpoints.ES_AUTOCOMPLETE_LANGUAGE_INDEX, method = RequestMethod.GET)
@@ -81,12 +87,6 @@ public class ElasticServices extends BaseServices {
     public List<SkillData> getSuggestedLanguagesBy(@PathVariable String value) {
         return skillController.suggestLanguage(value).stream()
                 .map(skillNode -> new SkillData(skillNode.getId(), skillNode.getName())).collect(Collectors.toList());
-    }
-
-    @RequestMapping(value = Endpoints.ES_AUTOCOMPLETE_KNOWLEDGE_INDEX, method = RequestMethod.PUT)
-    public ResponseEntity createAutocompleteKnowledgeIndexes() {
-        skillController.createAutocompleteKnowledgeIndexes();
-        return ResponseEntity.accepted().build();
     }
 
     @RequestMapping(value = Endpoints.ES_AUTOCOMPLETE_KNOWLEDGE_INDEX, method = RequestMethod.GET)

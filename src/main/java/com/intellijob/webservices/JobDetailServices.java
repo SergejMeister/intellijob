@@ -73,7 +73,7 @@ public class JobDetailServices extends BaseServices {
      *
      * @return data transfer object <code>ResponseJobDetailTableData.java</code>
      */
-    @RequestMapping(value = Endpoints.JOBDETAILS_PAGING, method = RequestMethod.GET)
+        @RequestMapping(value = Endpoints.JOBDETAILS_PAGING, method = RequestMethod.GET)
     public @ResponseBody ResponseJobDetailTableData getJobDetails(@PathVariable int offset, @PathVariable int limit,
                                                                   @RequestParam(value = "searchFilter", required = false) String searchFilter,
                                                                   @RequestParam(value = "searchData", required = false) String searchData)
