@@ -26,7 +26,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -52,9 +51,7 @@ public class ViewUserService extends BaseServices {
      * @return response user.
      */
     @RequestMapping(value = Endpoints.API_VIEWS_USERS_BY_ID, method = RequestMethod.GET)
-    public
-    @ResponseBody
-    UserViewModel getUserViewModel(@PathVariable String userId) throws Exception {
+    public UserViewModel getUserViewModel(@PathVariable String userId) throws Exception {
         User user = userController.getUser(userId);
 
         SkillViewModel skillViewModel = skillController.getSkillViewModel();
