@@ -28,6 +28,9 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.PreDestroy;
 
+/**
+ * ElasticSearch Configuration class.
+ */
 @Configuration
 @EnableElasticsearchRepositories(basePackages = "com.intellijob.elasticsearch.repository")
 public class ElasticsearchConfiguration {
