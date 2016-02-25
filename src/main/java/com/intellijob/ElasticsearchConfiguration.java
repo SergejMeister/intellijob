@@ -52,9 +52,9 @@ public class ElasticsearchConfiguration {
     private Node node;
 
     /**
-     * Init elasticsearch client and returns ElasticsearchTemplate for Cluster civs.
+     * Init elasticsearch client and open connection to cluster.
      *
-     * @return default ElasticsearchTemplate for Cluster intelliJob.
+     * @return default ElasticsearchTemplate connected to cluster.
      */
     @Bean
     public ElasticsearchTemplate elasticsearchTemplate() {
@@ -72,6 +72,10 @@ public class ElasticsearchConfiguration {
         return new ElasticsearchTemplate(node.client());
     }
 
+
+    /**
+     * Close connection to cluster!
+     */
     @PreDestroy
     void destroy() {
         if (node != null) {
