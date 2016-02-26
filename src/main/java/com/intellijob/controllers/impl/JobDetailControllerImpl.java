@@ -381,6 +381,11 @@ public class JobDetailControllerImpl implements JobDetailController {
             esJobDetailRepository.delete(jobDetail.getId());
         }
 
+        EsJobDetail esJobDetail = mapTo(jobDetail);
+        return esJobDetailRepository.index(esJobDetail);
+    }
+
+    private EsJobDetail mapTo(JobDetail jobDetail) {
         EsJobDetail esJobDetail = new EsJobDetail();
         esJobDetail.setId(jobDetail.getId());
         esJobDetail.setName(jobDetail.getName());
@@ -398,7 +403,7 @@ public class JobDetailControllerImpl implements JobDetailController {
         String plainText = htmlToPlaintText(jobDetail.getContent(), jobDetail.getLink());
         esJobDetail.setContent(plainText);
 
-        return esJobDetailRepository.index(esJobDetail);
+        return esJobDetail;
     }
 
     /**
