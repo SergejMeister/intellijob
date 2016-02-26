@@ -30,10 +30,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * This document represents domain object <code>JobDetail</code> in elasticsearch.
+ * Elasticsearch document representation of domain object <code>JobDetail</code>.
  */
 @Document(indexName = EsConstants.INDEX_INTELLIJOB, type = EsConstants.TYPE_JOB_DETAILS, shards = 1, replicas = 0)
-public class EsJobDetail extends EsBaseDocument{
+public class EsJobDetail extends EsBaseDocument {
 
     /**
      * Date received job mail.
