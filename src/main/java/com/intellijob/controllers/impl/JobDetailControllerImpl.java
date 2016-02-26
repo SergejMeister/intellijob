@@ -93,7 +93,7 @@ public class JobDetailControllerImpl implements JobDetailController {
     public JobDetail save(JobDetail jobDetail) {
         jobDetailRepository.save(jobDetail);
 
-        //always if you save the job create an index.
+        //always create an new index, if you save the job.
         createIndex(jobDetail);
 
         return jobDetail;
