@@ -62,7 +62,9 @@ public class JobDetailServices extends BaseServices {
      * @return job data.
      */
     @RequestMapping(value = Endpoints.JOBDETAILS, method = RequestMethod.GET)
-    public @ResponseBody ResponseJobDetailTableData getAllJobDetails() {
+    public
+    @ResponseBody
+    ResponseJobDetailTableData getAllJobDetails() {
         List<JobDetail> jobDetails = jobDetailController.findAll();
         //returns without job content, only metadata.
         return new ResponseJobDetailTableData(jobDetails, Boolean.FALSE);
@@ -73,10 +75,10 @@ public class JobDetailServices extends BaseServices {
      *
      * @return data transfer object <code>ResponseJobDetailTableData.java</code>
      */
-        @RequestMapping(value = Endpoints.JOBDETAILS_PAGING, method = RequestMethod.GET)
+    @RequestMapping(value = Endpoints.JOBDETAILS_PAGING, method = RequestMethod.GET)
     public @ResponseBody ResponseJobDetailTableData getJobDetails(@PathVariable int offset, @PathVariable int limit,
-                                                                  @RequestParam(value = "searchFilter", required = false) String searchFilter,
-                                                                  @RequestParam(value = "searchData", required = false) String searchData)
+                                             @RequestParam(value = "searchFilter", required = false) String searchFilter,
+                                             @RequestParam(value = "searchData", required = false) String searchData)
             throws UserNotFoundException {
         User user = userController.getUniqueUser();
 
@@ -99,7 +101,9 @@ public class JobDetailServices extends BaseServices {
      * @return data transfer object <code>ResponseJobDetailTableData.java</code>
      */
     @RequestMapping(value = Endpoints.JOBDETAILS_BY_ID, method = RequestMethod.GET)
-    public @ResponseBody ResponseJobDetailData getJobDetail(@PathVariable String jobDetailId) throws Exception {
+    public
+    @ResponseBody
+    ResponseJobDetailData getJobDetail(@PathVariable String jobDetailId) throws Exception {
         JobDetail jobDetail = jobDetailController.findAndConvertContentToText(jobDetailId);
         return new ResponseJobDetailData(jobDetail, Boolean.TRUE);
     }
@@ -110,7 +114,9 @@ public class JobDetailServices extends BaseServices {
      * @return data transfer object <code>ResponseJobDetailData.java</code>
      */
     @RequestMapping(value = Endpoints.JOBDETAILS_BY_ID, method = RequestMethod.DELETE)
-    public @ResponseBody ResponseJobDetailData deleteJobDetail(@PathVariable String jobDetailId) throws Exception {
+    public
+    @ResponseBody
+    ResponseJobDetailData deleteJobDetail(@PathVariable String jobDetailId) throws Exception {
         jobDetailController.deleteById(jobDetailId);
         return new ResponseJobDetailData(jobDetailId);
     }
