@@ -243,6 +243,7 @@ public class JobDetailControllerImpl implements JobDetailController {
         return jobDetailRepository.findAll();
     }
 
+
     /**
      * {@inheritDoc}
      */
@@ -305,11 +306,10 @@ public class JobDetailControllerImpl implements JobDetailController {
      *
      * @param searchModel search model.
      *
-     * @return founded jobDetail.
+     * @return founded jobDetails.
      */
     private Page<EsJobDetail> findUsingSimpleSearchEngine(SearchModel searchModel) {
         PageRequest request = new PageRequest(searchModel.getOffset(), searchModel.getLimit());
-        //PageRequest request = new PageRequest(searchModel.getOffset(), searchModel.getLimit(), new Sort(new Sort.Order(Sort.Direction.DESC,Constants.DB_FIELD_RECEIVED_DATE)));
         SearchQuery searchQuery = SearchQueryUtility.buildFullTextQuery(searchModel.getSearchData(), request);
         return elasticsearchTemplate.queryForPage(searchQuery, EsJobDetail.class);
     }
