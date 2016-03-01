@@ -214,7 +214,8 @@ public final class SearchQueryUtility {
      *
      * @return build search query
      */
-    public static SearchQuery buildFullTextSearchMatchQueryUsingOrConjunction(String searchOriginData, PageRequest pageRequest) {
+    public static SearchQuery buildFullTextSearchMatchQueryUsingOrConjunction(String searchOriginData,
+                                                                              PageRequest pageRequest) {
         String[] searchDataArray = searchOriginData.split(OR_SEPARATOR);
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
         if (searchDataArray.length == 1) {
@@ -243,8 +244,8 @@ public final class SearchQueryUtility {
      * The search data separated with whitespace will be linked with AND.
      * This query use  <code>ScoreFunctionBuilders.exponentialDecayFunction</code> to calculate receivedDate of last 14 days.
      *
-     * @param searchData search data.
-     * @param pageRequest      paging data (offset,limit)
+     * @param searchData  search data.
+     * @param pageRequest paging data (offset,limit)
      *
      * @return build search query
      */
@@ -293,13 +294,14 @@ public final class SearchQueryUtility {
      */
     @Deprecated
     public static SearchQuery buildBoolQueryAndBoostRatingFieldUsingExpansion(Collection<EsUserSkills> userSkills,
-                                                                  int offset,
-                                                                  int limit) {
+                                                                              int offset,
+                                                                              int limit) {
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
         for (EsUserSkills userSkill : userSkills) {
             float boostValue = userSkill.getRating() * 10;
             QueryBuilder matchQueryBuilder = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, userSkill.getName())
-                    .operator(MatchQueryBuilder.Operator.AND).fuzziness(5).maxExpansions(DEFAULT_EXPANSION_VALUE).boost(boostValue);
+                    .operator(MatchQueryBuilder.Operator.AND).fuzziness(5).maxExpansions(DEFAULT_EXPANSION_VALUE)
+                    .boost(boostValue);
             boolQueryBuilder.should(matchQueryBuilder);
         }
 
@@ -308,8 +310,8 @@ public final class SearchQueryUtility {
 
     /**
      * @param userSkills list of user skills with rating.
-     * @param offset           list offset.
-     * @param limit            list limit.
+     * @param offset     list offset.
+     * @param limit      list limit.
      *
      * @return searchQuery
      */
@@ -329,15 +331,16 @@ public final class SearchQueryUtility {
         FilteredQueryBuilder filteredQuery = QueryBuilders
                 .filteredQuery(boolQueryBuilder, FilterBuilders.termFilter(Constants.DB_FIELD_READ, Boolean.FALSE));
         FunctionScoreQueryBuilder functionBuilder = QueryBuilders.functionScoreQuery(filteredQuery);
-        functionBuilder.add(ScoreFunctionBuilders.exponentialDecayFunction(Constants.DB_FIELD_RECEIVED_DATE, DEFAULT_DECAY_FOR_RECEIVED_DATE));
+        functionBuilder.add(ScoreFunctionBuilders
+                .exponentialDecayFunction(Constants.DB_FIELD_RECEIVED_DATE, DEFAULT_DECAY_FOR_RECEIVED_DATE));
 
         return buildNativeQuery(functionBuilder, offset, limit);
     }
 
     /**
      * @param userSkills list of user skills with rating.
-     * @param offset           list offset.
-     * @param limit            list limit.
+     * @param offset     list offset.
+     * @param limit      list limit.
      *
      * @return searchQuery
      */
@@ -360,15 +363,18 @@ public final class SearchQueryUtility {
         FilteredQueryBuilder filteredQuery = QueryBuilders
                 .filteredQuery(boolQueryBuilder, FilterBuilders.termFilter(Constants.DB_FIELD_READ, Boolean.FALSE));
         FunctionScoreQueryBuilder functionBuilder = QueryBuilders.functionScoreQuery(filteredQuery);
-        functionBuilder.add(ScoreFunctionBuilders.exponentialDecayFunction(Constants.DB_FIELD_RECEIVED_DATE, DEFAULT_DECAY_FOR_RECEIVED_DATE));
+        functionBuilder.add(ScoreFunctionBuilders
+                .exponentialDecayFunction(Constants.DB_FIELD_RECEIVED_DATE, DEFAULT_DECAY_FOR_RECEIVED_DATE));
 
         return buildNativeQuery(functionBuilder, offset, limit);
     }
 
     /**
+     * Build a rating search query.
+     *
      * @param skills list of user skills with rating.
-     * @param offset           list offset.
-     * @param limit            list limit.
+     * @param offset list offset.
+     * @param limit  list limit.
      *
      * @return searchQuery
      */
@@ -380,8 +386,7 @@ public final class SearchQueryUtility {
                 // for parent override.
                 boostValue = esUserSkill.getRating();
             }
-            String searchTerm = esUserSkill.getName();
-            QueryBuilder matchQueryBuilder = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, searchTerm)
+            QueryBuilder matchQueryBuilder = QueryBuilders.matchQuery(Constants.DB_FIELD_CONTENT, esUserSkill.getName())
                     .operator(MatchQueryBuilder.Operator.OR).boost(boostValue);
 
             FunctionScoreQueryBuilder weightScoreQuery = QueryBuilders.functionScoreQuery(matchQueryBuilder)
@@ -395,8 +400,7 @@ public final class SearchQueryUtility {
         functionBuilder.add(ScoreFunctionBuilders
                 .exponentialDecayFunction(Constants.DB_FIELD_RECEIVED_DATE, DEFAULT_DECAY_FOR_RECEIVED_DATE));
 
-        SearchQuery searchQuery = buildNativeQuery(functionBuilder, offset, limit);
-        return searchQuery;
+        return buildNativeQuery(functionBuilder, offset, limit);
     }
 
     private static SearchQuery buildNativeQuery(QueryBuilder queryBuilder, int offset, int limit) {
