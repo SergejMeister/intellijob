@@ -26,6 +26,16 @@ public enum Error implements Serializable {
     /**
      * Bad request error code and message.
      */
+    APP_RUN_BAD_PORT(100000, "Wrong port configuration!"),
+
+    /**
+     * Bad request error code and message.
+     */
+    APP_RUN_BAD_HOST(100001, "Wrong host configuration!"),
+
+    /**
+     * Bad request error code and message.
+     */
     BAD_REQUEST(5000000, "Bad request!"),
 
     /**

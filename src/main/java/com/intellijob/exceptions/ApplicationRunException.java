@@ -16,8 +16,14 @@
 
 package com.intellijob.exceptions;
 
+import com.intellijob.enums.Error;
+
 /**
- * Created by Sergej Meister on 3/4/16.
+ * Exception by application start.
  */
-public class ApplicationRunException {
+public class ApplicationRunException extends BaseException {
+
+    public ApplicationRunException(Error error) {
+        super(error);
+    }
 }
