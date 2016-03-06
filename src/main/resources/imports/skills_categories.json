@@ -1,8 +1,6 @@
 [
   {
-    "_id": {
-      "$oid": "5633fe8544aefd11a76eac41"
-    },
+    "_id": "5633fe8544aefd11a76eac41",
     "_class": "com.intellijob.domain.skills.SkillCategory",
     "name": "Experience",
     "localizableObject": {
@@ -12,9 +10,7 @@
     "description": "type for all experience data"
   },
   {
-    "_id": {
-      "$oid": "5633fe8544aefd11a76eac42"
-    },
+    "_id": "5633fe8544aefd11a76eac42",
     "_class": "com.intellijob.domain.skills.SkillCategory",
     "name": "Education",
     "localizableObject": {
@@ -24,9 +20,7 @@
     "description": "type for all education data."
   },
   {
-    "_id": {
-      "$oid": "5633fe8544aefd11a76eac43"
-    },
+    "_id": "5633fe8544aefd11a76eac43",
     "_class": "com.intellijob.domain.skills.SkillCategory",
     "name": "Knowledges",
     "localizableObject": {
@@ -36,9 +30,7 @@
     "description": "type for all knowledges categories, like it,bau etc."
   },
   {
-    "_id": {
-      "$oid": "5633fe8544aefd11a76eac44"
-    },
+    "_id": "5633fe8544aefd11a76eac44",
     "_class": "com.intellijob.domain.skills.SkillCategory",
     "name": "Languages",
     "localizableObject": {
@@ -48,9 +40,7 @@
     "description": "type for all language skills."
   },
   {
-    "_id": {
-      "$oid": "5633fe8544aefd11a76eac45"
-    },
+    "_id": "5633fe8544aefd11a76eac45",
     "_class": "com.intellijob.domain.skills.SkillCategory",
     "name": "Personal strengths",
     "localizableObject": {
@@ -60,9 +50,7 @@
     "description": "type for all categories of personal strength"
   },
   {
-    "_id": {
-      "$oid": "5633fe8544aefd11a76eac46"
-    },
+    "_id": "5633fe8544aefd11a76eac46",
     "_class": "com.intellijob.domain.skills.SkillCategory",
     "name": "Mobility",
     "localizableObject": {

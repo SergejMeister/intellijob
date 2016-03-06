@@ -5,5 +5,6 @@ target
 src/test/resources/developerMailAccount.properties
 /.project
 /data/*
+/mongoData/*
 #/data-test/*
 src/test/resources/validateJson.json

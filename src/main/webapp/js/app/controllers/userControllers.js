@@ -69,30 +69,35 @@ intelliJobControllers.controller(
                 $scope.userPersonalStrengths = [];
                 $scope.userLanguages = [];
 
-                UserServices.getViewUserModelById($rootScope.globalUser.userId).success(function (response) {
-                    $scope.user = response.userData;
-                    $scope.searchEngine = $scope.user.profileData.searchEngine;
-                    $scope.switchSearchEngine($scope.searchEngine);
+                if ($rootScope.globalUser.userId) {
+                    UserServices.getViewUserModelById($rootScope.globalUser.userId).success(function (response) {
+                        $scope.user = response.userData;
+                        $scope.searchEngine = $scope.user.profileData.searchEngine;
+                        $scope.switchSearchEngine($scope.searchEngine);
 
-                    $scope.supportedKnowledges = [];
-                    if ($scope.user.knowledges && $scope.user.knowledges.length > 0) {
-                        $scope.userKnowledges = $scope.user.knowledges;
-                        $scope.userSkillStatus.isKnowledgeEmpty = false;
-                    }
+                        $scope.supportedKnowledges = [];
+                        if ($scope.user.knowledges && $scope.user.knowledges.length > 0) {
+                            $scope.userKnowledges = $scope.user.knowledges;
+                            $scope.userSkillStatus.isKnowledgeEmpty = false;
+                        }
 
-                    if ($scope.user.languages && $scope.user.languages.length > 0) {
-                        $scope.userLanguages = $scope.user.languages;
-                        $scope.userSkillStatus.isLanguageEmpty = false;
-                    }
+                        if ($scope.user.languages && $scope.user.languages.length > 0) {
+                            $scope.userLanguages = $scope.user.languages;
+                            $scope.userSkillStatus.isLanguageEmpty = false;
+                        }
 
-                    $scope.supportedPersonalStrengths = response.supportedPersonalStrengths;
-                    if ($scope.user.personalStrengths && $scope.user.personalStrengths.length > 0) {
-                        $scope.userPersonalStrengths = $scope.user.personalStrengths;
-                        $scope.userSkillStatus.isPersonEmpty = false;
-                    }
-                }).error(function (error) {
-                    console.log(error);
-                });
+                        $scope.supportedPersonalStrengths = response.supportedPersonalStrengths;
+                        if ($scope.user.personalStrengths && $scope.user.personalStrengths.length > 0) {
+                            $scope.userPersonalStrengths = $scope.user.personalStrengths;
+                            $scope.userSkillStatus.isPersonEmpty = false;
+                        }
+                    }).error(function (error) {
+                        console.log(error);
+                    });
+                } else {
+                    $scope.searchEngine = 'UNKNOWN';
+                }
+
 
                 $scope.panelStatus = {
                     isEducationSkillOpen: open,
@@ -177,7 +182,7 @@ intelliJobControllers.controller(
 
                 $scope.showKnowledgeTree = false;
                 $scope.setKnowledgeTreeState = function (newKnowledgeTreeState) {
-                    if ( $scope.supportedKnowledges.length == 0) {
+                    if ($scope.supportedKnowledges.length == 0) {
                         UserServices.getSupportedKnowledges().success(function (response) {
                             $scope.supportedKnowledges = response;
                         }).error(function (error) {
@@ -191,6 +196,9 @@ intelliJobControllers.controller(
                  * Save user data.
                  */
                 $scope.save = function (userData) {
+                    if (!userData.profileData.searchEngine) {
+                        userData.profileData.searchEngine = $scope.searchEngine;
+                    }
                     userData.personalStrengths = $scope.userPersonalStrengths;
                     userData.knowledges = $scope.userKnowledges;
                     userData.languages = $scope.userLanguages;
