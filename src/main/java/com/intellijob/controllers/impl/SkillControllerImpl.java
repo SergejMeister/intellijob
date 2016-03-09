@@ -40,6 +40,7 @@ import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -185,6 +186,9 @@ public class SkillControllerImpl implements SkillController {
 
         SuggestResponse suggestResponse =
                 elasticsearchTemplate.suggest(completionSuggestionFuzzyBuilder, EsAutocompleteLanguage.class);
+        if (suggestResponse.contextSize() == 0) {
+            return Collections.emptyList();
+        }
         CompletionSuggestion completionSuggestion =
                 suggestResponse.getSuggest().getSuggestion(EsConstants.FIELD_SUGGEST_LANGUAGE);
         List<CompletionSuggestion.Entry.Option> options = completionSuggestion.getEntries().get(0).getOptions();

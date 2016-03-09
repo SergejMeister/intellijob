@@ -21,7 +21,10 @@ import com.intellijob.controllers.UserController;
 import com.intellijob.domain.User;
 import com.intellijob.dto.SkillData;
 import com.intellijob.dto.response.UserViewModel;
+import com.intellijob.exceptions.UserNotFoundException;
 import com.intellijob.models.SkillViewModel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +42,8 @@ import java.util.stream.Collectors;
 @RestController
 public class ViewUserService extends BaseServices {
 
+    private final static Logger LOG = LoggerFactory.getLogger(MailServices.class);
+
     @Autowired
     private UserController userController;
 
@@ -52,10 +57,14 @@ public class ViewUserService extends BaseServices {
      */
     @RequestMapping(value = Endpoints.API_VIEWS_USERS_BY_ID, method = RequestMethod.GET)
     public UserViewModel getUserViewModel(@PathVariable String userId) throws Exception {
-        User user = userController.getUser(userId);
-
         SkillViewModel skillViewModel = skillController.getSkillViewModel();
-        return new UserViewModel(user, skillViewModel);
+        try {
+            User user = userController.getUser(userId);
+            return new UserViewModel(user, skillViewModel);
+        } catch (UserNotFoundException usf) {
+            LOG.info("ViewUserService.getUserViewModel: UserId is null! Create elasticSearch indexes.");
+            return new UserViewModel(skillViewModel);
+        }
     }
 
     /**

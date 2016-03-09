@@ -29,6 +29,7 @@ intelliJobControllers.controller(
             '$route',
             'UserServices',
             function ($scope, $rootScope, $location, $http, $cookieStore, $routeParams, $route, UserServices) {
+
                 $scope.educationLevels = [
                     'Promotion',
                     'Hochschulabschluss - Master',
@@ -69,35 +70,30 @@ intelliJobControllers.controller(
                 $scope.userPersonalStrengths = [];
                 $scope.userLanguages = [];
 
-                if ($rootScope.globalUser.userId) {
-                    UserServices.getViewUserModelById($rootScope.globalUser.userId).success(function (response) {
-                        $scope.user = response.userData;
-                        $scope.searchEngine = $scope.user.profileData.searchEngine;
-                        $scope.switchSearchEngine($scope.searchEngine);
+                UserServices.getViewUserModelById($rootScope.globalUser.userId).success(function (response) {
+                    $scope.user = response.userData;
+                    $scope.searchEngine = $scope.user.profileData.searchEngine;
+                    $scope.switchSearchEngine($scope.searchEngine);
 
-                        $scope.supportedKnowledges = [];
-                        if ($scope.user.knowledges && $scope.user.knowledges.length > 0) {
-                            $scope.userKnowledges = $scope.user.knowledges;
-                            $scope.userSkillStatus.isKnowledgeEmpty = false;
-                        }
+                    $scope.supportedKnowledges = [];
+                    if ($scope.user.knowledges && $scope.user.knowledges.length > 0) {
+                        $scope.userKnowledges = $scope.user.knowledges;
+                        $scope.userSkillStatus.isKnowledgeEmpty = false;
+                    }
 
-                        if ($scope.user.languages && $scope.user.languages.length > 0) {
-                            $scope.userLanguages = $scope.user.languages;
-                            $scope.userSkillStatus.isLanguageEmpty = false;
-                        }
+                    if ($scope.user.languages && $scope.user.languages.length > 0) {
+                        $scope.userLanguages = $scope.user.languages;
+                        $scope.userSkillStatus.isLanguageEmpty = false;
+                    }
 
-                        $scope.supportedPersonalStrengths = response.supportedPersonalStrengths;
-                        if ($scope.user.personalStrengths && $scope.user.personalStrengths.length > 0) {
-                            $scope.userPersonalStrengths = $scope.user.personalStrengths;
-                            $scope.userSkillStatus.isPersonEmpty = false;
-                        }
-                    }).error(function (error) {
-                        console.log(error);
-                    });
-                } else {
-                    $scope.searchEngine = 'UNKNOWN';
-                }
-
+                    $scope.supportedPersonalStrengths = response.supportedPersonalStrengths;
+                    if ($scope.user.personalStrengths && $scope.user.personalStrengths.length > 0) {
+                        $scope.userPersonalStrengths = $scope.user.personalStrengths;
+                        $scope.userSkillStatus.isPersonEmpty = false;
+                    }
+                }).error(function (error) {
+                    console.log(error);
+                });
 
                 $scope.panelStatus = {
                     isEducationSkillOpen: open,

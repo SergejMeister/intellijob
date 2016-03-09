@@ -133,7 +133,7 @@ public class UserControllerImpl implements UserController {
     public User getUser(String userId) throws UserNotFoundException {
         User user = userRepository.findOne(userId);
         if (user == null) {
-            LOG.error("No user for id: " + userId);
+            LOG.warn("No user for id: " + userId);
             throw new UserNotFoundException();
         }
         return user;

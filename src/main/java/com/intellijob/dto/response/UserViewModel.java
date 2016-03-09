@@ -42,9 +42,17 @@ public class UserViewModel extends ResponseData {
         this(user, null);
     }
 
+    public UserViewModel(SkillViewModel skillViewModel) {
+        setUserData(new ResponseUserData());
+        initUserViewData(skillViewModel);
+    }
+
     public UserViewModel(User user, SkillViewModel skillViewModel) {
         setUserData(new ResponseUserData(user));
+        initUserViewData(skillViewModel);
+    }
 
+    private void initUserViewData(SkillViewModel skillViewModel) {
         List<SkillData> personalStrengths = UserServiceMapper.mapToListSkillData(skillViewModel.getPersonalStrengths());
         setSupportedPersonalStrengths(personalStrengths);
 
