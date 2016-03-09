@@ -24,7 +24,6 @@ import com.intellijob.elasticsearch.EsConstants;
 import com.intellijob.elasticsearch.domain.EsUserSkills;
 import com.intellijob.elasticsearch.repository.EsJobDetailRepository;
 import com.intellijob.elasticsearch.repository.EsUserSkillsRepository;
-import com.intellijob.exceptions.UserNotFoundException;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.search.SearchHit;
@@ -72,7 +71,8 @@ public class SearchQueryUtilityTest extends BaseElasticSearchTester {
     }
 
     @Before
-    public void before() throws UserNotFoundException {
+    public void before() throws Exception {
+        reloadCollectionUsers();
         this.user = userController.getUniqueUser();
         userSkills = user.getSkills().getAllSkills();
         countAllJobDetails = esJobDetailRepository.count();

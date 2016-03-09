@@ -16,7 +16,7 @@ public class MailServicesTest extends BaseWebServiceTester {
 
     @Test
     public void testLiveSearchMail() throws Exception {
-        if (!RUNNING_LIVE) {
+        if (!isProduction) {
             Assert.assertTrue("Don't run this test.", Boolean.TRUE);
             return;
         }

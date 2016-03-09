@@ -25,6 +25,7 @@ import com.intellijob.domain.skills.SkillLanguage;
 import com.intellijob.domain.skills.SkillNode;
 import com.intellijob.enums.SkillCategoryEnum;
 import junit.framework.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -37,10 +38,12 @@ public class SkillLanguageRepositoryTest extends BaseTester {
     public static final String DEFAULT_LANGUAGE_RES = "skills/languages";
 
     @Autowired
-    private SkillCategoryRepository skillCategoryRepository;
-
-    @Autowired
     private SkillLanguageRepository skillLanguageRepository;
+
+    @Before
+    public void before() throws Exception {
+        reloadCollectionSkillCategories();
+    }
 
     @Test
     public void testCreateSkillLanguage() {

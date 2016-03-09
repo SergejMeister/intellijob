@@ -83,6 +83,12 @@ public class MongoConfiguration extends MongoAutoConfiguration {
     @Value("${spring.data.mongodb.replication.storage}")
     private String replicationStorage;
 
+    /**
+     * Production or test flag.
+     */
+    @Value("${spring.data.mongodb.production}")
+    private boolean isProduction;
+
 
     /**
      * Override embeddedMongoConfiguration to set a replication storage.
@@ -114,7 +120,7 @@ public class MongoConfiguration extends MongoAutoConfiguration {
         MongodConfigBuilder mongodConfigBuilder = new MongodConfigBuilder().version(Version.Main.PRODUCTION)
                 .net(net).configServer(false);
 
-        if (replicationStorage != null && !replicationStorage.isEmpty()) {
+        if (isProduction && replicationStorage != null && !replicationStorage.isEmpty()) {
             mongodConfigBuilder.replication(new Storage(replicationStorage, null, 0));
         }
 
@@ -127,7 +133,7 @@ public class MongoConfiguration extends MongoAutoConfiguration {
 
         DBCollection sys_import_collection = mongoClient
                 .getDB(this.properties.getDatabase()).getCollection("sys_import");
-        if (sys_import_collection.count() == 0) {
+        if (isProduction && sys_import_collection.count() == 0) {
             LOG.info("IMPORT DATA =============================================>");
 
             //Import collection skill_caegories.

@@ -1,9 +1,6 @@
 [
   {
-    "_id": {
-      "$oid": "5633fe8544aefd11a76eac41"
-    },
-    "_class": "com.intellijob.domain.skills.SkillCategory",
+    "id": "5633fe8544aefd11a76eac41",
     "name": "Experience",
     "localizableObject": {
       "label": "Berufserfahrung"
@@ -12,10 +9,7 @@
     "description": "type for all experience data"
   },
   {
-    "_id": {
-      "$oid": "5633fe8544aefd11a76eac42"
-    },
-    "_class": "com.intellijob.domain.skills.SkillCategory",
+    "id": "5633fe8544aefd11a76eac42",
     "name": "Experience",
     "localizableObject": {
       "label": "Bildung"
@@ -24,10 +18,7 @@
     "description": "type for all education data."
   },
   {
-    "_id": {
-      "$oid": "5633fe8544aefd11a76eac43"
-    },
-    "_class": "com.intellijob.domain.skills.SkillCategory",
+    "id": "5633fe8544aefd11a76eac43",
     "name": "Knowledges",
     "localizableObject": {
       "label": "Kenntnisse und Fertigkeiten"
@@ -36,10 +27,7 @@
     "description": "type for all knowledges categories,  like it, bau etc."
   },
   {
-    "_id": {
-      "$oid": "5633fe8544aefd11a76eac44"
-    },
-    "_class": "com.intellijob.domain.skills.SkillCategory",
+    "id": "5633fe8544aefd11a76eac44",
     "name": "Languages",
     "localizableObject": {
       "label": "Sprachen"
@@ -48,10 +36,7 @@
     "description": "type for all language skills."
   },
   {
-    "_id": {
-      "$oid": "5633fe8544aefd11a76eac45"
-    },
-    "_class": "com.intellijob.domain.skills.SkillCategory",
+    "id": "5633fe8544aefd11a76eac45",
     "name": "Personal strengths",
     "localizableObject": {
       "label": "Persönliche Stärken"
@@ -60,10 +45,7 @@
     "description": "type for all categories of personal strength"
   },
   {
-    "_id": {
-      "$oid": "5633fe8544aefd11a76eac46"
-    },
-    "_class": "com.intellijob.domain.skills.SkillCategory",
+    "id": "5633fe8544aefd11a76eac46",
     "name": "Mobility",
     "localizableObject": {
       "label": "Mobilität"

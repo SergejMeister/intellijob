@@ -16,9 +16,8 @@
 
 package com.intellijob;
 
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -28,8 +27,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-@ContextConfiguration(classes = {TestApplicationConfig.class})
+@SpringApplicationConfiguration(classes = ApplicationConfig.class)
 @TestPropertySource(locations = "classpath:application-test.properties")
-@WebAppConfiguration
 public @interface DefaultTestAnnotations {
 }
