@@ -32,6 +32,9 @@ public class User extends BaseDocument {
     private Skills skills;
 
     public User() {
+        setProfile(new Profile());
+        setSimpleSearchField("");
+        setSkills(new Skills());
     }
 
     public User(String id) {

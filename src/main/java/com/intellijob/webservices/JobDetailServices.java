@@ -27,6 +27,8 @@ import com.intellijob.elasticsearch.SearchModel;
 import com.intellijob.elasticsearch.SearchModelBuilder;
 import com.intellijob.elasticsearch.domain.EsJobDetail;
 import com.intellijob.exceptions.UserNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +36,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -46,6 +47,8 @@ import java.util.List;
  */
 @RestController
 public class JobDetailServices extends BaseServices {
+
+    private final static Logger LOG = LoggerFactory.getLogger(ViewJobDetailServices.class);
 
     @Autowired
     private UserController userController;
@@ -62,9 +65,7 @@ public class JobDetailServices extends BaseServices {
      * @return job data.
      */
     @RequestMapping(value = Endpoints.JOBDETAILS, method = RequestMethod.GET)
-    public
-    @ResponseBody
-    ResponseJobDetailTableData getAllJobDetails() {
+    public ResponseJobDetailTableData getAllJobDetails() {
         List<JobDetail> jobDetails = jobDetailController.findAll();
         //returns without job content, only metadata.
         return new ResponseJobDetailTableData(jobDetails, Boolean.FALSE);
@@ -76,11 +77,15 @@ public class JobDetailServices extends BaseServices {
      * @return data transfer object <code>ResponseJobDetailTableData.java</code>
      */
     @RequestMapping(value = Endpoints.JOBDETAILS_PAGING, method = RequestMethod.GET)
-    public @ResponseBody ResponseJobDetailTableData getJobDetails(@PathVariable int offset, @PathVariable int limit,
-                                             @RequestParam(value = "searchFilter", required = false) String searchFilter,
-                                             @RequestParam(value = "searchData", required = false) String searchData)
-            throws UserNotFoundException {
-        User user = userController.getUniqueUser();
+    public ResponseJobDetailTableData getJobDetails(@PathVariable int offset, @PathVariable int limit,
+                                                    @RequestParam(value = "searchFilter", required = false) String searchFilter,
+                                                    @RequestParam(value = "searchData", required = false) String searchData) {
+        User user = new User();
+        try {
+            user = userController.getUniqueUser();
+        } catch (UserNotFoundException e) {
+            LOG.warn("ViewJobDetailServices.getJobDetailViewModel: User not found. So return all jobDetails, without any searchFilter!");
+        }
 
         SearchModelBuilder searchModelBuilder = new SearchModelBuilder(user).setOffset(offset).setLimit(limit);
         if (searchFilter != null) {
@@ -101,9 +106,7 @@ public class JobDetailServices extends BaseServices {
      * @return data transfer object <code>ResponseJobDetailTableData.java</code>
      */
     @RequestMapping(value = Endpoints.JOBDETAILS_BY_ID, method = RequestMethod.GET)
-    public
-    @ResponseBody
-    ResponseJobDetailData getJobDetail(@PathVariable String jobDetailId) throws Exception {
+    public ResponseJobDetailData getJobDetail(@PathVariable String jobDetailId) throws Exception {
         JobDetail jobDetail = jobDetailController.findAndConvertContentToText(jobDetailId);
         return new ResponseJobDetailData(jobDetail, Boolean.TRUE);
     }
@@ -114,9 +117,7 @@ public class JobDetailServices extends BaseServices {
      * @return data transfer object <code>ResponseJobDetailData.java</code>
      */
     @RequestMapping(value = Endpoints.JOBDETAILS_BY_ID, method = RequestMethod.DELETE)
-    public
-    @ResponseBody
-    ResponseJobDetailData deleteJobDetail(@PathVariable String jobDetailId) throws Exception {
+    public ResponseJobDetailData deleteJobDetail(@PathVariable String jobDetailId) throws Exception {
         jobDetailController.deleteById(jobDetailId);
         return new ResponseJobDetailData(jobDetailId);
     }
