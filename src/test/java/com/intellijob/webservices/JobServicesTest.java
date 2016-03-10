@@ -31,7 +31,7 @@ public class JobServicesTest extends BaseWebServiceTester {
 
     @Test
     public void testLiveDownloadAllJobContents() throws Exception {
-        if (!RUNNING_LIVE) {
+        if (!isProduction) {
             Assert.assertTrue("Don't run this test.", Boolean.TRUE);
             return;
         }

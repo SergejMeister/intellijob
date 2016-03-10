@@ -14,20 +14,5 @@
  * limitations under the License.
  */
 
-package com.intellijob;
+package com.intellijob.elasticsearch;
 
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.TestPropertySource;
-
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
-
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-@SpringApplicationConfiguration(classes = ApplicationConfig.class)
-@TestPropertySource(locations = "classpath:application-test.properties")
-public @interface DefaultTestAnnotations {
-}

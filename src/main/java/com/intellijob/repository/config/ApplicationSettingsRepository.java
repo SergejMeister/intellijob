@@ -14,20 +14,15 @@
  * limitations under the License.
  */
 
-package com.intellijob;
+package com.intellijob.repository.config;
 
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.TestPropertySource;
+import com.intellijob.domain.config.ApplicationSettings;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+/**
+ * Repository class for applicationSettings.
+ */
+public interface ApplicationSettingsRepository extends MongoRepository<ApplicationSettings, String> {
 
-
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-@SpringApplicationConfiguration(classes = ApplicationConfig.class)
-@TestPropertySource(locations = "classpath:application-test.properties")
-public @interface DefaultTestAnnotations {
+    ApplicationSettings findTopByOrderByIdDesc();
 }

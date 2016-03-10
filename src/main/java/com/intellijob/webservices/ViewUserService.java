@@ -16,12 +16,16 @@
 
 package com.intellijob.webservices;
 
+import com.intellijob.controllers.ApplicationSettingsController;
 import com.intellijob.controllers.SkillController;
 import com.intellijob.controllers.UserController;
 import com.intellijob.domain.User;
 import com.intellijob.dto.SkillData;
 import com.intellijob.dto.response.UserViewModel;
+import com.intellijob.exceptions.UserNotFoundException;
 import com.intellijob.models.SkillViewModel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,11 +43,16 @@ import java.util.stream.Collectors;
 @RestController
 public class ViewUserService extends BaseServices {
 
+    private final static Logger LOG = LoggerFactory.getLogger(MailServices.class);
+
     @Autowired
     private UserController userController;
 
     @Autowired
     private SkillController skillController;
+
+    @Autowired
+    private ApplicationSettingsController applicationSettingsController;
 
     /**
      * Returns user data for specified userId.
@@ -52,10 +61,15 @@ public class ViewUserService extends BaseServices {
      */
     @RequestMapping(value = Endpoints.API_VIEWS_USERS_BY_ID, method = RequestMethod.GET)
     public UserViewModel getUserViewModel(@PathVariable String userId) throws Exception {
-        User user = userController.getUser(userId);
-
         SkillViewModel skillViewModel = skillController.getSkillViewModel();
-        return new UserViewModel(user, skillViewModel);
+        try {
+            User user = userController.getUser(userId);
+            return new UserViewModel(user, skillViewModel);
+        } catch (UserNotFoundException usf) {
+            LOG.info("ViewUserService.getUserViewModel: UserId is null! Create elasticSearch indexes.");
+            applicationSettingsController.initApplication();
+            return new UserViewModel(skillViewModel);
+        }
     }
 
     /**

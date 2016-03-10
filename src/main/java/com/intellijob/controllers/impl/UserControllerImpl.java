@@ -24,6 +24,7 @@ import com.intellijob.domain.skills.SkillNode;
 import com.intellijob.domain.skills.SkillRatingNode;
 import com.intellijob.elasticsearch.domain.EsUserSkills;
 import com.intellijob.elasticsearch.repository.EsUserSkillsRepository;
+import com.intellijob.enums.SearchEngineEnum;
 import com.intellijob.exceptions.NotMailSyncException;
 import com.intellijob.exceptions.UserNotFoundException;
 import com.intellijob.repository.skills.SkillKnowledgeRepository;
@@ -48,9 +49,9 @@ import java.util.stream.Collectors;
  * Represents profile controllers.
  */
 @Controller
-public class UseControllerImpl implements UserController {
+public class UserControllerImpl implements UserController {
 
-    private final static Logger LOG = LoggerFactory.getLogger(UseControllerImpl.class);
+    private final static Logger LOG = LoggerFactory.getLogger(UserControllerImpl.class);
 
     @Autowired
     private UserProfileRepository userProfileRepository;
@@ -132,7 +133,7 @@ public class UseControllerImpl implements UserController {
     public User getUser(String userId) throws UserNotFoundException {
         User user = userRepository.findOne(userId);
         if (user == null) {
-            LOG.error("No user for id: " + userId);
+            LOG.warn("No user for id: " + userId);
             throw new UserNotFoundException();
         }
         return user;
@@ -144,7 +145,10 @@ public class UseControllerImpl implements UserController {
     @Override
     public User save(User user) {
         User createUser = userRepository.save(user);
-        createUserSkillsIndexes(user);
+        if (user.getProfile().getSearchEngine().equals(SearchEngineEnum.COMPLEX)) {
+            createUserSkillsIndexes(user);
+        }
+
         return createUser;
     }
 

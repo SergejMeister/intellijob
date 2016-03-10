@@ -16,30 +16,44 @@
 
 package com.intellijob;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.intellijob.domain.LocalizableObject;
 import com.intellijob.domain.Profile;
 import com.intellijob.domain.User;
+import com.intellijob.domain.skills.SkillCategory;
 import com.intellijob.domain.skills.SkillNode;
 import com.intellijob.dto.SkillData;
 import com.intellijob.dto.SkillRatingData;
+import com.intellijob.repository.skills.SkillCategoryRepository;
+import com.intellijob.repository.user.UserRepository;
 import junit.framework.Assert;
 import org.apache.commons.lang.RandomStringUtils;
 import org.bson.types.ObjectId;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-
+//RunWith and WebAppConfiguration should be placed here!!!
 @RunWith(SpringJUnit4ClassRunner.class)
+@WebAppConfiguration
 @DefaultTestAnnotations
 public abstract class BaseTester {
+
+    protected final static Logger LOG = LoggerFactory.getLogger(BaseTester.class);
 
     protected static final String USER_PROFILE_DEFAULT_FIRSTNAME = "TestFirstName";
     protected static final String USER_PROFILE_DEFAULT_SECONDNAME = "TestSecondName";
@@ -47,10 +61,41 @@ public abstract class BaseTester {
     protected final static String DEFAULT_ENCODING = "UTF-8";
 
     /**
-     * Constants.
+     * Production or test flag.
      */
-    protected final static Boolean RUNNING_LIVE = TestApplicationConfig.LIVE_MONGODB;
-    protected final static Logger LOG = LoggerFactory.getLogger(BaseTester.class);
+    @Value("${spring.data.mongodb.production}")
+    protected boolean isProduction;
+
+    @Autowired
+    protected UserRepository userRepository;
+
+    @Autowired
+    protected SkillCategoryRepository skillCategoryRepository;
+
+    /**
+     * Production or test flag.
+     */
+    @Value("${spring.data.mongodb.replication.storage}")
+    private String replicationStorage;
+
+    /**
+     * Mongo Host.
+     */
+    @Value("${spring.data.mongodb.host}")
+    private String mongoHost;
+
+    /**
+     * Mongo port.
+     */
+    @Value("${spring.data.mongodb.port}")
+    private Integer mongoPort;
+
+    /**
+     * Mongo database.
+     */
+    @Value("${spring.data.mongodb.database}")
+    private String mongoDatabase;
+
 
     protected static SkillData createSkillData(String name) {
         String id = RandomStringUtils.random(5);
@@ -113,5 +158,47 @@ public abstract class BaseTester {
         }
 
         return result;
+    }
+
+    /**
+     * Reload collection skill_categories.
+     * <p>
+     * Drop collection if exist, create a new collection and load data.
+     * Read data from skill_categories.json
+     *
+     * @throws IOException exception.
+     */
+    protected void reloadCollectionSkillCategories() throws Exception {
+        skillCategoryRepository.deleteAll();
+        URL skillCategoriesURL = Thread.currentThread().getContextClassLoader()
+                .getResource("imports/skill_categories.json");
+
+        TypeReference<List<SkillCategory>> typeRef = new TypeReference<List<SkillCategory>>() {
+        };
+        List<SkillCategory> categories = new ObjectMapper().readValue(new File(skillCategoriesURL.getFile()), typeRef);
+        skillCategoryRepository.save(categories);
+    }
+
+    /**
+     * Reload collection users.
+     * <p>
+     * Drop collection if exist, create a new collection and load data.
+     * Read data from collection_users.json
+     *
+     * @throws IOException exception.
+     */
+    protected void reloadCollectionUsers() throws Exception {
+        userRepository.deleteAll();
+        URL collectionUserURL = Thread.currentThread().getContextClassLoader()
+                .getResource("imports/collection_users.json");
+
+        User user = new ObjectMapper().readValue(new File(collectionUserURL.getFile()), User.class);
+        userRepository.save(user);
+    }
+
+
+    protected void initMongoDatabase() throws Exception {
+        reloadCollectionSkillCategories();
+        reloadCollectionUsers();
     }
 }

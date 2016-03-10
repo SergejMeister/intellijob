@@ -34,7 +34,7 @@ public class JobControllerTest extends BaseTester {
 
     @Test
     public void setsAllJobAsExtractedLive() {
-        if (!RUNNING_LIVE) {
+        if (!isProduction) {
             Assert.assertTrue("Don't run this test.", Boolean.TRUE);
             return;
         }
@@ -48,7 +48,7 @@ public class JobControllerTest extends BaseTester {
 
     @Test
     public void setsAllJobAsNotExtractedLive() {
-        if (!RUNNING_LIVE) {
+        if (!isProduction) {
             Assert.assertTrue("Don't run this test.", Boolean.TRUE);
             return;
         }

@@ -40,12 +40,14 @@ intelliJobControllers.controller(
                 $scope.jobDetailTableMaxPage = 10;
                 $scope.showPagination = false;
                 $scope.jobDetails;
+                $scope.readonly = $rootScope.globalUser.userId == null;
                 var pageIndex = $scope.jobDetailTableCurrentPage - 1;
                 //watch state should not be active by init page, to avoid 2 get request!
                 $scope.isWatchActive = false;
                 JobDetailServices.getViewModel().success(function (response) {
                     $scope.words = $scope.createTagClouds(response.userSkills);
                     $scope.user = response.userData;
+                    $scope.readonly = $scope.user.id == null;
                     $scope.searchEngine = $scope.user.profileData.searchEngine;
                     $scope.switchSearchEngine($scope.searchEngine);
                     $scope.searchData = response.userData.simpleSearchField;

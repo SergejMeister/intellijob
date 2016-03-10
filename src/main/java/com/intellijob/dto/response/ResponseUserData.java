@@ -21,6 +21,7 @@ import com.intellijob.domain.skills.SkillRatingNode;
 import com.intellijob.dto.ProfileData;
 import com.intellijob.dto.SkillRatingData;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,6 +43,10 @@ public class ResponseUserData extends ResponseData {
     private List<SkillRatingData> knowledges;
 
     public ResponseUserData() {
+        this.profileData = new ProfileData();
+        this.languages= Collections.emptyList();
+        this.personalStrengths = Collections.emptyList();
+        this.knowledges = Collections.emptyList();
     }
 
     public ResponseUserData(User user) {

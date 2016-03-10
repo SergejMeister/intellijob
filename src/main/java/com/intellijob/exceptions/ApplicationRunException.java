@@ -14,20 +14,16 @@
  * limitations under the License.
  */
 
-package com.intellijob;
+package com.intellijob.exceptions;
 
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.TestPropertySource;
+import com.intellijob.enums.Error;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+/**
+ * Exception by application start.
+ */
+public class ApplicationRunException extends BaseException {
 
-
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-@SpringApplicationConfiguration(classes = ApplicationConfig.class)
-@TestPropertySource(locations = "classpath:application-test.properties")
-public @interface DefaultTestAnnotations {
+    public ApplicationRunException(Error error) {
+        super(error);
+    }
 }

@@ -17,6 +17,7 @@
 package com.intellijob.dto;
 
 import com.intellijob.domain.Profile;
+import com.intellijob.enums.SearchEngineEnum;
 import org.springframework.util.StringUtils;
 
 import java.io.Serializable;
@@ -49,6 +50,7 @@ public class ProfileData implements Serializable {
 
 
     public ProfileData() {
+        this.searchEngine = SearchEngineEnum.UNKNOWN.name();
     }
 
     public ProfileData(String firstName, String secondName, String sex) {

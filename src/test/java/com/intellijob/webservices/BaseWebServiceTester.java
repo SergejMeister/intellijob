@@ -44,6 +44,7 @@ public abstract class BaseWebServiceTester extends BaseTester {
     @BeforeClass
     public static void beforeClass() {
         Properties mailProperties;
+        Boolean RUNNING_LIVE = false;
         if (RUNNING_LIVE) {
             mailProperties = readProperty(FILENAME_DEVELOPER_MAIL_ACCOUNT);
         } else {

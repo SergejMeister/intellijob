@@ -36,12 +36,12 @@
                         <label for="radioSimpleSearch">
                             Einfache Suche
                             <input id="radioSimpleSearch" type="radio" ng-model='searchEngine' value='SIMPLE'
-                                   ng-change="changeSearchEngine(searchEngine)"/>
+                                   ng-change="changeSearchEngine(searchEngine)" />
                         </label>
                         <label for='radioComplexSearch'>
                             Erweiterte Suche
                             <input id='radioComplexSearch' type='radio' ng-model='searchEngine' value='COMPLEX'
-                                   ng-change='changeSearchEngine(searchEngine)'/>
+                                   ng-change='changeSearchEngine(searchEngine)' ng-disabled='readonly' />
                         </label>
                     </div>
                 </div>

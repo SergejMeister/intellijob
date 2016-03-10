@@ -34,7 +34,7 @@ public class JobLinkControllerTest extends BaseTester {
 
     @Test
     public void findInMailsAndSaveLive() {
-        if (!RUNNING_LIVE) {
+        if (!isProduction) {
             Assert.assertTrue("Don't run this test.", Boolean.TRUE);
             return;
         }

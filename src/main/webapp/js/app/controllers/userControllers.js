@@ -29,6 +29,7 @@ intelliJobControllers.controller(
             '$route',
             'UserServices',
             function ($scope, $rootScope, $location, $http, $cookieStore, $routeParams, $route, UserServices) {
+
                 $scope.educationLevels = [
                     'Promotion',
                     'Hochschulabschluss - Master',
@@ -177,7 +178,7 @@ intelliJobControllers.controller(
 
                 $scope.showKnowledgeTree = false;
                 $scope.setKnowledgeTreeState = function (newKnowledgeTreeState) {
-                    if ( $scope.supportedKnowledges.length == 0) {
+                    if ($scope.supportedKnowledges.length == 0) {
                         UserServices.getSupportedKnowledges().success(function (response) {
                             $scope.supportedKnowledges = response;
                         }).error(function (error) {
@@ -191,6 +192,9 @@ intelliJobControllers.controller(
                  * Save user data.
                  */
                 $scope.save = function (userData) {
+                    if (!userData.profileData.searchEngine) {
+                        userData.profileData.searchEngine = $scope.searchEngine;
+                    }
                     userData.personalStrengths = $scope.userPersonalStrengths;
                     userData.knowledges = $scope.userKnowledges;
                     userData.languages = $scope.userLanguages;

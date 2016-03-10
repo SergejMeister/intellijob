@@ -23,7 +23,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
-import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.PreDestroy;
@@ -32,7 +31,6 @@ import javax.annotation.PreDestroy;
  * ElasticSearch Configuration class.
  */
 @Configuration
-@EnableElasticsearchRepositories(basePackages = "com.intellijob.elasticsearch.repository")
 public class ElasticsearchConfiguration {
 
     private static final Logger LOG = Logger.getLogger(ElasticsearchConfiguration.class);
@@ -61,7 +59,7 @@ public class ElasticsearchConfiguration {
      */
     @Bean
     public ElasticsearchTemplate elasticsearchTemplate() {
-        LOG.info("Start elasticsearch server");
+        LOG.info("Start elasticsearch server =============================================================>");
         NodeBuilder nodeBuilder = new NodeBuilder();
         nodeBuilder.clusterName(clusterName).local(false);
         if (StringUtils.hasLength(pathData)) {
@@ -72,6 +70,7 @@ public class ElasticsearchConfiguration {
         nodeBuilder.settings().put("network.host", host);
 
         node = nodeBuilder.node();
+        LOG.info("Embedded ElasticSearch is running on host " + host);
         return new ElasticsearchTemplate(node.client());
     }
 

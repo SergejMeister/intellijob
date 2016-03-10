@@ -14,20 +14,17 @@
  * limitations under the License.
  */
 
-package com.intellijob;
+package com.intellijob.controllers;
 
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.TestPropertySource;
+/**
+ * Controller interface to handle application settings logic.
+ */
+public interface ApplicationSettingsController {
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
-
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-@SpringApplicationConfiguration(classes = ApplicationConfig.class)
-@TestPropertySource(locations = "classpath:application-test.properties")
-public @interface DefaultTestAnnotations {
+    /**
+     * Init all required application data and settings.
+     *
+     * @return status, true if no error occurred while initialization process.
+     */
+    Boolean initApplication();
 }

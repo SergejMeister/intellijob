@@ -34,14 +34,11 @@ import java.util.List;
 public class JobDetailControllerTest extends BaseTester {
 
     @Autowired
-    private JobController jobController;
-
-    @Autowired
     private JobDetailController jobDetailController;
 
     @Test
     public void extractJobDetailsOfAllJobLive() {
-        if (!RUNNING_LIVE) {
+        if (!isProduction) {
             Assert.assertTrue("Don't run this test.", Boolean.TRUE);
             return;
         }
@@ -53,7 +50,7 @@ public class JobDetailControllerTest extends BaseTester {
 
     @Test
     public void testUpdateRead() {
-        if (!RUNNING_LIVE) {
+        if (!isProduction) {
             Assert.assertTrue("Don't run this test.", Boolean.TRUE);
             return;
         }
