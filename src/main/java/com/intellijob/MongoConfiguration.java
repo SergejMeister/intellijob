@@ -19,6 +19,7 @@ package com.intellijob;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.intellijob.domain.config.ApplicationSettings;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
@@ -39,15 +40,12 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.boot.autoconfigure.mongo.MongoProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,8 +56,6 @@ import java.util.Map;
  * Start embedded server and load skill_data for FIRST application start"
  */
 @Configuration
-@ComponentScan
-@EnableMongoRepositories(basePackages = "com.intellijob.repository")
 public class MongoConfiguration extends MongoAutoConfiguration {
 
     public static final Integer DEFAULT_MONGO_PORT = 27017;
@@ -132,7 +128,7 @@ public class MongoConfiguration extends MongoAutoConfiguration {
     public Boolean doImportData(MongoClient mongoClient) throws IOException {
 
         DBCollection sys_import_collection = mongoClient
-                .getDB(this.properties.getDatabase()).getCollection("sys_import");
+                .getDB(this.properties.getDatabase()).getCollection(ApplicationSettings.COLLECTION_NAME);
         if (isProduction && sys_import_collection.count() == 0) {
             LOG.info("IMPORT DATA =============================================>");
 
@@ -149,8 +145,10 @@ public class MongoConfiguration extends MongoAutoConfiguration {
             loadSkillsData(mongoClient, "skill_personalstrengths.json", "skill_personalstrengths");
 
             DBObject row = new BasicDBObject();
-            row.put("Imported", 1);
-            row.put("Date", LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE));
+            row.put(ApplicationSettings.FIELD_MONGO_DATA_IMPORTED, true);
+            row.put(ApplicationSettings.FIELD_MONGO_DATA_IMPORTED_DATE, new Date());
+            row.put(ApplicationSettings.FIELD_ELASTIC_DATA_IMPORTED, false);
+            row.put(ApplicationSettings.FIELD_ELASTIC_DATA_IMPORTED_DATE, null);
 
             sys_import_collection.insert(row);
             LOG.info("IMPORT DATA FINISHED!");
@@ -162,8 +160,6 @@ public class MongoConfiguration extends MongoAutoConfiguration {
 
     /**
      * Import collection skill_categories.
-     *
-     * @throws IOException exception.
      */
     private void loadCollectionSkillCategories(MongoClient mongoClient) {
         String collectionName = "skill_categories";
@@ -191,8 +187,6 @@ public class MongoConfiguration extends MongoAutoConfiguration {
 
     /**
      * Import supported skill data.
-     *
-     * @throws IOException exception.
      */
     private void loadSkillsData(MongoClient mongoClient, String jsonFile, String collectionName) {
         try {

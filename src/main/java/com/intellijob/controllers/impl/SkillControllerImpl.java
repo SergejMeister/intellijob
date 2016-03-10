@@ -186,7 +186,7 @@ public class SkillControllerImpl implements SkillController {
 
         SuggestResponse suggestResponse =
                 elasticsearchTemplate.suggest(completionSuggestionFuzzyBuilder, EsAutocompleteLanguage.class);
-        if (suggestResponse.contextSize() == 0) {
+        if (suggestResponse.getSuggest() == null || suggestResponse.getSuggest().size() == 0) {
             return Collections.emptyList();
         }
         CompletionSuggestion completionSuggestion =

@@ -16,6 +16,7 @@
 
 package com.intellijob.webservices;
 
+import com.intellijob.controllers.ApplicationSettingsController;
 import com.intellijob.controllers.SkillController;
 import com.intellijob.controllers.UserController;
 import com.intellijob.domain.User;
@@ -50,6 +51,9 @@ public class ViewUserService extends BaseServices {
     @Autowired
     private SkillController skillController;
 
+    @Autowired
+    private ApplicationSettingsController applicationSettingsController;
+
     /**
      * Returns user data for specified userId.
      *
@@ -63,6 +67,7 @@ public class ViewUserService extends BaseServices {
             return new UserViewModel(user, skillViewModel);
         } catch (UserNotFoundException usf) {
             LOG.info("ViewUserService.getUserViewModel: UserId is null! Create elasticSearch indexes.");
+            applicationSettingsController.initApplication();
             return new UserViewModel(skillViewModel);
         }
     }

@@ -4700,1640 +4700,6 @@
     },
     {
       "_id": {
-        "$oid": "563625a144aec39e70b17381"
-      },
-      "name": "Branchen",
-      "localizableObject": {
-        "label": "Branchen"
-      },
-      "nodes": [
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b1755e"
-          },
-          "name": "Abfallwirtschaft",
-          "localizableObject": {
-            "label": "Abfallwirtschaft"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b1755f"
-          },
-          "name": "Arbeitgeberverbände",
-          "localizableObject": {
-            "label": "Arbeitgeberverbände"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17560"
-          },
-          "name": "Baugewerbe",
-          "localizableObject": {
-            "label": "Baugewerbe"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17561"
-          },
-          "name": "Bergbau",
-          "localizableObject": {
-            "label": "Bergbau"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17562"
-          },
-          "name": "Bestattung",
-          "localizableObject": {
-            "label": "Bestattung"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17563"
-          },
-          "name": "Bundesverkehrsverwaltung",
-          "localizableObject": {
-            "label": "Bundesverkehrsverwaltung"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17564"
-          },
-          "name": "Bundesverwaltung",
-          "localizableObject": {
-            "label": "Bundesverwaltung"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17565"
-          },
-          "name": "Chemische Industrie",
-          "localizableObject": {
-            "label": "Chemische Industrie"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17566"
-          },
-          "name": "Elektroindustrie",
-          "localizableObject": {
-            "label": "Elektroindustrie"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17567"
-          },
-          "name": "Evangelische Einrichtungen",
-          "localizableObject": {
-            "label": "Evangelische Einrichtungen"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17568"
-          },
-          "name": "Fachhochschulen",
-          "localizableObject": {
-            "label": "Fachhochschulen"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17569"
-          },
-          "name": "Filmindustrie",
-          "localizableObject": {
-            "label": "Filmindustrie"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b1756a"
-          },
-          "name": "Floristik",
-          "localizableObject": {
-            "label": "Floristik"
-          },
-          "nodes": [
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c45"
-              },
-              "name": "Blumenversand",
-              "localizableObject": {
-                "label": "Blumenversand"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c46"
-              },
-              "name": "Gestecke anfertigen",
-              "localizableObject": {
-                "label": "Gestecke anfertigen"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c47"
-              },
-              "name": "Girlanden anfertigen (Floristik)",
-              "localizableObject": {
-                "label": "Girlanden anfertigen (Floristik)"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c48"
-              },
-              "name": "Hochzeitsfloristik",
-              "localizableObject": {
-                "label": "Hochzeitsfloristik"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c49"
-              },
-              "name": "Hydrokultur",
-              "localizableObject": {
-                "label": "Hydrokultur"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c4a"
-              },
-              "name": "Ikebana",
-              "localizableObject": {
-                "label": "Ikebana"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c4b"
-              },
-              "name": "Kranzbinden, -flechten",
-              "localizableObject": {
-                "label": "Kranzbinden, -flechten"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c4c"
-              },
-              "name": "Pflanzen dekorativ arrangieren",
-              "localizableObject": {
-                "label": "Pflanzen dekorativ arrangieren"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c4d"
-              },
-              "name": "Schalenbepflanzungen",
-              "localizableObject": {
-                "label": "Schalenbepflanzungen"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c4e"
-              },
-              "name": "Straußbinden",
-              "localizableObject": {
-                "label": "Straußbinden"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c4f"
-              },
-              "name": "Trauerfloristik",
-              "localizableObject": {
-                "label": "Trauerfloristik"
-              },
-              "nodes": []
-            }
-          ]
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b1756b"
-          },
-          "name": "Foto, Film, Video",
-          "localizableObject": {
-            "label": "Foto, Film, Video"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b1756c"
-          },
-          "name": "Gartenbau",
-          "localizableObject": {
-            "label": "Gartenbau"
-          },
-          "nodes": [
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c6c"
-              },
-              "name": "Anbau-, Anlagenplanung (Gartenbau)",
-              "localizableObject": {
-                "label": "Anbau-, Anlagenplanung (Gartenbau)"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c6d"
-              },
-              "name": "Anzucht, Containeranzucht",
-              "localizableObject": {
-                "label": "Anzucht, Containeranzucht"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c6e"
-              },
-              "name": "Aufschulen",
-              "localizableObject": {
-                "label": "Aufschulen"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c6f"
-              },
-              "name": "Baumpflege, Baumschnitt",
-              "localizableObject": {
-                "label": "Baumpflege, Baumschnitt"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c70"
-              },
-              "name": "Baumsanierung",
-              "localizableObject": {
-                "label": "Baumsanierung"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c71"
-              },
-              "name": "Beeren ernten",
-              "localizableObject": {
-                "label": "Beeren ernten"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c72"
-              },
-              "name": "Botanische Gärten, Lehrgärten",
-              "localizableObject": {
-                "label": "Botanische Gärten, Lehrgärten"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c73"
-              },
-              "name": "Freilandkultur",
-              "localizableObject": {
-                "label": "Freilandkultur"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c74"
-              },
-              "name": "Friedhofsgärtnerei",
-              "localizableObject": {
-                "label": "Friedhofsgärtnerei"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c75"
-              },
-              "name": "Frühbeetkultur",
-              "localizableObject": {
-                "label": "Frühbeetkultur"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c76"
-              },
-              "name": "Garten-, Grünflächenpflege",
-              "localizableObject": {
-                "label": "Garten-, Grünflächenpflege"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c77"
-              },
-              "name": "Gehölze vermehren und kultivieren",
-              "localizableObject": {
-                "label": "Gehölze vermehren und kultivieren"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c78"
-              },
-              "name": "Gemüsebau",
-              "localizableObject": {
-                "label": "Gemüsebau"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c79"
-              },
-              "name": "Gemüse ernten",
-              "localizableObject": {
-                "label": "Gemüse ernten"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c7a"
-              },
-              "name": "Golfplatzpflege",
-              "localizableObject": {
-                "label": "Golfplatzpflege"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c7b"
-              },
-              "name": "Hecken- und Sträucherschnitt",
-              "localizableObject": {
-                "label": "Hecken- und Sträucherschnitt"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c7c"
-              },
-              "name": "Kletterausbildung (Baum)",
-              "localizableObject": {
-                "label": "Kletterausbildung (Baum)"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c7d"
-              },
-              "name": "Kompostierung",
-              "localizableObject": {
-                "label": "Kompostierung"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c7e"
-              },
-              "name": "Naturgärten",
-              "localizableObject": {
-                "label": "Naturgärten"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c7f"
-              },
-              "name": "Obstbau",
-              "localizableObject": {
-                "label": "Obstbau"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c80"
-              },
-              "name": "Obst ernten",
-              "localizableObject": {
-                "label": "Obst ernten"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c81"
-              },
-              "name": "Parkanlagen, Historische Gärten, Schlossgärten",
-              "localizableObject": {
-                "label": "Parkanlagen, Historische Gärten, Schlossgärten"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c82"
-              },
-              "name": "Pflanzenzucht",
-              "localizableObject": {
-                "label": "Pflanzenzucht"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c83"
-              },
-              "name": "Pikieren (Gartenbau)",
-              "localizableObject": {
-                "label": "Pikieren (Gartenbau)"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c84"
-              },
-              "name": "Pilzanbau",
-              "localizableObject": {
-                "label": "Pilzanbau"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c85"
-              },
-              "name": "Plattenlegen (Garten- und Landschaftsbau)",
-              "localizableObject": {
-                "label": "Plattenlegen (Garten- und Landschaftsbau)"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c86"
-              },
-              "name": "Produktionsgartenbau",
-              "localizableObject": {
-                "label": "Produktionsgartenbau"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c87"
-              },
-              "name": "Rekultivierung",
-              "localizableObject": {
-                "label": "Rekultivierung"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c88"
-              },
-              "name": "Sonderkulturen",
-              "localizableObject": {
-                "label": "Sonderkulturen"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c89"
-              },
-              "name": "Sportplatzbau, Spielplatzbau",
-              "localizableObject": {
-                "label": "Sportplatzbau, Spielplatzbau"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c8a"
-              },
-              "name": "Staudengärtnerei",
-              "localizableObject": {
-                "label": "Staudengärtnerei"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c8b"
-              },
-              "name": "Stufenbau (Garten- und Landschaftsbau)",
-              "localizableObject": {
-                "label": "Stufenbau (Garten- und Landschaftsbau)"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c8c"
-              },
-              "name": "Terrassenbau",
-              "localizableObject": {
-                "label": "Terrassenbau"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c8d"
-              },
-              "name": "Topfkulturen",
-              "localizableObject": {
-                "label": "Topfkulturen"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c8e"
-              },
-              "name": "Treibhausanbau",
-              "localizableObject": {
-                "label": "Treibhausanbau"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c8f"
-              },
-              "name": "Veredeln (Gartenbau)",
-              "localizableObject": {
-                "label": "Veredeln (Gartenbau)"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c90"
-              },
-              "name": "Versuchsgärten",
-              "localizableObject": {
-                "label": "Versuchsgärten"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c91"
-              },
-              "name": "Wasseranlagenbau (Garten- und Landschaftsbau)",
-              "localizableObject": {
-                "label": "Wasseranlagenbau (Garten- und Landschaftsbau)"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c92"
-              },
-              "name": "Wegebau",
-              "localizableObject": {
-                "label": "Wegebau"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17c93"
-              },
-              "name": "Zierpflanzenbau",
-              "localizableObject": {
-                "label": "Zierpflanzenbau"
-              },
-              "nodes": []
-            }
-          ]
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b1756d"
-          },
-          "name": "Garten- und Landschaftsbau",
-          "localizableObject": {
-            "label": "Garten- und Landschaftsbau"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b1756e"
-          },
-          "name": "Genossenschaften",
-          "localizableObject": {
-            "label": "Genossenschaften"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b1756f"
-          },
-          "name": "Gerätebau",
-          "localizableObject": {
-            "label": "Gerätebau"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17570"
-          },
-          "name": "Gesundheitswesen",
-          "localizableObject": {
-            "label": "Gesundheitswesen"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17571"
-          },
-          "name": "Getränkeherstellung",
-          "localizableObject": {
-            "label": "Getränkeherstellung"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17572"
-          },
-          "name": "Grundstücksverwaltung",
-          "localizableObject": {
-            "label": "Grundstücksverwaltung"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17573"
-          },
-          "name": "Handel",
-          "localizableObject": {
-            "label": "Handel"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17574"
-          },
-          "name": "Handwerksorganisation",
-          "localizableObject": {
-            "label": "Handwerksorganisation"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17575"
-          },
-          "name": "Hardware-, Softwarevertrieb",
-          "localizableObject": {
-            "label": "Hardware-, Softwarevertrieb"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17576"
-          },
-          "name": "Heime",
-          "localizableObject": {
-            "label": "Heime"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17577"
-          },
-          "name": "Heizungsbau",
-          "localizableObject": {
-            "label": "Heizungsbau"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17578"
-          },
-          "name": "Hobelindustrie",
-          "localizableObject": {
-            "label": "Hobelindustrie"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17579"
-          },
-          "name": "Hochbau",
-          "localizableObject": {
-            "label": "Hochbau"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b1757a"
-          },
-          "name": "Holzbau",
-          "localizableObject": {
-            "label": "Holzbau"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b1757b"
-          },
-          "name": "Holzleimindustrie",
-          "localizableObject": {
-            "label": "Holzleimindustrie"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b1757c"
-          },
-          "name": "Holzwerkstoffindustrie",
-          "localizableObject": {
-            "label": "Holzwerkstoffindustrie"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b1757d"
-          },
-          "name": "Industrie- und Handelskammern",
-          "localizableObject": {
-            "label": "Industrie- und Handelskammern"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b1757e"
-          },
-          "name": "Internationale Behörden",
-          "localizableObject": {
-            "label": "Internationale Behörden"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b1757f"
-          },
-          "name": "Internationale Organisationen",
-          "localizableObject": {
-            "label": "Internationale Organisationen"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17580"
-          },
-          "name": "Investitionsgüterindustrie",
-          "localizableObject": {
-            "label": "Investitionsgüterindustrie"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17581"
-          },
-          "name": "Karitative Einrichtungen",
-          "localizableObject": {
-            "label": "Karitative Einrichtungen"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17582"
-          },
-          "name": "Kassenärztliche Vereinigung",
-          "localizableObject": {
-            "label": "Kassenärztliche Vereinigung"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17583"
-          },
-          "name": "Katholische Einrichtungen",
-          "localizableObject": {
-            "label": "Katholische Einrichtungen"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17584"
-          },
-          "name": "Kirchliche Einrichtungen",
-          "localizableObject": {
-            "label": "Kirchliche Einrichtungen"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17585"
-          },
-          "name": "Kommunale Einrichtungen",
-          "localizableObject": {
-            "label": "Kommunale Einrichtungen"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17586"
-          },
-          "name": "Kommunalverwaltung",
-          "localizableObject": {
-            "label": "Kommunalverwaltung"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17587"
-          },
-          "name": "Konsumgüterindustrie",
-          "localizableObject": {
-            "label": "Konsumgüterindustrie"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17588"
-          },
-          "name": "Kraftverkehr",
-          "localizableObject": {
-            "label": "Kraftverkehr"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17589"
-          },
-          "name": "Landesverwaltung",
-          "localizableObject": {
-            "label": "Landesverwaltung"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b1758a"
-          },
-          "name": "Landwirtschaft",
-          "localizableObject": {
-            "label": "Landwirtschaft"
-          },
-          "nodes": [
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17cbc"
-              },
-              "name": "Ackerbau",
-              "localizableObject": {
-                "label": "Ackerbau"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17cbd"
-              },
-              "name": "Ackerfutterbau",
-              "localizableObject": {
-                "label": "Ackerfutterbau"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17cbe"
-              },
-              "name": "Anbauen, Anpflanzen",
-              "localizableObject": {
-                "label": "Anbauen, Anpflanzen"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17cbf"
-              },
-              "name": "Betriebs- und Maschinenhilfe (Organisation)",
-              "localizableObject": {
-                "label": "Betriebs- und Maschinenhilfe (Organisation)"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17cc0"
-              },
-              "name": "Bewässerungstechnik",
-              "localizableObject": {
-                "label": "Bewässerungstechnik"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17cc1"
-              },
-              "name": "Biologischer Pflanzenschutz",
-              "localizableObject": {
-                "label": "Biologischer Pflanzenschutz"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17cc2"
-              },
-              "name": "Bodenbearbeitung, Kulturarbeiten",
-              "localizableObject": {
-                "label": "Bodenbearbeitung, Kulturarbeiten"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17cc3"
-              },
-              "name": "Bodenbewirtschaftung",
-              "localizableObject": {
-                "label": "Bodenbewirtschaftung"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17cc4"
-              },
-              "name": "Bodenkunde",
-              "localizableObject": {
-                "label": "Bodenkunde"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17cc5"
-              },
-              "name": "Bodenschätzung (Ertragsfähigkeit)",
-              "localizableObject": {
-                "label": "Bodenschätzung (Ertragsfähigkeit)"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17cc6"
-              },
-              "name": "Düngung",
-              "localizableObject": {
-                "label": "Düngung"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17cc7"
-              },
-              "name": "Erntearbeiten",
-              "localizableObject": {
-                "label": "Erntearbeiten"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17cc8"
-              },
-              "name": "Feuchtlandbewirtschaftung",
-              "localizableObject": {
-                "label": "Feuchtlandbewirtschaftung"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17cc9"
-              },
-              "name": "Flurbereinigung, Entwicklung des ländlichen Raumes",
-              "localizableObject": {
-                "label": "Flurbereinigung, Entwicklung des ländlichen Raumes"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17cca"
-              },
-              "name": "Getreidebau",
-              "localizableObject": {
-                "label": "Getreidebau"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17ccb"
-              },
-              "name": "Grünlandwirtschaft",
-              "localizableObject": {
-                "label": "Grünlandwirtschaft"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17ccc"
-              },
-              "name": "Hackfrüchtebau",
-              "localizableObject": {
-                "label": "Hackfrüchtebau"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17ccd"
-              },
-              "name": "Hopfenbau",
-              "localizableObject": {
-                "label": "Hopfenbau"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17cce"
-              },
-              "name": "Kartoffelbau",
-              "localizableObject": {
-                "label": "Kartoffelbau"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17ccf"
-              },
-              "name": "Maschineneinsatz (Landwirtschaft, Forst, Garten)",
-              "localizableObject": {
-                "label": "Maschineneinsatz (Landwirtschaft, Forst, Garten)"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17cd0"
-              },
-              "name": "Ökologischer Anbau, Biologischer Anbau",
-              "localizableObject": {
-                "label": "Ökologischer Anbau, Biologischer Anbau"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17cd1"
-              },
-              "name": "Ölfrüchtebau",
-              "localizableObject": {
-                "label": "Ölfrüchtebau"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17cd2"
-              },
-              "name": "Pflanzenschutz",
-              "localizableObject": {
-                "label": "Pflanzenschutz"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17cd3"
-              },
-              "name": "Roden",
-              "localizableObject": {
-                "label": "Roden"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17cd4"
-              },
-              "name": "Saatzucht",
-              "localizableObject": {
-                "label": "Saatzucht"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17cd5"
-              },
-              "name": "Spargel stechen",
-              "localizableObject": {
-                "label": "Spargel stechen"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17cd6"
-              },
-              "name": "Tabakbau",
-              "localizableObject": {
-                "label": "Tabakbau"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17cd7"
-              },
-              "name": "Tropischer, subtropischer Landbau",
-              "localizableObject": {
-                "label": "Tropischer, subtropischer Landbau"
-              },
-              "nodes": []
-            }
-          ]
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b1758b"
-          },
-          "name": "Landwirtschaftliche Genossenschaften",
-          "localizableObject": {
-            "label": "Landwirtschaftliche Genossenschaften"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b1758c"
-          },
-          "name": "Lebensmittelherstellung, -verarbeitung",
-          "localizableObject": {
-            "label": "Lebensmittelherstellung, -verarbeitung"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b1758d"
-          },
-          "name": "Luftverkehr",
-          "localizableObject": {
-            "label": "Luftverkehr"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b1758e"
-          },
-          "name": "Marktforschungsinstitute",
-          "localizableObject": {
-            "label": "Marktforschungsinstitute"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b1758f"
-          },
-          "name": "Metallerzeugung",
-          "localizableObject": {
-            "label": "Metallerzeugung"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17590"
-          },
-          "name": "Mineralölindustrie",
-          "localizableObject": {
-            "label": "Mineralölindustrie"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17591"
-          },
-          "name": "Müllverbrennung",
-          "localizableObject": {
-            "label": "Müllverbrennung"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17592"
-          },
-          "name": "Öffentliche Verwaltung",
-          "localizableObject": {
-            "label": "Öffentliche Verwaltung"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17593"
-          },
-          "name": "Pharmaindustrie, Apotheke",
-          "localizableObject": {
-            "label": "Pharmaindustrie, Apotheke"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17594"
-          },
-          "name": "Politische Organisationen",
-          "localizableObject": {
-            "label": "Politische Organisationen"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17595"
-          },
-          "name": "Pressewesen, Verlagswesen",
-          "localizableObject": {
-            "label": "Pressewesen, Verlagswesen"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17596"
-          },
-          "name": "Rechtsanwaltswesen",
-          "localizableObject": {
-            "label": "Rechtsanwaltswesen"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17597"
-          },
-          "name": "Rechtspflege",
-          "localizableObject": {
-            "label": "Rechtspflege"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17598"
-          },
-          "name": "Rettungsdienst",
-          "localizableObject": {
-            "label": "Rettungsdienst"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b17599"
-          },
-          "name": "Rundfunk",
-          "localizableObject": {
-            "label": "Rundfunk"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b1759a"
-          },
-          "name": "Sägeindustrie",
-          "localizableObject": {
-            "label": "Sägeindustrie"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b1759b"
-          },
-          "name": "Sattlerei",
-          "localizableObject": {
-            "label": "Sattlerei"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b1759c"
-          },
-          "name": "Schifffahrt",
-          "localizableObject": {
-            "label": "Schifffahrt"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b1759d"
-          },
-          "name": "Seefahrt",
-          "localizableObject": {
-            "label": "Seefahrt"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b1759e"
-          },
-          "name": "Sicherheitsunternehmen",
-          "localizableObject": {
-            "label": "Sicherheitsunternehmen"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b1759f"
-          },
-          "name": "Sozialversicherung",
-          "localizableObject": {
-            "label": "Sozialversicherung"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b175a0"
-          },
-          "name": "Sportverbände",
-          "localizableObject": {
-            "label": "Sportverbände"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b175a1"
-          },
-          "name": "Sportvereine",
-          "localizableObject": {
-            "label": "Sportvereine"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b175a2"
-          },
-          "name": "Stahlbau",
-          "localizableObject": {
-            "label": "Stahlbau"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b175a3"
-          },
-          "name": "Stahlformenbau",
-          "localizableObject": {
-            "label": "Stahlformenbau"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b175a4"
-          },
-          "name": "Straßenwacht",
-          "localizableObject": {
-            "label": "Straßenwacht"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b175a5"
-          },
-          "name": "Tageseinrichtungen",
-          "localizableObject": {
-            "label": "Tageseinrichtungen"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b175a6"
-          },
-          "name": "Textil-, Faserindustrie",
-          "localizableObject": {
-            "label": "Textil-, Faserindustrie"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b175a7"
-          },
-          "name": "Tiefbau",
-          "localizableObject": {
-            "label": "Tiefbau"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b175a8"
-          },
-          "name": "Tierpflege",
-          "localizableObject": {
-            "label": "Tierpflege"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b175a9"
-          },
-          "name": "Touristik",
-          "localizableObject": {
-            "label": "Touristik"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b175aa"
-          },
-          "name": "Transportunternehmen",
-          "localizableObject": {
-            "label": "Transportunternehmen"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b175ab"
-          },
-          "name": "Verkehrsbetriebe",
-          "localizableObject": {
-            "label": "Verkehrsbetriebe"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b175ac"
-          },
-          "name": "Veterinärwesen",
-          "localizableObject": {
-            "label": "Veterinärwesen"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b175ad"
-          },
-          "name": "Wasser- und Schifffahrtsverwaltung",
-          "localizableObject": {
-            "label": "Wasser- und Schifffahrtsverwaltung"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b175ae"
-          },
-          "name": "Wissenschaftliche Hochschulen, Universitäten",
-          "localizableObject": {
-            "label": "Wissenschaftliche Hochschulen, Universitäten"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b175af"
-          },
-          "name": "Wohnheime",
-          "localizableObject": {
-            "label": "Wohnheime"
-          },
-          "nodes": []
-        },
-        {
-          "_id": {
-            "$oid": "563625a144aec39e70b175b0"
-          },
-          "name": "Zivilschutz",
-          "localizableObject": {
-            "label": "Zivilschutz"
-          },
-          "nodes": []
-        }
-      ]
-    },
-    {
-      "_id": {
         "$oid": "563625a144aec39e70b17382"
       },
       "name": "Dienstleistungen",
@@ -10277,24 +8643,25 @@
                 "label": "Windows Phone"
               },
               "nodes": []
-            },
+            }
+          ]
+        },
+        {
+          "_id": {
+            "$oid": "5682f06644ae528da2297124"
+          },
+          "name": "Virtualisierungssoftware",
+          "localizableObject": {
+            "label": "Virtualisierungssoftware"
+          },
+          "nodes": [
             {
               "_id": {
                 "$oid": "563625a144aec39e70b17742"
               },
-              "name": "Virtualisierungssoftware KVM/QEMU",
+              "name": "KVM/QEMU",
               "localizableObject": {
-                "label": "Virtualisierungssoftware KVM/QEMU"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17743"
-              },
-              "name": "Virtualisierungssoftware Microsoft",
-              "localizableObject": {
-                "label": "Virtualisierungssoftware Microsoft"
+                "label": "KVM/QEMU"
               },
               "nodes": []
             },
@@ -10304,7 +8671,7 @@
               },
               "name": "Virtualisierungssoftware Oracle VM",
               "localizableObject": {
-                "label": "Virtualisierungssoftware Oracle VM"
+                "label": "Oracle VM"
               },
               "nodes": []
             },
@@ -10314,7 +8681,7 @@
               },
               "name": "Virtualisierungssoftware VMware",
               "localizableObject": {
-                "label": "Virtualisierungssoftware VMware"
+                "label": "VMware"
               },
               "nodes": []
             },
@@ -10324,7 +8691,7 @@
               },
               "name": "Virtualisierungssoftware Xen",
               "localizableObject": {
-                "label": "Virtualisierungssoftware Xen"
+                "label": "Xen"
               },
               "nodes": []
             }
@@ -10343,9 +8710,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17747"
               },
-              "name": "Backup-Software ArcServe",
+              "name": "ArcServe",
               "localizableObject": {
-                "label": "Backup-Software ArcServe"
+                "label": "ArcServe"
               },
               "nodes": []
             },
@@ -10353,9 +8720,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17748"
               },
-              "name": "Backup-Software BackupExec",
+              "name": "BackupExec",
               "localizableObject": {
-                "label": "Backup-Software BackupExec"
+                "label": "BackupExec"
               },
               "nodes": []
             },
@@ -10363,9 +8730,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17749"
               },
-              "name": "Backup-Software HP Data Protector",
+              "name": "HP Data Protector",
               "localizableObject": {
-                "label": "Backup-Software HP Data Protector"
+                "label": "HP Data Protector"
               },
               "nodes": []
             },
@@ -10373,9 +8740,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1774a"
               },
-              "name": "Backup-Software Legato Networker",
+              "name": "Legato Networker",
               "localizableObject": {
-                "label": "Backup-Software Legato Networker"
+                "label": "Legato Networker"
               },
               "nodes": []
             },
@@ -10383,9 +8750,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1774b"
               },
-              "name": "Backup-Software Retrospect",
+              "name": "Retrospect",
               "localizableObject": {
-                "label": "Backup-Software Retrospect"
+                "label": "Retrospect"
               },
               "nodes": []
             },
@@ -10393,9 +8760,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1774c"
               },
-              "name": "Backup-Software Tivoli Storage Manager",
+              "name": "Tivoli Storage Manager",
               "localizableObject": {
-                "label": "Backup-Software Tivoli Storage Manager"
+                "label": "Tivoli Storage Manager"
               },
               "nodes": []
             },
@@ -10403,9 +8770,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1774d"
               },
-              "name": "Business-Intelligence-Software MicroStrategy",
+              "name": "MicroStrategy",
               "localizableObject": {
-                "label": "Business-Intelligence-Software MicroStrategy"
+                "label": "MicroStrategy"
               },
               "nodes": []
             },
@@ -10413,9 +8780,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1774e"
               },
-              "name": "Chemiedatenbank Crossfire Beilstein",
+              "name": "Crossfire Beilstein",
               "localizableObject": {
-                "label": "Chemiedatenbank Crossfire Beilstein"
+                "label": "Crossfire Beilstein"
               },
               "nodes": []
             },
@@ -10423,79 +8790,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1774f"
               },
-              "name": "Chemiedatenbank Crossfire Gmelin",
+              "name": "Crossfire Gmelin",
               "localizableObject": {
-                "label": "Chemiedatenbank Crossfire Gmelin"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17750"
-              },
-              "name": "Content-Management-System (CMS) Alfresco",
-              "localizableObject": {
-                "label": "Content-Management-System (CMS) Alfresco"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17751"
-              },
-              "name": "Content-Management-System (CMS) IBM DB2",
-              "localizableObject": {
-                "label": "Content-Management-System (CMS) IBM DB2"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17752"
-              },
-              "name": "Content-Management-System (CMS) Imperia",
-              "localizableObject": {
-                "label": "Content-Management-System (CMS) Imperia"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17753"
-              },
-              "name": "Content-Management-System (CMS) RedDot",
-              "localizableObject": {
-                "label": "Content-Management-System (CMS) RedDot"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17754"
-              },
-              "name": "Content-Management-System (CMS) Sitevision",
-              "localizableObject": {
-                "label": "Content-Management-System (CMS) Sitevision"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17755"
-              },
-              "name": "Content-Management-System (CMS) TYPO3",
-              "localizableObject": {
-                "label": "Content-Management-System (CMS) TYPO3"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17756"
-              },
-              "name": "Content-Management-Systeme (CMS) einsetzen",
-              "localizableObject": {
-                "label": "Content-Management-Systeme (CMS) einsetzen"
+                "label": "Crossfire Gmelin"
               },
               "nodes": []
             },
@@ -10511,21 +8808,11 @@
             },
             {
               "_id": {
-                "$oid": "563625a144aec39e70b17758"
-              },
-              "name": "Daten-, Festplattenverwaltung",
-              "localizableObject": {
-                "label": "Daten-, Festplattenverwaltung"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
                 "$oid": "563625a144aec39e70b17759"
               },
-              "name": "Datenanalyseprogramm OLAP",
+              "name": "OLAP",
               "localizableObject": {
-                "label": "Datenanalyseprogramm OLAP"
+                "label": "OLAP"
               },
               "nodes": []
             },
@@ -10533,9 +8820,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1775a"
               },
-              "name": "Datenbank Access (MS Office)",
+              "name": "MS Office Access",
               "localizableObject": {
-                "label": "Datenbank Access (MS Office)"
+                "label": "MS Office Access"
               },
               "nodes": []
             },
@@ -10543,9 +8830,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1775b"
               },
-              "name": "Datenbank ADABAS",
+              "name": "ADABAS",
               "localizableObject": {
-                "label": "Datenbank ADABAS"
+                "label": "ADABAS"
               },
               "nodes": []
             },
@@ -10553,9 +8840,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1775c"
               },
-              "name": "Datenbank Borland Database Engine (BDE)",
+              "name": "Borland BDE",
               "localizableObject": {
-                "label": "Datenbank Borland Database Engine (BDE)"
+                "label": "Borland BDE"
               },
               "nodes": []
             },
@@ -10563,9 +8850,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1775d"
               },
-              "name": "Datenbank Caché",
+              "name": "Caché",
               "localizableObject": {
-                "label": "Datenbank Caché"
+                "label": "Caché"
               },
               "nodes": []
             },
@@ -10573,9 +8860,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1775e"
               },
-              "name": "Datenbank Centura",
+              "name": "Centura",
               "localizableObject": {
-                "label": "Datenbank Centura"
+                "label": "Centura"
               },
               "nodes": []
             },
@@ -10583,9 +8870,19 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1775f"
               },
-              "name": "Datenbank Clipper",
+              "name": "Clipper",
               "localizableObject": {
-                "label": "Datenbank Clipper"
+                "label": "Clipper"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "5682fc2044ae528da2297127"
+              },
+              "name": "Cassandra",
+              "localizableObject": {
+                "label": "Cassandra"
               },
               "nodes": []
             },
@@ -10593,9 +8890,19 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17760"
               },
-              "name": "Datenbank DB2",
+              "name": "DB2",
               "localizableObject": {
-                "label": "Datenbank DB2"
+                "label": "DB2"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "5682fc2044ae528da2297128"
+              },
+              "name": "H2",
+              "localizableObject": {
+                "label": "H2"
               },
               "nodes": []
             },
@@ -10603,9 +8910,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17761"
               },
-              "name": "Datenbank db4o",
+              "name": "db4o",
               "localizableObject": {
-                "label": "Datenbank db4o"
+                "label": "db4o"
               },
               "nodes": []
             },
@@ -10613,9 +8920,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17762"
               },
-              "name": "Datenbank dBase, xBase",
+              "name": "dBase, xBase",
               "localizableObject": {
-                "label": "Datenbank dBase, xBase"
+                "label": "dBase, xBase"
               },
               "nodes": []
             },
@@ -10633,9 +8940,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17764"
               },
-              "name": "Datenbank FileMaker",
+              "name": "FileMaker",
               "localizableObject": {
-                "label": "Datenbank FileMaker"
+                "label": "FileMaker"
               },
               "nodes": []
             },
@@ -10643,9 +8950,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17765"
               },
-              "name": "Datenbank Firebird",
+              "name": "Firebird",
               "localizableObject": {
-                "label": "Datenbank Firebird"
+                "label": "Firebird"
               },
               "nodes": []
             },
@@ -10653,9 +8960,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17766"
               },
-              "name": "Datenbank FoxPro",
+              "name": "FoxPro",
               "localizableObject": {
-                "label": "Datenbank FoxPro"
+                "label": "FoxPro"
               },
               "nodes": []
             },
@@ -10663,9 +8970,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17767"
               },
-              "name": "Datenbank Gupta",
+              "name": "Gupta",
               "localizableObject": {
-                "label": "Datenbank Gupta"
+                "label": "Gupta"
               },
               "nodes": []
             },
@@ -10673,9 +8980,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17768"
               },
-              "name": "Datenbank IMS",
+              "name": "IMS",
               "localizableObject": {
-                "label": "Datenbank IMS"
+                "label": "IMS"
               },
               "nodes": []
             },
@@ -10683,9 +8990,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17769"
               },
-              "name": "Datenbank Informix",
+              "name": "Informix",
               "localizableObject": {
-                "label": "Datenbank Informix"
+                "label": "Informix"
               },
               "nodes": []
             },
@@ -10693,9 +9000,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1776a"
               },
-              "name": "Datenbank INGRES",
+              "name": "INGRES",
               "localizableObject": {
-                "label": "Datenbank INGRES"
+                "label": "INGRES"
               },
               "nodes": []
             },
@@ -10703,19 +9010,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1776b"
               },
-              "name": "Datenbank Interbase",
+              "name": "Interbase",
               "localizableObject": {
-                "label": "Datenbank Interbase"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b1776c"
-              },
-              "name": "Datenbankmanagementsystem Progress",
-              "localizableObject": {
-                "label": "Datenbankmanagementsystem Progress"
+                "label": "Interbase"
               },
               "nodes": []
             },
@@ -10723,9 +9020,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1776d"
               },
-              "name": "Datenbank MongoDB",
+              "name": "MongoDB",
               "localizableObject": {
-                "label": "Datenbank MongoDB"
+                "label": "MongoDB"
               },
               "nodes": []
             },
@@ -10733,9 +9030,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1776e"
               },
-              "name": "Datenbank MySQL",
+              "name": "MySQL",
               "localizableObject": {
-                "label": "Datenbank MySQL"
+                "label": "MySQL"
               },
               "nodes": []
             },
@@ -10743,9 +9040,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1776f"
               },
-              "name": "Datenbank Oracle",
+              "name": "Oracle",
               "localizableObject": {
-                "label": "Datenbank Oracle"
+                "label": "Oracle"
               },
               "nodes": []
             },
@@ -10753,9 +9050,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17770"
               },
-              "name": "Datenbank Paradox",
+              "name": "Paradox",
               "localizableObject": {
-                "label": "Datenbank Paradox"
+                "label": "Paradox"
               },
               "nodes": []
             },
@@ -10763,9 +9060,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17771"
               },
-              "name": "Datenbank Poet",
+              "name": "Poet",
               "localizableObject": {
-                "label": "Datenbank Poet"
+                "label": "Poet"
               },
               "nodes": []
             },
@@ -10773,9 +9070,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17772"
               },
-              "name": "Datenbank PostgreSQL",
+              "name": "PostgreSQL",
               "localizableObject": {
-                "label": "Datenbank PostgreSQL"
+                "label": "PostgreSQL"
               },
               "nodes": []
             },
@@ -10783,9 +9080,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17773"
               },
-              "name": "Datenbank SAP DB/Max DB",
+              "name": "SAP DB/Max DB",
               "localizableObject": {
-                "label": "Datenbank SAP DB/Max DB"
+                "label": "SAP DB/Max DB"
               },
               "nodes": []
             },
@@ -10793,9 +9090,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17774"
               },
-              "name": "Datenbanksprache QMF",
+              "name": "QMF",
               "localizableObject": {
-                "label": "Datenbanksprache QMF"
+                "label": "QMF"
               },
               "nodes": []
             },
@@ -10803,19 +9100,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17775"
               },
-              "name": "Datenbanksprache SQL",
+              "name": "SQL",
               "localizableObject": {
-                "label": "Datenbanksprache SQL"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17776"
-              },
-              "name": "Datenbank SQL",
-              "localizableObject": {
-                "label": "Datenbank SQL"
+                "label": "SQL"
               },
               "nodes": []
             },
@@ -10823,9 +9110,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17777"
               },
-              "name": "Datenbank SyBase",
+              "name": "SyBase",
               "localizableObject": {
-                "label": "Datenbank SyBase"
+                "label": "SyBase"
               },
               "nodes": []
             },
@@ -10833,9 +9120,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17778"
               },
-              "name": "Datenbanktechnologie SAP HANA",
+              "name": "SAP HANA",
               "localizableObject": {
-                "label": "Datenbanktechnologie SAP HANA"
+                "label": "SAP HANA"
               },
               "nodes": []
             },
@@ -10843,9 +9130,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17779"
               },
-              "name": "Datenbank und Datenanalysesoftware Teradata",
+              "name": "Teradata",
               "localizableObject": {
-                "label": "Datenbank und Datenanalysesoftware Teradata"
+                "label": "Teradata"
               },
               "nodes": []
             },
@@ -10853,9 +9140,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1777a"
               },
-              "name": "Datenbank Unify",
+              "name": "Unify",
               "localizableObject": {
-                "label": "Datenbank Unify"
+                "label": "Unify"
               },
               "nodes": []
             },
@@ -10863,9 +9150,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1777b"
               },
-              "name": "Datenerfassungs- und -analyseprogramm Spike2",
+              "name": "Spike2",
               "localizableObject": {
-                "label": "Datenerfassungs- und -analyseprogramm Spike2"
+                "label": "Spike2"
               },
               "nodes": []
             },
@@ -10873,9 +9160,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1777c"
               },
-              "name": "Datenintegrations- und -Conversionssoftware iWay DataMigrator",
+              "name": "iWay DataMigrator",
               "localizableObject": {
-                "label": "Datenintegrations- und -Conversionssoftware iWay DataMigrator"
+                "label": "iWay DataMigrator"
               },
               "nodes": []
             },
@@ -10883,9 +9170,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1777d"
               },
-              "name": "Daten- und Dokumentenmanagementsystem Canto Cumulus",
+              "name": "Canto Cumulus",
               "localizableObject": {
-                "label": "Daten- und Dokumentenmanagementsystem Canto Cumulus"
+                "label": "Canto Cumulus"
               },
               "nodes": []
             },
@@ -10893,99 +9180,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1777e"
               },
-              "name": "Daten- und Dokumentenmanagementsystem DIAdem",
+              "name": "DIAdem",
               "localizableObject": {
-                "label": "Daten- und Dokumentenmanagementsystem DIAdem"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b1777f"
-              },
-              "name": "Daten- und Dokumentenmanagementsystem Documentum",
-              "localizableObject": {
-                "label": "Daten- und Dokumentenmanagementsystem Documentum"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17780"
-              },
-              "name": "Daten- und Dokumentenmanagementsystem EASY Archiv",
-              "localizableObject": {
-                "label": "Daten- und Dokumentenmanagementsystem EASY Archiv"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17781"
-              },
-              "name": "Daten- und Dokumentenmanagementsystem FileNet",
-              "localizableObject": {
-                "label": "Daten- und Dokumentenmanagementsystem FileNet"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17782"
-              },
-              "name": "Daten- und Dokumentenmanagementsystem Lotus Domino",
-              "localizableObject": {
-                "label": "Daten- und Dokumentenmanagementsystem Lotus Domino"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17783"
-              },
-              "name": "Daten- und Dokumentenmanagementsystem PowerCenter",
-              "localizableObject": {
-                "label": "Daten- und Dokumentenmanagementsystem PowerCenter"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17784"
-              },
-              "name": "Datenverwaltungsprogramm Adobe Bridge",
-              "localizableObject": {
-                "label": "Datenverwaltungsprogramm Adobe Bridge"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17785"
-              },
-              "name": "Datenvisualisierungs- und Analysesoftware Origin",
-              "localizableObject": {
-                "label": "Datenvisualisierungs- und Analysesoftware Origin"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17786"
-              },
-              "name": "Dokumentenmanagementsystem ELO",
-              "localizableObject": {
-                "label": "Dokumentenmanagementsystem ELO"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17787"
-              },
-              "name": "Entity-Relationship-Modell",
-              "localizableObject": {
-                "label": "Entity-Relationship-Modell"
+                "label": "DIAdem"
               },
               "nodes": []
             },
@@ -11003,9 +9200,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17789"
               },
-              "name": "Informations- und Schriftgutmanagementsystem RegiSafe",
+              "name": "RegiSafe",
               "localizableObject": {
-                "label": "Informations- und Schriftgutmanagementsystem RegiSafe"
+                "label": "RegiSafe"
               },
               "nodes": []
             },
@@ -11033,29 +9230,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1778c"
               },
-              "name": "Produktinformationsmanagement-Systeme (PIM)",
+              "name": "PIM",
               "localizableObject": {
-                "label": "Produktinformationsmanagement-Systeme (PIM)"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b1778d"
-              },
-              "name": "proSoft Communication Server",
-              "localizableObject": {
-                "label": "proSoft Communication Server"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b1778e"
-              },
-              "name": "RDBMS (Relational Database Management System)",
-              "localizableObject": {
-                "label": "RDBMS (Relational Database Management System)"
+                "label": "PIM"
               },
               "nodes": []
             },
@@ -11063,9 +9240,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1778f"
               },
-              "name": "Signalanalysesoftware FAMOS",
+              "name": "FAMOS",
               "localizableObject": {
-                "label": "Signalanalysesoftware FAMOS"
+                "label": "FAMOS"
               },
               "nodes": []
             },
@@ -11073,9 +9250,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17790"
               },
-              "name": "SQL Server Integration Services (SSIS)",
+              "name": "SSIS",
               "localizableObject": {
-                "label": "SQL Server Integration Services (SSIS)"
+                "label": "SSIS"
               },
               "nodes": []
             },
@@ -11083,29 +9260,182 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17791"
               },
-              "name": "SQL Server Reporting Services (SSRS)",
+              "name": "SSRS",
               "localizableObject": {
-                "label": "SQL Server Reporting Services (SSRS)"
+                "label": "SSRS"
               },
               "nodes": []
             },
             {
               "_id": {
-                "$oid": "563625a144aec39e70b17792"
+                "$oid": "563625a144aec39e70b1779a"
               },
-              "name": "Storage- und Backupsysteme",
+              "name": "Active Directory",
               "localizableObject": {
-                "label": "Storage- und Backupsysteme"
+                "label": "Active Directory"
+              },
+              "nodes": []
+            }
+          ]
+        },
+        {
+          "_id": {
+            "$oid": "5682fc2044ae528da2297129"
+          },
+          "name": "Daten- und Dokumentenmanagementsystem",
+          "localizableObject": {
+            "label": "Daten- und Dokumentenmanagementsystem"
+          },
+          "nodes": [
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b17780"
+              },
+              "name": "EASY Archiv",
+              "localizableObject": {
+                "label": "EASY Archiv"
               },
               "nodes": []
             },
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b17781"
+              },
+              "name": "FileNet",
+              "localizableObject": {
+                "label": "FileNet"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b17782"
+              },
+              "name": "Lotus Domino",
+              "localizableObject": {
+                "label": "Lotus Domino"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b17783"
+              },
+              "name": "PowerCenter",
+              "localizableObject": {
+                "label": "PowerCenter"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b17784"
+              },
+              "name": "Adobe Bridge",
+              "localizableObject": {
+                "label": "Adobe Bridge"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b17786"
+              },
+              "name": "ELO",
+              "localizableObject": {
+                "label": "ELO"
+              },
+              "nodes": []
+            }
+          ]
+        },
+        {
+          "_id": {
+            "$oid": "5682f6a944ae528da2297125"
+          },
+          "name": "Content-Management-Systeme CMS",
+          "localizableObject": {
+            "label": "Content-Management-Systeme CMS"
+          },
+          "nodes": [
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b17750"
+              },
+              "name": "Alfresco",
+              "localizableObject": {
+                "label": "Alfresco"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b17751"
+              },
+              "name": "IBM DB2",
+              "localizableObject": {
+                "label": "IBM DB2"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b17752"
+              },
+              "name": "Imperia",
+              "localizableObject": {
+                "label": "Imperia"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b17753"
+              },
+              "name": "RedDot",
+              "localizableObject": {
+                "label": "RedDot"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b17754"
+              },
+              "name": "Sitevision",
+              "localizableObject": {
+                "label": "Sitevision"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b17755"
+              },
+              "name": "TYPO3",
+              "localizableObject": {
+                "label": "TYPO3"
+              },
+              "nodes": []
+            }
+          ]
+        },
+        {
+          "_id": {
+            "$oid": "5682f6a944ae528da2297126"
+          },
+          "name": "Versionsverwaltungsprogramm",
+          "localizableObject": {
+            "label": "Versionsverwaltungsprogramm"
+          },
+          "nodes": [
             {
               "_id": {
                 "$oid": "563625a144aec39e70b17793"
               },
-              "name": "Versionsverwaltungsprogr. Microsoft Visual SourceSafe (VSS)",
+              "name": "VSS",
               "localizableObject": {
-                "label": "Versionsverwaltungsprogr. Microsoft Visual SourceSafe (VSS)"
+                "label": "VSS"
               },
               "nodes": []
             },
@@ -11115,7 +9445,7 @@
               },
               "name": "Versionsverwaltungsprogramm Adobe VersionCue",
               "localizableObject": {
-                "label": "Versionsverwaltungsprogramm Adobe VersionCue"
+                "label": "Adobe VersionCue"
               },
               "nodes": []
             },
@@ -11123,9 +9453,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17795"
               },
-              "name": "Versionsverwaltungsprogramm CVS",
+              "name": "CVS",
               "localizableObject": {
-                "label": "Versionsverwaltungsprogramm CVS"
+                "label": "CVS"
               },
               "nodes": []
             },
@@ -11133,9 +9463,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17796"
               },
-              "name": "Versionsverwaltungsprogramm git",
+              "name": "Git",
               "localizableObject": {
-                "label": "Versionsverwaltungsprogramm git"
+                "label": "Git"
               },
               "nodes": []
             },
@@ -11143,9 +9473,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17797"
               },
-              "name": "Versionsverwaltungsprogramm Mercurial",
+              "name": "Mercurial",
               "localizableObject": {
-                "label": "Versionsverwaltungsprogramm Mercurial"
+                "label": "Mercurial"
               },
               "nodes": []
             },
@@ -11153,9 +9483,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17798"
               },
-              "name": "Versionsverwaltungsprogramm Perforce",
+              "name": "Perforce",
               "localizableObject": {
-                "label": "Versionsverwaltungsprogramm Perforce"
+                "label": "Perforce"
               },
               "nodes": []
             },
@@ -11163,19 +9493,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17799"
               },
-              "name": "Versionsverwaltungsprogramm Subversion",
+              "name": "Subversion",
               "localizableObject": {
-                "label": "Versionsverwaltungsprogramm Subversion"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b1779a"
-              },
-              "name": "Verzeichnisdienst Active Directory",
-              "localizableObject": {
-                "label": "Verzeichnisdienst Active Directory"
+                "label": "Subversion"
               },
               "nodes": []
             }
@@ -11242,16 +9562,6 @@
             },
             {
               "_id": {
-                "$oid": "563625a144aec39e70b177a0"
-              },
-              "name": "Case Tools anwenden, bereitstellen",
-              "localizableObject": {
-                "label": "Case Tools anwenden, bereitstellen"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
                 "$oid": "563625a144aec39e70b177a1"
               },
               "name": "Cloud Computing",
@@ -11294,19 +9604,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b177a5"
               },
-              "name": "Datenübernahme, Datenaufbereitung",
+              "name": "Datenverwaltung",
               "localizableObject": {
-                "label": "Datenübernahme, Datenaufbereitung"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b177a6"
-              },
-              "name": "Dokumentenmanagementsysteme einsetzen",
-              "localizableObject": {
-                "label": "Dokumentenmanagementsysteme einsetzen"
+                "label": "Datenverwaltung"
               },
               "nodes": []
             },
@@ -11324,9 +9624,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b177a8"
               },
-              "name": "EDV-Anwender-Training",
+              "name": "EDV-Training",
               "localizableObject": {
-                "label": "EDV-Anwender-Training"
+                "label": "EDV-Training"
               },
               "nodes": []
             },
@@ -11354,9 +9654,19 @@
               "_id": {
                 "$oid": "563625a144aec39e70b177ab"
               },
-              "name": "Hardwareinstallation, Softwareinstallation",
+              "name": "Hardwareinstallation",
               "localizableObject": {
-                "label": "Hardwareinstallation, Softwareinstallation"
+                "label": "Hardwareinstallation"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "5682fe4544ae528da229712a"
+              },
+              "name": "Softwareinstallation",
+              "localizableObject": {
+                "label": "Softwareinstallation"
               },
               "nodes": []
             },
@@ -11364,19 +9674,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b177ac"
               },
-              "name": "High-Performance-Computing (HPC/Parallele Rechner)",
+              "name": "High-Performance-Computing",
               "localizableObject": {
-                "label": "High-Performance-Computing (HPC/Parallele Rechner)"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b177ad"
-              },
-              "name": "HIL (Hardware in the Loop)-Simulation",
-              "localizableObject": {
-                "label": "HIL (Hardware in the Loop)-Simulation"
+                "label": "High-Performance-Computing"
               },
               "nodes": []
             },
@@ -11384,9 +9684,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b177ae"
               },
-              "name": "Internet-, Intranettechnik",
+              "name": "Internettechnik, Intranettechnik",
               "localizableObject": {
-                "label": "Internet-, Intranettechnik"
+                "label": "Internettechnik, Intranettechnik"
               },
               "nodes": []
             },
@@ -11434,9 +9734,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b177b3"
               },
-              "name": "IT-Service-Management nach ITIL",
+              "name": "IT-Service-Management",
               "localizableObject": {
-                "label": "IT-Service-Management nach ITIL"
+                "label": "IT-Service-Management"
               },
               "nodes": []
             },
@@ -11452,51 +9752,11 @@
             },
             {
               "_id": {
-                "$oid": "563625a144aec39e70b177b5"
-              },
-              "name": "Konfigurationsmanagement (IT)",
-              "localizableObject": {
-                "label": "Konfigurationsmanagement (IT)"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b177b6"
-              },
-              "name": "Konfigurieren",
-              "localizableObject": {
-                "label": "Konfigurieren"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b177b7"
-              },
-              "name": "Netzwerkadministration, -management, -organisation",
-              "localizableObject": {
-                "label": "Netzwerkadministration, -management, -organisation"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
                 "$oid": "563625a144aec39e70b177b8"
               },
               "name": "Netzwerkmonitoring",
               "localizableObject": {
                 "label": "Netzwerkmonitoring"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b177b9"
-              },
-              "name": "Operating",
-              "localizableObject": {
-                "label": "Operating"
               },
               "nodes": []
             },
@@ -11524,9 +9784,19 @@
               "_id": {
                 "$oid": "563625a144aec39e70b177bc"
               },
-              "name": "Sicherheitssysteme (IT), Datensicherheit",
+              "name": "Systemsicherheit",
               "localizableObject": {
-                "label": "Sicherheitssysteme (IT), Datensicherheit"
+                "label": "Systemsicherheit"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "5682fe4544ae528da229712b"
+              },
+              "name": "Datensicherheit",
+              "localizableObject": {
+                "label": "Datensicherheit"
               },
               "nodes": []
             },
@@ -11544,9 +9814,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b177be"
               },
-              "name": "Systembetreuung, Systemadministration, Systemverwaltung",
+              "name": "Systemadministration",
               "localizableObject": {
-                "label": "Systembetreuung, Systemadministration, Systemverwaltung"
+                "label": "Systemadministration"
               },
               "nodes": []
             },
@@ -11856,9 +10126,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b177db"
               },
-              "name": "Name Server Software BIND (Berkely Internet Name Domain)",
+              "name": "BIND",
               "localizableObject": {
-                "label": "Name Server Software BIND (Berkely Internet Name Domain)"
+                "label": "BIND"
               },
               "nodes": []
             },
@@ -11996,19 +10266,19 @@
               "_id": {
                 "$oid": "563625a144aec39e70b177e9"
               },
-              "name": "SMTP/postfix",
+              "name": "SMTP",
               "localizableObject": {
-                "label": "SMTP/postfix"
+                "label": "SMTP"
               },
               "nodes": []
             },
             {
               "_id": {
-                "$oid": "563625a144aec39e70b177ea"
+                "$oid": "5682ffbd44ae528da229712c"
               },
-              "name": "SMTP/sendmail",
+              "name": "postfix",
               "localizableObject": {
-                "label": "SMTP/sendmail"
+                "label": "postfix"
               },
               "nodes": []
             },
@@ -12066,9 +10336,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b177f0"
               },
-              "name": "IMAP (Internet Message Access Protocol)",
+              "name": "IMAP",
               "localizableObject": {
-                "label": "IMAP (Internet Message Access Protocol)"
+                "label": "IMAP"
               },
               "nodes": []
             },
@@ -12115,101 +10385,102 @@
           "nodes": [
             {
               "_id": {
-                "$oid": "563625a144aec39e70b177f4"
+                "$oid": "5683022244ae528da229712d"
               },
-              "name": "Bussystem CAN (Controller Area Network)",
+              "name": "Bussystem",
               "localizableObject": {
-                "label": "Bussystem CAN (Controller Area Network)"
+                "label": "Bussystem"
               },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b177f5"
-              },
-              "name": "Bussysteme",
-              "localizableObject": {
-                "label": "Bussysteme"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b177f6"
-              },
-              "name": "Bussystem FlexRay",
-              "localizableObject": {
-                "label": "Bussystem FlexRay"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b177f7"
-              },
-              "name": "Bussystem KNX",
-              "localizableObject": {
-                "label": "Bussystem KNX"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b177f8"
-              },
-              "name": "Bussystem Modbus",
-              "localizableObject": {
-                "label": "Bussystem Modbus"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b177f9"
-              },
-              "name": "Bussystem MOST (Media Oriented Systems Transport)",
-              "localizableObject": {
-                "label": "Bussystem MOST (Media Oriented Systems Transport)"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b177fa"
-              },
-              "name": "Bussystem Profibus",
-              "localizableObject": {
-                "label": "Bussystem Profibus"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b177fb"
-              },
-              "name": "Bussystem SCSI",
-              "localizableObject": {
-                "label": "Bussystem SCSI"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b177fc"
-              },
-              "name": "Bussystem USB (Universal Serial Bus)",
-              "localizableObject": {
-                "label": "Bussystem USB (Universal Serial Bus)"
-              },
-              "nodes": []
+              "nodes": [
+                {
+                  "_id": {
+                    "$oid": "563625a144aec39e70b177f4"
+                  },
+                  "name": "CAN",
+                  "localizableObject": {
+                    "label": "CAN"
+                  },
+                  "nodes": []
+                },
+                {
+                  "_id": {
+                    "$oid": "563625a144aec39e70b177f6"
+                  },
+                  "name": "FlexRay",
+                  "localizableObject": {
+                    "label": "FlexRay"
+                  },
+                  "nodes": []
+                },
+                {
+                  "_id": {
+                    "$oid": "563625a144aec39e70b177f7"
+                  },
+                  "name": "KNX",
+                  "localizableObject": {
+                    "label": "KNX"
+                  },
+                  "nodes": []
+                },
+                {
+                  "_id": {
+                    "$oid": "563625a144aec39e70b177f8"
+                  },
+                  "name": "Modbus",
+                  "localizableObject": {
+                    "label": "Modbus"
+                  },
+                  "nodes": []
+                },
+                {
+                  "_id": {
+                    "$oid": "563625a144aec39e70b177f9"
+                  },
+                  "name": "MOST",
+                  "localizableObject": {
+                    "label": "MOST"
+                  },
+                  "nodes": []
+                },
+                {
+                  "_id": {
+                    "$oid": "563625a144aec39e70b177fa"
+                  },
+                  "name": "Bussystem Profibus",
+                  "localizableObject": {
+                    "label": "Bussystem Profibus"
+                  },
+                  "nodes": []
+                },
+                {
+                  "_id": {
+                    "$oid": "563625a144aec39e70b177fb"
+                  },
+                  "name": "SCSI",
+                  "localizableObject": {
+                    "label": "SCSI"
+                  },
+                  "nodes": []
+                },
+                {
+                  "_id": {
+                    "$oid": "563625a144aec39e70b177fc"
+                  },
+                  "name": "USB",
+                  "localizableObject": {
+                    "label": "USB"
+                  },
+                  "nodes": []
+                }
+              ]
             },
             {
               "_id": {
                 "$oid": "563625a144aec39e70b177fd"
               },
-              "name": "Citrix Terminalserver",
+              "name": "Citrix",
               "localizableObject": {
-                "label": "Citrix Terminalserver"
+                "label": "Citrix"
               },
               "nodes": []
             },
@@ -12217,9 +10488,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b177fe"
               },
-              "name": "Firewall 1/FireWall-1/VPN-1(Check Point)",
+              "name": "Firewall",
               "localizableObject": {
-                "label": "Firewall 1/FireWall-1/VPN-1(Check Point)"
+                "label": "Firewall"
               },
               "nodes": []
             },
@@ -12247,9 +10518,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17801"
               },
-              "name": "Network Attached Storage (NAS)",
+              "name": "NAS Network Attached Storage",
               "localizableObject": {
-                "label": "Network Attached Storage (NAS)"
+                "label": "NAS Network Attached Storage"
               },
               "nodes": []
             },
@@ -12257,9 +10528,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17802"
               },
-              "name": "Netzwerktechnik Cisco",
+              "name": "Cisco",
               "localizableObject": {
-                "label": "Netzwerktechnik Cisco"
+                "label": "Cisco"
               },
               "nodes": []
             },
@@ -12267,9 +10538,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17803"
               },
-              "name": "Netzwerktechnik Datex",
+              "name": "Datex",
               "localizableObject": {
-                "label": "Netzwerktechnik Datex"
+                "label": "Datex"
               },
               "nodes": []
             },
@@ -12277,9 +10548,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17804"
               },
-              "name": "Netzwerktechnik DSA",
+              "name": "DSA",
               "localizableObject": {
-                "label": "Netzwerktechnik DSA"
+                "label": "DSA"
               },
               "nodes": []
             },
@@ -12287,9 +10558,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17805"
               },
-              "name": "Netzwerktechnik Ethernet",
+              "name": "Ethernet",
               "localizableObject": {
-                "label": "Netzwerktechnik Ethernet"
+                "label": "Ethernet"
               },
               "nodes": []
             },
@@ -12297,9 +10568,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17806"
               },
-              "name": "Netzwerktechnik FDDI",
+              "name": "FDDI",
               "localizableObject": {
-                "label": "Netzwerktechnik FDDI"
+                "label": "FDDI"
               },
               "nodes": []
             },
@@ -12307,9 +10578,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17807"
               },
-              "name": "Netzwerktechnik Frame Relay",
+              "name": "Frame Relay",
               "localizableObject": {
-                "label": "Netzwerktechnik Frame Relay"
+                "label": "Frame Relay"
               },
               "nodes": []
             },
@@ -12317,9 +10588,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17808"
               },
-              "name": "Netzwerktechnik HACMP",
+              "name": "HACMP",
               "localizableObject": {
-                "label": "Netzwerktechnik HACMP"
+                "label": "HACMP"
               },
               "nodes": []
             },
@@ -12327,9 +10598,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17809"
               },
-              "name": "Netzwerktechnik IBM NetView",
+              "name": "IBM NetView",
               "localizableObject": {
-                "label": "Netzwerktechnik IBM NetView"
+                "label": "IBM NetView"
               },
               "nodes": []
             },
@@ -12337,9 +10608,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1780a"
               },
-              "name": "Netzwerktechnik LAN (lokale Netzwerke)",
+              "name": "LAN",
               "localizableObject": {
-                "label": "Netzwerktechnik LAN (lokale Netzwerke)"
+                "label": "LAN"
               },
               "nodes": []
             },
@@ -12347,9 +10618,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1780b"
               },
-              "name": "Netzwerktechnik LIN (Local Interconnect Network)",
+              "name": "LIN",
               "localizableObject": {
-                "label": "Netzwerktechnik LIN (Local Interconnect Network)"
+                "label": "LIN"
               },
               "nodes": []
             },
@@ -12357,9 +10628,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1780c"
               },
-              "name": "Netzwerktechnik LON",
+              "name": "LON",
               "localizableObject": {
-                "label": "Netzwerktechnik LON"
+                "label": "LON"
               },
               "nodes": []
             },
@@ -12367,9 +10638,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1780d"
               },
-              "name": "Netzwerktechnik ManageWise",
+              "name": "ManageWise",
               "localizableObject": {
-                "label": "Netzwerktechnik ManageWise"
+                "label": "ManageWise"
               },
               "nodes": []
             },
@@ -12377,9 +10648,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1780e"
               },
-              "name": "Netzwerktechnik MPLS",
+              "name": "MPLS",
               "localizableObject": {
-                "label": "Netzwerktechnik MPLS"
+                "label": "MPLS"
               },
               "nodes": []
             },
@@ -12387,9 +10658,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1780f"
               },
-              "name": "Netzwerktechnik MS Exchange Server",
+              "name": "MS Exchange Server",
               "localizableObject": {
-                "label": "Netzwerktechnik MS Exchange Server"
+                "label": "MS Exchange Server"
               },
               "nodes": []
             },
@@ -12397,9 +10668,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17810"
               },
-              "name": "Netzwerktechnik MS Internet Information Server",
+              "name": "MS Internet Information Server",
               "localizableObject": {
-                "label": "Netzwerktechnik MS Internet Information Server"
+                "label": "MS Internet Information Server"
               },
               "nodes": []
             },
@@ -12407,9 +10678,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17811"
               },
-              "name": "Netzwerktechnik MS Proxy Server",
+              "name": "MS Proxy Server",
               "localizableObject": {
-                "label": "Netzwerktechnik MS Proxy Server"
+                "label": "MS Proxy Server"
               },
               "nodes": []
             },
@@ -12417,9 +10688,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17812"
               },
-              "name": "Netzwerktechnik Nerve Center",
+              "name": "Nerve Center",
               "localizableObject": {
-                "label": "Netzwerktechnik Nerve Center"
+                "label": "Nerve Center"
               },
               "nodes": []
             },
@@ -12427,9 +10698,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17813"
               },
-              "name": "Netzwerktechnik Net/Master",
+              "name": "Net/Master",
               "localizableObject": {
-                "label": "Netzwerktechnik Net/Master"
+                "label": "Net/Master"
               },
               "nodes": []
             },
@@ -12437,9 +10708,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17814"
               },
-              "name": "Netzwerktechnik NetGuard",
+              "name": "NetGuard",
               "localizableObject": {
-                "label": "Netzwerktechnik NetGuard"
+                "label": "NetGuard"
               },
               "nodes": []
             },
@@ -12447,9 +10718,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17815"
               },
-              "name": "Netzwerktechnik NFS",
+              "name": "NFS",
               "localizableObject": {
-                "label": "Netzwerktechnik NFS"
+                "label": "NFS"
               },
               "nodes": []
             },
@@ -12457,9 +10728,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17816"
               },
-              "name": "Netzwerktechnik NOVELL",
+              "name": "NOVELL",
               "localizableObject": {
-                "label": "Netzwerktechnik NOVELL"
+                "label": "NOVELL"
               },
               "nodes": []
             },
@@ -12467,9 +10738,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17817"
               },
-              "name": "Netzwerktechnik PcAnywhere",
+              "name": "PcAnywhere",
               "localizableObject": {
-                "label": "Netzwerktechnik PcAnywhere"
+                "label": "PcAnywhere"
               },
               "nodes": []
             },
@@ -12477,9 +10748,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17818"
               },
-              "name": "Netzwerktechnik RAS",
+              "name": "RAS",
               "localizableObject": {
-                "label": "Netzwerktechnik RAS"
+                "label": "RAS"
               },
               "nodes": []
             },
@@ -12487,9 +10758,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17819"
               },
-              "name": "Netzwerktechnik Remedy",
+              "name": "Remedy",
               "localizableObject": {
-                "label": "Netzwerktechnik Remedy"
+                "label": "Remedy"
               },
               "nodes": []
             },
@@ -12497,9 +10768,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1781a"
               },
-              "name": "Netzwerktechnik SAN (Storage Area Network)",
+              "name": "SAN (Storage Area Network)",
               "localizableObject": {
-                "label": "Netzwerktechnik SAN (Storage Area Network)"
+                "label": "SAN (Storage Area Network)"
               },
               "nodes": []
             },
@@ -12507,19 +10778,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1781b"
               },
-              "name": "Netzwerktechnik SNA",
+              "name": "SNA",
               "localizableObject": {
-                "label": "Netzwerktechnik SNA"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b1781c"
-              },
-              "name": "Netzwerktechnik TCP/IP",
-              "localizableObject": {
-                "label": "Netzwerktechnik TCP/IP"
+                "label": "SNA"
               },
               "nodes": []
             },
@@ -12527,9 +10788,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1781d"
               },
-              "name": "Netzwerktechnik Tivoli",
+              "name": "Tivoli",
               "localizableObject": {
-                "label": "Netzwerktechnik Tivoli"
+                "label": "Tivoli"
               },
               "nodes": []
             },
@@ -12537,9 +10798,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1781e"
               },
-              "name": "Netzwerktechnik Vines",
+              "name": "Vines",
               "localizableObject": {
-                "label": "Netzwerktechnik Vines"
+                "label": "Vines"
               },
               "nodes": []
             },
@@ -12547,9 +10808,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1781f"
               },
-              "name": "Netzwerktechnik VNC (Virtual Network Computing)",
+              "name": "VNC (Virtual Network Computing)",
               "localizableObject": {
-                "label": "Netzwerktechnik VNC (Virtual Network Computing)"
+                "label": "VNC"
               },
               "nodes": []
             },
@@ -12557,9 +10818,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17820"
               },
-              "name": "Netzwerktechnik VPN (Virtual Private Network)",
+              "name": "VPN",
               "localizableObject": {
-                "label": "Netzwerktechnik VPN (Virtual Private Network)"
+                "label": "VPN"
               },
               "nodes": []
             },
@@ -12567,39 +10828,19 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17821"
               },
-              "name": "Netzwerktechnik WAN, GAN",
+              "name": "WAN",
               "localizableObject": {
-                "label": "Netzwerktechnik WAN, GAN"
+                "label": "WAN"
               },
               "nodes": []
             },
             {
               "_id": {
-                "$oid": "563625a144aec39e70b17822"
+                "$oid": "5683046344ae528da229712e"
               },
-              "name": "Netzwerktechnik Windows NT, Windows 2000",
+              "name": "GAN",
               "localizableObject": {
-                "label": "Netzwerktechnik Windows NT, Windows 2000"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17823"
-              },
-              "name": "Netzwerktechnik Windows XP Professional",
-              "localizableObject": {
-                "label": "Netzwerktechnik Windows XP Professional"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17824"
-              },
-              "name": "Netzwerktechnik X.25, X.400, X.500",
-              "localizableObject": {
-                "label": "Netzwerktechnik X.25, X.400, X.500"
+                "label": "GAN"
               },
               "nodes": []
             },
@@ -12607,9 +10848,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17825"
               },
-              "name": "Netzwerktechnik ZEN.works",
+              "name": "ZEN.works",
               "localizableObject": {
-                "label": "Netzwerktechnik ZEN.works"
+                "label": "ZEN.works"
               },
               "nodes": []
             },
@@ -12617,9 +10858,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17826"
               },
-              "name": "Public Key Infrastructure (PKI)",
+              "name": "Public Key Infrastructure",
               "localizableObject": {
-                "label": "Public Key Infrastructure (PKI)"
+                "label": "Public Key Infrastructure"
               },
               "nodes": []
             },
@@ -12627,9 +10868,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17827"
               },
-              "name": "Samba (Unix Server für Microsoft Clients)",
+              "name": "Samba",
               "localizableObject": {
-                "label": "Samba (Unix Server für Microsoft Clients)"
+                "label": "Samba"
               },
               "nodes": []
             },
@@ -12637,9 +10878,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17828"
               },
-              "name": "WLAN (Wireless Local Area Network)",
+              "name": "WLAN",
               "localizableObject": {
-                "label": "WLAN (Wireless Local Area Network)"
+                "label": "WLAN"
               },
               "nodes": []
             }
@@ -12848,11 +11089,242 @@
         },
         {
           "_id": {
+            "$oid": "5684601244ae528da229712f"
+          },
+          "name": "Entwicklungsumgebungen",
+          "localizableObject": {
+            "label": "Entwicklungsumgebungen"
+          },
+          "nodes": [
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b1783e"
+              },
+              "name": "Apache Ant",
+              "localizableObject": {
+                "label": "Apache Ant"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b1783f"
+              },
+              "name": "MVN Apache Maven",
+              "localizableObject": {
+                "label": "MVN Apache Maven"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b17846"
+              },
+              "name": "Java ME (J2ME)",
+              "localizableObject": {
+                "label": "Java ME (J2ME)"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b17847"
+              },
+              "name": "Microsoft Silverlight",
+              "localizableObject": {
+                "label": "Microsoft Silverlight"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b17848"
+              },
+              "name": "Entwicklungsumgebung .NET Framework",
+              "localizableObject": {
+                "label": "Entwicklungsumgebung .NET Framework"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b17849"
+              },
+              "name": "4D",
+              "localizableObject": {
+                "label": "4D"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b1784a"
+              },
+              "name": "ACE",
+              "localizableObject": {
+                "label": "ACE"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b1784b"
+              },
+              "name": "Android SDK",
+              "localizableObject": {
+                "label": "Android SDK"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b1784c"
+              },
+              "name": "Eclipse",
+              "localizableObject": {
+                "label": "Eclipse"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b1784d"
+              },
+              "name": "Google Web Toolkit (GWT)",
+              "localizableObject": {
+                "label": "Google Web Toolkit (GWT)"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b1784e"
+              },
+              "name": "IntelliJ IDEA",
+              "localizableObject": {
+                "label": "IntelliJ IDEA"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b1784f"
+              },
+              "name": "JBuilder",
+              "localizableObject": {
+                "label": "JBuilder"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b17850"
+              },
+              "name": "NetBeans",
+              "localizableObject": {
+                "label": "NetBeans"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b17851"
+              },
+              "name": "Oracle Forms",
+              "localizableObject": {
+                "label": "Oracle Forms"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b17852"
+              },
+              "name": "Project Builder",
+              "localizableObject": {
+                "label": "Project Builder"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b17853"
+              },
+              "name": "TOAD",
+              "localizableObject": {
+                "label": "TOAD"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b17854"
+              },
+              "name": "Tomcat",
+              "localizableObject": {
+                "label": "Tomcat"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b17855"
+              },
+              "name": "Trolltech Qt4",
+              "localizableObject": {
+                "label": "Trolltech Qt4"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b17856"
+              },
+              "name": "Visual C++",
+              "localizableObject": {
+                "label": "Visual C++"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b17857"
+              },
+              "name": "Visual Studio",
+              "localizableObject": {
+                "label": "Visual Studio"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b17858"
+              },
+              "name": "Xcode",
+              "localizableObject": {
+                "label": "Xcode"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b17840"
+              },
+              "name": "CMake",
+              "localizableObject": {
+                "label": "CMake"
+              },
+              "nodes": []
+            }
+          ]
+        },
+        {
+          "_id": {
             "$oid": "563625a144aec39e70b17731"
           },
-          "name": "Programmiersprachen, Entwicklungsumgebungen",
+          "name": "Programmiersprachen",
           "localizableObject": {
-            "label": "Programmiersprachen, Entwicklungsumgebungen"
+            "label": "Programmiersprachen"
           },
           "nodes": [
             {
@@ -12872,36 +11344,6 @@
               "name": "bash",
               "localizableObject": {
                 "label": "bash"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b1783e"
-              },
-              "name": "Build-Management-Tool Apache Ant",
-              "localizableObject": {
-                "label": "Build-Management-Tool Apache Ant"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b1783f"
-              },
-              "name": "Build-Management-Tool Apache Maven",
-              "localizableObject": {
-                "label": "Build-Management-Tool Apache Maven"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17840"
-              },
-              "name": "Build-Management-Tool CMake",
-              "localizableObject": {
-                "label": "Build-Management-Tool CMake"
               },
               "nodes": []
             },
@@ -12939,219 +11381,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17844"
               },
-              "name": "Druckersprache PCL (Printer Command Language)",
+              "name": "PCL (Printer Command Language)",
               "localizableObject": {
-                "label": "Druckersprache PCL (Printer Command Language)"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17845"
-              },
-              "name": "Druckersprache Prescribe",
-              "localizableObject": {
-                "label": "Druckersprache Prescribe"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17846"
-              },
-              "name": "Entwicklungsplattform Java ME (J2ME)",
-              "localizableObject": {
-                "label": "Entwicklungsplattform Java ME (J2ME)"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17847"
-              },
-              "name": "Entwicklungsplattform Microsoft Silverlight",
-              "localizableObject": {
-                "label": "Entwicklungsplattform Microsoft Silverlight"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17848"
-              },
-              "name": "Entwicklungsumgebung .NET Framework",
-              "localizableObject": {
-                "label": "Entwicklungsumgebung .NET Framework"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17849"
-              },
-              "name": "Entwicklungsumgebung 4D",
-              "localizableObject": {
-                "label": "Entwicklungsumgebung 4D"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b1784a"
-              },
-              "name": "Entwicklungsumgebung ACE",
-              "localizableObject": {
-                "label": "Entwicklungsumgebung ACE"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b1784b"
-              },
-              "name": "Entwicklungsumgebung Android SDK",
-              "localizableObject": {
-                "label": "Entwicklungsumgebung Android SDK"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b1784c"
-              },
-              "name": "Entwicklungsumgebung Eclipse",
-              "localizableObject": {
-                "label": "Entwicklungsumgebung Eclipse"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b1784d"
-              },
-              "name": "Entwicklungsumgebung Google Web Toolkit (GWT)",
-              "localizableObject": {
-                "label": "Entwicklungsumgebung Google Web Toolkit (GWT)"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b1784e"
-              },
-              "name": "Entwicklungsumgebung IntelliJ IDEA",
-              "localizableObject": {
-                "label": "Entwicklungsumgebung IntelliJ IDEA"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b1784f"
-              },
-              "name": "Entwicklungsumgebung JBuilder",
-              "localizableObject": {
-                "label": "Entwicklungsumgebung JBuilder"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17850"
-              },
-              "name": "Entwicklungsumgebung NetBeans",
-              "localizableObject": {
-                "label": "Entwicklungsumgebung NetBeans"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17851"
-              },
-              "name": "Entwicklungsumgebung Oracle Forms",
-              "localizableObject": {
-                "label": "Entwicklungsumgebung Oracle Forms"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17852"
-              },
-              "name": "Entwicklungsumgebung Project Builder",
-              "localizableObject": {
-                "label": "Entwicklungsumgebung Project Builder"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17853"
-              },
-              "name": "Entwicklungsumgebung TOAD",
-              "localizableObject": {
-                "label": "Entwicklungsumgebung TOAD"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17854"
-              },
-              "name": "Entwicklungsumgebung Tomcat",
-              "localizableObject": {
-                "label": "Entwicklungsumgebung Tomcat"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17855"
-              },
-              "name": "Entwicklungsumgebung Trolltech Qt4",
-              "localizableObject": {
-                "label": "Entwicklungsumgebung Trolltech Qt4"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17856"
-              },
-              "name": "Entwicklungsumgebung Visual C++",
-              "localizableObject": {
-                "label": "Entwicklungsumgebung Visual C++"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17857"
-              },
-              "name": "Entwicklungsumgebung Visual Studio/Visual Studio.NET",
-              "localizableObject": {
-                "label": "Entwicklungsumgebung Visual Studio/Visual Studio.NET"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17858"
-              },
-              "name": "Entwicklungsumgebung Xcode",
-              "localizableObject": {
-                "label": "Entwicklungsumgebung Xcode"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17859"
-              },
-              "name": "Formatierungssprache CSS",
-              "localizableObject": {
-                "label": "Formatierungssprache CSS"
+                "label": "PCL (Printer Command Language)"
               },
               "nodes": []
             },
@@ -13159,9 +11391,29 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1785a"
               },
-              "name": "Hadoop Framework",
+              "name": "Hadoop",
               "localizableObject": {
-                "label": "Hadoop Framework"
+                "label": "Hadoop"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b17845"
+              },
+              "name": "Prescribe",
+              "localizableObject": {
+                "label": "Prescribe"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "563625a144aec39e70b17859"
+              },
+              "name": "CSS",
+              "localizableObject": {
+                "label": "CSS"
               },
               "nodes": []
             },
@@ -13169,9 +11421,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1785b"
               },
-              "name": "Hibernate Framework",
+              "name": "Hibernate",
               "localizableObject": {
-                "label": "Hibernate Framework"
+                "label": "Hibernate"
               },
               "nodes": []
             },
@@ -13219,9 +11471,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17860"
               },
-              "name": "HTML/CSS Framework YAML",
+              "name": "YAML",
               "localizableObject": {
-                "label": "HTML/CSS Framework YAML"
+                "label": "YAML"
               },
               "nodes": []
             },
@@ -13229,9 +11481,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17861"
               },
-              "name": "JavaScript-Framework Backbone",
+              "name": "Backbone",
               "localizableObject": {
-                "label": "JavaScript-Framework Backbone"
+                "label": "Backbone"
               },
               "nodes": []
             },
@@ -13239,9 +11491,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17862"
               },
-              "name": "JavaScript-Framework Ember",
+              "name": "Ember",
               "localizableObject": {
-                "label": "JavaScript-Framework Ember"
+                "label": "Ember"
               },
               "nodes": []
             },
@@ -13249,9 +11501,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17863"
               },
-              "name": "JavaScript-Framework Ext",
+              "name": "Ext",
               "localizableObject": {
-                "label": "JavaScript-Framework Ext"
+                "label": "Ext"
               },
               "nodes": []
             },
@@ -13259,9 +11511,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17864"
               },
-              "name": "JavaScript-Framework Jasmine",
+              "name": "Jasmine",
               "localizableObject": {
-                "label": "JavaScript-Framework Jasmine"
+                "label": "Jasmine"
               },
               "nodes": []
             },
@@ -13269,9 +11521,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17865"
               },
-              "name": "JavaScript-Framework jQuery",
+              "name": "jQuery",
               "localizableObject": {
-                "label": "JavaScript-Framework jQuery"
+                "label": "jQuery"
               },
               "nodes": []
             },
@@ -13279,9 +11531,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17866"
               },
-              "name": "JavaScript-Framework Knockout",
+              "name": "Knockout",
               "localizableObject": {
-                "label": "JavaScript-Framework Knockout"
+                "label": "Knockout"
               },
               "nodes": []
             },
@@ -13289,9 +11541,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17867"
               },
-              "name": "JavaScript-Framework MooTools",
+              "name": "MooTools",
               "localizableObject": {
-                "label": "JavaScript-Framework MooTools"
+                "label": "MooTools"
               },
               "nodes": []
             },
@@ -13299,9 +11551,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17868"
               },
-              "name": "Modellierungs- und Simulationssprache SystemC",
+              "name": "SystemC",
               "localizableObject": {
-                "label": "Modellierungs- und Simulationssprache SystemC"
+                "label": "SystemC"
               },
               "nodes": []
             },
@@ -13309,9 +11561,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17869"
               },
-              "name": "MSL (mIRC Scripting Language)",
+              "name": "MSL",
               "localizableObject": {
-                "label": "MSL (mIRC Scripting Language)"
+                "label": "MSL"
               },
               "nodes": []
             },
@@ -13329,9 +11581,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1786b"
               },
-              "name": "PHP-Entwicklungsumgebung Zend Studio",
+              "name": "Zend Studio",
               "localizableObject": {
-                "label": "PHP-Entwicklungsumgebung Zend Studio"
+                "label": "Zend Studio"
               },
               "nodes": []
             },
@@ -13339,9 +11591,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1786c"
               },
-              "name": "Programmbibliothek CORBA",
+              "name": "CORBA",
               "localizableObject": {
-                "label": "Programmbibliothek CORBA"
+                "label": "CORBA"
               },
               "nodes": []
             },
@@ -13349,9 +11601,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1786d"
               },
-              "name": "Programmbibliothek Motif",
+              "name": "Motif",
               "localizableObject": {
-                "label": "Programmbibliothek Motif"
+                "label": "Motif"
               },
               "nodes": []
             },
@@ -13359,9 +11611,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1786e"
               },
-              "name": "Programmbibliothek SQLite",
+              "name": "SQLite",
               "localizableObject": {
-                "label": "Programmbibliothek SQLite"
+                "label": "SQLite"
               },
               "nodes": []
             },
@@ -13369,9 +11621,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1786f"
               },
-              "name": "Programmiersprache/Software MATLAB",
+              "name": "MATLAB",
               "localizableObject": {
-                "label": "Programmiersprache/Software MATLAB"
+                "label": "MATLAB"
               },
               "nodes": []
             },
@@ -13379,9 +11631,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17870"
               },
-              "name": "Programmiersprache 4GL",
+              "name": "4GL",
               "localizableObject": {
-                "label": "Programmiersprache 4GL"
+                "label": "4GL"
               },
               "nodes": []
             },
@@ -13389,9 +11641,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17871"
               },
-              "name": "Programmiersprache ABAP (SAP)",
+              "name": "ABAP (SAP)",
               "localizableObject": {
-                "label": "Programmiersprache ABAP (SAP)"
+                "label": "ABAP (SAP)"
               },
               "nodes": []
             },
@@ -13399,9 +11651,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17872"
               },
-              "name": "Programmiersprache ActionScript",
+              "name": "ActionScript",
               "localizableObject": {
-                "label": "Programmiersprache ActionScript"
+                "label": "ActionScript"
               },
               "nodes": []
             },
@@ -13409,9 +11661,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17873"
               },
-              "name": "Programmiersprache ActiveX",
+              "name": "ActiveX",
               "localizableObject": {
-                "label": "Programmiersprache ActiveX"
+                "label": "ActiveX"
               },
               "nodes": []
             },
@@ -13419,9 +11671,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17874"
               },
-              "name": "Programmiersprache ADA",
+              "name": "ADA",
               "localizableObject": {
-                "label": "Programmiersprache ADA"
+                "label": "ADA"
               },
               "nodes": []
             },
@@ -13429,9 +11681,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17875"
               },
-              "name": "Programmiersprache ADO.NET",
+              "name": "ADO.NET",
               "localizableObject": {
-                "label": "Programmiersprache ADO.NET"
+                "label": "ADO.NET"
               },
               "nodes": []
             },
@@ -13439,9 +11691,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17876"
               },
-              "name": "Programmiersprache Algol",
+              "name": "Algol",
               "localizableObject": {
-                "label": "Programmiersprache Algol"
+                "label": "Algol"
               },
               "nodes": []
             },
@@ -13449,9 +11701,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17877"
               },
-              "name": "Programmiersprache APL",
+              "name": "APL",
               "localizableObject": {
-                "label": "Programmiersprache APL"
+                "label": "APL"
               },
               "nodes": []
             },
@@ -13459,9 +11711,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17878"
               },
-              "name": "Programmiersprache AppleScript",
+              "name": "AppleScript",
               "localizableObject": {
-                "label": "Programmiersprache AppleScript"
+                "label": "AppleScript"
               },
               "nodes": []
             },
@@ -13469,9 +11721,19 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17879"
               },
-              "name": "Programmiersprache APT, EXAPT, EXAPTplus",
+              "name": "APT",
               "localizableObject": {
-                "label": "Programmiersprache APT, EXAPT, EXAPTplus"
+                "label": "APT"
+              },
+              "nodes": []
+            },
+            {
+              "_id": {
+                "$oid": "5684601244ae528da2297130"
+              },
+              "name": "EXAPT",
+              "localizableObject": {
+                "label": "EXAPT"
               },
               "nodes": []
             },
@@ -13479,9 +11741,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1787a"
               },
-              "name": "Programmiersprache ARIS",
+              "name": "ARIS",
               "localizableObject": {
-                "label": "Programmiersprache ARIS"
+                "label": "ARIS"
               },
               "nodes": []
             },
@@ -13489,9 +11751,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1787b"
               },
-              "name": "Programmiersprache ASP",
+              "name": "ASP",
               "localizableObject": {
-                "label": "Programmiersprache ASP"
+                "label": "ASP"
               },
               "nodes": []
             },
@@ -13499,9 +11761,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1787c"
               },
-              "name": "Programmiersprache ASP.NET",
+              "name": "ASP.NET",
               "localizableObject": {
-                "label": "Programmiersprache ASP.NET"
+                "label": "ASP.NET"
               },
               "nodes": []
             },
@@ -13509,9 +11771,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1787d"
               },
-              "name": "Programmiersprache Assembler",
+              "name": "Assembler",
               "localizableObject": {
-                "label": "Programmiersprache Assembler"
+                "label": "Assembler"
               },
               "nodes": []
             },
@@ -13519,9 +11781,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1787e"
               },
-              "name": "Programmiersprache ATL",
+              "name": "ATL",
               "localizableObject": {
-                "label": "Programmiersprache ATL"
+                "label": "ATL"
               },
               "nodes": []
             },
@@ -13529,9 +11791,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1787f"
               },
-              "name": "Programmiersprache AWK",
+              "name": "AWK",
               "localizableObject": {
-                "label": "Programmiersprache AWK"
+                "label": "AWK"
               },
               "nodes": []
             },
@@ -13539,9 +11801,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17880"
               },
-              "name": "Programmiersprache Basic, Turbo Basic",
+              "name": "Turbo Basic",
               "localizableObject": {
-                "label": "Programmiersprache Basic, Turbo Basic"
+                "label": "Turbo Basic"
               },
               "nodes": []
             },
@@ -13549,9 +11811,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17881"
               },
-              "name": "Programmiersprache C",
+              "name": "C",
               "localizableObject": {
-                "label": "Programmiersprache C"
+                "label": "C"
               },
               "nodes": []
             },
@@ -13559,9 +11821,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17882"
               },
-              "name": "Programmiersprache C#",
+              "name": "C#",
               "localizableObject": {
-                "label": "Programmiersprache C#"
+                "label": "C#"
               },
               "nodes": []
             },
@@ -13569,9 +11831,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17883"
               },
-              "name": "Programmiersprache C++",
+              "name": "C++",
               "localizableObject": {
-                "label": "Programmiersprache C++"
+                "label": "C++"
               },
               "nodes": []
             },
@@ -13579,9 +11841,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17884"
               },
-              "name": "Programmiersprache Clipper",
+              "name": "Clipper",
               "localizableObject": {
-                "label": "Programmiersprache Clipper"
+                "label": "Clipper"
               },
               "nodes": []
             },
@@ -13589,9 +11851,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17885"
               },
-              "name": "Programmiersprache Cobol",
+              "name": "Cobol",
               "localizableObject": {
-                "label": "Programmiersprache Cobol"
+                "label": "Cobol"
               },
               "nodes": []
             },
@@ -13599,9 +11861,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17886"
               },
-              "name": "Programmiersprache CoDeSys",
+              "name": "CoDeSys",
               "localizableObject": {
-                "label": "Programmiersprache CoDeSys"
+                "label": "CoDeSys"
               },
               "nodes": []
             },
@@ -13609,9 +11871,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17887"
               },
-              "name": "Programmiersprache CoffeeScript",
+              "name": "CoffeeScript",
               "localizableObject": {
-                "label": "Programmiersprache CoffeeScript"
+                "label": "CoffeeScript"
               },
               "nodes": []
             },
@@ -13619,9 +11881,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17888"
               },
-              "name": "Programmiersprache ColdFusion",
+              "name": "ColdFusion",
               "localizableObject": {
-                "label": "Programmiersprache ColdFusion"
+                "label": "ColdFusion"
               },
               "nodes": []
             },
@@ -13629,9 +11891,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17889"
               },
-              "name": "Programmiersprache COM+",
+              "name": "COM+",
               "localizableObject": {
-                "label": "Programmiersprache COM+"
+                "label": "COM+"
               },
               "nodes": []
             },
@@ -13639,9 +11901,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1788a"
               },
-              "name": "Programmiersprache Delphi",
+              "name": "Delphi",
               "localizableObject": {
-                "label": "Programmiersprache Delphi"
+                "label": "Delphi"
               },
               "nodes": []
             },
@@ -13649,9 +11911,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1788b"
               },
-              "name": "Programmiersprache Designer/2000",
+              "name": "Designer/2000",
               "localizableObject": {
-                "label": "Programmiersprache Designer/2000"
+                "label": "Designer/2000"
               },
               "nodes": []
             },
@@ -13659,9 +11921,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1788c"
               },
-              "name": "Programmiersprache Developer/2000",
+              "name": "Developer/2000",
               "localizableObject": {
-                "label": "Programmiersprache Developer/2000"
+                "label": "Developer/2000"
               },
               "nodes": []
             },
@@ -13669,9 +11931,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1788d"
               },
-              "name": "Programmiersprache Easytrieve Plus",
+              "name": "Easytrieve Plus",
               "localizableObject": {
-                "label": "Programmiersprache Easytrieve Plus"
+                "label": "Easytrieve Plus"
               },
               "nodes": []
             },
@@ -13679,9 +11941,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1788e"
               },
-              "name": "Programmiersprache Erlang",
+              "name": "Erlang",
               "localizableObject": {
-                "label": "Programmiersprache Erlang"
+                "label": "Erlang"
               },
               "nodes": []
             },
@@ -13689,9 +11951,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1788f"
               },
-              "name": "Programmiersprache Esterel, Esterel studio",
+              "name": "Esterel",
               "localizableObject": {
-                "label": "Programmiersprache Esterel, Esterel studio"
+                "label": "Esterel"
               },
               "nodes": []
             },
@@ -13699,9 +11961,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17890"
               },
-              "name": "Programmiersprache Fortran",
+              "name": "Fortran",
               "localizableObject": {
-                "label": "Programmiersprache Fortran"
+                "label": "Fortran"
               },
               "nodes": []
             },
@@ -13709,9 +11971,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17891"
               },
-              "name": "Programmiersprache Groovy",
+              "name": "Groovy",
               "localizableObject": {
-                "label": "Programmiersprache Groovy"
+                "label": "Groovy"
               },
               "nodes": []
             },
@@ -13719,39 +11981,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17892"
               },
-              "name": "Programmiersprache Haskell",
+              "name": "Haskell",
               "localizableObject": {
-                "label": "Programmiersprache Haskell"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17893"
-              },
-              "name": "Programmiersprache IDL (Interactive Data Language)",
-              "localizableObject": {
-                "label": "Programmiersprache IDL (Interactive Data Language)"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17894"
-              },
-              "name": "Programmiersprache Installscript",
-              "localizableObject": {
-                "label": "Programmiersprache Installscript"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b17895"
-              },
-              "name": "Programmiersprache Installshield",
-              "localizableObject": {
-                "label": "Programmiersprache Installshield"
+                "label": "Haskell"
               },
               "nodes": []
             },
@@ -13759,9 +11991,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17896"
               },
-              "name": "Programmiersprache J#",
+              "name": "J#",
               "localizableObject": {
-                "label": "Programmiersprache J#"
+                "label": "J#"
               },
               "nodes": []
             },
@@ -13769,9 +12001,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17897"
               },
-              "name": "Programmiersprache Java",
+              "name": "Java",
               "localizableObject": {
-                "label": "Programmiersprache Java"
+                "label": "Java"
               },
               "nodes": []
             },
@@ -13779,9 +12011,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17898"
               },
-              "name": "Programmiersprache Java EE",
+              "name": "Java Enterprice Java EE",
               "localizableObject": {
-                "label": "Programmiersprache Java EE"
+                "label": "Java Enterprice Java EE"
               },
               "nodes": []
             },
@@ -13789,9 +12021,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b17899"
               },
-              "name": "Programmiersprache JavaScript",
+              "name": "JavaScript",
               "localizableObject": {
-                "label": "Programmiersprache JavaScript"
+                "label": "JavaScript"
               },
               "nodes": []
             },
@@ -13799,9 +12031,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1789a"
               },
-              "name": "Programmiersprache Jscript.NET",
+              "name": "Jscript.NET",
               "localizableObject": {
-                "label": "Programmiersprache Jscript.NET"
+                "label": "Jscript.NET"
               },
               "nodes": []
             },
@@ -13809,9 +12041,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1789b"
               },
-              "name": "Programmiersprache JSP (Java Server Pages)",
+              "name": "JSP",
               "localizableObject": {
-                "label": "Programmiersprache JSP (Java Server Pages)"
+                "label": "JSP"
               },
               "nodes": []
             },
@@ -13819,9 +12051,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1789c"
               },
-              "name": "Programmiersprache LESS",
+              "name": "LESS",
               "localizableObject": {
-                "label": "Programmiersprache LESS"
+                "label": "LESS"
               },
               "nodes": []
             },
@@ -13829,9 +12061,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1789d"
               },
-              "name": "Programmiersprache LINGO",
+              "name": "LINGO",
               "localizableObject": {
-                "label": "Programmiersprache LINGO"
+                "label": "LINGO"
               },
               "nodes": []
             },
@@ -13839,9 +12071,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1789e"
               },
-              "name": "Programmiersprache Lisp",
+              "name": "Lisp",
               "localizableObject": {
-                "label": "Programmiersprache Lisp"
+                "label": "Lisp"
               },
               "nodes": []
             },
@@ -13849,9 +12081,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b1789f"
               },
-              "name": "Programmiersprache Logo",
+              "name": "Logo",
               "localizableObject": {
-                "label": "Programmiersprache Logo"
+                "label": "Logo"
               },
               "nodes": []
             },
@@ -13859,9 +12091,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178a0"
               },
-              "name": "Programmiersprache LotusScript",
+              "name": "LotusScript",
               "localizableObject": {
-                "label": "Programmiersprache LotusScript"
+                "label": "LotusScript"
               },
               "nodes": []
             },
@@ -13869,9 +12101,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178a1"
               },
-              "name": "Programmiersprache Lustre",
+              "name": "Lustre",
               "localizableObject": {
-                "label": "Programmiersprache Lustre"
+                "label": "Lustre"
               },
               "nodes": []
             },
@@ -13879,9 +12111,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178a2"
               },
-              "name": "Programmiersprache Modula",
+              "name": "Modula",
               "localizableObject": {
-                "label": "Programmiersprache Modula"
+                "label": "Modula"
               },
               "nodes": []
             },
@@ -13889,9 +12121,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178a3"
               },
-              "name": "Programmiersprache Natural",
+              "name": "Natural",
               "localizableObject": {
-                "label": "Programmiersprache Natural"
+                "label": "Natural"
               },
               "nodes": []
             },
@@ -13899,9 +12131,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178a4"
               },
-              "name": "Programmiersprache Oberon",
+              "name": "Oberon",
               "localizableObject": {
-                "label": "Programmiersprache Oberon"
+                "label": "Oberon"
               },
               "nodes": []
             },
@@ -13909,9 +12141,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178a5"
               },
-              "name": "Programmiersprache Objective-C",
+              "name": "Objective-C",
               "localizableObject": {
-                "label": "Programmiersprache Objective-C"
+                "label": "Objective-C"
               },
               "nodes": []
             },
@@ -13919,19 +12151,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178a6"
               },
-              "name": "Programmiersprache Pascal, Turbo Pascal",
+              "name": "Pascal",
               "localizableObject": {
-                "label": "Programmiersprache Pascal, Turbo Pascal"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b178a7"
-              },
-              "name": "Programmiersprache PEARL",
-              "localizableObject": {
-                "label": "Programmiersprache PEARL"
+                "label": "Pascal"
               },
               "nodes": []
             },
@@ -13939,9 +12161,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178a8"
               },
-              "name": "Programmiersprache Perl",
+              "name": "Perl",
               "localizableObject": {
-                "label": "Programmiersprache Perl"
+                "label": "Perl"
               },
               "nodes": []
             },
@@ -13949,19 +12171,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178a9"
               },
-              "name": "Programmiersprache PHP",
+              "name": "PHP",
               "localizableObject": {
-                "label": "Programmiersprache PHP"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b178aa"
-              },
-              "name": "Programmiersprache PL/SQL",
-              "localizableObject": {
-                "label": "Programmiersprache PL/SQL"
+                "label": "PHP"
               },
               "nodes": []
             },
@@ -13969,9 +12181,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178ab"
               },
-              "name": "Programmiersprache PL1",
+              "name": "PL1",
               "localizableObject": {
-                "label": "Programmiersprache PL1"
+                "label": "PL1"
               },
               "nodes": []
             },
@@ -13979,9 +12191,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178ac"
               },
-              "name": "Programmiersprache PowerBuilder",
+              "name": "PowerBuilder",
               "localizableObject": {
-                "label": "Programmiersprache PowerBuilder"
+                "label": "PowerBuilder"
               },
               "nodes": []
             },
@@ -13989,19 +12201,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178ad"
               },
-              "name": "Programmiersprache PowerDesigner",
+              "name": "PowerDesigner",
               "localizableObject": {
-                "label": "Programmiersprache PowerDesigner"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b178ae"
-              },
-              "name": "Programmiersprache PreS (Printsoft)",
-              "localizableObject": {
-                "label": "Programmiersprache PreS (Printsoft)"
+                "label": "PowerDesigner"
               },
               "nodes": []
             },
@@ -14009,9 +12211,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178af"
               },
-              "name": "Programmiersprache Progress OpenEdge ABL",
+              "name": "OpenEdge ABL",
               "localizableObject": {
-                "label": "Programmiersprache Progress OpenEdge ABL"
+                "label": "OpenEdge ABL"
               },
               "nodes": []
             },
@@ -14019,9 +12221,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178b0"
               },
-              "name": "Programmiersprache Prolog",
+              "name": "Prolog",
               "localizableObject": {
-                "label": "Programmiersprache Prolog"
+                "label": "Prolog"
               },
               "nodes": []
             },
@@ -14029,59 +12231,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178b1"
               },
-              "name": "Programmiersprache Python",
+              "name": "Python",
               "localizableObject": {
-                "label": "Programmiersprache Python"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b178b2"
-              },
-              "name": "Programmiersprache Rational Rose",
-              "localizableObject": {
-                "label": "Programmiersprache Rational Rose"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b178b3"
-              },
-              "name": "Programmiersprache REBOL",
-              "localizableObject": {
-                "label": "Programmiersprache REBOL"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b178b4"
-              },
-              "name": "Programmiersprache Remedy",
-              "localizableObject": {
-                "label": "Programmiersprache Remedy"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b178b5"
-              },
-              "name": "Programmiersprache REXX",
-              "localizableObject": {
-                "label": "Programmiersprache REXX"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b178b6"
-              },
-              "name": "Programmiersprache RPG",
-              "localizableObject": {
-                "label": "Programmiersprache RPG"
+                "label": "Python"
               },
               "nodes": []
             },
@@ -14089,9 +12241,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178b7"
               },
-              "name": "Programmiersprache Ruby",
+              "name": "Ruby",
               "localizableObject": {
-                "label": "Programmiersprache Ruby"
+                "label": "Ruby"
               },
               "nodes": []
             },
@@ -14099,9 +12251,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178b8"
               },
-              "name": "Programmiersprache SASS",
+              "name": "SASS",
               "localizableObject": {
-                "label": "Programmiersprache SASS"
+                "label": "SASS"
               },
               "nodes": []
             },
@@ -14109,9 +12261,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178b9"
               },
-              "name": "Programmiersprache Scala",
+              "name": "Scala",
               "localizableObject": {
-                "label": "Programmiersprache Scala"
+                "label": "Scala"
               },
               "nodes": []
             },
@@ -14119,19 +12271,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178ba"
               },
-              "name": "Programmiersprache SED",
+              "name": "SED",
               "localizableObject": {
-                "label": "Programmiersprache SED"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b178bb"
-              },
-              "name": "Programmiersprache SGML",
-              "localizableObject": {
-                "label": "Programmiersprache SGML"
+                "label": "SED"
               },
               "nodes": []
             },
@@ -14139,9 +12281,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178bc"
               },
-              "name": "Programmiersprache Smalltalk",
+              "name": "Smalltalk",
               "localizableObject": {
-                "label": "Programmiersprache Smalltalk"
+                "label": "Smalltalk"
               },
               "nodes": []
             },
@@ -14149,9 +12291,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178bd"
               },
-              "name": "Programmiersprache SVG",
+              "name": "SVG",
               "localizableObject": {
-                "label": "Programmiersprache SVG"
+                "label": "SVG"
               },
               "nodes": []
             },
@@ -14159,19 +12301,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178be"
               },
-              "name": "Programmiersprache Swift",
+              "name": "Swift",
               "localizableObject": {
-                "label": "Programmiersprache Swift"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b178bf"
-              },
-              "name": "Programmiersprache Tcl/TK",
-              "localizableObject": {
-                "label": "Programmiersprache Tcl/TK"
+                "label": "Swift"
               },
               "nodes": []
             },
@@ -14179,9 +12311,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178c0"
               },
-              "name": "Programmiersprache TeX",
+              "name": "TeX",
               "localizableObject": {
-                "label": "Programmiersprache TeX"
+                "label": "TeX"
               },
               "nodes": []
             },
@@ -14189,9 +12321,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178c1"
               },
-              "name": "Programmiersprache VB.NET",
+              "name": "VB.NET",
               "localizableObject": {
-                "label": "Programmiersprache VB.NET"
+                "label": "VB.NET"
               },
               "nodes": []
             },
@@ -14199,9 +12331,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178c2"
               },
-              "name": "Programmiersprache VBA",
+              "name": "VBA",
               "localizableObject": {
-                "label": "Programmiersprache VBA"
+                "label": "VBA"
               },
               "nodes": []
             },
@@ -14209,9 +12341,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178c3"
               },
-              "name": "Programmiersprache VBScript",
+              "name": "VBScript",
               "localizableObject": {
-                "label": "Programmiersprache VBScript"
+                "label": "VBScript"
               },
               "nodes": []
             },
@@ -14219,9 +12351,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178c4"
               },
-              "name": "Programmiersprache VC.NET",
+              "name": "VC.NET",
               "localizableObject": {
-                "label": "Programmiersprache VC.NET"
+                "label": "VC.NET"
               },
               "nodes": []
             },
@@ -14229,9 +12361,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178c5"
               },
-              "name": "Programmiersprache Verilog",
+              "name": "Verilog",
               "localizableObject": {
-                "label": "Programmiersprache Verilog"
+                "label": "Verilog"
               },
               "nodes": []
             },
@@ -14239,9 +12371,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178c6"
               },
-              "name": "Programmiersprache VHDL",
+              "name": "VHDL",
               "localizableObject": {
-                "label": "Programmiersprache VHDL"
+                "label": "VHDL"
               },
               "nodes": []
             },
@@ -14249,9 +12381,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178c7"
               },
-              "name": "Programmiersprache Visual Age",
+              "name": "Visual Age",
               "localizableObject": {
-                "label": "Programmiersprache Visual Age"
+                "label": "Visual Age"
               },
               "nodes": []
             },
@@ -14259,19 +12391,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178c8"
               },
-              "name": "Programmiersprache Visual Basic",
+              "name": "Visual Basic",
               "localizableObject": {
-                "label": "Programmiersprache Visual Basic"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b178c9"
-              },
-              "name": "Programmiersprache Visual Basic (VB 6)",
-              "localizableObject": {
-                "label": "Programmiersprache Visual Basic (VB 6)"
+                "label": "Visual Basic"
               },
               "nodes": []
             },
@@ -14279,39 +12401,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178ca"
               },
-              "name": "Programmiersprache Visual J++",
+              "name": "Visual J++",
               "localizableObject": {
-                "label": "Programmiersprache Visual J++"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b178cb"
-              },
-              "name": "Programmiersprache VRML",
-              "localizableObject": {
-                "label": "Programmiersprache VRML"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b178cc"
-              },
-              "name": "Programmiersprache WML (Wireless Markup Language)",
-              "localizableObject": {
-                "label": "Programmiersprache WML (Wireless Markup Language)"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b178cd"
-              },
-              "name": "Programmiersprache X++",
-              "localizableObject": {
-                "label": "Programmiersprache X++"
+                "label": "Visual J++"
               },
               "nodes": []
             },
@@ -14319,9 +12411,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178ce"
               },
-              "name": "Programmiersprache xBase",
+              "name": "xBase",
               "localizableObject": {
-                "label": "Programmiersprache xBase"
+                "label": "xBase"
               },
               "nodes": []
             },
@@ -14329,9 +12421,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178cf"
               },
-              "name": "Programmiertechnik Ajax",
+              "name": "Ajax",
               "localizableObject": {
-                "label": "Programmiertechnik Ajax"
+                "label": "Ajax"
               },
               "nodes": []
             },
@@ -14339,9 +12431,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178d0"
               },
-              "name": "Programmiertechnik DHTML",
+              "name": "DHTML",
               "localizableObject": {
-                "label": "Programmiertechnik DHTML"
+                "label": "DHTML"
               },
               "nodes": []
             },
@@ -14359,59 +12451,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178d2"
               },
-              "name": "Rails (Ruby on Rails) Framework",
+              "name": "Ruby on Rails",
               "localizableObject": {
-                "label": "Rails (Ruby on Rails) Framework"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b178d3"
-              },
-              "name": "SAS Base/Macro Programmierung",
-              "localizableObject": {
-                "label": "SAS Base/Macro Programmierung"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b178d4"
-              },
-              "name": "Schnittstellensprache IDL (Interface Definition Language)",
-              "localizableObject": {
-                "label": "Schnittstellensprache IDL (Interface Definition Language)"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b178d5"
-              },
-              "name": "Schnittstellen Tool WebDynpro (SAP)",
-              "localizableObject": {
-                "label": "Schnittstellen Tool WebDynpro (SAP)"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b178d6"
-              },
-              "name": "Software CruiseControl (kontinuierliche Integration)",
-              "localizableObject": {
-                "label": "Software CruiseControl (kontinuierliche Integration)"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b178d7"
-              },
-              "name": "Software Hudson (kontinuierliche Integration)",
-              "localizableObject": {
-                "label": "Software Hudson (kontinuierliche Integration)"
+                "label": "Ruby on Rails"
               },
               "nodes": []
             },
@@ -14419,9 +12461,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178d8"
               },
-              "name": "Softwarekomponenten Enterprise JavaBeans (EJB)",
+              "name": "Enterprise JavaBeans (EJB)",
               "localizableObject": {
-                "label": "Softwarekomponenten Enterprise JavaBeans (EJB)"
+                "label": "Enterprise JavaBeans (EJB)"
               },
               "nodes": []
             },
@@ -14442,16 +12484,6 @@
               "name": "Symfony Framework",
               "localizableObject": {
                 "label": "Symfony Framework"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b178db"
-              },
-              "name": "Unified Modelling Language (UML)",
-              "localizableObject": {
-                "label": "Unified Modelling Language (UML)"
               },
               "nodes": []
             },
@@ -14479,19 +12511,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178de"
               },
-              "name": "Windows Presentation Foundation (WPF)",
+              "name": "WPF",
               "localizableObject": {
-                "label": "Windows Presentation Foundation (WPF)"
-              },
-              "nodes": []
-            },
-            {
-              "_id": {
-                "$oid": "563625a144aec39e70b178df"
-              },
-              "name": "Windows Script Host (WSH)",
-              "localizableObject": {
-                "label": "Windows Script Host (WSH)"
+                "label": "WPF"
               },
               "nodes": []
             },
@@ -14499,9 +12521,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178e0"
               },
-              "name": "WQL (Windows Query Language)",
+              "name": "WQL",
               "localizableObject": {
-                "label": "WQL (Windows Query Language)"
+                "label": "WQL"
               },
               "nodes": []
             },
@@ -14509,9 +12531,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178e1"
               },
-              "name": "WSDL (Web Services Description Language)",
+              "name": "WSDL",
               "localizableObject": {
-                "label": "WSDL (Web Services Description Language)"
+                "label": "WSDL"
               },
               "nodes": []
             },
@@ -14519,9 +12541,9 @@
               "_id": {
                 "$oid": "563625a144aec39e70b178e2"
               },
-              "name": "XML web Services (.NET)",
+              "name": "XML",
               "localizableObject": {
-                "label": "XML web Services (.NET)"
+                "label": "XML"
               },
               "nodes": []
             },
@@ -15280,9 +13302,9 @@
                   "_id": {
                     "$oid": "563625a144aec39e70b17934"
                   },
-                  "name": "Baukalkulations- u. -abwicklungssoftware Bau-SU",
+                  "name": "Bauabwicklungssoftware Bau-SU",
                   "localizableObject": {
-                    "label": "Baukalkulations- u. -abwicklungssoftware Bau-SU"
+                    "label": "Bauabwicklungssoftware Bau-SU"
                   },
                   "nodes": []
                 },
@@ -15290,9 +13312,9 @@
                   "_id": {
                     "$oid": "563625a144aec39e70b17935"
                   },
-                  "name": "Baukalkulations- und -abwicklungssoftware ARRIBA",
+                  "name": "ARRIBA",
                   "localizableObject": {
-                    "label": "Baukalkulations- und -abwicklungssoftware ARRIBA"
+                    "label": "ARRIBA"
                   },
                   "nodes": []
                 },

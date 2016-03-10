@@ -23,7 +23,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
-import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.PreDestroy;
@@ -32,7 +31,6 @@ import javax.annotation.PreDestroy;
  * ElasticSearch Configuration class.
  */
 @Configuration
-@EnableElasticsearchRepositories(basePackages = "com.intellijob.elasticsearch.repository")
 public class ElasticsearchConfiguration {
 
     private static final Logger LOG = Logger.getLogger(ElasticsearchConfiguration.class);
