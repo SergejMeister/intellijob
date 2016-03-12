@@ -37,9 +37,6 @@ public class Endpoints {
     public static final String USERS = API + "/users";
     public static final String USERS_BY_ID = USERS + "/{userId}";
     public static final String JOBS_PAGING = JOBS + "/{pageIndex}/{limit}";
-    public static final String JOBS_DOWNLOAD = JOBS + "/download";
-    public static final String JOBS_BY_ID_EXTRACT = JOBS + "/{jobId}/extract";
-    public static final String JOBS_BY_JOBLINK_ID_DOWNLOAD = JOBS + "/{jobLinkId}/download";
     public static final String JOBS_BY_ID = JOBS + "/{jobId}";
     public static final String API_VIEWS_JOBDETAILS = API_VIEWS + "/jobdetails";
     public static final String JOBDETAILS = API + "/jobdetails";

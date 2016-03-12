@@ -76,6 +76,20 @@ intelliJobControllers.controller(
                 };
 
                 /**
+                 * download html content of all links.
+                 */
+                $scope.downloadAll = function () {
+                    JobLinkServices.downloadAll().success(function (response) {
+                        for (var i = 0; i < $scope.jobLinks.length; i++) {
+                                $scope.jobLinks[i].downloaded = true;
+                        }
+                        $rootScope.success = "Downloaded successfully!";
+                    }).error(function (error) {
+                        console.log(error);
+                    })
+                };
+
+                /**
                  * Delete jobLink.
                  */
                 $scope.deleteJobLink = function (jobLinkId) {

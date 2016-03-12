@@ -56,10 +56,23 @@ angular.module('intelliJob')
                  * @returns {HttpPromise}
                  */
                 jobServices.extractDataById = function (jobId) {
-                    var extractUrl = urlBase + "/" + jobId + "/extract";
-                    var emptyPayLoad = {}
-                    return $http.post(extractUrl, emptyPayLoad);
-                }
+                    var extractUrl = urlBase + "/" + jobId;
+                    var emptyPayLoad = {};
+                    return $http.put(extractUrl, emptyPayLoad);
+                };
+
+                /**
+                 * Extract data from all jobs.
+                 *
+                 * This service analyse the job content and extract specific information.
+                 * @param jobId affected job id.
+                 * @returns {HttpPromise}
+                 */
+                jobServices.extractAllData = function () {
+                    var extractUrl = urlBase ;
+                    var emptyPayLoad = {};
+                    return $http.put(extractUrl, emptyPayLoad);
+                };
 
                 /**
                  * Delete job by id.

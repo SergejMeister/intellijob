@@ -19,7 +19,6 @@ angular.module('intelliJob')
             function ($http) {
 
                 var urlBase = "api/joblinks";
-                var apiJobDownload = "api/jobs"
                 var jobLinkServices = {};
 
                 /**
@@ -46,9 +45,9 @@ angular.module('intelliJob')
                  * @returns {HttpPromise}
                  */
                 jobLinkServices.downloadById = function (jobLinkId) {
-                    var downloadUrl = apiJobDownload + "/" + jobLinkId + "/download";
+                    var downloadUrl = urlBase + "/" + jobLinkId;
                     var emptyPayLoad = {};
-                    return $http.post(downloadUrl, emptyPayLoad);
+                    return $http.put(downloadUrl, emptyPayLoad);
                 };
 
                 /**
@@ -57,9 +56,8 @@ angular.module('intelliJob')
                  * @returns {HttpPromise}
                  */
                 jobLinkServices.downloadAll = function () {
-                    var downloadUrl = apiJobDownload + "/download";
                     var emptyPayLoad = {};
-                    return $http.post(downloadUrl, emptyPayLoad);
+                    return $http.put(urlBase, emptyPayLoad);
                 };
 
                 /**

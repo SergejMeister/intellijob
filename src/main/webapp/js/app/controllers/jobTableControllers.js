@@ -71,6 +71,20 @@ intelliJobControllers.controller(
                 /**
                  * download html content of given link.
                  */
+                $scope.extractAllData = function () {
+                    JobServices.extractAllData().success(function (response) {
+                        for (var i = 0; i < $scope.jobs.length; i++) {
+                            $scope.jobs[i].extracted = true;
+                        }
+                        $rootScope.success = "Extracted successfully!";
+                    }).error(function (error) {
+                        console.log(error);
+                    })
+                };
+
+                /**
+                 * download html content of given link.
+                 */
                 $scope.extractDataById = function (jobId) {
                     JobServices.extractDataById(jobId).success(function (response) {
                         for (var i = 0; i < $scope.jobs.length; i++) {

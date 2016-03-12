@@ -25,7 +25,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-public class JobServicesTest extends BaseWebServiceTester {
+public class JobLinkServicesTest extends BaseWebServiceTester {
 
     //public static final String PLACEHOLDER_JOBlINK_ID = "{jobLinkId}";
 
@@ -39,7 +39,7 @@ public class JobServicesTest extends BaseWebServiceTester {
         //String jobLinkId = "5568b2a044ae360321161380";
         //String url = Endpoints.JOBS_BY_JOBLINK_ID_DOWNLOAD.replace(PLACEHOLDER_JOBlINK_ID, jobLinkId);
         MvcResult result = mockMvc.perform(
-                MockMvcRequestBuilders.post(Endpoints.JOBS_DOWNLOAD)
+                MockMvcRequestBuilders.put(Endpoints.JOBLINKS)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())

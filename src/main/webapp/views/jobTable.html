@@ -31,6 +31,13 @@
                             items-per-page="jobTableNumPerPage"
                             ng-model="jobTableCurrentPage">
                 </uib-pagination>
+                <div class="dropdown pull-right" style="margin-top: 1.3em;">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Auctions
+                        <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" ng-click="extractAllData()">Extract</a></li>
+                    </ul>
+                </div>
                 <table class="table">
                     <thead>
                         <tr>
