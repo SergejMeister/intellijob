@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -117,6 +118,18 @@ public class JobServices extends BaseServices {
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void extractAllJobContents() throws Exception {
         jobDetailController.extractJobs();
+    }
+
+    /**
+     * Request to extract html content from all jobs.
+     */
+    @RequestMapping(value = Endpoints.JOBS, method = RequestMethod.PATCH)
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void updateExtractFlag(@RequestParam(value = "extracted") Boolean value) throws Exception {
+        if (value != null) {
+            List<Job> allJobs = jobController.findAll();
+            jobController.setExtractedFlag (allJobs, value);
+        }
     }
 
     /**

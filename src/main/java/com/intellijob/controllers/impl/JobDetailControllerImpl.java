@@ -202,7 +202,11 @@ public class JobDetailControllerImpl implements JobDetailController {
     @Override
     public List<JobDetail> extractJobDetailAndSave(List<Job> jobs) {
         List<JobDetail> result = new ArrayList<>();
+        int extractCounter = jobs.size();
+        LOG.info("{} job contents should be extracted! ", extractCounter);
         for (Job job : jobs) {
+            LOG.info("Extraction process start .........", extractCounter);
+            extractCounter--;
             JobDetail jobDetail = extractJobDetail(job);
             JobDetail similarityJob = jobDetailRepository.findByContentHash(jobDetail.getContentHash());
             if (similarityJob == null) {
@@ -214,6 +218,7 @@ public class JobDetailControllerImpl implements JobDetailController {
                 }
                 createIndex(jobDetail);
             } else {
+                LOG.info("Job content exists and should be overwritten!");
                 JobDetail mergedJobDetail = mergeJobDetails(jobDetail, similarityJob);
                 jobDetailRepository.save(mergedJobDetail);
                 result.add(mergedJobDetail);
@@ -221,6 +226,7 @@ public class JobDetailControllerImpl implements JobDetailController {
                 esJobDetailRepository.delete(jobDetail.getId());
                 createIndex(mergedJobDetail);
             }
+            LOG.info("Extraction process of one job (id={}) is finished. Rest - {}", jobDetail.getId(), extractCounter);
         }
         jobController.setExtractedFlag(jobs, Boolean.TRUE);
         return result;
