@@ -188,6 +188,24 @@ intelliJobControllers.controller(
                     $scope.showKnowledgeTree = newKnowledgeTreeState;
                 };
 
+                $scope.createFullName = function (firstName, secondName) {
+                    var isFirstName = firstName != null && firstName.length > 0;
+                    var isSecondName = secondName != null && secondName.length > 0;
+                    if (isFirstName && isSecondName) {
+                        return firstName + "-" + secondName;
+                    }
+
+                    if (isFirstName && !isSecondName) {
+                        return firstName;
+                    }
+
+                    if (!isFirstName && isSecondName) {
+                        return secondName;
+                    }
+
+                    return "";
+                };
+
                 /**
                  * Save user data.
                  */
@@ -200,7 +218,8 @@ intelliJobControllers.controller(
                     userData.languages = $scope.userLanguages;
                     UserServices.updateUser(userData).success(function (response) {
                         $rootScope.success = response.message;
-                        $cookieStore.put('user', userData);
+                        userData.profileData.fullName = $scope.createFullName(userData.profileData.firstName, userData.profileData.secondName);
+                        $rootScope.setGlobalUserData(userData);
                         $scope.readonly = true;
                     }).error(function (error) {
                         console.log(error);

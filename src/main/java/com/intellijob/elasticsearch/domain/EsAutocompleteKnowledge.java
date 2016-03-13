@@ -54,18 +54,6 @@ public class EsAutocompleteKnowledge extends EsBaseAutocomplete {
     protected String nameSimple;
 
     /**
-     * Use simple index analyze for suggestion query.
-     */
-    @Field(
-            type = FieldType.String,
-            index = FieldIndex.analyzed,
-            searchAnalyzer = "ngram_analyzer",
-            indexAnalyzer = "ngram_analyzer",
-            store = true
-    )
-    protected String nameNgram;
-
-    /**
      * Thi field is required to create an index for autocomplete service.
      */
     @CompletionField(payloads = true)
@@ -86,7 +74,6 @@ public class EsAutocompleteKnowledge extends EsBaseAutocomplete {
         setName(name);
         if (withSuggest) {
             setNameSimple(name);
-            setNameNgram(name);
             Set<String> inputs = new HashSet<>();
             inputs.add(name);
 
@@ -133,13 +120,5 @@ public class EsAutocompleteKnowledge extends EsBaseAutocomplete {
 
     public void setNameSimple(String nameSimple) {
         this.nameSimple = nameSimple;
-    }
-
-    public String getNameNgram() {
-        return nameNgram;
-    }
-
-    public void setNameNgram(String nameNgram) {
-        this.nameNgram = nameNgram;
     }
 }

@@ -47,7 +47,7 @@ intelliJobControllers.controller(
                 JobDetailServices.getViewModel().success(function (response) {
                     $scope.words = $scope.createTagClouds(response.userSkills);
                     $scope.user = response.userData;
-                    $scope.readonly = $scope.user.id == null;
+                    $scope.readonly = $scope.user.userId == null;
                     $scope.searchEngine = $scope.user.profileData.searchEngine;
                     $scope.switchSearchEngine($scope.searchEngine);
                     $scope.searchData = response.userData.simpleSearchField;

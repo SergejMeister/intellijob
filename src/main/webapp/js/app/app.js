@@ -119,23 +119,33 @@ intelliJob.config([
         }
     });
 
+    $rootScope.setGlobalUserData = function (user) {
+        var globalUserObj = {};
+        globalUserObj.userId = user.userId;
+        globalUserObj.profileData = {};
+        globalUserObj.profileData.firstName = user.profileData.firstName;
+        globalUserObj.profileData.secondName = user.profileData.secondName;
+        globalUserObj.profileData.fullName = user.profileData.fullName;
+        $rootScope.globalUser = globalUserObj;
+        $cookieStore.put("user", globalUserObj);
+    };
+
+    $rootScope.isUserValid = function () {
+        return $rootScope.globalUser !== undefined && $rootScope.globalUser.userId !== undefined && $rootScope.globalUser.userId !== null;
+    };
+
     $rootScope.$on('$routeChangeSuccess', function () {
         /* Try getting valid user from cookie*/
         $rootScope.globalUser = $cookieStore.get('user');
         if (!$rootScope.isUserValid()) {
             //user not valid, request getUser
             UserServices.getUser().success(function (response) {
-                $rootScope.globalUser = response;
-                $cookieStore.put("user", $rootScope.globalUser);
+                setGlobalUserData(response);
             }).error(function (error) {
                 $rootScope.error = status + ": " + error.data.message;
             });
         }
     });
-
-    $rootScope.isUserValid = function () {
-        return $rootScope.globalUser !== undefined && $rootScope.globalUser.userId !== undefined && $rootScope.globalUser.userId !== null;
-    };
 
     console.log($rootScope);
 });
