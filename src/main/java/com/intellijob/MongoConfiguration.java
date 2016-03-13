@@ -42,9 +42,8 @@ import org.springframework.boot.autoconfigure.mongo.MongoProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -162,16 +161,17 @@ public class MongoConfiguration extends MongoAutoConfiguration {
      * Import collection skill_categories.
      */
     private void loadCollectionSkillCategories(MongoClient mongoClient) {
+
+        InputStream inputStream = Thread.currentThread().getContextClassLoader()
+                .getResourceAsStream("imports/skills_categories.json");
+
         String collectionName = "skill_categories";
         try {
             LOG.info("LOAD {} DATA ....................................", collectionName);
-            URL skillCategoriesURL = Thread.currentThread().getContextClassLoader()
-                    .getResource("imports/skills_categories.json");
-
             DBCollection col = mongoClient.getDB(this.properties.getDatabase()).getCollection(collectionName);
 
             List<Map<String, Object>> categories =
-                    new ObjectMapper().readValue(new File(skillCategoriesURL.getFile()), TypeFactory
+                    new ObjectMapper().readValue(inputStream, TypeFactory
                             .defaultInstance().constructCollectionType(List.class, HashMap.class));
 
             for (Map<String, Object> category : categories) {
@@ -191,14 +191,13 @@ public class MongoConfiguration extends MongoAutoConfiguration {
     private void loadSkillsData(MongoClient mongoClient, String jsonFile, String collectionName) {
         try {
             LOG.info("LOAD {} DATA .........................................", collectionName);
-            URL jsonUrl = Thread.currentThread().getContextClassLoader()
-                    .getResource("imports/" + jsonFile);
-
+            InputStream inputStream = Thread.currentThread().getContextClassLoader()
+                    .getResourceAsStream("imports/" + jsonFile);
             DBCollection col = mongoClient.getDB(this.properties.getDatabase()).getCollection(collectionName);
 
             TypeReference<HashMap<String, Object>> typeRef = new TypeReference<HashMap<String, Object>>() {
             };
-            Map<String, Object> mapData = new ObjectMapper().readValue(new File(jsonUrl.getFile()), typeRef);
+            Map<String, Object> mapData = new ObjectMapper().readValue(inputStream, typeRef);
 
             setObjectIdRecursive(mapData);
             DBObject dbObject = new BasicDBObject(mapData);
