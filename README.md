@@ -20,7 +20,7 @@ Uses jobs metadata to find out the best matching job offer!
 * cd intellijob/ && mvn clean install
 
 ###Run
-* java -jar target/intellijob-1.0.0.jar
+* java -jar target/intellijob-1.2.0.jar
 
 
 
