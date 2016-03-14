@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<!--
+  ~ Copyright 2015 Sergej Meister
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~  http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~  Unless required by applicable law or agreed to in writing, software
+  ~  distributed under the License is distributed on an "AS IS" BASIS,
+  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<div name="userForm" class="form-horizontal" role="form">
+
+    <h1>Benutzerdaten</h1>
+
+    <div id="user-profile">
+        <fieldset>
+            <legend class="scheduler-border">Benutzerprofile</legend>
+            <div class="input-group">
+                <div class="col-sm-6">
+                    <label for="firstname">Vorname</label>
+                    <input id="firstname" class="form-control input-group-lg reg_name" type="text" name="firstName"
+                           ng-model="user.profileData.firstName" placeholder="Vorname" ng-readonly="readonly">
+                </div>
+                <div class="col-sm-6">
+                    <label for="lastname">Nachname</label>
+                    <input id="lastname" class="form-control input-group-lg reg_name" type="text" name="lastName"
+                           ng-model="user.profileData.secondName" placeholder="Nachname" ng-readonly="readonly">
+                </div>
+            </div>
+            <br>
+
+            <div class="input-group">
+                <div class="col-sm-8">
+                    <label for="mailSync">Letzte Mail Synchronesierung</label>
+                    <input id="mailSync" class="form-control input-group-lg reg_name"
+                           value="{{user.profileData.lastMailSyncDate |date:'dd.MM.yyyy HH:mm:ss'}}" readonly>
+                </div>
+            </div>
+            <br>
+
+            <div class="input-group">
+                <div class="col-sm-5">
+                    <label for="education-level">Höchster Bildungsstand</label>
+                    <select class="form-control" id="education-level"
+                            ng-disabled="readonly"
+                            ng-model="user.profileData.selectedEducationLevel"
+                            ng-options="educationLevel for educationLevel in educationLevels">
+                    </select>
+                </div>
+                <div class="col-sm-5">
+                    <label for="education-description">Abschlussbezeichnung</label>
+                    <input id="education-description" class="form-control input-group-lg reg_name" type="text"
+                           name="lastName"
+                           ng-model="user.profileData.selectedEducationDescription" placeholder="Abschlussbezeichnung"
+                           ng-readonly="readonly">
+                </div>
+            </div>
+            <br>
+
+            <div class="input-group">
+                <div class="col-sm-6">
+                    <label for="praxis-level">Aktuellen Berufsstand</label>
+                    <select class="form-control" id="praxis-level"
+                            ng-disabled="readonly"
+                            ng-model="user.profileData.selectedPraxisLevel"
+                            ng-options="praxisLevel for praxisLevel in praxisLevels">
+                    </select>
+                </div>
+                <div class="col-sm-6">
+                    <label for="praxis-experience">Praktische Erfahrung (Jahre)</label>
+                    <input id="praxis-experience" class="form-control input-group-lg reg_name" type="number"
+                           ng-model="user.profileData.selectedPraxisExperience" placeholder="Praktische Erfahrung"
+                           ng-readonly="readonly">
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <br>
+
+    <div id="user-search-engine">
+        <fieldset>
+            <legend class="scheduler-border">Suchfilter</legend>
+            <div class="input-group">
+                <div class="col-sm-20">
+                    <label for="noSearch">
+                        Keine
+                        <input id="noSearch" type="radio" ng-model='searchEngine' value='UNKNOWN'
+                               ng-change="changeSearchEngine(searchEngine)" ng-disabled='readonly'/>
+                    </label>
+                    <label for="radioSimpleSearch">
+                        Einfache Suche
+                        <input id="radioSimpleSearch" type="radio" ng-model='searchEngine' value='SIMPLE'
+                               ng-change="changeSearchEngine(searchEngine)" ng-disabled='readonly'/>
+                    </label>
+                    <label for='radioComplexSearch'>
+                        Erweiterte Suche
+                        <input id='radioComplexSearch' type='radio' ng-model='searchEngine' value='COMPLEX'
+                               ng-change='changeSearchEngine(searchEngine)' ng-disabled='readonly'/>
+                    </label>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <br>
+
+    <div id="simpleSearchForm" ng-show="showSimpleSearchDialog">
+        <fieldset>
+            <legend class="scheduler-border">Suche nach</legend>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-group-lg reg_name"
+                       ng-model="user.simpleSearchField" ng-readonly='readonly'>
+            </div>
+        </fieldset>
+    </div>
+
+    <div id=complexSearchForm" ng-show="showComplexSearchDialog">
+        <fieldset>
+            <legend class="scheduler-border">Persönliche Fähigkeiten</legend>
+            <uib-accordion close-others="false">
+                <!--Job skills -->
+                <uib-accordion-group heading="Kenntnisse und Fertigkeiten" is-open="panelStatus.isKnowledgeSkillOpen"
+                                     is-disabled="panelStatus.isKnowledgeSkillDisabled">
+                    <p ng-if="userSkillStatus.isKnowledgeEmpty">Es wurden noch keine Kenntnisse und Fertigkeiten
+                        ausgewählt.</p>
+
+                    <div ng-repeat="userKnowledge in userKnowledges">
+                        <div class="input-group margin-bottom-1">
+                                    <span class="tag label label-info">
+                                        <span>{{userKnowledge.skillData.name}}</span>
+                                        <a class=tag-addon" ng-click='deleteKnowledge($index)' ng-hide="readonly"><i
+                                                class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
+                                    </span>
+                            <span class='star-rating' star-rating rating-value='userKnowledge.rating' data-max='5'
+                                  on-rating-selected='rateFunction(rating)' star-disabled="readonly"></span>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div uib-collapse="readonly">
+                        <div class='row'>
+                            <div class='col-md-2'>
+                                <angucomplete id="ex1"
+                                              placeholder="Kenntnisse und Fertigkeiten"
+                                              pause="100"
+                                              selectedobject="selectedKnowledge"
+                                              url="api/elastic/autocomplete/knowledge/name/"
+                                              searchfields="name"
+                                              titlefield="name"
+                                              minlength="1"
+                                              inputclass="form-control form-control-small"></angucomplete>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class='btn btn-info'
+                                        data-ng-click='addKnowledge(selectedKnowledge)'>
+                                    Hinzufügen
+                                </button>
+                                <button type='button' class='btn btn-info pull' ng-hide="showKnowledgeTree"
+                                        ng-click="setKnowledgeTreeState(true)">
+                                    Auswählen
+                                </button>
+                                <button type='button' class='btn btn-info pull' ng-show="showKnowledgeTree"
+                                        ng-click="setKnowledgeTreeState(false)">
+                                    Abbrechen
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class='row'>
+                        <div uib-collapse="!showKnowledgeTree">
+                            <div class="span5 article-tree">
+                                <div>
+                                    <div class="tree well">
+                                        <ul>
+                                            <skill-tree ng-model="supportedKnowledges"
+                                                        selected="userKnowledges" expanded="false"></skill-tree>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </uib-accordion-group>
+
+                <!--Personal strengths menu-->
+                <uib-accordion-group heading="Persönliche Stärken" is-open="panelStatus.isPersonSkillOpen"
+                                     is-disabled="panelStatus.isPersonSkillDisabled">
+                    <p ng-if="userSkillStatus.isPersonEmpty">Es wurden noch keine persönlichen Stärken ausgewählt.</p>
+
+                    <div ng-repeat="personalStrength in userPersonalStrengths">
+                        <div class="input-group margin-bottom-1">
+                                    <span class="tag label label-info">
+                                        <span>{{personalStrength.skillData.name}}</span>
+                                        <a class=tag-addon" ng-click='deletePersonalStrength($index)'
+                                           ng-hide="readonly"><i
+                                                class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
+                                    </span>
+                            <span class='star-rating' star-rating rating-value='personalStrength.rating' data-max='5'
+                                  on-rating-selected='rateFunction(rating)'></span>
+                        </div>
+                    </div>
+
+                    <div uib-collapse="readonly">
+                        <div class="span5 article-tree">
+                            <div>
+                                <div class="tree well">
+                                    <ul>
+                                        <skill-tree ng-model="supportedPersonalStrengths"
+                                                    selected="userPersonalStrengths" expanded="false"></skill-tree>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </uib-accordion-group>
+
+                <!--Languages Menu-->
+                <uib-accordion-group heading="Sprachkenntnisse" is-open="panelStatus.isLanguageSkillOpen"
+                                     is-disabled="panelStatus.isLanguageSkillDisabled">
+                    <p ng-if="userSkillStatus.isLanguageEmpty">Es wurden noch keine Sprachen ausgewählt.</p>
+
+                    <div ng-repeat="userLanguage in userLanguages">
+                        <div class="input-group margin-bottom-1">
+                                    <span class="tag label label-info">
+                                        <span>{{userLanguage.skillData.name}}</span>
+                                        <a class=tag-addon" ng-click='deleteLanguage($index)' ng-hide="readonly"><i
+                                                class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
+                                    </span>
+                            <span class='star-rating' star-rating rating-value='userLanguage.rating' data-max='5'
+                                  on-rating-selected='rateFunction(rating)'></span>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div uib-collapse="readonly">
+                        <div class='row'>
+                            <div class='col-md-2'>
+                                <angucomplete id="ex1"
+                                              placeholder="Sprache"
+                                              pause="100"
+                                              selectedobject="selectedLanguage"
+                                              url="api/elastic/autocomplete/language/name/"
+                                              searchfields="name"
+                                              titlefield="name"
+                                              minlength="1"
+                                              inputclass="form-control form-control-small"></angucomplete>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class='btn btn-info'
+                                        data-ng-click='addLanguage(selectedLanguage)'>
+                                    Hinzufügen
+                                </button>
+                                <button type='button' class='btn btn-info pull'>
+                                    Auswählen
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </uib-accordion-group>
+            </uib-accordion>
+        </fieldset>
+    </div>
+    <br>
+
+    <div class="actions">
+        <div class="col-sm-20 margin-bottom-1">
+            <button class="btn btn-info pull" ng-hide="readonly" ng-click="save(user)">Speichern</button>
+            <button class="btn btn-info pull" ng-hide="readonly" ng-click="setReadOnlyMode(true)">Abbrechen</button>
+            <button class="btn btn-info pull" ng-show="readonly" ng-click="setReadOnlyMode(false)">Ändern</button>
+        </div>
+    </div>
+</div>
