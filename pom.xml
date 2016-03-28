@@ -47,6 +47,7 @@
         <log.path>target/log</log.path>
         <start-class>com.intellijob.ApplicationConfig</start-class>
         <version.spring.mongodb>1.8.0.RELEASE</version.spring.mongodb>
+        <docker.image.prefix>civis</docker.image.prefix>
         <version.civis>1.2.0</version.civis>
     </properties>
 
@@ -262,6 +263,22 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.2.3</version>
+                <configuration>
+                    <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+                    <dockerDirectory>src/main/docker</dockerDirectory>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
             </plugin>
         </plugins>
     </build>
