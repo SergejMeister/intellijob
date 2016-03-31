@@ -251,30 +251,27 @@ public class MailReceiverBean implements MailReceiver {
     }
 
     private SearchTerm createSearchTermForFromsAndDate(List<String> froms, Boolean or, Date date) {
-        SearchTerm term = createSearchTermForFroms(froms, or);
-        ReceivedDateTerm dateTerm = new ReceivedDateTerm(ComparisonTerm.GE, date);
-        term = new AndTerm(term, dateTerm);
-
-        return term;
+        SearchTerm fromTerm = createSearchTermForFroms(froms, or);
+        SearchTerm dateTerm = new ReceivedDateTerm(ComparisonTerm.GT, date);
+        return new AndTerm(fromTerm, dateTerm);
     }
 
     private SearchTerm createSearchTermForFroms(List<String> froms, Boolean or) {
-        SearchTerm term = null;
-        for (String from : froms) {
-            FromStringTerm fromTerm = new FromStringTerm(from);
-            if (term != null) {
-                if (or) {
-                    term = new OrTerm(term, fromTerm);
-                } else {
-                    term = new AndTerm(term, fromTerm);
-                }
-            } else {
-                term = fromTerm;
-            }
+        if (froms.size() == 1) {
+            return new FromStringTerm(froms.get(0));
         }
 
-        return term;
+        SearchTerm[] allFroms = new FromStringTerm[froms.size()];
+        for (int i = 0; i < froms.size(); i++) {
+            allFroms[i] = new FromStringTerm(froms.get(i));
+        }
+
+        if (or) {
+            return new OrTerm(allFroms);
+        }
+        return new AndTerm(allFroms);
     }
+
 
     /**
      * Can contain messages.
