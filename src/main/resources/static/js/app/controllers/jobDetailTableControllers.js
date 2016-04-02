@@ -98,7 +98,7 @@ intelliJobControllers.controller(
                             }
                         }
                         if (newReadState) {
-                            $rootScope.success = 'Mark as read!';
+                            $rootScope.success = 'Arbeitsangebot wurde als gelesen markiert!';
                         } else {
                             $rootScope.success = $rootScope.success = 'Mark as unread!';
                         }
@@ -121,7 +121,7 @@ intelliJobControllers.controller(
                             $scope.jobDetails[i].read = newReadState;
                         }
                         if (newReadState) {
-                            $rootScope.success = 'All mark as read!';
+                            $rootScope.success = 'Alle Arbeitsangebote wurden als gelesen markiert!';
                         } else {
                             $rootScope.success = $rootScope.success = 'All mark as unread!';
                         }
@@ -149,7 +149,7 @@ intelliJobControllers.controller(
                             alert("Something gone wrong");
                         }
                         $scope.jobDetails.splice(index, 1);
-                        $rootScope.success = "Deleted successfully! (Id - " + jobDetailId + " )";
+                        $rootScope.success = "Arbeitsdaten wurden erfolgreich gelöscht! (Id - " + jobDetailId + " )";
                     }).error(function (error) {
                         console.log(error);
                     });

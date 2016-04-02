@@ -66,7 +66,7 @@ intelliJobControllers.controller(
                         for (var i = 0; i < $scope.jobLinks.length; i++) {
                             if ($scope.jobLinks[i].jobLinkId === response.jobLinkId) {
                                 $scope.jobLinks[i].downloaded = true;
-                                $rootScope.success = "Downloaded successfully!";
+                                $rootScope.success = "Arbeitsangebot wurde erfolgreich heruntergeladen!";
                                 break;
                             }
                         }
@@ -83,7 +83,7 @@ intelliJobControllers.controller(
                         for (var i = 0; i < $scope.jobLinks.length; i++) {
                                 $scope.jobLinks[i].downloaded = true;
                         }
-                        $rootScope.success = "Downloaded successfully!";
+                        $rootScope.success = "Arbeitsangebot wurde erfolgreich heruntergeladen!";
                     }).error(function (error) {
                         console.log(error);
                     })
@@ -107,7 +107,7 @@ intelliJobControllers.controller(
                             alert("Something gone wrong");
                         }
                         $scope.jobLinks.splice(index, 1);
-                        $rootScope.success = "Deleted successfully! (Id - " + deletedJobLinkId + " )";
+                        $rootScope.success = "Arbeitsangebot wurde erfolgreich gelöscht! (Id - " + deletedJobLinkId + " )";
                     }).error(function (error) {
                         console.log(error);
                     });

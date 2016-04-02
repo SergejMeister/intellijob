@@ -84,7 +84,7 @@ intelliJobControllers.controller(
                             alert("Something gone wrong");
                         }
                         $scope.mails.splice(index, 1);
-                        $rootScope.success = "Deleted successfully! (Id - " + deletedMailId + " )";
+                        $rootScope.success = "E-Mail wurde erfolgreich gelöscht! (Id - " + deletedMailId + " )";
                     }).error(function (error) {
                         console.log(error);
                     });

@@ -17,40 +17,44 @@
 <!-- View - Image search content-->
 <form name="mailSearchForm" class="form" ng-controller="MailCtrl" ng-submit="search(mailUsername, mailPassword)">
 
-    <h1>Hello to IntelliJob!</h1>
+    <h1>Willkommen zu IntelliJob!</h1>
 
-    <h3>This service:</h3>
+    <h3>Das Programm:</h3>
     <ul>
-        <li>Scans your mail box to find out mails from jobs portal (monster.de, stepstone.de)!</li>
-        <li>Parses mail context to determine jobs metadata (contact person, mail, address, requirements, skills etc.)!
+        <li>Sucht in Ihrem E-Mail Account nach E-Mails von Jobportall (monster.de, stepstone.de)!</li>
+        <li>Speichert den Inhalt eines Arbeitsangebots in MongoDB und extrahiert die Kontakperson, runter und Parses
+            mail context to determine jobs metadata (contact person, mail, address, requirements, skills etc.)!
         </li>
-        <li>Use user profile skills ranking to find out the best matching job offer!</li>
+        <li>Extrahiert die Arbeitsangebotsdaten wie Berufsbezeichnung, Kontaktperson und Kontaktdaten</li>
+        <li>Setzt Elasticsearch an, um alle Arbeitsangebote mit German-Analyzer zu indexieren</li>
+        <li>Ermöglicht die Bewertung von eigenen Fähigkeiten und Qualifikationen</li>
+        <li>Bietet sowohl eine Volltextsuche als auch die Suche nach bewerteten Fähigkeiten und Qualifikationen an</li>
     </ul>
 
     <div id="searchMail">
         <fieldset>
-            <h2>Mail access data</h2>
+            <h2>E-Mail Zugangsdaten</h2>
 
             <div class="form-group">
-                <label for="mail-account">Select mail account by:</label>
+                <label for="mail-account">E-Mail auswählen:</label>
                 <select class="form-control" id="mail-account" ng-model="selectedMailAccount"
                         ng-options="mailAccount.name for mailAccount in mailAccounts">
                 </select>
             </div>
             <div class="form-group">
-                <label for="mail-username">Username:</label>
+                <label for="mail-username">Benutzername:</label>
                 <input type="text" class="form-control" id="mail-username" ng-model="mailUsername" required>
             </div>
             <div class="form-group">
-                <label for="mail-password">Password:</label>
+                <label for="mail-password">Passwort:</label>
                 <input type="password" class="form-control" id="mail-password" ng-model="mailPassword" required>
             </div>
         </fieldset>
         <div class="actions">
-            <button class="btn btn-info pull" type="submit" ng-show="!isSubmitSuccess">Search</button>
+            <button class="btn btn-info pull" type="submit" ng-show="!isSubmitSuccess">Suchen</button>
         </div>
         <div class="actions">
-            <a class="btn btn-info pull" ng-show="isSubmitSuccess" href="intellijob/mails">Show mails</a>
+            <a class="btn btn-info pull" ng-show="isSubmitSuccess" href="intellijob/mails">E-Mails zeigen</a>
         </div>
     </div>
 </form>

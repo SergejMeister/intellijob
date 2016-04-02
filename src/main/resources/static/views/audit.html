@@ -18,26 +18,26 @@
 <div class="row">
     <div class="col-md-9">
         <fieldset>
-            <h2>Current audit data</h2>
+            <h2>Aktuelle Audit-Daten</h2>
 
             <div class="form-group">
-                <label class="col-md-20">Count-jobDetails:</label>
+                <label class="col-md-20">Anzahl von allen Arbeitsanboten:</label>
                 <label>{{currentAuditData.countJobDetails}}</label>
             </div>
             <div class="form-group">
-                <label class="col-md-20">Count-contact found:</label>
+                <label class="col-md-20">Anzahl von gefundenen Kontaktpersonen:</label>
                 <label>{{currentAuditData.countNotEmptyContactPersons}}</label>
             </div>
             <div class="form-group">
-                <label class="col-md-20">Count-contact empty: </label>
+                <label class="col-md-20">Anzahl von nicht gefundenen Kontaktpersonen: </label>
                 <label>{{currentAuditData.countEmptyContactPersons}}</label>
             </div>
             <div class="form-group">
-                <label class="col-md-20">Count-address found:</label>
+                <label class="col-md-20">Anzahl von gefundenen Adressen:</label>
                 <label>{{currentAuditData.countNotEmptyAddress}}</label>
             </div>
             <div class="form-group">
-                <label class="col-md-20">Count-address empty:</label>
+                <label class="col-md-20">Anzahl von nicht gefundenen Adressen:</label>
                 <label>{{currentAuditData.countEmptyAddress}}</label>
             </div>
 
@@ -46,7 +46,7 @@
             </div>
         </fieldset>
         <fieldset>
-            <h2>History audit data</h2>
+            <h2>Zuletzt gespeicherte Audit-Daten</h2>
 
             <uib-pagination class="pagination-sm" boundary-links="true" rotate="false"
                         ng-show="showPagination"
@@ -59,12 +59,12 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Count-jobDetails</th>
-                        <th>Count-contact found</th>
-                        <th>Count-contact empty</th>
-                        <th>Count-address found</th>
-                        <th>Count-address empty</th>
-                        <th>created</th>
+                        <th>Anzahl von allen Arbeitsanboten</th>
+                        <th>Anzahl von gefundenen Kontaktdaten</th>
+                        <th>Anzahl von nicht gefundenen Kontaktdaten</th>
+                        <th>Anzahl von gefundenen Adressen</th>
+                        <th>Anzahl von nicht gefundenen Adressen</th>
+                        <th>Datum</th>
                         <th></th>
                         <th></th>
                     </tr>

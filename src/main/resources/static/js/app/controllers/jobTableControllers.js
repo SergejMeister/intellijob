@@ -76,7 +76,7 @@ intelliJobControllers.controller(
                         for (var i = 0; i < $scope.jobs.length; i++) {
                             $scope.jobs[i].extracted = true;
                         }
-                        $rootScope.success = "Extracted successfully!";
+                        $rootScope.success = "Daten wurden erfolgreich extrahiert!";
                     }).error(function (error) {
                         console.log(error);
                     })
@@ -90,7 +90,7 @@ intelliJobControllers.controller(
                         for (var i = 0; i < $scope.jobs.length; i++) {
                             if ($scope.jobs[i].jobId === response.jobId) {
                                 $scope.jobs[i].extracted = true;
-                                $rootScope.success = "Extracted successfully!";
+                                $rootScope.success = "Daten wurden erfolgreich extrahiert!";
                                 break;
                             }
                         }

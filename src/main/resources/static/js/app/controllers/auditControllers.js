@@ -70,7 +70,7 @@ intelliJobControllers.controller(
                         var newHistoryAuditData = response;
                         $scope.historyAuditData.push(newHistoryAuditData);
                         $scope.auditHistoryTableTotalItems = $scope.auditHistoryTableTotalItems + 1;
-                        $rootScope.success = "Current audit data is added to the history!";
+                        $rootScope.success = "Neue Audit-Daten wurden erfolgreich gespeichert!";
                     }).error(function (error) {
                         console.log(error);
                     });
@@ -94,7 +94,7 @@ intelliJobControllers.controller(
                             alert("Something gone wrong");
                         }
                         $scope.historyAuditData.splice(index, 1);
-                        $rootScope.success = "Deleted successfully! (Id - " + auditId + " )";
+                        $rootScope.success = "Alte Audit-Daten wurden erfolgreich gelöscht! (Id - " + auditId + " )";
                     }).error(function (error) {
                         console.log(error);
                     });
