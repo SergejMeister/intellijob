@@ -15,90 +15,88 @@
   ~ limitations under the License.
   -->
 
-<div class="row">
-    <div class="col-md-9">
-        <fieldset>
-            <h2>Aktuelle Audit-Daten</h2>
+<div class="fullWith">
+    <fieldset>
+        <h2>Aktuelle Audit-Daten</h2>
 
-            <div class="form-group">
-                <label class="col-md-20">Anzahl von allen Arbeitsanboten:</label>
-                <label>{{currentAuditData.countJobDetails}}</label>
-            </div>
-            <div class="form-group">
-                <label class="col-md-20">Anzahl von gefundenen Kontaktpersonen:</label>
-                <label>{{currentAuditData.countNotEmptyContactPersons}}</label>
-            </div>
-            <div class="form-group">
-                <label class="col-md-20">Anzahl von nicht gefundenen Kontaktpersonen: </label>
-                <label>{{currentAuditData.countEmptyContactPersons}}</label>
-            </div>
-            <div class="form-group">
-                <label class="col-md-20">Anzahl von gefundenen Adressen:</label>
-                <label>{{currentAuditData.countNotEmptyAddress}}</label>
-            </div>
-            <div class="form-group">
-                <label class="col-md-20">Anzahl von nicht gefundenen Adressen:</label>
-                <label>{{currentAuditData.countEmptyAddress}}</label>
-            </div>
+        <div class="form-group">
+            <label class="col-md-20">Anzahl von allen Arbeitsanboten:</label>
+            <label>{{currentAuditData.countJobDetails}}</label>
+        </div>
+        <div class="form-group">
+            <label class="col-md-20">Anzahl von gefundenen Kontaktpersonen:</label>
+            <label>{{currentAuditData.countNotEmptyContactPersons}}</label>
+        </div>
+        <div class="form-group">
+            <label class="col-md-20">Anzahl von nicht gefundenen Kontaktpersonen: </label>
+            <label>{{currentAuditData.countEmptyContactPersons}}</label>
+        </div>
+        <div class="form-group">
+            <label class="col-md-20">Anzahl von gefundenen Adressen:</label>
+            <label>{{currentAuditData.countNotEmptyAddress}}</label>
+        </div>
+        <div class="form-group">
+            <label class="col-md-20">Anzahl von nicht gefundenen Adressen:</label>
+            <label>{{currentAuditData.countEmptyAddress}}</label>
+        </div>
 
-            <div class="actions">
-                <button class="btn btn-info pull" ng-click="saveCurrentAuditData()">save</button>
-            </div>
-        </fieldset>
-        <fieldset>
-            <h2>Zuletzt gespeicherte Audit-Daten</h2>
+        <div class="actions">
+            <button class="btn btn-info pull" ng-click="saveCurrentAuditData()">Speichern</button>
+        </div>
+    </fieldset>
+    <fieldset>
+        <h2>Zuletzt gespeicherte Audit-Daten</h2>
 
-            <uib-pagination class="pagination-sm" boundary-links="true" rotate="false"
+        <uib-pagination class="pagination-sm" boundary-links="true" rotate="false"
                         ng-show="showPagination"
                         max-size="auditHistoryTableMaxPage"
                         total-items="auditHistoryTableTotalItems"
                         items-per-page="auditHistoryTableNumPerPage"
                         ng-model="auditHistoryTableCurrentPage">
-            </uib-pagination>
-            <table class="table table-condensed table-bordered">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Anzahl von allen Arbeitsanboten</th>
-                        <th>Anzahl von gefundenen Kontaktdaten</th>
-                        <th>Anzahl von nicht gefundenen Kontaktdaten</th>
-                        <th>Anzahl von gefundenen Adressen</th>
-                        <th>Anzahl von nicht gefundenen Adressen</th>
-                        <th>Datum</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="auditData in historyAuditData">
-                        <td>{{$index}}</td>
-                        <td>{{auditData.countJobDetails}}</td>
-                        <td>{{auditData.countNotEmptyContactPersons}}</td>
-                        <td>{{auditData.countEmptyContactPersons}}</td>
-                        <td>{{auditData.countNotEmptyAddress}}</td>
-                        <td>{{auditData.countEmptyAddress}}</td>
-                        <td><p ng-bind="auditData.createdDate | date:'dd.MM.yyyy HH:mm'"></td>
-                        <td>
-                            <a target="_blank" ng-click="showAuditHistory(auditData.id)">
-                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                            </a>
-                        </td>
-                        <td>
-                            <a target="_blank" ng-click="deleteAuditHistory(auditData.id)">
-                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                            </a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <uib-pagination class="pagination-sm" boundary-links="true" rotate="false"
+        </uib-pagination>
+        <table class="table table-condensed table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Anzahl von allen Arbeitsanboten</th>
+                    <th>Anzahl von gefundenen Kontaktdaten</th>
+                    <th>Anzahl von nicht gefundenen Kontaktdaten</th>
+                    <th>Anzahl von gefundenen Adressen</th>
+                    <th>Anzahl von nicht gefundenen Adressen</th>
+                    <th>Datum</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="auditData in historyAuditData">
+                    <td>{{$index}}</td>
+                    <td>{{auditData.countJobDetails}}</td>
+                    <td>{{auditData.countNotEmptyContactPersons}}</td>
+                    <td>{{auditData.countEmptyContactPersons}}</td>
+                    <td>{{auditData.countNotEmptyAddress}}</td>
+                    <td>{{auditData.countEmptyAddress}}</td>
+                    <td><p ng-bind="auditData.createdDate | date:'dd.MM.yyyy HH:mm'"></td>
+                    <td>
+                        <a target="_blank" ng-click="showAuditHistory(auditData.id)">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        </a>
+                    </td>
+                    <td>
+                        <a target="_blank" ng-click="deleteAuditHistory(auditData.id)">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <uib-pagination class="pagination-sm" boundary-links="true" rotate="false"
                         ng-show="showPagination"
                         max-size="auditHistoryTableMaxPage"
                         total-items="auditHistoryTableTotalItems"
                         items-per-page="auditHistoryTableNumPerPage"
                         ng-model="auditHistoryTableCurrentPage">
-            </uib-pagination>
+        </uib-pagination>
 
-        </fieldset>
-    </div>
+    </fieldset>
 </div>

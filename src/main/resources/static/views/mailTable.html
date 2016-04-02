@@ -15,64 +15,58 @@
   ~ limitations under the License.
   -->
 
-<div class="row">
-    <div class="col-md-9">
-        <div class="row">
-            <div class="col-md-12">
-                <h1>Alle E-Mails</h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <uib-pagination class="pagination-sm" boundary-links="true" rotate="false"
-                            ng-show="showPagination"
-                            max-size="mailTableMaxPage"
-                            total-items="mailTableTotalItems"
-                            items-per-page="mailTableNumPerPage"
-                            ng-model="mailTableCurrentPage">
-                </uib-pagination>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Von</th>
-                            <th>Betreff</th>
-                            <th>Type</th>
-                            <th>Versandsdatum</th>
-                            <th>Empfangsdatum</th>
-                            <th>Inhalt</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="mail in mails">
-                            <td>{{$index}}</td>
-                            <td>{{mail.sentAddress}}</td>
-                            <td>{{mail.subject}}</td>
-                            <td>{{mail.contentType}}</td>
-                            <td><p ng-bind="mail.sentDate | date:'dd.MM.yyyy HH:mm'"></td>
-                            <td><p ng-bind="mail.receivedDate | date:'dd.MM.yyyy HH:mm'"></td>
-                            <td>
-                                <a target="_blank" ng-click="showContext(mail.id)">
-                                    <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                                </a>
-                            </td>
-                            <td>
-                                <a target="_blank" ng-click="deleteMail(mail.id)">
-                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <uib-pagination class="pagination-sm" boundary-links="true" rotate="false"
-                            ng-show="showPagination"
-                            max-size="mailTableMaxPage"
-                            total-items="mailTableTotalItems"
-                            items-per-page="mailTableNumPerPage"
-                            ng-model="mailTableCurrentPage">
-                </uib-pagination>
-            </div>
+<div class="fullWith">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Alle E-Mails</h1>
         </div>
     </div>
+    <uib-pagination class="pagination-sm" boundary-links="true" rotate="false"
+                    ng-show="showPagination"
+                    max-size="mailTableMaxPage"
+                    total-items="mailTableTotalItems"
+                    items-per-page="mailTableNumPerPage"
+                    ng-model="mailTableCurrentPage">
+    </uib-pagination>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Von</th>
+                <th>Betreff</th>
+                <th>Type</th>
+                <th>Versandsdatum</th>
+                <th>Empfangsdatum</th>
+                <th>Inhalt</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="mail in mails">
+                <td>{{$index}}</td>
+                <td>{{mail.sentAddress}}</td>
+                <td>{{mail.subject}}</td>
+                <td>{{mail.contentType}}</td>
+                <td><p ng-bind="mail.sentDate | date:'dd.MM.yyyy HH:mm'"></td>
+                <td><p ng-bind="mail.receivedDate | date:'dd.MM.yyyy HH:mm'"></td>
+                <td>
+                    <a target="_blank" ng-click="showContext(mail.id)">
+                        <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                    </a>
+                </td>
+                <td>
+                    <a target="_blank" ng-click="deleteMail(mail.id)">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <uib-pagination class="pagination-sm" boundary-links="true" rotate="false"
+                    ng-show="showPagination"
+                    max-size="mailTableMaxPage"
+                    total-items="mailTableTotalItems"
+                    items-per-page="mailTableNumPerPage"
+                    ng-model="mailTableCurrentPage">
+    </uib-pagination>
 </div>
