@@ -25,9 +25,7 @@ import org.springframework.data.elasticsearch.annotations.FieldIndex;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import org.springframework.data.elasticsearch.core.completion.Completion;
 
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * This document represents the knowledge index of domain object <code>SkillNode</code> in elasticsearch.
@@ -37,21 +35,24 @@ public class EsAutocompleteKnowledge extends EsBaseAutocomplete {
 
     @Field(
             type = FieldType.String,
-            index = FieldIndex.not_analyzed
-    )
-    protected String name;
-
-    /**
-     * Use simple index analyze for suggestion query.
-     */
-    @Field(
-            type = FieldType.String,
             index = FieldIndex.analyzed,
             searchAnalyzer = "simple",
             indexAnalyzer = "simple",
             store = true
     )
-    protected String nameSimple;
+    protected String name;
+
+//    /**
+//     * Use simple index analyze for suggestion query.
+//     */
+//    @Field(
+//            type = FieldType.String,
+//            index = FieldIndex.analyzed,
+//            searchAnalyzer = "simple",
+//            indexAnalyzer = "simple",
+//            store = true
+//    )
+//    protected String nameSimple;
 
     /**
      * Thi field is required to create an index for autocomplete service.
@@ -73,20 +74,22 @@ public class EsAutocompleteKnowledge extends EsBaseAutocomplete {
         super(id);
         setName(name);
         if (withSuggest) {
-            setNameSimple(name);
-            Set<String> inputs = new HashSet<>();
-            inputs.add(name);
+            //setNameSimple(name);
+//            Set<String> inputs = new HashSet<>();
+//            inputs.add(name);
+//
+//            String plainName = name.replaceAll("[-()/.]", WHITESPACE_SEPARATOR);
+//            for (String value : plainName.split(COMMA_SEPARATOR)) {
+//                for (String input : value.split(WHITESPACE_SEPARATOR)) {
+//                    if (!input.isEmpty()) {
+//                        inputs.add(input);
+//                    }
+//                }
+//            }
 
-            String plainName = name.replaceAll("[-()/.]", WHITESPACE_SEPARATOR);
-            for (String value : plainName.split(COMMA_SEPARATOR)) {
-                for (String input : value.split(WHITESPACE_SEPARATOR)) {
-                    if (!input.isEmpty()) {
-                        inputs.add(input);
-                    }
-                }
-            }
-
-            this.suggestKnowledge = new Completion(inputs.toArray(new String[inputs.size()]));
+//            this.suggestKnowledge = new Completion(inputs.toArray(new String[inputs.size()]));
+            this.suggestKnowledge =
+                    new Completion(name.replaceAll("[-()/.]", WHITESPACE_SEPARATOR).split(WHITESPACE_SEPARATOR));
             Map<String, Object> payload = createPayload();
             this.suggestKnowledge.setPayload(payload);
         }
@@ -114,11 +117,11 @@ public class EsAutocompleteKnowledge extends EsBaseAutocomplete {
         this.name = name;
     }
 
-    public String getNameSimple() {
-        return nameSimple;
-    }
-
-    public void setNameSimple(String nameSimple) {
-        this.nameSimple = nameSimple;
-    }
+//    public String getNameSimple() {
+//        return nameSimple;
+//    }
+//
+//    public void setNameSimple(String nameSimple) {
+//        this.nameSimple = nameSimple;
+//    }
 }
