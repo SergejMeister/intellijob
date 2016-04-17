@@ -33,6 +33,7 @@ import com.intellijob.repository.skills.SkillLanguageRepository;
 import com.intellijob.repository.skills.SkillPersonalStrengthRepository;
 import org.elasticsearch.action.suggest.SuggestResponse;
 import org.elasticsearch.search.suggest.completion.CompletionSuggestion;
+import org.elasticsearch.search.suggest.completion.CompletionSuggestionBuilder;
 import org.elasticsearch.search.suggest.completion.CompletionSuggestionFuzzyBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
@@ -41,7 +42,9 @@ import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -212,28 +215,28 @@ public class SkillControllerImpl implements SkillController {
      */
     @Override
     public List<EsAutocompleteKnowledge> suggestKnowledge(String searchWord) {
-        return searchKnowledge(searchWord);
-//        CompletionSuggestionFuzzyBuilder completionSuggestionFuzzyBuilder =
-//                new CompletionSuggestionFuzzyBuilder(EsConstants.FIELD_SUGGEST_KNOWLEDGE).text(searchWord).field(
-//                        EsConstants.FIELD_SUGGEST_KNOWLEDGE).size(50);
-//
-//        SuggestResponse suggestResponse =
-//                elasticsearchTemplate.suggest(completionSuggestionFuzzyBuilder, EsAutocompleteKnowledge.class);
-//        CompletionSuggestion completionSuggestion =
-//                suggestResponse.getSuggest().getSuggestion(EsConstants.FIELD_SUGGEST_KNOWLEDGE);
-//        List<CompletionSuggestion.Entry.Option> options = completionSuggestion.getEntries().get(0).getOptions();
-//
-//        Set<String> ids = new HashSet<>();
-//        List<EsAutocompleteKnowledge> result = new ArrayList<>();
-//        for (CompletionSuggestion.Entry.Option option : options) {
-//            EsAutocompleteKnowledge esAutocompleteKnowledge = new EsAutocompleteKnowledge(option.getPayloadAsMap());
-//            if (!ids.contains(esAutocompleteKnowledge.getId())) {
-//                result.add(esAutocompleteKnowledge);
-//                ids.add(esAutocompleteKnowledge.getId());
-//            }
-//        }
-//
-//        return result;
+        //return searchKnowledge(searchWord);
+        CompletionSuggestionBuilder completionSuggestionFuzzyBuilder =
+                new CompletionSuggestionBuilder(EsConstants.FIELD_SUGGEST_KNOWLEDGE).text(searchWord).field(
+                        EsConstants.FIELD_SUGGEST_KNOWLEDGE).size(10);
+
+        SuggestResponse suggestResponse =
+                elasticsearchTemplate.suggest(completionSuggestionFuzzyBuilder, EsAutocompleteKnowledge.class);
+        CompletionSuggestion completionSuggestion =
+                suggestResponse.getSuggest().getSuggestion(EsConstants.FIELD_SUGGEST_KNOWLEDGE);
+        List<CompletionSuggestion.Entry.Option> options = completionSuggestion.getEntries().get(0).getOptions();
+
+        Set<String> ids = new HashSet<>();
+        List<EsAutocompleteKnowledge> result = new ArrayList<>();
+        for (CompletionSuggestion.Entry.Option option : options) {
+            EsAutocompleteKnowledge esAutocompleteKnowledge = new EsAutocompleteKnowledge(option.getPayloadAsMap());
+            if (!ids.contains(esAutocompleteKnowledge.getId())) {
+                result.add(esAutocompleteKnowledge);
+                ids.add(esAutocompleteKnowledge.getId());
+            }
+        }
+
+        return result;
     }
 
     /**
