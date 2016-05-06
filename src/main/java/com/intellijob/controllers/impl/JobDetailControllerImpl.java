@@ -64,6 +64,7 @@ import java.util.List;
 public class JobDetailControllerImpl implements JobDetailController {
 
     public static final String STEPSTONE = "stepstone";
+    public static final String MONSTER = "monster";
 
     private static final Logger LOG = LoggerFactory.getLogger(JobDetailControllerImpl.class);
 
@@ -125,7 +126,8 @@ public class JobDetailControllerImpl implements JobDetailController {
         htmlParseFilter.setNullableText(Boolean.FALSE);
         htmlParseFilter.setIgnore(
                 Arrays.asList("www.tecoloco.com", "www.irishjobs.ie", "www.estascontratado.com", "www.myjob.mu",
-                        "www.caribbeanjobs.com", "www.nijobs.com", "www.jobs.lu", "www.pnet.co.za"));
+                        "www.caribbeanjobs.com", "www.nijobs.com", "www.jobs.lu", "www.pnet.co.za", "www.stepstone.de",
+                        "www.monster.de"));
         List<String> foundedHomepages = new HtmlParser(htmlContent, htmlParseFilter).toPlainText().parse().getUrls();
 
         return new JobDetailBuilder(job).setApplicationMail(mails).setHomepages(foundedHomepages)

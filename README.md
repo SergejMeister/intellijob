@@ -4,13 +4,12 @@ intelligent job search
 ##This service:
 Scans your mail box to find out mails from jobs portal (monster.de, stepstone.de)!
 Parses mail context to determine jobs metadata (contact person, mail, address, requirements, skills etc.)!
-Uses jobs metadata to find out the best matching job offer!
+Uses users profile metadata to find out the best matching job offer!
 
-###HOW to start on LINUX
+###HOW to build a run a new intellijob.jar file on LINUX!
 
 * install java 1.8
-* install mongodb
-* run mongodb
+* install maven
 
 ###DOWNLOAD-Civis-Tools
 * git clone https://github.com/SergejMeister/civis-tools.git -b master
@@ -21,6 +20,13 @@ Uses jobs metadata to find out the best matching job offer!
 * cd intellijob/ && mvn clean install
 
 ###Run
-* java -jar target/intellijob-1.0.0.jar
+* java -jar target/intellijob-1.2.0.jar
+
+
+##DEMO
+* You can find a demo version in /demo
+* Please extract the archiv demo.zip
+* run java -jar intellijob-1.2.0.jar
+
 
 

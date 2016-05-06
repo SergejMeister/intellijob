@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<!--
+  ~ Copyright 2015 Sergej Meister
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~  http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~  Unless required by applicable law or agreed to in writing, software
+  ~  distributed under the License is distributed on an "AS IS" BASIS,
+  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<div class="fullWith">
+    <div class="row">
+        <div class="col-md-10">
+            <h1>Arbeitsdaten</h1>
+        </div>
+    </div>
+
+    <div id="user-search-engine">
+        <fieldset>
+            <legend class="scheduler-border">Suchfilter</legend>
+            <div class="input-group">
+                <div class="col-sm-20">
+                    <label for="noSearch">
+                        Keine
+                        <input id="noSearch" type="radio" ng-model='searchEngine' value='UNKNOWN'
+                               ng-change="changeSearchEngine(searchEngine)"/>
+                    </label>
+                    <label for="radioSimpleSearch">
+                        Einfache Suche
+                        <input id="radioSimpleSearch" type="radio" ng-model='searchEngine' value='SIMPLE'
+                               ng-change="changeSearchEngine(searchEngine)"/>
+                    </label>
+                    <label for='radioComplexSearch'>
+                        Erweiterte Suche
+                        <input id='radioComplexSearch' type='radio' ng-model='searchEngine' value='COMPLEX'
+                               ng-change='changeSearchEngine(searchEngine)' ng-disabled='readonly'/>
+                    </label>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <br>
+
+    <div id="simpleSearchForm" ng-show="showSimpleSearchDialog">
+        <fieldset>
+            <legend class="scheduler-border">Suche nach</legend>
+            <div class="input-group input-group">
+                <input type="text" class="form-control input-group-lg reg_name" ng-model="searchData"/>
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" ng-click="search()">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+            </div>
+        </fieldset>
+    </div>
+
+    <div ng-if="showComplexSearchDialog">
+        <jqcloud words="words" height="150" autoResize="true" steps="5"></jqcloud>
+    </div>
+
+    <div>
+        <uib-pagination class="pagination-sm" boundary-links="true" rotate="false"
+                        ng-show="showPagination"
+                        max-size="jobDetailTableMaxPage"
+                        total-items="jobDetailTableTotalItems"
+                        items-per-page="jobDetailTableNumPerPage"
+                        ng-model="jobDetailTableCurrentPage">
+        </uib-pagination>
+        <div class="dropdown pull-right" style="margin-top: 1.3em;">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Aktivität
+                <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li><a href="#" ng-click="updateAllReadState(true)">Markieren als gelesen</a></li>
+                <!--<li><a href="#" ng-click="updateAllReadState(false)">Mark as unread</a></li>-->
+            </ul>
+        </div>
+    </div>
+    <table class="table table-condensed table-bordered">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Berufsbezeichnung</th>
+                <th>Empfanfsdatum</th>
+                <th>Kontaktperson</th>
+                <th>Adresse</th>
+                <th>Homepage</th>
+                <th>E-Mail</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="jobDetail in jobDetails">
+                <td>{{$index + 1}}</td>
+                <td>{{jobDetail.name}}</td>
+                <td><p ng-bind="jobDetail.receivedDate | date:'dd.MM.yyyy HH:mm'"></td>
+                <td>{{jobDetail.contactPerson}}</td>
+                <td>{{jobDetail.address}}</td>
+                <td>{{jobDetail.homepage}}</td>
+                <td>{{jobDetail.applicationMail}}</td>
+                <td>
+                    <a target="_blank" ng-click="updateOneReadState(jobDetail.jobDetailId,true)"
+                       ng-hide="jobDetail.read">
+                        <span class="glyphicon glyphicon-open" aria-hidden="true"></span>
+                    </a>
+                    <a target="_blank" ng-click="updateOneReadState(jobDetail.jobDetailId,false)"
+                       ng-show="jobDetail.read">
+                        <span class="glyphicon glyphicon-saved" aria-hidden="true"></span>
+                    </a>
+                </td>
+                <td>
+                    <a target="_blank" href="{{jobDetail.link}}">Link</a>
+                </td>
+                <td>
+                    <a target="_blank" ng-click="showJobText(jobDetail.jobDetailId)">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    </a>
+                </td>
+                <td>
+                    <a target="_blank" ng-click="deleteJobDetail(jobDetail.jobDetailId)">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <uib-pagination class="pagination-sm" boundary-links="true" rotate="false"
+                    ng-show="showPagination"
+                    max-size="jobDetailTableMaxPage"
+                    total-items="jobDetailTableTotalItems"
+                    items-per-page="jobDetailTableNumPerPage"
+                    ng-model="jobDetailTableCurrentPage">
+    </uib-pagination>
+</div>

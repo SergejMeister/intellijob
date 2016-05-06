@@ -122,7 +122,8 @@ public class MailServices extends BaseServices {
         //search for job links and save.
         List<JobLink> jobLinks = jobLinkController.findInMailsAndSave(savedMails);
 
-        return new ResponseMailSearchData(inboxMails.size() + " mails and " + jobLinks.size() + " job links founded.");
+        return new ResponseMailSearchData(
+                inboxMails.size() + " E-Mails und " + jobLinks.size() + " Job Links wurden gefunden.");
     }
 
     /**
